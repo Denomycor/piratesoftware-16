@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://cb05setpgdk7r"]
+
+[node name="main_menu" type="CanvasLayer"]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Chico da Tina"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="play" type="Button" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Play"
+
+[node name="quit" type="Button" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Quit
+"

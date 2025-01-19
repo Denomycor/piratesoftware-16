@@ -1,6 +1,9 @@
-[gd_scene format=3 uid="uid://2vnrdwbw1mxc"]
+[gd_scene load_steps=2 format=3 uid="uid://2vnrdwbw1mxc"]
+
+[ext_resource type="Script" path="res://assets/scripts/level.gd" id="1_y7sae"]
 
 [node name="test_level" type="Node"]
+script = ExtResource("1_y7sae")
 
 [node name="world" type="Node2D" parent="."]
 
