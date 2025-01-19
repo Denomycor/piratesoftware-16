@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://2vnrdwbw1mxc"]
+
+[node name="test_level" type="Node"]
+
+[node name="world" type="Node2D" parent="."]
+
+[node name="player_temp" type="Node2D" parent="world"]
