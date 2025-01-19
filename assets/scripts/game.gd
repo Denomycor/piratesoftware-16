@@ -8,6 +8,7 @@ const TEST_LEVEL: PackedScene = preload("res://assets/scenes/levels/test_level.t
 
 func _ready() -> void:
 	main_menu.get_node("%play").pressed.connect(switch_main_menu_to_level.bind(TEST_LEVEL))
+	main_menu.get_node("%quit").pressed.connect(get_tree().quit)
 
 
 func switch_main_menu_to_level(level_scene: PackedScene) -> void:
