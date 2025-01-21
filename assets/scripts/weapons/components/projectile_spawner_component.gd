@@ -26,10 +26,11 @@ func _process(delta: float) -> void:
 		else:
 			delay_acc -= delta
 
+
 func shoot(to: Vector2, data: Variant = null) -> void:
 	if proj_ready and enabled:
 		for i in range(multishot):
-			var angle: float = (to - global_position).angle()
+			var angle: float = (to - global_position).angle() + (randf() - 0.5) * spread
 			shoot_projectile.emit(global_position, angle, data)
 		proj_ready = false
 		delay_acc = fire_delay
