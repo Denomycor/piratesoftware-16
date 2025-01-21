@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://b6iibn0ws4g3v"]
 
-[ext_resource type="PackedScene" uid="uid://drcpxeie725b" path="res://physics_car.tscn" id="2_4b2k8"]
+[ext_resource type="PackedScene" uid="uid://drcpxeie725b" path="res://car.tscn" id="2_4b2k8"]
 
 [node name="Arena" type="Node2D"]
 
