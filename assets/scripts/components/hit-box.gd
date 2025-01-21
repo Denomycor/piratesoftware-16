@@ -5,7 +5,7 @@ signal has_dealt_damage
 
 func _ready() -> void:
     self.monitoring = true
-    connect("area_entered", _on_area_entered)
+    area_entered.connect(_on_area_entered)
 
 func deal_damage(area: Area2D) -> void:
     area.take_damage(damage_amount)
