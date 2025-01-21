@@ -14,5 +14,4 @@ func get_mouse_direction() -> Vector2:
 
 func _input(event):
 	if event is InputEventMouseButton:
-		print("pressed")
 		fired.emit(-get_mouse_direction()*strength)
