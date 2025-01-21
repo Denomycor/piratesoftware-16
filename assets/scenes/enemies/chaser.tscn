@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://ckx8ei6qnmsix"]
+
+[ext_resource type="Script" path="res://assets/scripts/enemies/chaser.gd" id="1_wtqxv"]
+[ext_resource type="Script" path="res://assets/scripts/components/hurt-box.gd" id="2_485wi"]
+[ext_resource type="Texture2D" uid="uid://qjmbo1bj5df7" path="res://icon.svg" id="2_u65tk"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6pu46"]
+height = 48.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_srnp2"]
+radius = 13.0
+height = 54.0
+
+[node name="Chaser" type="CharacterBody2D"]
+script = ExtResource("1_wtqxv")
+speed = 100.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -1)
+scale = Vector2(0.140625, 0.296875)
+texture = ExtResource("2_u65tk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_6pu46")
+
+[node name="Hp" type="Area2D" parent="."]
+script = ExtResource("2_485wi")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hp"]
+shape = SubResource("CapsuleShape2D_srnp2")
+debug_color = Color(0.942244, 0.168395, 0.439121, 0.42)
