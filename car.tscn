@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://ct0tohtis203c"]
+
+[ext_resource type="Script" path="res://car.gd" id="1_gjsga"]
+[ext_resource type="PackedScene" uid="uid://cwf5k547vtn3f" path="res://weapon.tscn" id="2_p6r67"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f0wqc"]
+size = Vector2(40, 80)
+
+[node name="Car" type="CharacterBody2D"]
+script = ExtResource("1_gjsga")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(1, 0.0784314, 0.0784314, 1)
+polygon = PackedVector2Array(-20, -20, -20, 60, 20, 60, 20, -20)
+
+[node name="Weapon" parent="." instance=ExtResource("2_p6r67")]
+position = Vector2(0, 40)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 20)
+shape = SubResource("RectangleShape2D_f0wqc")
