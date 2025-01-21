@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://2vnrdwbw1mxc"]
+[gd_scene load_steps=6 format=3 uid="uid://2vnrdwbw1mxc"]
 
 [ext_resource type="Script" path="res://assets/scripts/level.gd" id="1_y7sae"]
 [ext_resource type="Texture2D" uid="uid://qjmbo1bj5df7" path="res://icon.svg" id="2_0y7wo"]
 [ext_resource type="PackedScene" uid="uid://dr2otcq7lhq6j" path="res://assets/scenes/ui/pause_menu.tscn" id="2_idj3t"]
+[ext_resource type="Script" path="res://assets/scripts/enemies/manager/enemies-manager.gd" id="4_a7yx0"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_12h78"]
 
 [node name="test_level" type="Node"]
 script = ExtResource("1_y7sae")
@@ -10,10 +13,23 @@ script = ExtResource("1_y7sae")
 [node name="world" type="Node2D" parent="."]
 
 [node name="Icon" type="Sprite2D" parent="world"]
-position = Vector2(467, 143)
+position = Vector2(882, 468)
 texture = ExtResource("2_0y7wo")
 
 [node name="player_temp" type="Node2D" parent="world"]
 
+[node name="Rigid body" type="RigidBody2D" parent="world"]
+position = Vector2(892, 467)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="world/Rigid body"]
+shape = SubResource("WorldBoundaryShape2D_12h78")
+
 [node name="pause_menu" parent="." instance=ExtResource("2_idj3t")]
 visible = false
+
+[node name="Node" type="Node" parent="." node_paths=PackedStringArray("target")]
+script = ExtResource("4_a7yx0")
+target = NodePath("../world/Rigid body")
+
+[node name="SpawnTimer" type="Timer" parent="Node"]
+one_shot = true
