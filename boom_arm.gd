@@ -24,6 +24,5 @@ func set_boom_position() -> void:
 
 func set_camera_zoom(delta: float) -> void:
 	var speed = owner.linear_velocity.length()
-	print(speed)
 	var zoom = clampf(lerpf(max_zoom, min_zoom, (speed - min_speed)/max_speed), min_zoom, max_zoom)
 	camera.zoom = lerp(camera.zoom, Vector2(zoom,zoom), delta)
