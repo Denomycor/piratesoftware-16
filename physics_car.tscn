@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://drcpxeie725b"]
+
+[ext_resource type="Script" path="res://physics_car.gd" id="1_nqiho"]
+[ext_resource type="PackedScene" uid="uid://cwf5k547vtn3f" path="res://weapon.tscn" id="1_uckfq"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_kt83k"]
+friction = 0.8
+bounce = 0.1
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_chw5h"]
+size = Vector2(20, 40)
+
+[node name="physics_car" type="RigidBody2D" node_paths=PackedStringArray("weapon")]
+physics_material_override = SubResource("PhysicsMaterial_kt83k")
+gravity_scale = 0.0
+center_of_mass_mode = 1
+center_of_mass = Vector2(0, -10)
+script = ExtResource("1_nqiho")
+motor_strength = 200.0
+weapon = NodePath("Weapon")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_chw5h")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+position = Vector2(0, -10)
+color = Color(0.0784314, 1, 0.0784314, 1)
+polygon = PackedVector2Array(-10, -10, 10, -10, 10, 30, -10, 30)
+
+[node name="Weapon" parent="." instance=ExtResource("1_uckfq")]
+position = Vector2(0, 10)
+strength = 80.0

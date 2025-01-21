@@ -1,9 +1,22 @@
-[gd_scene load_steps=2 format=3 uid="uid://b6iibn0ws4g3v"]
+[gd_scene load_steps=3 format=3 uid="uid://b6iibn0ws4g3v"]
 
-[ext_resource type="PackedScene" uid="uid://ct0tohtis203c" path="res://car.tscn" id="1_1uefc"]
+[ext_resource type="PackedScene" uid="uid://drcpxeie725b" path="res://physics_car.tscn" id="2_4b2k8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_srfst"]
+size = Vector2(50, 50)
 
 [node name="Arena" type="Node2D"]
 
-[node name="Car" parent="." instance=ExtResource("1_1uefc")]
-
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="physics_car" parent="." instance=ExtResource("2_4b2k8")]
+position = Vector2(159, -5)
+motor_strength = 50.0
+drift_friction_strength = 1.0
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(-310, -38.8372)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(188, 37.8372)
+shape = SubResource("RectangleShape2D_srfst")

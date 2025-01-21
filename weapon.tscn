@@ -6,4 +6,4 @@
 script = ExtResource("1_1blat")
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
-polygon = PackedVector2Array(0, -5, 50, -5, 50, 5, 0, 5)
+polygon = PackedVector2Array(0, -2.5, 20, -2.5, 20, 2.5, 0, 2.5)
