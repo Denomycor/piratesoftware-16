@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://65khifofm02q"]
+
+[node name="LaserGun" type="Node2D"]
