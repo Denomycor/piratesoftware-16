@@ -1,7 +1,7 @@
 class_name BoomArm extends Node2D
 
-@export var mouse_slide_distance: float = 150
-@export var slide_ratio: float = 0.1
+@export var mouse_slide_distance: float = 1000
+@export var slide_ratio: float = 0.4
 
 func _process(_delta):
 	position = clampf(get_mouse_distance(),0,mouse_slide_distance) * slide_ratio * get_mouse_direction()

@@ -1,8 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://drcpxeie725b"]
+[gd_scene load_steps=5 format=3 uid="uid://drcpxeie725b"]
 
 [ext_resource type="Script" path="res://car.gd" id="1_nqiho"]
 [ext_resource type="PackedScene" uid="uid://cwf5k547vtn3f" path="res://weapon.tscn" id="1_uckfq"]
-[ext_resource type="Script" path="res://boom_arm.gd" id="3_g02g4"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_kt83k"]
 friction = 0.6
@@ -31,11 +30,3 @@ polygon = PackedVector2Array(-10, -10, 10, -10, 10, 30, -10, 30)
 [node name="Weapon" parent="." instance=ExtResource("1_uckfq")]
 position = Vector2(0, 10)
 strength = 50.0
-
-[node name="BoomArm" type="Node2D" parent="."]
-script = ExtResource("3_g02g4")
-mouse_slide_distance = 1000.0
-slide_ratio = 0.3
-
-[node name="Camera2D" type="Camera2D" parent="BoomArm"]
-position_smoothing_enabled = true
