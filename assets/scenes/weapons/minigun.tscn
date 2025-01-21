@@ -1,3 +1,15 @@
-[gd_scene format=3 uid="uid://dbf445di2iil4"]
+[gd_scene load_steps=3 format=3 uid="uid://dbf445di2iil4"]
 
-[node name="Minigun" type="Node2D"]
+[ext_resource type="Script" path="res://assets/scripts/weapons/components/turn_component.gd" id="1_fw3mj"]
+[ext_resource type="Script" path="res://assets/scripts/weapons/components/projectile_spawner_component.gd" id="2_qdibs"]
+
+[node name="minigun" type="Node2D"]
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(0, -8, 0, 8, 40, 8, 40, -8)
+
+[node name="TurnComponent" type="Node2D" parent="."]
+script = ExtResource("1_fw3mj")
+
+[node name="ProjectileSpawnerComponent" type="Node2D" parent="."]
+script = ExtResource("2_qdibs")
