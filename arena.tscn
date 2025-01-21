@@ -12,7 +12,7 @@ size = Vector2(50, 50)
 [node name="physics_car" parent="." instance=ExtResource("2_4b2k8")]
 position = Vector2(159, -5)
 motor_strength = 50.0
-drift_friction_strength = 1.0
+drift_friction_strength = 5.0
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(-310, -38.8372)
