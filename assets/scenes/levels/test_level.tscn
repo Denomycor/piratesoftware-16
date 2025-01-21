@@ -80,4 +80,7 @@ target = NodePath("../Car")
 visible = false
 
 [node name="GameOverMenu" parent="." instance=ExtResource("9_h3nak")]
-visible = false
+
+[node name="weapon_dock" parent="world" instance=ExtResource("3_7j5di")]
+position = Vector2(535, 324)
+

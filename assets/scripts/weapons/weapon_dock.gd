@@ -8,8 +8,6 @@ var current_idx: int
 
 
 func _ready() -> void:
-	for c in get_children():
-		c.visible = false
 	get_weapon(0).activate()
 
 
