@@ -1,11 +1,11 @@
 class_name Car extends RigidBody2D
 
-@export var motor_strength: float = 100
-@export var drift_friction_strength: float = 5
-@export var torque_multiplier: float = 2
-@export var perpendicular_multiplier: float = .25
-@export var parallel_multiplier: float = .25
-@export var weapon: Weapon
+@export var motor_strength: float
+@export var drift_friction_strength: float
+@export var torque_multiplier: float
+@export var perpendicular_multiplier: float
+@export var parallel_multiplier: float
+@export var weapon: WeaponTest
 @export var health: int = 20
 
 @onready var hurt_box: HurtBoxComponent = $HurtBoxComponent

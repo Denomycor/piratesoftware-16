@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://bg2t7swkelk5w"]
+[gd_scene load_steps=2 format=3 uid="uid://od1a5kyfmhsw"]
 
 [ext_resource type="Script" path="res://assets/scripts/weapons/components/turn_component.gd" id="1_f8ofd"]
 
