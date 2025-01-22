@@ -5,7 +5,7 @@ class_name Car extends RigidBody2D
 @export var torque_multiplier: float
 @export var perpendicular_multiplier: float
 @export var parallel_multiplier: float
-@export var weapon: Weapon
+@export var weapon: WeaponTest
 
 func _ready():
 	weapon.fired.connect(apply_knockback)
