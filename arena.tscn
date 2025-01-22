@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://b6iibn0ws4g3v"]
+
+[ext_resource type="PackedScene" uid="uid://drcpxeie725b" path="res://car.tscn" id="2_4b2k8"]
+
+[node name="Arena" type="Node2D"]
+
+[node name="physics_car" parent="." instance=ExtResource("2_4b2k8")]
+position = Vector2(159, -5)
+motor_strength = 100.0
+drift_friction_strength = 5.0
+torque_multiplier = 2.0
+perpendicular_multiplier = 0.25
+parallel_multiplier = 0.25

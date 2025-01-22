@@ -1,0 +1,16 @@
+entities:
+    alien_car
+    chaser - moving - attacking - dying
+    motar
+weapons:
+    minigun
+    flamethrower
+    shotgun
+    hook
+tiles:
+    floor tiles - base - 3 different
+    wall tiles - straight - corner
+props:
+    barrels
+    boulders - 3 variations
+    bone clusters

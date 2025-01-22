@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cwf5k547vtn3f"]
+
+[ext_resource type="Script" path="res://weapon.gd" id="1_1blat"]
+
+[node name="Weapon" type="Node2D"]
+script = ExtResource("1_1blat")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(0, -2.5, 20, -2.5, 20, 2.5, 0, 2.5)
