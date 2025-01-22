@@ -27,7 +27,6 @@ func _physics_process(delta: float):
 
 	if points.size() <= 0 and free_when_empty:
 		queue_free()
-	set_width_curve.call_deferred()
 
 func set_params(max_drift_points: int, min_line_width: float, max_line_width: float, min_drift_alpha: float, max_drift_alpha: float, drift_point_duration: float, min_line_drift_strength: float, max_line_drift_strength: float) -> void:
 	max_points = max_drift_points
@@ -75,11 +74,14 @@ func set_drift_gradient() -> void:
 
 func set_width_curve() -> void:
 	var temp_curve:= Curve.new()
+	if width_points.size() != 0:
+		temp_curve.bake_resolution = width_points.size()
 	temp_curve.min_value = min_width
 	temp_curve.max_value = max_width
 	for idx in width_points.size():
 		temp_curve.add_point(Vector2(get_point_ratio(idx),width_points[idx]))
 	width_curve = temp_curve
+	width_curve.bake()
 
 func get_point_ratio(idx: int) -> float:
 	return (point_distance[idx]-point_distance[0])/(point_distance[point_distance.size()-1]-point_distance[0])

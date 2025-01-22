@@ -1,10 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://vnjfkg2hdmsq"]
+[gd_scene load_steps=3 format=3 uid="uid://vnjfkg2hdmsq"]
 
 [ext_resource type="Script" path="res://assets/scripts/drift_line.gd" id="1_tw6y0"]
+
+[sub_resource type="Curve" id="Curve_bymuo"]
 
 [node name="DriftLine" type="Line2D"]
 z_index = -1
 width = 1.0
+width_curve = SubResource("Curve_bymuo")
 default_color = Color(0.0784314, 0.0784314, 0.0784314, 1)
 joint_mode = 2
 begin_cap_mode = 2
