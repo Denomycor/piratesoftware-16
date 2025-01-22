@@ -11,6 +11,10 @@ config_version=5
 [application]
 
 config/name="piratesoftware-16"
-run/main_scene="res://arena.tscn"
+run/main_scene="res://assets/scenes/levels/test_level.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
+
+[physics]
+
+2d/default_gravity=0.0

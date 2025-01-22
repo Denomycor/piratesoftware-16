@@ -1,0 +1,47 @@
+[gd_scene load_steps=8 format=3 uid="uid://2vnrdwbw1mxc"]
+
+[ext_resource type="Script" path="res://assets/scripts/level.gd" id="1_y7sae"]
+[ext_resource type="Texture2D" uid="uid://qjmbo1bj5df7" path="res://icon.svg" id="2_0y7wo"]
+[ext_resource type="PackedScene" uid="uid://dr2otcq7lhq6j" path="res://assets/scenes/ui/pause_menu.tscn" id="2_idj3t"]
+[ext_resource type="Script" path="res://assets/scripts/components/hit-box.gd" id="3_8oq85"]
+[ext_resource type="Script" path="res://assets/scripts/enemies/manager/enemies-manager.gd" id="4_a7yx0"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gojo0"]
+radius = 138.521
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_md4kh"]
+size = Vector2(128, 128)
+
+[node name="test_level" type="Node"]
+script = ExtResource("1_y7sae")
+
+[node name="world" type="Node2D" parent="."]
+
+[node name="Icon" type="Sprite2D" parent="world"]
+position = Vector2(892, 467)
+texture = ExtResource("2_0y7wo")
+
+[node name="player_temp" type="Node2D" parent="world"]
+
+[node name="Rigid body" type="RigidBody2D" parent="world"]
+position = Vector2(892, 467)
+
+[node name="Area2D" type="Area2D" parent="world/Rigid body"]
+script = ExtResource("3_8oq85")
+damage_amount = 10
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="world/Rigid body/Area2D"]
+shape = SubResource("CircleShape2D_gojo0")
+debug_color = Color(0.98537, 0.0612741, 0.263992, 0.42)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="world/Rigid body"]
+shape = SubResource("RectangleShape2D_md4kh")
+
+[node name="pause_menu" parent="." instance=ExtResource("2_idj3t")]
+visible = false
+
+[node name="Node" type="Node" parent="." node_paths=PackedStringArray("target")]
+script = ExtResource("4_a7yx0")
+target = NodePath("../world/Rigid body")
+
+[node name="SpawnTimer" type="Timer" parent="Node"]
