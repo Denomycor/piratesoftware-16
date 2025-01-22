@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cwf5k547vtn3f" path="res://assets/scenes/weapons/weapon.tscn" id="1_uckfq"]
 [ext_resource type="Texture2D" uid="uid://cyfq1o7yraqrl" path="res://assets/textures/car.png" id="2_no78u"]
 [ext_resource type="Script" path="res://assets/scripts/car/boom_arm.gd" id="3_g02g4"]
+[ext_resource type="Script" path="res://assets/scripts/wheel.gd" id="4_wkcph"]
 [ext_resource type="Script" path="res://assets/scripts/components/hit-box.gd" id="5_tyiex"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_kt83k"]
@@ -42,6 +43,42 @@ max_zoom = 1.0
 max_speed = 400.0
 
 [node name="Camera2D" type="Camera2D" parent="BoomArm"]
+
+[node name="Wheel" type="Node2D" parent="."]
+position = Vector2(9, -15)
+script = ExtResource("4_wkcph")
+max_points = 400
+max_width = 3.0
+point_duration = 5.0
+min_drift_strength = 50.0
+max_drift_strength = 200.0
+
+[node name="Wheel2" type="Node2D" parent="."]
+position = Vector2(-9, -15)
+script = ExtResource("4_wkcph")
+max_points = 400
+max_width = 3.0
+point_duration = 5.0
+min_drift_strength = 50.0
+max_drift_strength = 200.0
+
+[node name="Wheel3" type="Node2D" parent="."]
+position = Vector2(9, 16)
+script = ExtResource("4_wkcph")
+max_points = 400
+max_width = 6.0
+point_duration = 5.0
+min_drift_strength = 50.0
+max_drift_strength = 200.0
+
+[node name="Wheel4" type="Node2D" parent="."]
+position = Vector2(-9, 16)
+script = ExtResource("4_wkcph")
+max_points = 400
+max_width = 6.0
+point_duration = 5.0
+min_drift_strength = 50.0
+max_drift_strength = 200.0
 
 [node name="HitBoxComponent" type="Area2D" parent="."]
 script = ExtResource("5_tyiex")
