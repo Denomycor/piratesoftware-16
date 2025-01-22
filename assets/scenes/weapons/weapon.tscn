@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cwf5k547vtn3f"]
 
-[ext_resource type="Script" path="res://assets/scripts/weapons/weapon.gd" id="1_huo2y"]
+[ext_resource type="Script" path="res://assets/scripts/weapons/weapon_car_test.gd" id="1_huo2y"]
 [ext_resource type="Texture2D" uid="uid://burn5eoa8i5yc" path="res://assets/textures/car/weapon/wwweapon.png" id="2_tqrn8"]
 
 [node name="Weapon" type="Node2D"]

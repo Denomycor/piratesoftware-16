@@ -1,3 +1,11 @@
-[gd_scene format=3 uid="uid://bg2t7swkelk5w"]
+[gd_scene load_steps=2 format=3 uid="uid://bg2t7swkelk5w"]
+
+[ext_resource type="Script" path="res://assets/scripts/weapons/components/turn_component.gd" id="1_f8ofd"]
 
 [node name="Shotgun" type="Node2D"]
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(0, -8, 40, -8, 40, 8, 0, 8)
+
+[node name="TurnComponent" type="Node2D" parent="."]
+script = ExtResource("1_f8ofd")
