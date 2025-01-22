@@ -1,7 +1,7 @@
 class_name Enemy extends CharacterBody2D
 
 
-@onready var hurt_box: HurtBoxComponent = $Hp
+@onready var hurt_box: HurtBoxComponent = $HurtBoxComponent
 @export var speed: float = 200.0
 
 var target: RigidBody2D

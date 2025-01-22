@@ -1,47 +1,52 @@
-[gd_scene load_steps=8 format=3 uid="uid://2vnrdwbw1mxc"]
+[gd_scene load_steps=10 format=3 uid="uid://2vnrdwbw1mxc"]
 
 [ext_resource type="Script" path="res://assets/scripts/level.gd" id="1_y7sae"]
-[ext_resource type="Texture2D" uid="uid://qjmbo1bj5df7" path="res://icon.svg" id="2_0y7wo"]
+[ext_resource type="PackedScene" uid="uid://drcpxeie725b" path="res://assets/scenes/car/car.tscn" id="2_8k278"]
 [ext_resource type="PackedScene" uid="uid://dr2otcq7lhq6j" path="res://assets/scenes/ui/pause_menu.tscn" id="2_idj3t"]
-[ext_resource type="Script" path="res://assets/scripts/components/hit-box.gd" id="3_8oq85"]
 [ext_resource type="Script" path="res://assets/scripts/enemies/manager/enemies-manager.gd" id="4_a7yx0"]
+[ext_resource type="Shader" path="res://assets/scenes/levels/test_level.gdshader" id="5_b170y"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_gojo0"]
-radius = 138.521
+[sub_resource type="Gradient" id="Gradient_3d0lo"]
+colors = PackedColorArray(0.75, 0.48375, 0.2175, 1, 0.976471, 0.690196, 0.4, 1)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_md4kh"]
-size = Vector2(128, 128)
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_6kt1r"]
+seed = 3
+frequency = 0.1447
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_iaqii"]
+width = 4000
+height = 2000
+seamless = true
+color_ramp = SubResource("Gradient_3d0lo")
+noise = SubResource("FastNoiseLite_6kt1r")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6ve6o"]
+shader = ExtResource("5_b170y")
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_iaqii")
 
 [node name="test_level" type="Node"]
 script = ExtResource("1_y7sae")
 
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxBackground" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(8000, 4000)
+
+[node name="ColorRect" type="ColorRect" parent="ParallaxBackground/ParallaxBackground"]
+material = SubResource("ShaderMaterial_6ve6o")
+offset_right = 8012.0
+offset_bottom = 4000.0
+
 [node name="world" type="Node2D" parent="."]
 
-[node name="Icon" type="Sprite2D" parent="world"]
-position = Vector2(892, 467)
-texture = ExtResource("2_0y7wo")
-
-[node name="player_temp" type="Node2D" parent="world"]
-
-[node name="Rigid body" type="RigidBody2D" parent="world"]
-position = Vector2(892, 467)
-
-[node name="Area2D" type="Area2D" parent="world/Rigid body"]
-script = ExtResource("3_8oq85")
-damage_amount = 10
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="world/Rigid body/Area2D"]
-shape = SubResource("CircleShape2D_gojo0")
-debug_color = Color(0.98537, 0.0612741, 0.263992, 0.42)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="world/Rigid body"]
-shape = SubResource("RectangleShape2D_md4kh")
+[node name="physics_car" parent="world" instance=ExtResource("2_8k278")]
+position = Vector2(987, 467)
 
 [node name="pause_menu" parent="." instance=ExtResource("2_idj3t")]
 visible = false
 
 [node name="Node" type="Node" parent="." node_paths=PackedStringArray("target")]
 script = ExtResource("4_a7yx0")
-target = NodePath("../world/Rigid body")
+target = NodePath("../world/physics_car")
 
 [node name="SpawnTimer" type="Timer" parent="Node"]

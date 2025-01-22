@@ -1,10 +1,10 @@
 class_name Car extends RigidBody2D
 
-@export var motor_strength: float
-@export var drift_friction_strength: float
-@export var torque_multiplier: float
-@export var perpendicular_multiplier: float
-@export var parallel_multiplier: float
+@export var motor_strength: float = 100
+@export var drift_friction_strength: float = 5
+@export var torque_multiplier: float = 2
+@export var perpendicular_multiplier: float = .25
+@export var parallel_multiplier: float = .25
 @export var weapon: Weapon
 
 func _ready():
@@ -14,10 +14,10 @@ func get_forward_direction() -> Vector2:
 	return (to_global(Vector2.UP) - to_global(Vector2.ZERO))
 
 func get_perpendicular_direction() -> Vector2:
-	return (to_global(Vector2.UP) - to_global(Vector2.ZERO)).rotated(-PI/2)
+	return (to_global(Vector2.UP) - to_global(Vector2.ZERO)).rotated(-PI / 2)
 
 func _physics_process(_delta):
-	apply_central_force(get_forward_direction()*motor_strength)
+	apply_central_force(get_forward_direction() * motor_strength)
 	apply_drift_friction()
 
 func apply_drift_friction():
