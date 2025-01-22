@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://2vnrdwbw1mxc"]
+[gd_scene load_steps=12 format=3 uid="uid://2vnrdwbw1mxc"]
 
 [ext_resource type="Script" path="res://assets/scripts/level.gd" id="1_y7sae"]
 [ext_resource type="PackedScene" uid="uid://drcpxeie725b" path="res://assets/scenes/car/car.tscn" id="2_8k278"]
@@ -6,23 +6,32 @@
 [ext_resource type="Script" path="res://assets/scripts/enemies/manager/enemies-manager.gd" id="4_a7yx0"]
 [ext_resource type="Shader" path="res://assets/scenes/levels/test_level.gdshader" id="5_b170y"]
 
-[sub_resource type="Gradient" id="Gradient_3d0lo"]
-colors = PackedColorArray(0.75, 0.48375, 0.2175, 1, 0.976471, 0.690196, 0.4, 1)
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_bif64"]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_6kt1r"]
-seed = 3
-frequency = 0.1447
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_l0gm6"]
+width = 4000
+height = 2000
+as_normal_map = true
+bump_strength = 6.5
+noise = SubResource("FastNoiseLite_bif64")
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_iaqii"]
+[sub_resource type="Gradient" id="Gradient_muhko"]
+colors = PackedColorArray(0.933333, 0.827451, 0, 1, 0.74902, 0.588235, 0.427451, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_on0o5"]
+frequency = 0.4775
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_gf0g1"]
 width = 4000
 height = 2000
 seamless = true
-color_ramp = SubResource("Gradient_3d0lo")
-noise = SubResource("FastNoiseLite_6kt1r")
+color_ramp = SubResource("Gradient_muhko")
+noise = SubResource("FastNoiseLite_on0o5")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6ve6o"]
 shader = ExtResource("5_b170y")
-shader_parameter/noise_texture = SubResource("NoiseTexture2D_iaqii")
+shader_parameter/sand_texture = SubResource("NoiseTexture2D_gf0g1")
+shader_parameter/ground_texture = SubResource("NoiseTexture2D_l0gm6")
 
 [node name="test_level" type="Node"]
 script = ExtResource("1_y7sae")
