@@ -1,4 +1,4 @@
-class_name Chaser extends Enemy
+class_name Crawler extends Enemy
 
 @export var health: int = 10
 
@@ -11,6 +11,7 @@ func attack():
 
 func update_movement():
 	var direction = global_position.direction_to(target.global_position)
+	look_at(target.global_position)
 	velocity = direction * speed
 
 func die():

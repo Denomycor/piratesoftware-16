@@ -6,7 +6,7 @@ extends Node
 @onready var spawn_timer: Timer = $SpawnTimer
 
 
-var chaser_scene = load("res://assets/scenes/enemies/chaser.tscn")
+var crawler_scene = load("res://assets/scenes/enemies/crawler.tscn")
 
 var cur_group = 0
 
@@ -32,7 +32,7 @@ func _process(_delta: float) -> void:
 
 func _spawn_enemy() -> void:
 	var pos = Vector2.ZERO
-	var enemy_instance = chaser_scene.instantiate()
+	var enemy_instance = crawler_scene.instantiate()
 	enemy_instance.target = target
 	enemy_instance.global_position = pos
 	add_child(enemy_instance)
