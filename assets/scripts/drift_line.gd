@@ -1,37 +1,49 @@
 class_name DriftLine extends Line2D
 
-@export var max_points: int = 1000
-@export var min_width: float = 1
-@export var max_width: float = 4
-@export var line_duration: float = 3
-@export var min_drift_strength: float = 10
-@export var max_drift_strength: float = 40
+var max_points: int
+var min_width: float
+var max_width: float
+var point_duration: float
+var min_drift_strength: float
+var max_drift_strength: float
 
-@onready var curve := Curve2D.new()
+var free_when_empty: bool = false
+
 @onready var width_points: Array[float]
+@onready var point_age: Array[float]
 
-func _physics_process(_delta):
-	draw_drift_line()
+func _process(delta: float):
+	for idx in point_age.size()-1:
+		point_age[idx] += delta
+		if point_age[idx] > point_duration:
+			remove_drift_point(idx)
+		idx += 1
 
-func draw_drift_line() -> void:
-	add_point(global_position)
-	width_points.append(get_point_width())
-	if curve.get_baked_points().size() > max_points:
-		remove_point(0)
-		width_points.pop_back()
-	points = curve.get_baked_points()
+	if get_point_count() > max_points:
+		remove_drift_point(0)
+
 	set_width_curve()
 
-func fade_drift_line() -> void:
-	set_physics_process(false)
-	var tween := get_tree().create_tween()
-	tween.tween_property(self,"modulate:a", 0, line_duration)
-	await  tween.finished
-	queue_free()
+	if points.size() == 0 and free_when_empty:
+		queue_free()
 
-func get_point_width() -> float:
-	var drift_strength :float = owner.get_drift_strength()
-	return clampf(lerpf(min_width,max_width,(drift_strength-min_drift_strength)/max_drift_strength),min_width,max_width)
+func set_params(max_drift_points: int, min_line_width: float, max_line_width: float, drift_point_duration: float, min_line_drift_strength: float, max_line_drift_strength: float) -> void:
+	max_points = max_drift_points
+	min_width = min_line_width
+	max_width = max_line_width
+	point_duration = drift_point_duration
+	min_drift_strength = min_line_drift_strength
+	max_drift_strength = max_line_drift_strength
+
+func remove_drift_point(idx: int) -> void:
+	width_points.remove_at.call_deferred(idx)
+	point_age.remove_at.call_deferred(idx)
+	remove_point.call_deferred(idx)
+
+func add_drift_point(pos: Vector2, w: float) -> void:
+	point_age.append(0.0)
+	width_points.append(w)
+	add_point(pos)
 
 func set_width_curve() -> void:
 	var temp_curve:= Curve.new()

@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://drcpxeie725b"]
+[gd_scene load_steps=7 format=3 uid="uid://drcpxeie725b"]
 
 [ext_resource type="Script" path="res://assets/scripts/car/car.gd" id="1_nqiho"]
 [ext_resource type="PackedScene" uid="uid://cwf5k547vtn3f" path="res://assets/scenes/weapons/weapon.tscn" id="1_uckfq"]
 [ext_resource type="Script" path="res://assets/scripts/car/boom_arm.gd" id="3_g02g4"]
+[ext_resource type="Script" path="res://assets/scripts/wheel.gd" id="4_wkcph"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_kt83k"]
 bounce = 0.1
@@ -39,3 +40,35 @@ slide_ratio = 0.5
 max_speed = 400.0
 
 [node name="Camera2D" type="Camera2D" parent="BoomArm"]
+
+[node name="Wheel" type="Node2D" parent="."]
+position = Vector2(9, -15)
+script = ExtResource("4_wkcph")
+max_width = 3.0
+point_duration = 8.0
+min_drift_strength = 30.0
+max_drift_strength = 100.0
+
+[node name="Wheel2" type="Node2D" parent="."]
+position = Vector2(-9, -15)
+script = ExtResource("4_wkcph")
+max_width = 3.0
+point_duration = 8.0
+min_drift_strength = 30.0
+max_drift_strength = 100.0
+
+[node name="Wheel3" type="Node2D" parent="."]
+position = Vector2(9, 16)
+script = ExtResource("4_wkcph")
+max_width = 6.0
+point_duration = 8.0
+min_drift_strength = 30.0
+max_drift_strength = 100.0
+
+[node name="Wheel4" type="Node2D" parent="."]
+position = Vector2(-9, 16)
+script = ExtResource("4_wkcph")
+max_width = 6.0
+point_duration = 8.0
+min_drift_strength = 30.0
+max_drift_strength = 100.0
