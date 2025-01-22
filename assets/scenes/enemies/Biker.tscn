@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://bsblyulsgbsgk"]
+
+[ext_resource type="Script" path="res://assets/scripts/components/hurt-box.gd" id="1_80q8j"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8wxew"]
+radius = 16.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vwflh"]
+
+[node name="Biker" type="CharacterBody2D" groups=["enemies"]]
+
+[node name="HurtBoxComponent" type="Area2D" parent="."]
+script = ExtResource("1_80q8j")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBoxComponent"]
+shape = SubResource("CircleShape2D_8wxew")
+debug_color = Color(0.972063, 0, 0.443653, 0.42)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_vwflh")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="LineOfSigth" type="RayCast2D" parent="."]
+target_position = Vector2(0, -38)
+
+[node name="Laser" type="Line2D" parent="."]
+position = Vector2(0, -16)
+points = PackedVector2Array(0, -1, 0, -316)
+width = 1.0
+default_color = Color(0.815686, 0, 0, 0.392157)
