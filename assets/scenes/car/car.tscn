@@ -44,31 +44,35 @@ max_speed = 400.0
 [node name="Wheel" type="Node2D" parent="."]
 position = Vector2(9, -15)
 script = ExtResource("4_wkcph")
+max_points = 400
 max_width = 3.0
-point_duration = 8.0
-min_drift_strength = 30.0
-max_drift_strength = 100.0
+point_duration = 5.0
+min_drift_strength = 50.0
+max_drift_strength = 200.0
 
 [node name="Wheel2" type="Node2D" parent="."]
 position = Vector2(-9, -15)
 script = ExtResource("4_wkcph")
+max_points = 400
 max_width = 3.0
-point_duration = 8.0
-min_drift_strength = 30.0
-max_drift_strength = 100.0
+point_duration = 5.0
+min_drift_strength = 50.0
+max_drift_strength = 200.0
 
 [node name="Wheel3" type="Node2D" parent="."]
 position = Vector2(9, 16)
 script = ExtResource("4_wkcph")
+max_points = 400
 max_width = 6.0
-point_duration = 8.0
-min_drift_strength = 30.0
-max_drift_strength = 100.0
+point_duration = 5.0
+min_drift_strength = 50.0
+max_drift_strength = 200.0
 
 [node name="Wheel4" type="Node2D" parent="."]
 position = Vector2(-9, 16)
 script = ExtResource("4_wkcph")
+max_points = 400
 max_width = 6.0
-point_duration = 8.0
-min_drift_strength = 30.0
-max_drift_strength = 100.0
+point_duration = 5.0
+min_drift_strength = 50.0
+max_drift_strength = 200.0
