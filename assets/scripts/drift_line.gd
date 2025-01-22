@@ -45,7 +45,7 @@ func remove_drift_point(idx: int) -> void:
 	point_distance.remove_at.call_deferred(idx)
 	remove_point.call_deferred(idx)
 	set_width_curve.call_deferred()
-	#set_drift_gradient.call_deferred()
+	set_drift_gradient.call_deferred()
 
 func add_drift_point(pos: Vector2, w: float, a: float) -> void:
 	var d: float
@@ -62,14 +62,17 @@ func add_drift_point(pos: Vector2, w: float, a: float) -> void:
 
 	add_point(pos)
 	set_width_curve.call_deferred()
-	#set_drift_gradient.call_deferred()
+	set_drift_gradient.call_deferred()
 
 func set_drift_gradient() -> void:
 	var temp_gradient:= Gradient.new()
-	for idx in alpha_points.size():
-		var temp_color = default_color
-		temp_color.a = alpha_points[idx]/255
-		temp_gradient.add_point(1,temp_color)
+	var temp_color = default_color
+	if alpha_points.size() > 1:
+		for idx in alpha_points.size():
+			if idx < 2:
+				temp_gradient.remove_point(0)
+			temp_color.a = alpha_points[idx]/255
+			temp_gradient.add_point(get_point_ratio(idx),temp_color)
 	gradient = temp_gradient
 
 func set_width_curve() -> void:
