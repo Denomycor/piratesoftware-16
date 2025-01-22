@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://drcpxeie725b"]
 
-[ext_resource type="Script" path="res://car.gd" id="1_nqiho"]
-[ext_resource type="PackedScene" uid="uid://cwf5k547vtn3f" path="res://weapon.tscn" id="1_uckfq"]
-[ext_resource type="Script" path="res://boom_arm.gd" id="3_g02g4"]
+[ext_resource type="Script" path="res://assets/scripts/car/car.gd" id="1_nqiho"]
+[ext_resource type="PackedScene" uid="uid://cwf5k547vtn3f" path="res://assets/scenes/weapons/weapon.tscn" id="1_uckfq"]
+[ext_resource type="Script" path="res://assets/scripts/car/boom_arm.gd" id="3_g02g4"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_kt83k"]
 bounce = 0.1
