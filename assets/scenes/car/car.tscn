@@ -52,19 +52,19 @@ position = Vector2(4, 90)
 [node name="WheelFR" type="Node2D" parent="wheels"]
 position = Vector2(76, -99)
 script = ExtResource("4_wkcph")
-min_width = 10.0
-max_width = 50.0
+min_width = 5.0
+max_width = 25.0
 point_duration = 10.0
-min_drift_strength = 500.0
+min_drift_strength = 1800.0
 max_drift_strength = 2000.0
 
 [node name="WheelFL" type="Node2D" parent="wheels"]
 position = Vector2(-69, -100)
 script = ExtResource("4_wkcph")
-min_width = 10.0
-max_width = 50.0
+min_width = 5.0
+max_width = 25.0
 point_duration = 10.0
-min_drift_strength = 500.0
+min_drift_strength = 1800.0
 max_drift_strength = 2000.0
 
 [node name="WheelBL" type="Node2D" parent="wheels"]
@@ -73,8 +73,9 @@ script = ExtResource("4_wkcph")
 min_width = 10.0
 max_width = 50.0
 point_duration = 10.0
-min_drift_strength = 500.0
+min_drift_strength = 1200.0
 max_drift_strength = 2000.0
+torque_multiplier = 2.0
 
 [node name="WheelBR" type="Node2D" parent="wheels"]
 position = Vector2(84, 140)
@@ -82,8 +83,9 @@ script = ExtResource("4_wkcph")
 min_width = 10.0
 max_width = 50.0
 point_duration = 10.0
-min_drift_strength = 500.0
+min_drift_strength = 1200.0
 max_drift_strength = 2000.0
+torque_multiplier = 2.0
 
 [node name="HurtBoxComponent" type="Area2D" parent="."]
 script = ExtResource("7_plr5q")

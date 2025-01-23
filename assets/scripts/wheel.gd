@@ -11,6 +11,7 @@ const TICK_TIME = 0.0
 @export var point_duration: float = 3
 @export var min_drift_strength: float = 10
 @export var max_drift_strength: float = 40
+@export var torque_multiplier: float = 1
 
 var drift_strength: float
 var drift_line: DriftLine
@@ -21,7 +22,7 @@ func _ready():
     create_drift_line()
 
 func _physics_process(_delta: float) -> void:
-    drift_strength = owner.get_drift_strength()
+    drift_strength = owner.get_drift_strength(torque_multiplier)
     if tick > TICK_TIME:
         tick = 0
         if drift_strength >= min_drift_strength:
