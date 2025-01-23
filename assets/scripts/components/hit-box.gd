@@ -5,6 +5,7 @@ signal has_dealt_damage
 
 func _ready() -> void:
     self.monitoring = true
+    self.monitorable = false
     area_entered.connect(_on_area_entered)
 
 func deal_damage(area: Area2D) -> void:

@@ -1,16 +1,21 @@
-[gd_scene load_steps=6 format=3 uid="uid://ckx8ei6qnmsix"]
+[gd_scene load_steps=8 format=3 uid="uid://is7y7auk6peu"]
 
 [ext_resource type="Script" path="res://assets/scripts/enemies/crawler.gd" id="1_57m52"]
-[ext_resource type="Texture2D" uid="uid://bq1wgovkram7g" path="res://assets/textures/Crawlertest1.png" id="2_8n8kl"]
+[ext_resource type="Texture2D" uid="uid://bq1wgovkram7g" path="res://assets/textures/enemies/crawler.png" id="2_8n8kl"]
 [ext_resource type="Script" path="res://assets/scripts/components/hurt-box.gd" id="3_xyjir"]
+[ext_resource type="Script" path="res://assets/scripts/components/hit-box.gd" id="4_78tml"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6pu46"]
 radius = 71.0
 height = 204.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_srnp2"]
-radius = 110.0
-height = 332.0
+radius = 77.9999
+height = 234.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4t71l"]
+radius = 43.0
+height = 192.0
 
 [node name="Crawler" type="CharacterBody2D" groups=["enemies"]]
 script = ExtResource("1_57m52")
@@ -27,9 +32,18 @@ shape = SubResource("CapsuleShape2D_6pu46")
 
 [node name="HurtBoxComponent" type="Area2D" parent="."]
 rotation = 1.5708
+collision_layer = 2
+collision_mask = 0
 script = ExtResource("3_xyjir")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBoxComponent"]
-position = Vector2(0, -18)
 shape = SubResource("CapsuleShape2D_srnp2")
 debug_color = Color(0.942244, 0.168395, 0.439121, 0.42)
+
+[node name="HitBoxComponent" type="Area2D" parent="."]
+script = ExtResource("4_78tml")
+damage_amount = 10
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
+position = Vector2(99, 0)
+shape = SubResource("CapsuleShape2D_4t71l")
