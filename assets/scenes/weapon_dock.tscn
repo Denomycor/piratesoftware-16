@@ -1,10 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://c4b5t5usvyqcs"]
+[gd_scene load_steps=4 format=3 uid="uid://c4b5t5usvyqcs"]
 
 [ext_resource type="Script" path="res://assets/scripts/weapons/weapon_dock.gd" id="1_sbl3c"]
 [ext_resource type="PackedScene" uid="uid://dbf445di2iil4" path="res://assets/scenes/weapons/minigun.tscn" id="2_4o0ak"]
+[ext_resource type="PackedScene" uid="uid://od1a5kyfmhsw" path="res://assets/scenes/weapons/shotgun.tscn" id="3_fdnat"]
 
 [node name="weapon_dock" type="Node2D"]
 script = ExtResource("1_sbl3c")
 
 [node name="minigun" parent="." instance=ExtResource("2_4o0ak")]
+visible = false
+
+[node name="Shotgun" parent="." instance=ExtResource("3_fdnat")]
 visible = false

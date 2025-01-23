@@ -1,7 +1,7 @@
-class_name Minigun extends Weapon
+class_name Shotgun extends Weapon
 
 
-const PROJECTILE_SCENE: PackedScene = preload("res://assets/scenes/projectiles/minigun_projectile.tscn")
+const PROJECTILE_SCENE: PackedScene = preload("res://assets/scenes/projectiles/shotgun_projectile.tscn")
 
 @onready var turn_component: TurnComponent = $TurnComponent
 @onready var projectile_spawner_component: ProjectileSpawnerComponent = $ProjectileSpawnerComponent
