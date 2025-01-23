@@ -65,6 +65,8 @@ offset_bottom = 4000.0
 [node name="Car" parent="World" instance=ExtResource("2_8k278")]
 z_index = 5
 position = Vector2(987, 467)
+motor_strength = 1000.0
+torque_multiplier = 10.0
 
 [node name="ArenaWalls" type="Node2D" parent="World"]
 script = ExtResource("4_eyags")

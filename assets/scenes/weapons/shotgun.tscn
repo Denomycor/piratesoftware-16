@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://assets/scripts/weapons/shotgun.gd" id="1_4mcpn"]
 [ext_resource type="Script" path="res://assets/scripts/weapons/components/turn_component.gd" id="1_f8ofd"]
 [ext_resource type="Script" path="res://assets/scripts/weapons/components/projectile_spawner_component.gd" id="3_dgnp0"]
-[ext_resource type="Texture2D" uid="uid://b8lcbubve4m4u" path="res://assets/textures/weapon.png" id="4_05tof"]
+[ext_resource type="Texture2D" uid="uid://burn5eoa8i5yc" path="res://assets/textures/car/weapon/wwweapon.png" id="4_05tof"]
 
 [node name="Shotgun" type="Node2D"]
 script = ExtResource("1_4mcpn")

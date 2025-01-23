@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://c4b5t5usvyqcs"]
+[gd_scene load_steps=4 format=3 uid="uid://dempu0o3px02n"]
 
 [ext_resource type="Script" path="res://assets/scripts/weapons/weapon_dock.gd" id="1_sbl3c"]
 [ext_resource type="PackedScene" uid="uid://dbf445di2iil4" path="res://assets/scenes/weapons/minigun.tscn" id="2_4o0ak"]

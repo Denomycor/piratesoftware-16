@@ -21,9 +21,7 @@ gravity_scale = 0.0
 center_of_mass_mode = 1
 center_of_mass = Vector2(0, -100)
 script = ExtResource("1_nqiho")
-motor_strength = 1000.0
-torque_multiplier = 10.0
-weapon = NodePath("Weapon")
+weapon = NodePath("WeaponTest")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_no78u")
@@ -43,9 +41,6 @@ max_zoom = 1.0
 max_speed = 1000.0
 
 [node name="Camera2D" type="Camera2D" parent="BoomArm"]
-
-[node name="Weapon" parent="." instance=ExtResource("1_uckfq")]
-position = Vector2(4, 90)
 
 [node name="wheels" type="Node2D" parent="."]
 
@@ -93,3 +88,5 @@ script = ExtResource("7_plr5q")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBoxComponent"]
 position = Vector2(1, 5)
 shape = SubResource("CapsuleShape2D_1m2s1")
+
+[node name="WeaponTest" parent="." instance=ExtResource("1_uckfq")]
