@@ -28,7 +28,7 @@ func _physics_process(delta: float):
 		if not removed:
 			remove_drift_point(0)
 
-	if points.size() <= 0 and free_when_empty:
+	if get_point_count() <= 0 and free_when_empty:
 		queue_free()
 
 func set_params(max_drift_points: int, min_line_width: float, max_line_width: float, min_drift_alpha: float, max_drift_alpha: float, drift_point_duration: float, min_line_drift_strength: float, max_line_drift_strength: float) -> void:
@@ -42,6 +42,8 @@ func set_params(max_drift_points: int, min_line_width: float, max_line_width: fl
 	max_drift_strength = max_line_drift_strength
 
 func remove_drift_point(idx: int) -> void:
+	if idx >= get_point_count():
+		return
 	width_points.remove_at.call_deferred(idx)
 	alpha_points.remove_at.call_deferred(idx)
 	point_age.remove_at.call_deferred(idx)
