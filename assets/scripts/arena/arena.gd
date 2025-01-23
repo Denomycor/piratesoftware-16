@@ -29,7 +29,6 @@ func build_arena() -> void:
 	for i in range(NUMBER_OF_SIDES):
 	
 		last_position = build_wall(last_position, direction)
-
 		
 		var corner_instance: Node2D = corner.instantiate()
 		corner_instance.position = last_position
