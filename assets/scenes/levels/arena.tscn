@@ -12,4 +12,3 @@ motor_strength = 100.0
 [node name="ArenaWalls" type="Node2D" parent="."]
 position = Vector2(159, -5)
 script = ExtResource("2_jmuku")
-walls_per_side = null
