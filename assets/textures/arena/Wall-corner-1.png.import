@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://burn5eoa8i5yc"
-path="res://.godot/imported/wwweapon.png-1f6f9f25eebc4de2442eed86b4888e3b.ctex"
+uid="uid://nj5vu5iapn2p"
+path="res://.godot/imported/Wall-corner-1.png-f84b1771ab976d642ced6d682210fb23.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/wwweapon.png"
-dest_files=["res://.godot/imported/wwweapon.png-1f6f9f25eebc4de2442eed86b4888e3b.ctex"]
+source_file="res://assets/textures/arena/Wall-corner-1.png"
+dest_files=["res://.godot/imported/Wall-corner-1.png-f84b1771ab976d642ced6d682210fb23.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://g3sqn6dtwj1g"
-path="res://.godot/imported/skeleton-attack_0.png-bf76cae7e0efd2b776ceeafbfe9301fe.ctex"
+uid="uid://burn5eoa8i5yc"
+path="res://.godot/imported/wwweapon.png-f6dfb468ce3b10c656c9df3b2b25d2cd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/skeleton-attack_0.png"
-dest_files=["res://.godot/imported/skeleton-attack_0.png-bf76cae7e0efd2b776ceeafbfe9301fe.ctex"]
+source_file="res://assets/textures/car/weapon/wwweapon.png"
+dest_files=["res://.godot/imported/wwweapon.png-f6dfb468ce3b10c656c9df3b2b25d2cd.ctex"]
 
 [params]
 

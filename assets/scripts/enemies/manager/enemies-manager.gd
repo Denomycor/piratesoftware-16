@@ -21,6 +21,15 @@ func update_enemies():
 
 	for i in range(len(enemies)):
 		if i % num_groups == cur_group:
+			if enemies[i].position.distance_to(target.position) > 10000:
+				var target_dir = target.linear_velocity.normalized()
+				var teleport_dir = Vector2(randf() - 0.5, randf() - 0.5).normalized()
+
+				if target_dir.dot(teleport_dir) < 0:
+					teleport_dir = -teleport_dir
+
+				enemies[i].position = target.position + teleport_dir * 10000
+
 			enemies[i].update_movement()
 
 	cur_group += 1

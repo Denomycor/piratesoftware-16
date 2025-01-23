@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://assets/scripts/car/car.gd" id="1_nqiho"]
 [ext_resource type="PackedScene" uid="uid://cwf5k547vtn3f" path="res://assets/scenes/weapons/weapon.tscn" id="1_uckfq"]
-[ext_resource type="Texture2D" uid="uid://cyfq1o7yraqrl" path="res://assets/textures/car.png" id="2_no78u"]
+[ext_resource type="Texture2D" uid="uid://cyfq1o7yraqrl" path="res://assets/textures/car/car.png" id="2_no78u"]
 [ext_resource type="Script" path="res://assets/scripts/car/boom_arm.gd" id="3_g02g4"]
 [ext_resource type="Script" path="res://assets/scripts/wheel.gd" id="4_wkcph"]
 [ext_resource type="Script" path="res://assets/scripts/components/hit-box.gd" id="5_tyiex"]
@@ -33,6 +33,7 @@ position = Vector2(1, 1)
 polygon = PackedVector2Array(-96, 182, -114, 137, -94, -16, -92, -131, -47, -136, -25, -209, 33, -207, 58, -136, 95, -137, 101, -102, 91, -11, 116, 141, 100, 179, 52, 209, -45, 212)
 
 [node name="BoomArm" type="Node2D" parent="."]
+z_index = 5
 position = Vector2(0, 10)
 script = ExtResource("3_g02g4")
 mouse_slide_distance = 3000.0
