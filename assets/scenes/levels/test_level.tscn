@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://2vnrdwbw1mxc"]
+[gd_scene load_steps=16 format=3 uid="uid://2vnrdwbw1mxc"]
 
 [ext_resource type="Script" path="res://assets/scripts/level/level.gd" id="1_y7sae"]
 [ext_resource type="PackedScene" uid="uid://drcpxeie725b" path="res://assets/scenes/car/car.tscn" id="2_8k278"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://assets/scripts/arena/arena.gd" id="4_eyags"]
 [ext_resource type="Shader" path="res://assets/scenes/levels/test_level.gdshader" id="5_b170y"]
 [ext_resource type="Script" path="res://assets/scripts/level/stats.gd" id="8_6ascs"]
+[ext_resource type="PackedScene" uid="uid://dtyepolgwnyv2" path="res://assets/scenes/ui/game_over_menu.tscn" id="9_h3nak"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_bif64"]
 
@@ -76,4 +77,7 @@ target = NodePath("../Car")
 [node name="SpawnTimer" type="Timer" parent="World/EnemySpawner"]
 
 [node name="PauseMenu" parent="." instance=ExtResource("2_idj3t")]
+visible = false
+
+[node name="GameOverMenu" parent="." instance=ExtResource("9_h3nak")]
 visible = false
