@@ -17,7 +17,7 @@ func _ready():
 func on_take_damage(amount: int):
 	health -= amount
 	if health <= 0:
-		LevelContext.level.level_exited.emit(LevelContext.level)
+		LevelContext.level.set_game_over()
 
 func get_forward_direction() -> Vector2:
 	return (to_global(Vector2.UP) - to_global(Vector2.ZERO))
