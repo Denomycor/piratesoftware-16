@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://vnjfkg2hdmsq"]
 
-[ext_resource type="Script" path="res://assets/scripts/drift_line.gd" id="1_tw6y0"]
+[ext_resource type="Script" path="res://assets/scripts/car/drift_line.gd" id="1_tw6y0"]
 
 [sub_resource type="Curve" id="Curve_bymuo"]
 
