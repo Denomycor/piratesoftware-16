@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://2vnrdwbw1mxc"]
+[gd_scene load_steps=9 format=3 uid="uid://2vnrdwbw1mxc"]
 
 [ext_resource type="Script" path="res://assets/scripts/level.gd" id="1_y7sae"]
 [ext_resource type="Texture2D" uid="uid://qjmbo1bj5df7" path="res://icon.svg" id="2_0y7wo"]
 [ext_resource type="PackedScene" uid="uid://dr2otcq7lhq6j" path="res://assets/scenes/ui/pause_menu.tscn" id="2_idj3t"]
 [ext_resource type="Script" path="res://assets/scripts/components/hit-box.gd" id="3_8oq85"]
 [ext_resource type="Script" path="res://assets/scripts/enemies/manager/enemies-manager.gd" id="4_a7yx0"]
+[ext_resource type="PackedScene" uid="uid://od1a5kyfmhsw" path="res://assets/scenes/weapons/shotgun.tscn" id="6_c106p"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gojo0"]
 radius = 138.521
@@ -45,3 +46,6 @@ script = ExtResource("4_a7yx0")
 target = NodePath("../world/Rigid body")
 
 [node name="SpawnTimer" type="Timer" parent="Node"]
+
+[node name="Shotgun" parent="." instance=ExtResource("6_c106p")]
+position = Vector2(82, 78)

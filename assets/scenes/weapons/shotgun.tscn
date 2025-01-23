@@ -1,20 +1,26 @@
-[gd_scene load_steps=4 format=3 uid="uid://od1a5kyfmhsw"]
+[gd_scene load_steps=5 format=3 uid="uid://od1a5kyfmhsw"]
 
-[ext_resource type="Script" path="res://assets/scripts/weapons/shotgun.gd" id="1_42hqu"]
+[ext_resource type="Script" path="res://assets/scripts/weapons/shotgun.gd" id="1_4mcpn"]
 [ext_resource type="Script" path="res://assets/scripts/weapons/components/turn_component.gd" id="1_f8ofd"]
-[ext_resource type="Script" path="res://assets/scripts/weapons/components/projectile_spawner_component.gd" id="2_flot3"]
+[ext_resource type="Script" path="res://assets/scripts/weapons/components/projectile_spawner_component.gd" id="3_dgnp0"]
+[ext_resource type="Texture2D" uid="uid://b8lcbubve4m4u" path="res://assets/textures/weapon.png" id="4_05tof"]
 
 [node name="Shotgun" type="Node2D"]
-script = ExtResource("1_42hqu")
-
-[node name="Polygon2D" type="Polygon2D" parent="."]
-polygon = PackedVector2Array(0, -8, 40, -8, 40, 8, 0, 8)
+script = ExtResource("1_4mcpn")
+speed_variation = 0.3
 
 [node name="TurnComponent" type="Node2D" parent="."]
 script = ExtResource("1_f8ofd")
 
 [node name="ProjectileSpawnerComponent" type="Node2D" parent="."]
-script = ExtResource("2_flot3")
-fire_delay = 0.7
-multishot = 6
-spread = 0.524
+position = Vector2(41, 0)
+script = ExtResource("3_dgnp0")
+fire_delay = 0.1
+multishot = 40
+spread = 0.9
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 1.5708
+scale = Vector2(0.22037, 0.233437)
+texture = ExtResource("4_05tof")
+offset = Vector2(-3, -104)
