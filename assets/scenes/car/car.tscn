@@ -55,7 +55,6 @@ debug_color = Color(0.926996, 0.183974, 0.49923, 0.42)
 [node name="Wheel" type="Node2D" parent="."]
 position = Vector2(76, -99)
 script = ExtResource("4_wkcph")
-max_points = 5000
 min_width = 10.0
 max_width = 50.0
 point_duration = 10.0
@@ -65,7 +64,6 @@ max_drift_strength = 2000.0
 [node name="Wheel2" type="Node2D" parent="."]
 position = Vector2(-69, -100)
 script = ExtResource("4_wkcph")
-max_points = 5000
 min_width = 10.0
 max_width = 50.0
 point_duration = 10.0
@@ -75,7 +73,6 @@ max_drift_strength = 2000.0
 [node name="Wheel3" type="Node2D" parent="."]
 position = Vector2(-78, 140)
 script = ExtResource("4_wkcph")
-max_points = 5000
 min_width = 10.0
 max_width = 50.0
 point_duration = 10.0
@@ -85,7 +82,6 @@ max_drift_strength = 2000.0
 [node name="Wheel4" type="Node2D" parent="."]
 position = Vector2(84, 140)
 script = ExtResource("4_wkcph")
-max_points = 5000
 min_width = 10.0
 max_width = 50.0
 point_duration = 10.0

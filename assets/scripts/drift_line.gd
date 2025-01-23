@@ -17,13 +17,16 @@ var free_when_empty: bool = false
 @onready var point_age: Array[float]
 
 func _physics_process(delta: float):
+	var removed:= false
 	for idx in point_age.size():
 		point_age[idx] += delta
 		if point_age[idx] > point_duration:
 			remove_drift_point(idx)
+			removed = true
 
 	if get_point_count() > max_points:
-		remove_drift_point(0)
+		if not removed:
+			remove_drift_point(0)
 
 	if points.size() <= 0 and free_when_empty:
 		queue_free()
