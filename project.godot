@@ -15,10 +15,6 @@ run/main_scene="res://assets/scenes/levels/test_level.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
-[layer_names]
-
-2d_physics/layer_2="player_projectiles"
-
 [autoload]
 
 LevelContext="*res://assets/scripts/level/level_context.gd"
@@ -26,6 +22,10 @@ LevelContext="*res://assets/scripts/level/level_context.gd"
 [display]
 
 window/size/mode=3
+
+[layer_names]
+
+2d_physics/layer_2="player_projectiles"
 
 [physics]
 

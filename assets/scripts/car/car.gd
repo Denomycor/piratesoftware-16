@@ -5,7 +5,7 @@ class_name Car extends RigidBody2D
 @export var torque_multiplier: float = 2
 @export var perpendicular_multiplier: float = .25
 @export var parallel_multiplier: float = .25
-@export var weapon: Weapon
+@export var weapon: WeaponTest
 @export var health: int = 20
 
 @onready var hurt_box: HurtBoxComponent = $HurtBoxComponent
