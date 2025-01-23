@@ -23,10 +23,10 @@ LevelContext="*res://assets/scripts/level/level_context.gd"
 
 window/size/mode=3
 
-[physics]
-
-2d/default_gravity=0.0
-
 [layer_names]
 
 2d_physics/layer_2="player_projectiles"
+
+[physics]
+
+2d/default_gravity=0.0
