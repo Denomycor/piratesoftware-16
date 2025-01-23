@@ -1,20 +1,34 @@
-[gd_scene load_steps=3 format=3 uid="uid://brtlxge0ng5gg"]
+[gd_scene load_steps=5 format=3 uid="uid://brtlxge0ng5gg"]
 
 [ext_resource type="Script" path="res://assets/scripts/projectiles/linear_projectile.gd" id="1_jeofx"]
+[ext_resource type="Script" path="res://assets/scripts/components/hit-box.gd" id="2_607e3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qagmc"]
 size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c3o5e"]
+size = Vector2(25, 25)
 
 [node name="minigun_projectile" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 0
 motion_mode = 1
 script = ExtResource("1_jeofx")
-speed = 10.0
-reach = 800.0
+speed = 100.0
+reach = 4000.0
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
 polygon = PackedVector2Array(-8, -8, -8, 8, 8, 8, 8, -8)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_qagmc")
+
+[node name="HitBoxComponent" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("2_607e3")
+damage_amount = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
+shape = SubResource("RectangleShape2D_c3o5e")
+debug_color = Color(0.983756, 0.102916, 0.182855, 0.42)

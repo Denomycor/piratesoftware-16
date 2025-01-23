@@ -22,11 +22,8 @@ center_of_mass_mode = 1
 center_of_mass = Vector2(0, -100)
 script = ExtResource("1_nqiho")
 motor_strength = 1000.0
-drift_friction_strength = null
 torque_multiplier = 10.0
-perpendicular_multiplier = null
-parallel_multiplier = null
-health = null
+health = 100
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_no78u")

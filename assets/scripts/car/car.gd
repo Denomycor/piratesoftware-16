@@ -17,6 +17,11 @@ func _ready():
 	weapon_dock.weapon_switched.connect(_on_weapon_switched)
 	hurt_box.has_taken_damage.connect(_on_take_damage)
 
+	current_weapon = weapon_dock.get_current_weapon()
+	current_weapon.fired.connect(apply_knockback)
+	current_weapon.activated.connect(on_weapon_activated)
+	current_weapon.deactivated.connect(on_weapon_deactivated)
+
 func get_forward_direction() -> Vector2:
 	return (to_global(Vector2.UP) - to_global(Vector2.ZERO))
 
