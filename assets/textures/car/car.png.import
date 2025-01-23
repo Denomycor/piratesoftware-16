@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bq1wgovkram7g"
-path="res://.godot/imported/Crawlertest1.png-60d0343044c91e34d385b09b683ab6b9.ctex"
+uid="uid://cyfq1o7yraqrl"
+path="res://.godot/imported/car.png-d984629c551e507513bd0d6629ba73c1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/Crawlertest1.png"
-dest_files=["res://.godot/imported/Crawlertest1.png-60d0343044c91e34d385b09b683ab6b9.ctex"]
+source_file="res://assets/textures/car/car.png"
+dest_files=["res://.godot/imported/car.png-d984629c551e507513bd0d6629ba73c1.ctex"]
 
 [params]
 

@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://2vnrdwbw1mxc"]
+[gd_scene load_steps=13 format=3 uid="uid://2vnrdwbw1mxc"]
 
 [ext_resource type="Script" path="res://assets/scripts/level.gd" id="1_y7sae"]
 [ext_resource type="PackedScene" uid="uid://drcpxeie725b" path="res://assets/scenes/car/car.tscn" id="2_8k278"]
 [ext_resource type="PackedScene" uid="uid://dr2otcq7lhq6j" path="res://assets/scenes/ui/pause_menu.tscn" id="2_idj3t"]
 [ext_resource type="Script" path="res://assets/scripts/enemies/manager/enemies-manager.gd" id="4_a7yx0"]
+[ext_resource type="Script" path="res://assets/scripts/arena/arena.gd" id="4_eyags"]
 [ext_resource type="Shader" path="res://assets/scenes/levels/test_level.gdshader" id="5_b170y"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_bif64"]
@@ -49,7 +50,12 @@ offset_bottom = 4000.0
 [node name="world" type="Node2D" parent="."]
 
 [node name="physics_car" parent="world" instance=ExtResource("2_8k278")]
+z_index = 5
 position = Vector2(987, 467)
+
+[node name="ArenaWalls" type="Node2D" parent="world"]
+script = ExtResource("4_eyags")
+walls_per_side = 30
 
 [node name="pause_menu" parent="." instance=ExtResource("2_idj3t")]
 visible = false

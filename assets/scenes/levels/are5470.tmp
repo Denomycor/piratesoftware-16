@@ -6,9 +6,8 @@
 [node name="Arena" type="Node2D"]
 
 [node name="physics_car" parent="." instance=ExtResource("1_ha3ds")]
-z_index = 5
+position = Vector2(1705, 403)
 motor_strength = 100.0
 
-[node name="ArenaWalls" type="Node2D" parent="."]
+[node name="Walls" type="Node2D" parent="."]
 script = ExtResource("2_jmuku")
-walls_per_side = null
