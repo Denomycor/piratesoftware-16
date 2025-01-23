@@ -12,7 +12,6 @@ func _ready() -> void:
 
 
 func switch_active_weapon(idx: int) -> void:
-	print(idx)
 	get_weapon(current_idx).deactivate()
 	get_weapon(idx).activate()
 	current_idx = idx
@@ -28,10 +27,9 @@ func get_weapon(idx: int) -> Weapon:
 
 
 func _input(event: InputEvent) -> void:
-	if(event is InputEventMouseButton):
+	if (event is InputEventMouseButton):
 		var e := event as InputEventMouseButton
-		if(e.button_index == MOUSE_BUTTON_WHEEL_DOWN && e.pressed):
-			switch_active_weapon(wrapi(current_idx+1, 0, get_child_count()))
-		elif(e.button_index == MOUSE_BUTTON_WHEEL_UP && e.pressed):
-			switch_active_weapon(wrapi(current_idx-1, 0, get_child_count()))
-
+		if (e.button_index == MOUSE_BUTTON_WHEEL_DOWN && e.pressed):
+			switch_active_weapon(wrapi(current_idx + 1, 0, get_child_count()))
+		elif (e.button_index == MOUSE_BUTTON_WHEEL_UP && e.pressed):
+			switch_active_weapon(wrapi(current_idx - 1, 0, get_child_count()))

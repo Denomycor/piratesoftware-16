@@ -8,7 +8,7 @@
 [ext_resource type="Script" path="res://assets/scripts/arena/arena.gd" id="4_eyags"]
 [ext_resource type="Shader" path="res://assets/scenes/levels/test_level.gdshader" id="5_b170y"]
 [ext_resource type="Script" path="res://assets/scripts/level/stats.gd" id="8_6ascs"]
-[ext_resource type="PackedScene" uid="uid://dtyepolgwnyv2" path="res://assets/scenes/ui/game_over_menu.tscn" id="9_h3nak"]
+[ext_resource type="PackedScene" path="res://assets/scenes/ui/game_over_menu.tscn" id="9_h3nak"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_bif64"]
 
