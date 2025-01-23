@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://b8kfknyxgsssb"]
+[gd_scene load_steps=3 format=3 uid="uid://cu2jiyx6agjlt"]
 
 [ext_resource type="PackedScene" uid="uid://drcpxeie725b" path="res://assets/scenes/car/car.tscn" id="1_ha3ds"]
 [ext_resource type="Script" path="res://assets/scripts/arena/arena.gd" id="2_jmuku"]

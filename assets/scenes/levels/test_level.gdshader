@@ -13,7 +13,7 @@ void fragment() {
 
 	vec3 light_color = vec3(0.749, 0.588, 0.427);
 	vec3 dark_color = vec3(0.976, 0.690, 0.400);
-	
+
 	float factor = mix(0.4, 0.6, ground.r);
 
 	vec3 test = sand.rgb * factor;
