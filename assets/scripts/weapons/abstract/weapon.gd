@@ -23,4 +23,3 @@ func deactivate() -> void:
 	visible = false
 	active = false
 	deactivated.emit()
-

@@ -1,20 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://bfmi4x6unh6bk"]
+[gd_scene load_steps=3 format=3 uid="uid://b1vjjhqginc1j"]
 
-[ext_resource type="Script" path="res://assets/scripts/projectiles/linear_projectile.gd" id="1_6euub"]
+[ext_resource type="Script" path="res://assets/scripts/projectiles/linear_projectile.gd" id="1_pex8q"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_qagmc"]
-size = Vector2(16, 16)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cgf20"]
+size = Vector2(4, 4)
 
-[node name="shotgun_projectile" type="CharacterBody2D"]
-collision_layer = 2
+[node name="ShotgunProjectile" type="CharacterBody2D"]
 collision_mask = 0
-motion_mode = 1
-script = ExtResource("1_6euub")
+script = ExtResource("1_pex8q")
 speed = 10.0
-reach = 500.0
+reach = 800.0
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
-polygon = PackedVector2Array(-8, -8, -8, 8, 8, 8, 8, -8)
+position = Vector2(-2, 2)
+polygon = PackedVector2Array(0, 0, 0, -4, 4, -4, 4, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_qagmc")
+shape = SubResource("RectangleShape2D_cgf20")
