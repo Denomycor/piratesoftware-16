@@ -1,31 +1,46 @@
-[gd_scene load_steps=4 format=3 uid="uid://bsblyulsgbsgk"]
+[gd_scene load_steps=6 format=3 uid="uid://i7bfb3sl4bbq"]
 
+[ext_resource type="Script" path="res://assets/scripts/enemies/biker.gd" id="1_3s7no"]
 [ext_resource type="Script" path="res://assets/scripts/components/hurt-box.gd" id="1_80q8j"]
+[ext_resource type="Texture2D" uid="uid://blvtkmatmqnm8" path="res://assets/textures/biker.png" id="2_tipff"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_8wxew"]
-radius = 16.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_j40sk"]
+radius = 57.0
+height = 268.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_vwflh"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_utvnp"]
+radius = 48.0
+height = 240.0
 
 [node name="Biker" type="CharacterBody2D" groups=["enemies"]]
+script = ExtResource("1_3s7no")
+speed = 2000.0
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_tipff")
 
 [node name="HurtBoxComponent" type="Area2D" parent="."]
 script = ExtResource("1_80q8j")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBoxComponent"]
-shape = SubResource("CircleShape2D_8wxew")
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_j40sk")
 debug_color = Color(0.972063, 0, 0.443653, 0.42)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_vwflh")
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_utvnp")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 
-[node name="LineOfSigth" type="RayCast2D" parent="."]
+[node name="LineOfSight" type="RayCast2D" parent="."]
+position = Vector2(110, 0)
+rotation = 1.5708
 target_position = Vector2(0, -38)
 
-[node name="Laser" type="Line2D" parent="."]
-position = Vector2(0, -16)
-points = PackedVector2Array(0, -1, 0, -316)
-width = 1.0
+[node name="Laser" type="Line2D" parent="LineOfSight"]
+position = Vector2(4.37117e-08, 1)
+points = PackedVector2Array(0, 0, 0, -2000)
+width = 5.0
 default_color = Color(0.815686, 0, 0, 0.392157)
