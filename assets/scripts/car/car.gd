@@ -6,7 +6,7 @@ class_name Car extends RigidBody2D
 @export var perpendicular_multiplier: float = .25
 @export var parallel_multiplier: float = .25
 @export var weapon: Weapon
-@export var health: int = 1000
+@export var health: int = 20
 
 @onready var hurt_box: HurtBoxComponent = $HurtBoxComponent
 
@@ -17,8 +17,7 @@ func _ready():
 func on_take_damage(amount: int):
 	health -= amount
 	if health <= 0:
-		# TODO: level.level_exited.emit()
-		pass
+		LevelContext.level.level_exited.emit(LevelContext.level)
 
 func get_forward_direction() -> Vector2:
 	return (to_global(Vector2.UP) - to_global(Vector2.ZERO))

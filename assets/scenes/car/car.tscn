@@ -24,7 +24,6 @@ script = ExtResource("1_nqiho")
 motor_strength = 1000.0
 torque_multiplier = 10.0
 weapon = NodePath("Weapon")
-health = 20
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_no78u")
