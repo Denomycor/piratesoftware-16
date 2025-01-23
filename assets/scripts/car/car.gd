@@ -43,7 +43,5 @@ func apply_knockback(impulse: Vector2) -> void:
 func get_drift_strength(strength_torque_multiplier: float) -> float:
 		return abs(get_perpendicular_direction().dot(linear_velocity) * drift_friction_strength * abs(angular_velocity) * strength_torque_multiplier)
 
-
-
 func get_speed() -> float:
 	return linear_velocity.length()
