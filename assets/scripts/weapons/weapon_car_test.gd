@@ -1,4 +1,4 @@
-class_name Weapon extends Node2D
+class_name WeaponTest extends Node2D
 
 @export var strength: float
 signal fired(impulse: Vector2)

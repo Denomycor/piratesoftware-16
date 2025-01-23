@@ -81,3 +81,4 @@ visible = false
 
 [node name="GameOverMenu" parent="." instance=ExtResource("9_h3nak")]
 visible = false
+
