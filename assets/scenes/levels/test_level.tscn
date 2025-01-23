@@ -1,51 +1,83 @@
-[gd_scene load_steps=9 format=3 uid="uid://2vnrdwbw1mxc"]
+[gd_scene load_steps=16 format=3 uid="uid://2vnrdwbw1mxc"]
 
-[ext_resource type="Script" path="res://assets/scripts/level.gd" id="1_y7sae"]
-[ext_resource type="Texture2D" uid="uid://qjmbo1bj5df7" path="res://icon.svg" id="2_0y7wo"]
+[ext_resource type="Script" path="res://assets/scripts/level/level.gd" id="1_y7sae"]
+[ext_resource type="PackedScene" uid="uid://drcpxeie725b" path="res://assets/scenes/car/car.tscn" id="2_8k278"]
 [ext_resource type="PackedScene" uid="uid://dr2otcq7lhq6j" path="res://assets/scenes/ui/pause_menu.tscn" id="2_idj3t"]
-[ext_resource type="Script" path="res://assets/scripts/components/hit-box.gd" id="3_8oq85"]
+[ext_resource type="PackedScene" uid="uid://is7aeubau3xs" path="res://assets/scenes/ui/overlay.tscn" id="2_wbdkc"]
 [ext_resource type="Script" path="res://assets/scripts/enemies/manager/enemies-manager.gd" id="4_a7yx0"]
-[ext_resource type="PackedScene" uid="uid://od1a5kyfmhsw" path="res://assets/scenes/weapons/shotgun.tscn" id="6_c106p"]
+[ext_resource type="Script" path="res://assets/scripts/arena/arena.gd" id="4_eyags"]
+[ext_resource type="Shader" path="res://assets/scenes/levels/test_level.gdshader" id="5_b170y"]
+[ext_resource type="Script" path="res://assets/scripts/level/stats.gd" id="8_6ascs"]
+[ext_resource type="PackedScene" uid="uid://dtyepolgwnyv2" path="res://assets/scenes/ui/game_over_menu.tscn" id="9_h3nak"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_gojo0"]
-radius = 138.521
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_bif64"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_md4kh"]
-size = Vector2(128, 128)
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_l0gm6"]
+width = 4000
+height = 2000
+as_normal_map = true
+bump_strength = 6.5
+noise = SubResource("FastNoiseLite_bif64")
 
-[node name="test_level" type="Node"]
+[sub_resource type="Gradient" id="Gradient_muhko"]
+colors = PackedColorArray(0.933333, 0.827451, 0, 1, 0.74902, 0.588235, 0.427451, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_on0o5"]
+frequency = 0.4775
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_gf0g1"]
+width = 4000
+height = 2000
+seamless = true
+color_ramp = SubResource("Gradient_muhko")
+noise = SubResource("FastNoiseLite_on0o5")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6ve6o"]
+shader = ExtResource("5_b170y")
+shader_parameter/sand_texture = SubResource("NoiseTexture2D_gf0g1")
+shader_parameter/ground_texture = SubResource("NoiseTexture2D_l0gm6")
+
+[node name="TestLevel" type="Node" node_paths=PackedStringArray("overlay", "stats", "car")]
 script = ExtResource("1_y7sae")
+overlay = NodePath("Overlay")
+stats = NodePath("Stats")
+car = NodePath("World/Car")
 
-[node name="world" type="Node2D" parent="."]
+[node name="Stats" type="Node" parent="." node_paths=PackedStringArray("overlay")]
+script = ExtResource("8_6ascs")
+points_per_second = 10
+overlay = NodePath("../Overlay")
 
-[node name="Icon" type="Sprite2D" parent="world"]
-position = Vector2(892, 467)
-texture = ExtResource("2_0y7wo")
+[node name="Overlay" parent="." instance=ExtResource("2_wbdkc")]
 
-[node name="player_temp" type="Node2D" parent="world"]
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
-[node name="Rigid body" type="RigidBody2D" parent="world"]
-position = Vector2(892, 467)
+[node name="ParallaxBackground" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(8000, 4000)
 
-[node name="Area2D" type="Area2D" parent="world/Rigid body"]
-script = ExtResource("3_8oq85")
-damage_amount = 10
+[node name="ColorRect" type="ColorRect" parent="ParallaxBackground/ParallaxBackground"]
+material = SubResource("ShaderMaterial_6ve6o")
+offset_right = 8012.0
+offset_bottom = 4000.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="world/Rigid body/Area2D"]
-shape = SubResource("CircleShape2D_gojo0")
-debug_color = Color(0.98537, 0.0612741, 0.263992, 0.42)
+[node name="World" type="Node2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="world/Rigid body"]
-shape = SubResource("RectangleShape2D_md4kh")
+[node name="Car" parent="World" instance=ExtResource("2_8k278")]
+z_index = 5
+position = Vector2(987, 467)
 
-[node name="pause_menu" parent="." instance=ExtResource("2_idj3t")]
+[node name="ArenaWalls" type="Node2D" parent="World"]
+script = ExtResource("4_eyags")
+walls_per_side = 30
+
+[node name="EnemySpawner" type="Node" parent="World" node_paths=PackedStringArray("target")]
+script = ExtResource("4_a7yx0")
+target = NodePath("../Car")
+
+[node name="SpawnTimer" type="Timer" parent="World/EnemySpawner"]
+
+[node name="PauseMenu" parent="." instance=ExtResource("2_idj3t")]
 visible = false
 
-[node name="Node" type="Node" parent="." node_paths=PackedStringArray("target")]
-script = ExtResource("4_a7yx0")
-target = NodePath("../world/Rigid body")
-
-[node name="SpawnTimer" type="Timer" parent="Node"]
-
-[node name="Shotgun" parent="." instance=ExtResource("6_c106p")]
-position = Vector2(82, 78)
+[node name="GameOverMenu" parent="." instance=ExtResource("9_h3nak")]
+visible = false

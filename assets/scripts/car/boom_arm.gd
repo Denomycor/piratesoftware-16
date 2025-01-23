@@ -6,6 +6,7 @@ class_name BoomArm extends Node2D
 @export var max_zoom: float = 2
 @export var min_speed: float = 0
 @export var max_speed: float = 300
+@export var zoom_speed: float = 3
 
 @onready var camera: Camera2D = get_node("Camera2D")
 
@@ -25,4 +26,4 @@ func set_boom_position() -> void:
 func set_camera_zoom(delta: float) -> void:
 	var speed = owner.linear_velocity.length()
 	var zoom = clampf(lerpf(max_zoom, min_zoom, (speed - min_speed)/max_speed), min_zoom, max_zoom)
-	camera.zoom = lerp(camera.zoom, Vector2(zoom,zoom), delta)
+	camera.zoom = lerp(camera.zoom, Vector2(zoom,zoom), delta * zoom_speed)

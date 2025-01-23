@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://bqa66deo41qpx"]
+
+[ext_resource type="Texture2D" uid="uid://nj5vu5iapn2p" path="res://assets/textures/arena/Wall-corner-1.png" id="1_bxpee"]
+
+[node name="Corner" type="StaticBody2D"]
+position = Vector2(13, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1015.8, 175.9)
+rotation = 1.5708
+texture = ExtResource("1_bxpee")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(1015.8, 175.9)
+rotation = 1.5708
+polygon = PackedVector2Array(-28, 1047, -651, 1053, -655, -201, 234, -1083, 698, -639, -32, 119)

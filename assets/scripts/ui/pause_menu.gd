@@ -1,9 +1,10 @@
 class_name PauseMenu extends CanvasLayer
 
+signal quit_level
 
 func _ready() -> void:
 	%resume.pressed.connect(toggle_pause_menu)
-	%quit.pressed.connect(get_parent().quit_level)
+	%quit.pressed.connect(quit_level.emit)
 
 
 func _input(event: InputEvent) -> void:
@@ -16,4 +17,3 @@ func _input(event: InputEvent) -> void:
 func toggle_pause_menu() -> void:
 	visible = !visible
 	get_tree().paused = visible
-

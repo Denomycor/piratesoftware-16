@@ -1,9 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://cwf5k547vtn3f"]
+[gd_scene load_steps=3 format=3 uid="uid://cwf5k547vtn3f"]
 
-[ext_resource type="Script" path="res://assets/scripts/weapons/weapon_car_test.gd" id="1_huo2y"]
+[ext_resource type="Script" path="res://assets/scripts/weapons/weapon.gd" id="1_huo2y"]
+[ext_resource type="Texture2D" uid="uid://burn5eoa8i5yc" path="res://assets/textures/car/weapon/wwweapon.png" id="2_tqrn8"]
 
 [node name="Weapon" type="Node2D"]
 script = ExtResource("1_huo2y")
+strength = 500.0
 
-[node name="Polygon2D" type="Polygon2D" parent="."]
-polygon = PackedVector2Array(0, -2.5, 20, -2.5, 20, 2.5, 0, 2.5)
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(93, -4)
+rotation = 1.5708
+texture = ExtResource("2_tqrn8")
