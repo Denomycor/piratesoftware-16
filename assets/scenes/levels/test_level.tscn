@@ -57,11 +57,11 @@ position = Vector2(987, 467)
 script = ExtResource("4_eyags")
 walls_per_side = 30
 
+[node name="EnemySpawner" type="Node" parent="world" node_paths=PackedStringArray("target")]
+script = ExtResource("4_a7yx0")
+target = NodePath("../physics_car")
+
+[node name="SpawnTimer" type="Timer" parent="world/EnemySpawner"]
+
 [node name="pause_menu" parent="." instance=ExtResource("2_idj3t")]
 visible = false
-
-[node name="Node" type="Node" parent="." node_paths=PackedStringArray("target")]
-script = ExtResource("4_a7yx0")
-target = NodePath("../world/physics_car")
-
-[node name="SpawnTimer" type="Timer" parent="Node"]
