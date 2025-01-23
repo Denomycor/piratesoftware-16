@@ -19,6 +19,14 @@ config/icon="res://icon.svg"
 
 2d_physics/layer_2="player_projectiles"
 
+[autoload]
+
+LevelContext="*res://assets/scripts/level/level_context.gd"
+
+[display]
+
+window/size/mode=3
+
 [physics]
 
 2d/default_gravity=0.0

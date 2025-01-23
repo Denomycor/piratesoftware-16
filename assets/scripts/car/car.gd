@@ -1,23 +1,32 @@
 class_name Car extends RigidBody2D
 
-@export var motor_strength: float
-@export var drift_friction_strength: float
-@export var torque_multiplier: float
-@export var perpendicular_multiplier: float
-@export var parallel_multiplier: float
-@export var weapon: WeaponTest
+@export var motor_strength: float = 100
+@export var drift_friction_strength: float = 5
+@export var torque_multiplier: float = 2
+@export var perpendicular_multiplier: float = .25
+@export var parallel_multiplier: float = .25
+@export var weapon: Weapon
+@export var health: int = 20
+
+@onready var hurt_box: HurtBoxComponent = $HurtBoxComponent
 
 func _ready():
 	weapon.fired.connect(apply_knockback)
+	hurt_box.has_taken_damage.connect(on_take_damage)
+
+func on_take_damage(amount: int):
+	health -= amount
+	if health <= 0:
+		LevelContext.level.level_exited.emit(LevelContext.level)
 
 func get_forward_direction() -> Vector2:
 	return (to_global(Vector2.UP) - to_global(Vector2.ZERO))
 
 func get_perpendicular_direction() -> Vector2:
-	return (to_global(Vector2.UP) - to_global(Vector2.ZERO)).rotated(-PI/2)
+	return (to_global(Vector2.UP) - to_global(Vector2.ZERO)).rotated(-PI / 2)
 
 func _physics_process(_delta):
-	apply_central_force(get_forward_direction()*motor_strength)
+	apply_central_force(get_forward_direction() * motor_strength)
 	apply_drift_friction()
 
 func apply_drift_friction():
@@ -32,4 +41,7 @@ func apply_knockback(impulse: Vector2) -> void:
 	apply_torque_impulse(perpendicular_component * torque_multiplier)
 
 func get_drift_strength() -> float:
-	return get_perpendicular_direction().dot(linear_velocity) * drift_friction_strength
+	return abs(get_perpendicular_direction().dot(linear_velocity) * drift_friction_strength)
+
+func get_speed() -> float:
+	return linear_velocity.length()

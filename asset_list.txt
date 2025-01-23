@@ -1,6 +1,6 @@
 entities:
     alien_car
-    chaser - moving - attacking - dying
+    crawler - moving - attacking - dying
     motar
 weapons:
     minigun

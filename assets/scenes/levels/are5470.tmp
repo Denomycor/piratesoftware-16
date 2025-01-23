@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://cu2jiyx6agjlt"]
+[gd_scene load_steps=3 format=3 uid="uid://b8kfknyxgsssb"]
 
 [ext_resource type="PackedScene" uid="uid://drcpxeie725b" path="res://assets/scenes/car/car.tscn" id="1_ha3ds"]
 [ext_resource type="Script" path="res://assets/scripts/arena/arena.gd" id="2_jmuku"]
@@ -6,9 +6,8 @@
 [node name="Arena" type="Node2D"]
 
 [node name="physics_car" parent="." instance=ExtResource("1_ha3ds")]
-z_index = 5
+position = Vector2(1705, 403)
 motor_strength = 100.0
 
-[node name="ArenaWalls" type="Node2D" parent="."]
-position = Vector2(159, -5)
+[node name="Walls" type="Node2D" parent="."]
 script = ExtResource("2_jmuku")
