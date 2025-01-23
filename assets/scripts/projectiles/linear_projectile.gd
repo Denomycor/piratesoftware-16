@@ -1,4 +1,4 @@
-class_name MinigunProjectile extends CharacterBody2D
+class_name LinearProjectile extends CharacterBody2D
 
 
 @export var speed: float
