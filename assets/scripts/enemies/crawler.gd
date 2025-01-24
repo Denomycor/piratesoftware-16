@@ -15,6 +15,7 @@ func update_movement():
 	velocity = direction * speed
 
 func die():
+	died.emit()
 	queue_free()
 
 # Signal

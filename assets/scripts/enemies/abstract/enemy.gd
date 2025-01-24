@@ -1,5 +1,7 @@
 class_name Enemy extends CharacterBody2D
 
+@warning_ignore("UNUSED_SIGNAL")
+signal died
 
 @onready var hurt_box: HurtBoxComponent = $HurtBoxComponent
 @export var speed: float = 200.0

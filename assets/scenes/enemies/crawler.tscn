@@ -70,7 +70,6 @@ animations = [{
 [node name="Crawler" type="CharacterBody2D" groups=["enemies"]]
 collision_mask = 3
 script = ExtResource("1_57m52")
-speed = 500.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708
