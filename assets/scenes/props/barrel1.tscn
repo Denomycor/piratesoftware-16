@@ -8,6 +8,7 @@ size = Vector2(157.29, 81.0239)
 
 [node name="Barrel" type="StaticBody2D"]
 z_index = 5
+collision_mask = 0
 script = ExtResource("1_464r1")
 block_radius = 90.0
 
