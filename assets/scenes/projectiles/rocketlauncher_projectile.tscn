@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://ba4sfi37kkfj"]
+
+[ext_resource type="Script" path="res://assets/scripts/projectiles/linear_projectile.gd" id="1_vddns"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hufu7"]
+size = Vector2(24, 24)
+
+[node name="RocketlauncherProjectile" type="CharacterBody2D"]
+script = ExtResource("1_vddns")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-12, -12, 12, -12, 12, 12, -12, 12)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_hufu7")
