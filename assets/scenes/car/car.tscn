@@ -1,10 +1,10 @@
 [gd_scene load_steps=9 format=3 uid="uid://drcpxeie725b"]
 
 [ext_resource type="Script" path="res://assets/scripts/car/car.gd" id="1_nqiho"]
-[ext_resource type="PackedScene" uid="uid://cwf5k547vtn3f" path="res://assets/scenes/weapons/weapon.tscn" id="1_uckfq"]
 [ext_resource type="Texture2D" uid="uid://cyfq1o7yraqrl" path="res://assets/textures/car/car.png" id="2_no78u"]
 [ext_resource type="Script" path="res://assets/scripts/car/boom_arm.gd" id="3_g02g4"]
 [ext_resource type="Script" path="res://assets/scripts/wheel.gd" id="4_wkcph"]
+[ext_resource type="PackedScene" uid="uid://c4b5t5usvyqcs" path="res://assets/scenes/weapon_dock.tscn" id="6_kmu1j"]
 [ext_resource type="Script" path="res://assets/scripts/components/hurt-box.gd" id="7_plr5q"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_kt83k"]
@@ -15,7 +15,7 @@ bounce = 0.1
 radius = 122.0
 height = 446.0
 
-[node name="Car" type="RigidBody2D" node_paths=PackedStringArray("weapon")]
+[node name="Car" type="RigidBody2D"]
 physics_material_override = SubResource("PhysicsMaterial_kt83k")
 gravity_scale = 0.0
 center_of_mass_mode = 1
@@ -23,7 +23,7 @@ center_of_mass = Vector2(0, -100)
 script = ExtResource("1_nqiho")
 motor_strength = 1000.0
 torque_multiplier = 10.0
-weapon = NodePath("Weapon")
+health = 100
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_no78u")
@@ -43,9 +43,6 @@ max_zoom = 1.0
 max_speed = 1000.0
 
 [node name="Camera2D" type="Camera2D" parent="BoomArm"]
-
-[node name="Weapon" parent="." instance=ExtResource("1_uckfq")]
-position = Vector2(4, 90)
 
 [node name="wheels" type="Node2D" parent="."]
 
@@ -93,3 +90,6 @@ script = ExtResource("7_plr5q")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBoxComponent"]
 position = Vector2(1, 5)
 shape = SubResource("CapsuleShape2D_1m2s1")
+
+[node name="weapon_dock" parent="." instance=ExtResource("6_kmu1j")]
+position = Vector2(3, 87)

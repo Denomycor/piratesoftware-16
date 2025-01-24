@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://is7y7auk6peu"]
+[gd_scene load_steps=16 format=3 uid="uid://is7y7auk6peu"]
 
 [ext_resource type="Script" path="res://assets/scripts/enemies/crawler.gd" id="1_57m52"]
 [ext_resource type="Texture2D" uid="uid://bq1wgovkram7g" path="res://assets/textures/enemies/crawler.png" id="2_8n8kl"]
 [ext_resource type="Script" path="res://assets/scripts/components/hurt-box.gd" id="3_xyjir"]
 [ext_resource type="Script" path="res://assets/scripts/components/hit-box.gd" id="4_78tml"]
+[ext_resource type="Texture2D" uid="uid://nesewo4kcwtn" path="res://assets/textures/enemies/Crawler_moving_spritesheet.png" id="5_i3u1f"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6pu46"]
 radius = 71.0
@@ -17,11 +18,63 @@ height = 234.0
 radius = 43.0
 height = 192.0
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_bkqtl"]
+atlas = ExtResource("5_i3u1f")
+region = Rect2(0, 0, 455, 521)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6srut"]
+atlas = ExtResource("5_i3u1f")
+region = Rect2(455, 0, 455, 521)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_45157"]
+atlas = ExtResource("5_i3u1f")
+region = Rect2(910, 0, 455, 521)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8ecxw"]
+atlas = ExtResource("5_i3u1f")
+region = Rect2(1365, 0, 455, 521)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a8vou"]
+atlas = ExtResource("5_i3u1f")
+region = Rect2(1820, 0, 455, 521)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ps71o"]
+atlas = ExtResource("5_i3u1f")
+region = Rect2(2275, 0, 455, 521)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_or4c4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bkqtl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6srut")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_45157")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8ecxw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a8vou")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ps71o")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}]
+
 [node name="Crawler" type="CharacterBody2D" groups=["enemies"]]
+collision_mask = 3
 script = ExtResource("1_57m52")
 speed = 500.0
 
 [node name="Crawlertest1" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(1, 3)
 rotation = 1.5708
 texture = ExtResource("2_8n8kl")
@@ -47,3 +100,9 @@ damage_amount = 10
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
 position = Vector2(99, 0)
 shape = SubResource("CapsuleShape2D_4t71l")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+rotation = 1.5708
+sprite_frames = SubResource("SpriteFrames_or4c4")
+autoplay = "default"
+frame_progress = 0.444495

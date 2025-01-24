@@ -5,19 +5,22 @@ class_name Car extends RigidBody2D
 @export var torque_multiplier: float
 @export var perpendicular_multiplier: float
 @export var parallel_multiplier: float
-@export var weapon: WeaponTest
 @export var health: int = 20
 
+
+@onready var weapon_dock: WeaponDock = $weapon_dock
 @onready var hurt_box: HurtBoxComponent = $HurtBoxComponent
 
-func _ready():
-	weapon.fired.connect(apply_knockback)
-	hurt_box.has_taken_damage.connect(on_take_damage)
+var current_weapon: Weapon
 
-func on_take_damage(amount: int):
-	health -= amount
-	if health <= 0:
-		LevelContext.level.set_game_over()
+func _ready():
+	weapon_dock.weapon_switched.connect(_on_weapon_switched)
+	hurt_box.has_taken_damage.connect(_on_take_damage)
+
+	current_weapon = weapon_dock.get_current_weapon()
+	current_weapon.fired.connect(apply_knockback)
+	current_weapon.activated.connect(on_weapon_activated)
+	current_weapon.deactivated.connect(on_weapon_deactivated)
 
 func get_forward_direction() -> Vector2:
 	return (to_global(Vector2.UP) - to_global(Vector2.ZERO))
@@ -45,3 +48,30 @@ func get_drift_strength(strength_torque_multiplier: float) -> float:
 
 func get_speed() -> float:
 	return linear_velocity.length()
+
+
+func on_weapon_activated():
+	pass
+
+func on_weapon_deactivated():
+	pass
+
+
+#region Signals
+func _on_weapon_switched():
+	if current_weapon:
+		current_weapon.fired.disconnect(apply_knockback)
+		current_weapon.deactivated.disconnect(on_weapon_deactivated)
+		current_weapon.activated.disconnect(on_weapon_activated)
+
+	current_weapon = weapon_dock.get_current_weapon()
+	current_weapon.fired.connect(apply_knockback)
+	current_weapon.activated.connect(on_weapon_activated)
+	current_weapon.deactivated.connect(on_weapon_deactivated)
+
+func _on_take_damage(amount: int):
+	health -= amount
+	if health <= 0:
+		LevelContext.level.set_game_over()
+
+#endregion

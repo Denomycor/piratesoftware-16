@@ -1,7 +1,7 @@
 shader_type canvas_item;
 
 uniform sampler2D sand_texture;
-uniform sampler2D ground_texture;
+uniform sampler2D normal_map_texture;
 
 void vertex() {
 	// Called for every vertex the material is visible on.
@@ -9,18 +9,18 @@ void vertex() {
 
 void fragment() {
 	vec4 sand = texture(sand_texture, UV);
-	vec4 ground = texture(ground_texture, UV);
+	vec4 normal_map = texture(normal_map_texture, UV);
 
-	vec3 light_color = vec3(0.749, 0.588, 0.427);
-	vec3 dark_color = vec3(0.976, 0.690, 0.400);
+	vec3 normal = normalize(normal_map.rgb * 2.0 - 1.0);
+	vec3 light_dir = normalize(vec3(0.0, 0.8, 1.0));
 
-	float factor = mix(0.4, 0.6, ground.r);
+	float factor = max(dot(normal, light_dir), 0.0);
 
-	vec3 test = sand.rgb * factor;
+	vec3 adjusted_sand = sand.rgb * factor;
 
-	vec4 noise = vec4(test, 1.0);
+	vec4 final_color = vec4(adjusted_sand, 1.0);
 
-	COLOR = noise;
+	COLOR = final_color;
 }
 
 void light() {
