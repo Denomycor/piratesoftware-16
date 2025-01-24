@@ -10,13 +10,13 @@ var position_before_drag2
 func _ready():
     set_zoom_level(zoom_level)
 
-func _unhandled_input(event: InputEvent) -> void:
+func _input(event: InputEvent) -> void:
     if event is InputEventMouseButton:
         if event.button_index == MOUSE_BUTTON_WHEEL_UP:
             set_zoom_level(zoom_level + zoom_factor)
-        if event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+        elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
             set_zoom_level(zoom_level - zoom_factor)
-        if event.button_index == MOUSE_BUTTON_LEFT:
+        elif event.button_index == MOUSE_BUTTON_LEFT:
             position_before_drag = event.global_position
             position_before_drag2 = self.global_position
             if event.is_released():

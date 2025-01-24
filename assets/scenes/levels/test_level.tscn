@@ -13,20 +13,24 @@
 [ext_resource type="PackedScene" uid="uid://dtyepolgwnyv2" path="res://assets/scenes/ui/game_over_menu.tscn" id="9_h3nak"]
 [ext_resource type="Script" path="res://assets/scripts/utils/panning_camera.gd" id="9_qeern"]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_bif64"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_hkqgo"]
+noise_type = 3
+frequency = 0.002
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_l0gm6"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_uxiu7"]
 width = 4000
 height = 2000
+seamless = true
 as_normal_map = true
-bump_strength = 6.5
-noise = SubResource("FastNoiseLite_bif64")
+bump_strength = 15.8
+noise = SubResource("FastNoiseLite_hkqgo")
 
 [sub_resource type="Gradient" id="Gradient_muhko"]
 colors = PackedColorArray(0.933333, 0.827451, 0, 1, 0.74902, 0.588235, 0.427451, 1)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_on0o5"]
-frequency = 0.4775
+noise_type = 3
+frequency = 0.0867
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_gf0g1"]
 width = 4000
@@ -38,7 +42,7 @@ noise = SubResource("FastNoiseLite_on0o5")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6ve6o"]
 shader = ExtResource("5_b170y")
 shader_parameter/sand_texture = SubResource("NoiseTexture2D_gf0g1")
-shader_parameter/ground_texture = SubResource("NoiseTexture2D_l0gm6")
+shader_parameter/normal_map_texture = SubResource("NoiseTexture2D_uxiu7")
 
 [node name="TestLevel" type="Node" node_paths=PackedStringArray("overlay", "stats", "car")]
 script = ExtResource("1_y7sae")
@@ -71,6 +75,7 @@ walls_per_side = 30
 prop_list = Array[PackedScene]([ExtResource("7_tmaof"), ExtResource("8_chcvc")])
 ratios = Array[int]([1, 2])
 prop_density = 0.005
+debug = true
 
 [node name="Camera2D" type="Camera2D" parent="World/ArenaWalls"]
 enabled = false
