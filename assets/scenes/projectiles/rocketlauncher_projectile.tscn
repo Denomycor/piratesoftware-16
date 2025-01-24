@@ -11,6 +11,8 @@ size = Vector2(32, 32)
 
 [node name="RocketlauncherProjectile" type="CharacterBody2D"]
 script = ExtResource("1_vddns")
+speed = 200.0
+reach = 2000.0
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
 polygon = PackedVector2Array(-12, -12, 12, -12, 12, 12, -12, 12)
@@ -20,6 +22,9 @@ shape = SubResource("RectangleShape2D_hufu7")
 
 [node name="HitBoxComponent" type="Area2D" parent="."]
 script = ExtResource("2_4rp8f")
+direct_damage = 20
+area_damage = 5
+explosion_radius = 100
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
 shape = SubResource("RectangleShape2D_jde8s")

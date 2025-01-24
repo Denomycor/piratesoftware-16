@@ -16,3 +16,5 @@ script = ExtResource("2_qsljy")
 [node name="ProjectileSpawnerComponent" type="Node2D" parent="."]
 position = Vector2(96, 0)
 script = ExtResource("3_ygmqf")
+fire_delay = 0.01
+multishot = 1
