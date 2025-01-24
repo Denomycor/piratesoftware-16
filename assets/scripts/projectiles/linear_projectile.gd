@@ -14,7 +14,7 @@ func set_properties(pos: Vector2, rot: float) -> void:
 
 func _physics_process(_delta) -> void:
 	var motion := Vector2.from_angle(rotation) * speed
-	if(reach_acc < reach):
+	if (reach_acc < reach):
 		reach_acc += motion.length()
 		move_and_collide(motion)
 	else:
@@ -23,4 +23,3 @@ func _physics_process(_delta) -> void:
 
 func destroy() -> void:
 	queue_free()
-

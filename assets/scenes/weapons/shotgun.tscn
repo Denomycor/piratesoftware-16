@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://od1a5kyfmhsw"]
+[gd_scene load_steps=5 format=3 uid="uid://qaypc31xeqwu"]
 
 [ext_resource type="Script" path="res://assets/scripts/weapons/shotgun.gd" id="1_4mcpn"]
 [ext_resource type="Script" path="res://assets/scripts/weapons/components/turn_component.gd" id="1_f8ofd"]
@@ -9,18 +9,18 @@
 script = ExtResource("1_4mcpn")
 speed_variation = 0.3
 
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-15, 1)
+rotation = 1.5708
+texture = ExtResource("4_05tof")
+offset = Vector2(-3, -104)
+
 [node name="TurnComponent" type="Node2D" parent="."]
 script = ExtResource("1_f8ofd")
 
 [node name="ProjectileSpawnerComponent" type="Node2D" parent="."]
-position = Vector2(41, 0)
+position = Vector2(160, 0)
 script = ExtResource("3_dgnp0")
 fire_delay = 0.1
 multishot = 40
 spread = 0.9
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-rotation = 1.5708
-scale = Vector2(0.22037, 0.233437)
-texture = ExtResource("4_05tof")
-offset = Vector2(-3, -104)

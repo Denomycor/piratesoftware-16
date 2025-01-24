@@ -1,20 +1,24 @@
-[gd_scene load_steps=4 format=3 uid="uid://dbf445di2iil4"]
+[gd_scene load_steps=5 format=3 uid="uid://dbf445di2iil4"]
 
 [ext_resource type="Script" path="res://assets/scripts/weapons/components/turn_component.gd" id="1_fw3mj"]
 [ext_resource type="Script" path="res://assets/scripts/weapons/minigun.gd" id="1_nd5hs"]
+[ext_resource type="Texture2D" uid="uid://cfmeupd241sxf" path="res://assets/textures/car/weapon/minigun.png" id="2_52n6a"]
 [ext_resource type="Script" path="res://assets/scripts/weapons/components/projectile_spawner_component.gd" id="2_qdibs"]
 
 [node name="minigun" type="Node2D"]
 script = ExtResource("1_nd5hs")
+strength = 50.0
 
-[node name="Polygon2D" type="Polygon2D" parent="."]
-polygon = PackedVector2Array(0, -8, 0, 8, 40, 8, 40, -8)
+[node name="Minigun" type="Sprite2D" parent="."]
+position = Vector2(92, 1)
+rotation = 1.5708
+texture = ExtResource("2_52n6a")
 
 [node name="TurnComponent" type="Node2D" parent="."]
 script = ExtResource("1_fw3mj")
 
 [node name="ProjectileSpawnerComponent" type="Node2D" parent="."]
-position = Vector2(40, 0)
+position = Vector2(201, 0)
 script = ExtResource("2_qdibs")
 fire_delay = 0.01
 multishot = 1

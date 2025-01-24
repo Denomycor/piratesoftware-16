@@ -21,7 +21,7 @@ gravity_scale = 0.0
 center_of_mass_mode = 1
 center_of_mass = Vector2(0, -100)
 script = ExtResource("1_nqiho")
-motor_strength = 1000.0
+motor_strength = 500.0
 torque_multiplier = 10.0
 health = 100
 

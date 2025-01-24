@@ -1,3 +1,24 @@
-[gd_scene format=3 uid="uid://blwqp27dvjvst"]
+[gd_scene load_steps=5 format=3 uid="uid://bgp4vgcumbv8k"]
+
+[ext_resource type="Texture2D" uid="uid://b376ctw7d50nr" path="res://assets/textures/car/weapon/hook.png" id="1_5juf2"]
+[ext_resource type="Script" path="res://assets/scripts/weapons/hook.gd" id="1_wlxyj"]
+[ext_resource type="Script" path="res://assets/scripts/weapons/components/turn_component.gd" id="3_2m2un"]
+[ext_resource type="Script" path="res://assets/scripts/weapons/components/projectile_spawner_component.gd" id="4_jnjbs"]
 
 [node name="Hook" type="Node2D"]
+script = ExtResource("1_wlxyj")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(92, -1)
+rotation = 1.5708
+texture = ExtResource("1_5juf2")
+
+[node name="TurnComponent" type="Node2D" parent="."]
+script = ExtResource("3_2m2un")
+
+[node name="ProjectileSpawnerComponent" type="Node2D" parent="."]
+rotation = -0.00323829
+script = ExtResource("4_jnjbs")
+fire_delay = 0.1
+multishot = 1
+spread = 0.01
