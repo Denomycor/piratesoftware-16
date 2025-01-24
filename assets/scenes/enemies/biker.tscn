@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://r5x8bir33mc3"]
+[gd_scene load_steps=6 format=3 uid="uid://con75ahe8s7lj"]
 
 [ext_resource type="Script" path="res://assets/scripts/enemies/biker.gd" id="1_3s7no"]
 [ext_resource type="Script" path="res://assets/scripts/components/hurt-box.gd" id="1_80q8j"]
@@ -14,11 +14,11 @@ height = 240.0
 
 [node name="Biker" type="CharacterBody2D" groups=["enemies"]]
 script = ExtResource("1_3s7no")
-health = null
-follow_range = null
+health = 40
+follow_range = 1500
 prediction_time = null
-max_angle_diff = null
-speed = 3000.0
+max_angle_diff = 10.0
+speed = 4000.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
