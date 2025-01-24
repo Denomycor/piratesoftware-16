@@ -1,6 +1,9 @@
 class_name ArenaWalls extends Node2D
 
 @export var walls_per_side: int = 10
+@export var average_prop_area := 90000
+@export var border_size := 300
+@export var scale_offset := 0.1
 @export var prop_list: Array[PackedScene]
 @export var ratios: Array[int]
 @export var prop_density: float
@@ -9,13 +12,9 @@ class_name ArenaWalls extends Node2D
 var wall: PackedScene = preload("res://assets/scenes/levels/walls/Wall.tscn")
 var corner: PackedScene = preload("res://assets/scenes/levels/walls/Corner.tscn")
 
-const AVERAGE_PROP_AREA = 90000
 const NUMBER_OF_SIDES: int = 8
-
 const WALL_LENGTH: int = 1035
 const CORNER_LENGTH: int = 1025
-
-const BORDER_SIZE = 300
 
 var angle_increment: float = 2 * PI / NUMBER_OF_SIDES
 var polygon: Array[Vector2]
@@ -45,7 +44,7 @@ func build_arena() -> void:
 		corner_instance.position = last_position
 		corner_instance.rotation = direction.angle()
 		var point_pos : Vector2 = corner_instance.get_node("Point").global_position
-		polygon.append(point_pos.normalized() * (point_pos.distance_to(center) - BORDER_SIZE))
+		polygon.append(point_pos.normalized() * (point_pos.distance_to(center) - border_size))
 		add_child(corner_instance)
 
 		last_position += direction * CORNER_LENGTH
@@ -89,7 +88,7 @@ func get_random_prop_instance() -> Prop:
 	return prop_list[idx-1].instantiate()
 
 func generate_props() -> void:
-	var area := 2*(1+sqrt(2))*pow(polygon[0].distance_to(polygon[1]),2) / AVERAGE_PROP_AREA
+	var area := 2*(1+sqrt(2))*pow(polygon[0].distance_to(polygon[1]),2) / average_prop_area
 	var prop_number: int = int(area * prop_density)
 	for idx in prop_number:
 		var prop := get_random_prop_instance()
@@ -98,6 +97,7 @@ func generate_props() -> void:
 			pos = get_random_point_inside_polygon()
 		prop.global_position = pos
 		prop.destroyed.connect(func(): props.erase(prop))
+		apply_random_transforms(prop)
 		props.append(prop)
 		get_parent().add_child.call_deferred(prop)
 	
@@ -106,3 +106,8 @@ func can_place_prop(prop: Prop, pos: Vector2) -> bool:
 		if item.is_overlaping(pos, prop.block_radius):
 			return false
 	return true
+
+func apply_random_transforms(prop: Prop) -> void:
+	prop.rotate(randf_range(0,PI*2))
+	var r_scale = 1 + (randf_range(-scale_offset,scale_offset))
+	prop.scale = Vector2(r_scale, r_scale)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://2vnrdwbw1mxc"]
+[gd_scene load_steps=18 format=3 uid="uid://2vnrdwbw1mxc"]
 
 [ext_resource type="Script" path="res://assets/scripts/level/level.gd" id="1_y7sae"]
 [ext_resource type="PackedScene" uid="uid://drcpxeie725b" path="res://assets/scenes/car/car.tscn" id="2_8k278"]
@@ -9,6 +9,7 @@
 [ext_resource type="Shader" path="res://assets/scenes/levels/test_level.gdshader" id="5_b170y"]
 [ext_resource type="PackedScene" uid="uid://deo63nl1macwi" path="res://assets/scenes/props/barrel1.tscn" id="7_tmaof"]
 [ext_resource type="Script" path="res://assets/scripts/level/stats.gd" id="8_6ascs"]
+[ext_resource type="PackedScene" uid="uid://bed4ht5aqqkf1" path="res://assets/scenes/props/boulder1.tscn" id="8_chcvc"]
 [ext_resource type="PackedScene" uid="uid://dtyepolgwnyv2" path="res://assets/scenes/ui/game_over_menu.tscn" id="9_h3nak"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_bif64"]
@@ -76,8 +77,8 @@ enabled = false
 [node name="ArenaWalls" type="Node2D" parent="World"]
 script = ExtResource("4_eyags")
 walls_per_side = 30
-prop_list = Array[PackedScene]([ExtResource("7_tmaof")])
-ratios = Array[int]([1])
+prop_list = Array[PackedScene]([ExtResource("7_tmaof"), ExtResource("8_chcvc")])
+ratios = Array[int]([1, 2])
 prop_density = 0.005
 
 [node name="EnemySpawner" type="Node" parent="World" node_paths=PackedStringArray("target")]
