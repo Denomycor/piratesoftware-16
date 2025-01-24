@@ -2,6 +2,9 @@ class_name Crawler extends Enemy
 
 @export var health: int = 10
 
+@onready var gpuParticles: GPUParticles2D = $GPUParticles2D
+@onready var animations: AnimatedSprite2D = $AnimatedSprite2D
+
 func _ready() -> void:
 	hurt_box.has_taken_damage.connect(_take_dmg)
 
@@ -16,7 +19,9 @@ func update_movement():
 
 func die():
 	died.emit()
-	queue_free()
+	animations.visible = false
+	gpuParticles.emitting = true
+	gpuParticles.finished.connect(queue_free)
 
 # Signal
 func _take_dmg(amount: int):
