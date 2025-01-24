@@ -4,11 +4,14 @@ class_name Crawler extends Enemy
 
 @onready var gpuParticles: GPUParticles2D = $GPUParticles2D
 @onready var animations: AnimatedSprite2D = $AnimatedSprite2D
+@onready var collision: CollisionShape2D = $CollisionShape2D
+@onready var hit_box: HitBoxComponent = $HitBoxComponent
 
 func _ready() -> void:
 	hurt_box.has_taken_damage.connect(_take_dmg)
-
-
+	animations.frame = randi() % animations.sprite_frames.get_frame_count(animations.animation)
+	animations.speed_scale = randf_range(0.8, 1.2)
+	
 func attack():
 	print("I am the pacifist")
 
@@ -19,6 +22,11 @@ func update_movement():
 
 func die():
 	died.emit()
+	velocity = Vector2.ZERO
+	hurt_box.has_taken_damage.disconnect(_take_dmg)
+	hurt_box.queue_free()
+	collision.queue_free()
+	hit_box.queue_free()
 	animations.visible = false
 	gpuParticles.emitting = true
 	gpuParticles.finished.connect(queue_free)
