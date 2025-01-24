@@ -1,12 +1,13 @@
 class_name PolygonRandomPointGenerator
 
-
 var _polygon: PackedVector2Array
 var _triangles: PackedInt32Array
 var _cumulated_triangle_areas: Array
 
 var _rand: RandomNumberGenerator
 
+func _ready():
+    @warning_ignore("integer_division")
 
 func _init(polygon: PackedVector2Array) -> void:
     _polygon = polygon

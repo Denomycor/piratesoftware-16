@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://2vnrdwbw1mxc"]
+[gd_scene load_steps=19 format=3 uid="uid://2vnrdwbw1mxc"]
 
 [ext_resource type="Script" path="res://assets/scripts/level/level.gd" id="1_y7sae"]
 [ext_resource type="PackedScene" uid="uid://drcpxeie725b" path="res://assets/scenes/car/car.tscn" id="2_8k278"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://assets/scripts/level/stats.gd" id="8_6ascs"]
 [ext_resource type="PackedScene" uid="uid://bed4ht5aqqkf1" path="res://assets/scenes/props/boulder1.tscn" id="8_chcvc"]
 [ext_resource type="PackedScene" uid="uid://dtyepolgwnyv2" path="res://assets/scenes/ui/game_over_menu.tscn" id="9_h3nak"]
+[ext_resource type="Script" path="res://assets/scripts/utils/panning_camera.gd" id="9_qeern"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_bif64"]
 
@@ -64,22 +65,27 @@ offset_bottom = 4000.0
 
 [node name="World" type="Node2D" parent="."]
 
-[node name="Car" parent="World" instance=ExtResource("2_8k278")]
-z_index = 5
-position = Vector2(987, 467)
-drift_friction_strength = 5.0
-perpendicular_multiplier = 0.25
-parallel_multiplier = 0.25
-
-[node name="Camera2D" parent="World/Car/BoomArm" index="0"]
-enabled = false
-
 [node name="ArenaWalls" type="Node2D" parent="World"]
 script = ExtResource("4_eyags")
 walls_per_side = 30
 prop_list = Array[PackedScene]([ExtResource("7_tmaof"), ExtResource("8_chcvc")])
 ratios = Array[int]([1, 2])
 prop_density = 0.005
+
+[node name="Camera2D" type="Camera2D" parent="World/ArenaWalls"]
+enabled = false
+zoom = Vector2(0.04, 0.04)
+script = ExtResource("9_qeern")
+min_zoom = 0.003
+max_zoom = 0.3
+zoom_factor = 0.005
+
+[node name="Car" parent="World" instance=ExtResource("2_8k278")]
+z_index = 5
+position = Vector2(987, 467)
+drift_friction_strength = 5.0
+perpendicular_multiplier = 0.25
+parallel_multiplier = 0.25
 
 [node name="EnemySpawner" type="Node" parent="World" node_paths=PackedStringArray("target")]
 script = ExtResource("4_a7yx0")
@@ -93,8 +99,5 @@ visible = false
 
 [node name="GameOverMenu" parent="." instance=ExtResource("9_h3nak")]
 visible = false
-
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(0.04, 0.04)
 
 [editable path="World/Car"]

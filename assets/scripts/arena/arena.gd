@@ -7,7 +7,9 @@ class_name ArenaWalls extends Node2D
 @export var prop_list: Array[PackedScene]
 @export var ratios: Array[int]
 @export var prop_density: float
+@export var debug: bool = false
 
+@onready var debug_camera: Camera2D = $Camera2D
 
 var wall: PackedScene = preload("res://assets/scenes/levels/walls/Wall.tscn")
 var corner: PackedScene = preload("res://assets/scenes/levels/walls/Corner.tscn")
@@ -22,6 +24,12 @@ var point_generator: PolygonRandomPointGenerator
 var props: Array[Prop]
 
 func _ready() -> void:
+	if debug:
+		debug_camera.enabled = true
+		debug_camera.make_current()
+	else:
+		debug_camera.enabled = false
+
 	assert(prop_list.size() == ratios.size(), "prop_list and ratios need to have same size")
 	build_arena()
 	generate_props()
