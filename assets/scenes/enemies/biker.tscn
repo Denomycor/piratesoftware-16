@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://i7bfb3sl4bbq"]
+[gd_scene load_steps=6 format=3 uid="uid://r5x8bir33mc3"]
 
 [ext_resource type="Script" path="res://assets/scripts/enemies/biker.gd" id="1_3s7no"]
 [ext_resource type="Script" path="res://assets/scripts/components/hurt-box.gd" id="1_80q8j"]
@@ -14,7 +14,11 @@ height = 240.0
 
 [node name="Biker" type="CharacterBody2D" groups=["enemies"]]
 script = ExtResource("1_3s7no")
-speed = 2000.0
+health = null
+follow_range = null
+prediction_time = null
+max_angle_diff = null
+speed = 3000.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
@@ -38,6 +42,7 @@ rotation = 1.5708
 target_position = Vector2(0, -38)
 
 [node name="Laser" type="Line2D" parent="LineOfSight"]
+visible = false
 position = Vector2(4.37117e-08, 1)
 points = PackedVector2Array(0, 0, 0, -2000)
 width = 5.0
