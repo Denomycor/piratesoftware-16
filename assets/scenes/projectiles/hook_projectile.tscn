@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://dnbjeygwc7und"]
+[gd_scene load_steps=5 format=3 uid="uid://da0glwm1oavka"]
 
 [ext_resource type="Script" path="res://assets/scripts/projectiles/hook_projectile.gd" id="1_e2oua"]
 [ext_resource type="Texture2D" uid="uid://b376ctw7d50nr" path="res://assets/textures/car/weapon/hook.png" id="1_e2rc5"]
@@ -10,7 +10,7 @@ size = Vector2(212, 29)
 radius = 53.0377
 
 [node name="HookProjectile" type="CharacterBody2D"]
-collision_layer = 2
+collision_layer = 0
 collision_mask = 0
 motion_mode = 1
 script = ExtResource("1_e2oua")
