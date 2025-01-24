@@ -1,7 +1,6 @@
-[gd_scene load_steps=16 format=3 uid="uid://is7y7auk6peu"]
+[gd_scene load_steps=15 format=3 uid="uid://is7y7auk6peu"]
 
 [ext_resource type="Script" path="res://assets/scripts/enemies/crawler.gd" id="1_57m52"]
-[ext_resource type="Texture2D" uid="uid://bq1wgovkram7g" path="res://assets/textures/enemies/crawler.png" id="2_8n8kl"]
 [ext_resource type="Script" path="res://assets/scripts/components/hurt-box.gd" id="3_xyjir"]
 [ext_resource type="Script" path="res://assets/scripts/components/hit-box.gd" id="4_78tml"]
 [ext_resource type="Texture2D" uid="uid://nesewo4kcwtn" path="res://assets/textures/enemies/Crawler_moving_spritesheet.png" id="5_i3u1f"]
@@ -72,12 +71,6 @@ animations = [{
 collision_mask = 3
 script = ExtResource("1_57m52")
 speed = 500.0
-
-[node name="Crawlertest1" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(1, 3)
-rotation = 1.5708
-texture = ExtResource("2_8n8kl")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708
