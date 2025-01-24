@@ -20,6 +20,7 @@ const BORDER_SIZE = 300
 var angle_increment: float = 2 * PI / NUMBER_OF_SIDES
 var polygon: Array[Vector2]
 var point_generator: PolygonRandomPointGenerator
+var props: Array[Prop]
 
 func _ready() -> void:
 	assert(prop_list.size() == ratios.size(), "prop_list and ratios need to have same size")
@@ -73,7 +74,7 @@ func get_random_point_inside_polygon() -> Vector2:
 		point_generator = PolygonRandomPointGenerator.new(polygon)
 	return point_generator.get_random_point()
 
-func get_random_prop_instance() -> Node2D:
+func get_random_prop_instance() -> Prop:
 	if prop_list.size() == 0:
 		return null
 	var sum := 0
@@ -91,7 +92,17 @@ func generate_props() -> void:
 	var area := 2*(1+sqrt(2))*pow(polygon[0].distance_to(polygon[1]),2) / AVERAGE_PROP_AREA
 	var prop_number: int = int(area * prop_density)
 	for idx in prop_number:
-		var pos := get_random_point_inside_polygon()
 		var prop := get_random_prop_instance()
+		var pos := get_random_point_inside_polygon()
+		while not can_place_prop(prop, pos):
+			pos = get_random_point_inside_polygon()
 		prop.global_position = pos
+		prop.destroyed.connect(func(): props.erase(prop))
+		props.append(prop)
 		get_parent().add_child.call_deferred(prop)
+	
+func can_place_prop(prop: Prop, pos: Vector2) -> bool:
+	for item in props:
+		if item.is_overlaping(pos, prop.block_radius):
+			return false
+	return true
