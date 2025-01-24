@@ -13,6 +13,7 @@ reach = 800.0
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
 position = Vector2(-2, 2)
+color = Color(0.408329, 0.408329, 0.408329, 1)
 polygon = PackedVector2Array(0, 0, 0, -4, 4, -4, 4, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

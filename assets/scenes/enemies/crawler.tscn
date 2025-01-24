@@ -18,6 +18,8 @@ radius = 43.0
 height = 192.0
 
 [node name="Crawler" type="CharacterBody2D" groups=["enemies"]]
+z_index = 5
+collision_mask = 3
 script = ExtResource("1_57m52")
 speed = 500.0
 

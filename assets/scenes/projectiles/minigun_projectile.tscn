@@ -14,6 +14,7 @@ speed = 10.0
 reach = 800.0
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(0.233925, 0.233925, 0.233925, 1)
 polygon = PackedVector2Array(-8, -8, -8, 8, 8, 8, 8, -8)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
