@@ -19,11 +19,11 @@ const BORDER_SIZE = 300
 
 var angle_increment: float = 2 * PI / NUMBER_OF_SIDES
 var polygon: Array[Vector2]
+var point_generator: PolygonRandomPointGenerator
 
 func _ready() -> void:
 	assert(prop_list.size() == ratios.size(), "prop_list and ratios need to have same size")
 	build_arena()
-	print(polygon)
 	generate_props()
 
 func build_arena() -> void:
@@ -43,7 +43,8 @@ func build_arena() -> void:
 		var corner_instance: Node2D = corner.instantiate()
 		corner_instance.position = last_position
 		corner_instance.rotation = direction.angle()
-		polygon.append(corner_instance.get_node("Point").global_position)
+		var point_pos : Vector2 = corner_instance.get_node("Point").global_position
+		polygon.append(point_pos.normalized() * (point_pos.distance_to(center) - BORDER_SIZE))
 		add_child(corner_instance)
 
 		last_position += direction * CORNER_LENGTH
@@ -67,15 +68,10 @@ func build_wall(start_position: Vector2, direction: Vector2) -> Vector2:
 func is_point_inside_polygon(point: Vector2) -> bool:
 	return Geometry2D.is_point_in_polygon(point, polygon)
 
-func get_random_point_inside_polygon(border_space: float) -> Vector2:
-	var bordered_polygon := polygon
-	var out_radius := (bordered_polygon[0] - position).length()
-	for idx in bordered_polygon.size():
-		var dir := (bordered_polygon[idx] - position).normalized()
-		var new_point := dir * (out_radius - border_space)
-		bordered_polygon[idx] = new_point
-	var generator:= PolygonRandomPointGenerator.new(bordered_polygon)
-	return generator.get_random_point()
+func get_random_point_inside_polygon() -> Vector2:
+	if point_generator == null:
+		point_generator = PolygonRandomPointGenerator.new(polygon)
+	return point_generator.get_random_point()
 
 func get_random_prop_instance() -> Node2D:
 	if prop_list.size() == 0:
@@ -95,7 +91,7 @@ func generate_props() -> void:
 	var area := 2*(1+sqrt(2))*pow(polygon[0].distance_to(polygon[1]),2) / AVERAGE_PROP_AREA
 	var prop_number: int = int(area * prop_density)
 	for idx in prop_number:
-		var pos := get_random_point_inside_polygon(BORDER_SIZE)
+		var pos := get_random_point_inside_polygon()
 		var prop := get_random_prop_instance()
 		prop.global_position = pos
 		get_parent().add_child.call_deferred(prop)
