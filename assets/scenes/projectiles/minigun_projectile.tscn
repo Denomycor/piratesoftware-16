@@ -10,22 +10,22 @@ size = Vector2(16, 16)
 size = Vector2(25, 25)
 
 [node name="minigun_projectile" type="CharacterBody2D"]
-collision_layer = 2
-collision_mask = 0
+collision_layer = 8
+collision_mask = 5
 motion_mode = 1
 script = ExtResource("1_jeofx")
 speed = 100.0
 reach = 4000.0
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
-polygon = PackedVector2Array(-8, -8, -8, 8, 8, 8, 8, -8)
+polygon = PackedVector2Array(-8, -8, -8, 8, 0, 8, 8, 8, 8, -8)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_qagmc")
 
 [node name="HitBoxComponent" type="Area2D" parent="."]
 collision_layer = 0
-collision_mask = 2
+collision_mask = 4
 script = ExtResource("2_607e3")
 damage_amount = 5
 

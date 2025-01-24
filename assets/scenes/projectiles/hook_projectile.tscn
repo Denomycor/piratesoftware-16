@@ -10,8 +10,8 @@ size = Vector2(212, 29)
 radius = 53.0377
 
 [node name="HookProjectile" type="CharacterBody2D"]
-collision_layer = 0
-collision_mask = 0
+collision_layer = 8
+collision_mask = 5
 motion_mode = 1
 script = ExtResource("1_e2oua")
 speed = 100.0
@@ -28,7 +28,7 @@ texture = ExtResource("1_e2rc5")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 0
-collision_mask = 31
+collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(194, 0)

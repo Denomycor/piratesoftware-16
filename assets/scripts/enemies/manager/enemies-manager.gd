@@ -54,7 +54,7 @@ func _spawn_enemy() -> void:
 		return
 	
 	var pos = Vector2.ZERO
-	var enemy_instance = biker_scene.instantiate()
+	var enemy_instance = crawler_scene.instantiate()
 	enemy_instance.target = target
 	enemy_instance.global_position = pos
 	add_child(enemy_instance)
