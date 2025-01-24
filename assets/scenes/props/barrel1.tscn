@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://deo63nl1macwi"]
+
+[ext_resource type="Script" path="res://assets/scripts/props/prop.gd" id="1_464r1"]
+[ext_resource type="Texture2D" uid="uid://b8pjgkx0utcs6" path="res://assets/textures/props/barrel_asset_1.png" id="1_sehac"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3qjhx"]
+size = Vector2(157.29, 81.0239)
+
+[node name="Barrel" type="StaticBody2D"]
+z_index = 5
+script = ExtResource("1_464r1")
+block_radius = 90.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_sehac")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+z_index = 1
+position = Vector2(0.684161, -0.0805338)
+rotation = -0.413698
+shape = SubResource("RectangleShape2D_3qjhx")

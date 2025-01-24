@@ -3,8 +3,8 @@
 [ext_resource type="Script" path="res://assets/scripts/car/car.gd" id="1_nqiho"]
 [ext_resource type="Texture2D" uid="uid://cyfq1o7yraqrl" path="res://assets/textures/car/car.png" id="2_no78u"]
 [ext_resource type="Script" path="res://assets/scripts/car/boom_arm.gd" id="3_g02g4"]
-[ext_resource type="Script" path="res://assets/scripts/wheel.gd" id="4_wkcph"]
-[ext_resource type="PackedScene" uid="uid://c4b5t5usvyqcs" path="res://assets/scenes/weapon_dock.tscn" id="6_kmu1j"]
+[ext_resource type="Script" path="res://assets/scripts/car/wheel.gd" id="4_wkcph"]
+[ext_resource type="PackedScene" uid="uid://c4b5t5usvyqcs" path="res://assets/scenes/weapons/weapon_dock.tscn" id="6_kmu1j"]
 [ext_resource type="Script" path="res://assets/scripts/components/hurt-box.gd" id="7_plr5q"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_kt83k"]

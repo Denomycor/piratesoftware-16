@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b8lcbubve4m4u"
-path="res://.godot/imported/weapon.png-f7ae57c12903b5f8e8033b45c3e981c7.ctex"
+uid="uid://d0db5vjestun1"
+path="res://.godot/imported/gasoline_asset_1.png-720cdd658cef20293123f1aab4766f37.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/weapon.png"
-dest_files=["res://.godot/imported/weapon.png-f7ae57c12903b5f8e8033b45c3e981c7.ctex"]
+source_file="res://assets/textures/props/gasoline_asset_1.png"
+dest_files=["res://.godot/imported/gasoline_asset_1.png-720cdd658cef20293123f1aab4766f37.ctex"]
 
 [params]
 
