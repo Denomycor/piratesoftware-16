@@ -4,16 +4,16 @@ class_name HitBoxComponent extends Area2D
 signal has_dealt_damage
 
 func _ready() -> void:
-    self.monitoring = true
-    self.monitorable = false
-    area_entered.connect(_on_area_entered)
+	self.monitoring = true
+	self.monitorable = false
+	area_entered.connect(_on_area_entered)
 
 func deal_damage(area: Area2D) -> void:
-    area.take_damage(damage_amount)
-    has_dealt_damage.emit(damage_amount)
+	area.take_damage(damage_amount)
+	has_dealt_damage.emit(damage_amount)
 
 
 # signal
 func _on_area_entered(area: Area2D) -> void:
-    if area.has_method("take_damage"):
-        deal_damage(area)
+	if area.has_method("take_damage"):
+		deal_damage(area)
