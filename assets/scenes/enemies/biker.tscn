@@ -1,18 +1,20 @@
-[gd_scene load_steps=6 format=3 uid="uid://con75ahe8s7lj"]
+[gd_scene load_steps=6 format=3 uid="uid://dw2abso84avq1"]
 
 [ext_resource type="Script" path="res://assets/scripts/enemies/biker.gd" id="1_3s7no"]
 [ext_resource type="Script" path="res://assets/scripts/components/hurt-box.gd" id="1_80q8j"]
 [ext_resource type="Texture2D" uid="uid://blvtkmatmqnm8" path="res://assets/textures/biker.png" id="2_tipff"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_j40sk"]
-radius = 57.0
-height = 268.0
-
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_utvnp"]
 radius = 48.0
 height = 240.0
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_j40sk"]
+radius = 57.0
+height = 268.0
+
 [node name="Biker" type="CharacterBody2D" groups=["enemies"]]
+collision_layer = 4
+collision_mask = 7
 script = ExtResource("1_3s7no")
 health = 40
 follow_range = 1500
@@ -24,17 +26,19 @@ speed = 4000.0
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_tipff")
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_utvnp")
+
 [node name="HurtBoxComponent" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 0
 script = ExtResource("1_80q8j")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBoxComponent"]
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_j40sk")
 debug_color = Color(0.972063, 0, 0.443653, 0.42)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-rotation = 1.5708
-shape = SubResource("CapsuleShape2D_utvnp")
 
 [node name="LineOfSight" type="RayCast2D" parent="."]
 position = Vector2(110, 0)

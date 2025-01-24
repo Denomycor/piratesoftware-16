@@ -1,4 +1,4 @@
-class_name ArenaWalls extends Node2D
+class_name Arena extends Node2D
 
 @export var walls_per_side: int = 10
 @export var average_prop_area := 90000

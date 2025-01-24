@@ -10,8 +10,8 @@ size = Vector2(4, 4)
 radius = 5.0
 
 [node name="ShotgunProjectile" type="CharacterBody2D"]
-collision_layer = 2
-collision_mask = 0
+collision_layer = 8
+collision_mask = 5
 script = ExtResource("1_pex8q")
 speed = 60.0
 reach = 800.0
@@ -25,7 +25,7 @@ shape = SubResource("RectangleShape2D_cgf20")
 
 [node name="HitBoxComponent" type="Area2D" parent="."]
 collision_layer = 0
-collision_mask = 2
+collision_mask = 4
 script = ExtResource("2_eg3h8")
 damage_amount = 5
 

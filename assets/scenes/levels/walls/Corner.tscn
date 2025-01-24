@@ -4,6 +4,7 @@
 
 [node name="Corner" type="StaticBody2D"]
 position = Vector2(13, 0)
+collision_mask = 0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(1015.8, 175.9)

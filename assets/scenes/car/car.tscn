@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cyfq1o7yraqrl" path="res://assets/textures/car/car.png" id="2_no78u"]
 [ext_resource type="Script" path="res://assets/scripts/car/boom_arm.gd" id="3_g02g4"]
 [ext_resource type="Script" path="res://assets/scripts/car/wheel.gd" id="4_wkcph"]
-[ext_resource type="PackedScene" uid="uid://c4b5t5usvyqcs" path="res://assets/scenes/weapons/weapon_dock.tscn" id="6_kmu1j"]
+[ext_resource type="PackedScene" path="res://assets/scenes/weapons/weapon_dock.tscn" id="6_kmu1j"]
 [ext_resource type="Script" path="res://assets/scripts/components/hurt-box.gd" id="7_plr5q"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_kt83k"]
@@ -16,6 +16,8 @@ radius = 122.0
 height = 446.0
 
 [node name="Car" type="RigidBody2D"]
+collision_layer = 2
+collision_mask = 5
 physics_material_override = SubResource("PhysicsMaterial_kt83k")
 gravity_scale = 0.0
 center_of_mass_mode = 1
@@ -85,6 +87,8 @@ max_drift_strength = 2000.0
 torque_multiplier = 2.0
 
 [node name="HurtBoxComponent" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 0
 script = ExtResource("7_plr5q")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBoxComponent"]
