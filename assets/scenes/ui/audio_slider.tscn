@@ -1,0 +1,31 @@
+[gd_scene load_steps=2 format=3 uid="uid://bwj7wl63yu7p8"]
+
+[ext_resource type="Script" path="res://assets/scripts/ui/audio_slider.gd" id="1_nqktx"]
+
+[node name="AudioSlider" type="VBoxContainer"]
+offset_right = 50.0
+offset_bottom = 24.0
+script = ExtResource("1_nqktx")
+bus_name = "music"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+text = "audio"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+alignment = 1
+
+[node name="CheckBox" type="CheckBox" parent="HBoxContainer"]
+layout_mode = 2
+button_pressed = true
+
+[node name="HSlider" type="HSlider" parent="HBoxContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_vertical = 1
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+text = "0"

@@ -1,32 +1,95 @@
-[gd_scene format=3 uid="uid://cb05setpgdk7r"]
+[gd_scene load_steps=3 format=3 uid="uid://cb05setpgdk7r"]
+
+[ext_resource type="PackedScene" uid="uid://bwj7wl63yu7p8" path="res://assets/scenes/ui/audio_slider.tscn" id="1_4isu8"]
+[ext_resource type="Script" path="res://assets/scripts/ui/main_menu.gd" id="1_rkxya"]
 
 [node name="MainMenu" type="CanvasLayer"]
+script = ExtResource("1_rkxya")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="TabContainer" type="TabContainer" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-alignment = 1
+tab_alignment = 1
+current_tab = 0
+tabs_visible = false
 
-[node name="Label" type="Label" parent="VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer"]
+layout_mode = 2
+alignment = 1
+metadata/_tab_index = 0
+
+[node name="Label" type="Label" parent="TabContainer/VBoxContainer"]
 layout_mode = 2
 text = "Chico da Tina"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="play" type="Button" parent="VBoxContainer"]
+[node name="play" type="Button" parent="TabContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 text = "Play"
 
-[node name="quit" type="Button" parent="VBoxContainer"]
+[node name="options" type="Button" parent="TabContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Options"
+
+[node name="quit" type="Button" parent="TabContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 text = "Quit
 "
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="TabContainer"]
+visible = false
+layout_mode = 2
+alignment = 1
+metadata/_tab_index = 1
+
+[node name="Label" type="Label" parent="TabContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Options
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="AudioSlider" parent="TabContainer/VBoxContainer2/VBoxContainer" instance=ExtResource("1_4isu8")]
+layout_mode = 2
+bus_name = "Master"
+
+[node name="AudioSlider2" parent="TabContainer/VBoxContainer2/VBoxContainer" instance=ExtResource("1_4isu8")]
+layout_mode = 2
+bus_name = "Music"
+bus_idx = 1
+
+[node name="AudioSlider3" parent="TabContainer/VBoxContainer2/VBoxContainer" instance=ExtResource("1_4isu8")]
+layout_mode = 2
+bus_name = "SFX"
+bus_idx = 2
+
+[node name="window_mode" type="Button" parent="TabContainer/VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Fullscreen
+"
+
+[node name="back" type="Button" parent="TabContainer/VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Back"
