@@ -3,6 +3,7 @@ class_name ProjectileSpawnerComponent extends Node2D
 
 signal shoot_projectile(from: Vector2, rot: float, data: Variant)
 signal projectile_ready
+signal just_shot
 
 @export var fire_delay: float
 @export var multishot: int
@@ -36,3 +37,5 @@ func shoot(to: Vector2, data: Variant = null) -> void:
 			shoot_projectile.emit(bullet_spawn.global_position, angle, data)
 		proj_ready = false
 		delay_acc = fire_delay
+		just_shot.emit()
+
