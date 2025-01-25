@@ -80,10 +80,12 @@ func _on_take_damage(amount: int):
 		LevelContext.level.set_game_over()
 
 func _on_collision(node: Node) -> void:
+	var collision_damage := clampi(int(lerpf(0,max_collision_damage, get_speed()/speed_for_max_collision_damage)),0,max_collision_damage)
 	if node is RigidBody2D:
-		hurt_box.take_damage(clampi(int(lerpf(0,max_collision_damage, get_speed()/speed_for_max_collision_damage)),0,max_collision_damage)*node.mass/mass)
+		var mass_ratio = node.mass/mass
+		hurt_box.take_damage(collision_damage * mass_ratio)
 	elif node is StaticBody2D:
-		hurt_box.take_damage(clampi(int(lerpf(0,max_collision_damage, get_speed()/speed_for_max_collision_damage)),0,max_collision_damage))
+		hurt_box.take_damage(collision_damage)
 	elif node is CharacterBody2D:
 		#ainda n sei
 		pass
