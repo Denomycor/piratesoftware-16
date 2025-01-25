@@ -14,6 +14,7 @@ var inherited_velocity := Vector2.ZERO
 func _ready() -> void:
 	timer = create_tween()
 	timer.tween_callback(destroy).set_delay(lifetime)
+	$GPUParticles2D.emitting = true
 
 
 func set_properties(pos: Vector2, rot: float) -> void:
