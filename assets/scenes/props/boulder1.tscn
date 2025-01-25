@@ -5,7 +5,7 @@
 
 [node name="Boulder" type="StaticBody2D"]
 z_index = 5
-collision_mask = 0
+collision_mask = 3
 script = ExtResource("1_2tv2v")
 block_radius = 230.0
 

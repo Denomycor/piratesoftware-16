@@ -1,9 +1,14 @@
-[gd_scene load_steps=7 format=3 uid="uid://deo63nl1macwi"]
+[gd_scene load_steps=8 format=3 uid="uid://deo63nl1macwi"]
 
 [ext_resource type="Texture2D" uid="uid://b8pjgkx0utcs6" path="res://assets/textures/props/barrel_asset_1.png" id="1_sehac"]
 [ext_resource type="Script" path="res://assets/scripts/props/barrel.gd" id="1_xs686"]
 [ext_resource type="Script" path="res://assets/scripts/components/hit-box.gd" id="3_68ped"]
 [ext_resource type="Script" path="res://assets/scripts/components/hurt-box.gd" id="4_3nec5"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vldhs"]
+friction = 0.8
+bounce = 0.3
+absorbent = true
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3qjhx"]
 size = Vector2(157.29, 81.0239)
@@ -11,9 +16,12 @@ size = Vector2(157.29, 81.0239)
 [sub_resource type="CircleShape2D" id="CircleShape2D_yna4x"]
 radius = 248.0
 
-[node name="Barrel" type="StaticBody2D"]
+[node name="Barrel" type="RigidBody2D"]
 z_index = 5
-collision_mask = 0
+collision_mask = 3
+mass = 0.1
+physics_material_override = SubResource("PhysicsMaterial_vldhs")
+gravity_scale = 0.0
 script = ExtResource("1_xs686")
 block_radius = 90.0
 

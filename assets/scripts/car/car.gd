@@ -5,7 +5,9 @@ class_name Car extends RigidBody2D
 @export var torque_multiplier: float
 @export var perpendicular_multiplier: float
 @export var parallel_multiplier: float
-@export var health: int = 20
+@export var health: int = 100
+@export var max_collision_damage: int = 25
+@export var speed_for_max_collision_damage: float = 500
 
 
 @onready var weapon_dock: WeaponDock = $weapon_dock
@@ -14,6 +16,9 @@ class_name Car extends RigidBody2D
 var current_weapon: Weapon
 
 func _ready():
+	contact_monitor = true
+	max_contacts_reported = 10
+	body_entered.connect(_on_collision)
 	weapon_dock.weapon_switched.connect(_on_weapon_switched)
 	hurt_box.has_taken_damage.connect(_on_take_damage)
 
@@ -73,5 +78,16 @@ func _on_take_damage(amount: int):
 	health -= amount
 	if health <= 0:
 		LevelContext.level.set_game_over()
+
+func _on_collision(node: Node) -> void:
+	if node is RigidBody2D:
+		hurt_box.take_damage(clampi(int(lerpf(0,max_collision_damage, get_speed()/speed_for_max_collision_damage)),0,max_collision_damage)*node.mass/mass)
+	elif node is StaticBody2D:
+		hurt_box.take_damage(clampi(int(lerpf(0,max_collision_damage, get_speed()/speed_for_max_collision_damage)),0,max_collision_damage))
+	elif node is CharacterBody2D:
+		#ainda n sei
+		pass
+	return
+
 
 #endregion

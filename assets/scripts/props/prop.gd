@@ -1,4 +1,4 @@
-class_name Prop extends StaticBody2D
+class_name Prop extends PhysicsBody2D
 
 @export var block_radius: float
 

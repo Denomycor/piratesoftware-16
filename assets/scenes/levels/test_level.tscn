@@ -73,7 +73,7 @@ offset_bottom = 4000.0
 script = ExtResource("4_eyags")
 walls_per_side = 30
 prop_list = Array[PackedScene]([ExtResource("7_tmaof"), ExtResource("8_chcvc")])
-ratios = Array[int]([10, 1])
+ratios = Array[int]([3, 1])
 prop_density = 0.015
 
 [node name="Camera2D" type="Camera2D" parent="World/Arena"]
