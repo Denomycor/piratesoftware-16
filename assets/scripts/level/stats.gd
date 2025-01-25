@@ -30,10 +30,10 @@ func check_max_speed() -> void:
 		max_speed = speed
 
 func _physics_process(delta: float):
-	check_drift(delta)
 	if not is_game_over:
 		speed = LevelContext.level.car.get_speed() * speed_conversion_ratio
 		check_max_speed()
+		check_drift(delta)
 		add_points(points_per_second * delta)
 		time_survived += delta
 		overlay.set_hp(LevelContext.level.car.health)
