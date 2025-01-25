@@ -1,6 +1,6 @@
 class_name HitBoxComponent extends Area2D
 
-@export var damage_amount: int
+@export var damage_amount: float
 signal has_dealt_damage
 
 func _ready() -> void:

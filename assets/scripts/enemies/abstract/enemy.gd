@@ -22,5 +22,5 @@ func _physics_process(_delta: float) -> void:
 	move_and_slide()
 
 # Signal
-func _take_dmg(_amount: int):
+func _take_dmg(_amount: float):
 	push_error("The _take_dmg function is not implemented for this enemy.")

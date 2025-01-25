@@ -6,5 +6,5 @@ func _ready() -> void:
     self.monitoring = false
     self.monitorable = true
 
-func take_damage(amount: int) -> void:
+func take_damage(amount: float) -> void:
         has_taken_damage.emit(amount)

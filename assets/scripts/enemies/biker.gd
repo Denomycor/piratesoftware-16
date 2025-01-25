@@ -1,6 +1,6 @@
 class_name Biker extends Enemy
 
-@export var health: int = 20
+@export var health: float = 20
 @export_range(500, 1500) var follow_range: int
 @export var prediction_time: float = 0.3
 @export var max_angle_diff: float = 1.0
@@ -65,7 +65,7 @@ func die():
 	queue_free()
 
 # Signal
-func _take_dmg(amount: int):
+func _take_dmg(amount: float):
 	health -= amount
 	if health <= 0:
 		die()

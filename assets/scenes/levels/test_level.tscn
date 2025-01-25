@@ -47,6 +47,8 @@ position = Vector2(987, 467)
 drift_friction_strength = 5.0
 perpendicular_multiplier = 0.25
 parallel_multiplier = 0.25
+min_collision_speed = 500.0
+speed_for_max_collision_damage = 4000.0
 
 [node name="BoomArm" parent="World/Car" index="2"]
 mouse_slide_distance = 1000.0
