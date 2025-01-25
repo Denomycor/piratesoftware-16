@@ -2,17 +2,40 @@
 
 [ext_resource type="Script" path="res://assets/scripts/ui/overlay.gd" id="1_tmn6d"]
 
-[node name="Overlay" type="CanvasLayer" node_paths=PackedStringArray("point_counter")]
+[node name="Overlay" type="CanvasLayer" node_paths=PackedStringArray("point_counter", "kills_counter", "hp_counter")]
 script = ExtResource("1_tmn6d")
 point_counter = NodePath("Points")
+kills_counter = NodePath("Kills")
+hp_counter = NodePath("Hp")
 
 [node name="Points" type="Label" parent="."]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -40.0
-offset_bottom = 23.0
+offset_left = -133.0
+offset_top = 6.0
+offset_bottom = 29.0
 grow_horizontal = 0
 size_flags_horizontal = 8
 size_flags_vertical = 0
-horizontal_alignment = 2
+text = "Points: 100"
+
+[node name="Kills" type="Label" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -115.0
+offset_top = 30.0
+offset_bottom = 53.0
+grow_horizontal = 0
+text = "Kills: 0"
+
+[node name="Hp" type="Label" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -104.0
+offset_top = 56.0
+offset_bottom = 79.0
+grow_horizontal = 0
+text = "HP: 100"
