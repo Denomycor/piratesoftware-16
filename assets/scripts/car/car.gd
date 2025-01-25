@@ -16,6 +16,8 @@ class_name Car extends RigidBody2D
 
 var current_weapon: Weapon
 
+var last_velocity: Vector2
+
 func _ready():
 	contact_monitor = true
 	max_contacts_reported = 1
@@ -38,6 +40,7 @@ func get_perpendicular_direction() -> Vector2:
 func _physics_process(_delta):
 	apply_central_force(get_forward_direction() * motor_strength)
 	apply_drift_friction()
+	last_velocity = linear_velocity
 
 func apply_drift_friction():
 	var perpendicular_component := get_perpendicular_direction().dot(linear_velocity)
@@ -81,8 +84,8 @@ func _on_take_damage(amount: float):
 		LevelContext.level.set_game_over()
 
 func _on_collision(node: Node) -> void:
-	var collision_damage := clampf(lerpf(0,max_collision_damage, (get_speed()-min_collision_speed)/(speed_for_max_collision_damage - min_collision_speed)),0,max_collision_damage)
-	print(collision_damage)
+	var collision_speed := last_velocity.dot(global_position.direction_to(node.global_position))
+	var collision_damage := clampf(lerpf(0,max_collision_damage, (collision_speed-min_collision_speed)/(speed_for_max_collision_damage - min_collision_speed)),0,max_collision_damage)
 	if node is RigidBody2D:
 		var mass_ratio = node.mass/mass
 		hurt_box.take_damage(collision_damage * mass_ratio)
