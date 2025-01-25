@@ -2,9 +2,14 @@ class_name LinearProjectile extends CharacterBody2D
 
 
 @export var speed: float
-@export var reach: float
+@export var lifetime: float
 
-var reach_acc := 0.0
+var timer: Tween
+
+
+func _ready() -> void:
+	timer = create_tween()
+	timer.tween_callback(destroy).set_delay(lifetime)
 
 
 func set_properties(pos: Vector2, rot: float) -> void:
@@ -14,11 +19,7 @@ func set_properties(pos: Vector2, rot: float) -> void:
 
 func _physics_process(_delta) -> void:
 	var motion := Vector2.from_angle(rotation) * speed
-	if (reach_acc < reach):
-		reach_acc += motion.length()
-		move_and_collide(motion)
-	else:
-		destroy()
+	move_and_collide(motion)
 
 
 func destroy() -> void:

@@ -21,7 +21,6 @@ func _process(_delta: float) -> void:
 func _on_hook_shoot(from: Vector2, rot: float, _data: Variant) -> void:
 	var projectile: HookProjectile = PROJECTILE_SCENE.instantiate()
 	projectile.set_properties(from, rot)
-
 	LevelContext.level.get_node("World").add_child(projectile)
 
 	var dir: Vector2 = get_global_mouse_position().direction_to(global_position)

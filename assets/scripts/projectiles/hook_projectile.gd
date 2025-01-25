@@ -1,17 +1,16 @@
 class_name HookProjectile extends CharacterBody2D
 
 @export var speed: float
-@export var reach: float
+@export var lifetime: float
 @export var drag_dist: float = 900
 
 @onready var area_collision: Area2D = $Area2D
 @onready var cable: Line2D = $Line2D
 
 
-var reach_acc := 0.0
-
 var target: PhysicsBody2D
 var car: RigidBody2D
+var timer: Tween
 
 var hit_target: bool = false
 
@@ -19,6 +18,8 @@ var hit_target: bool = false
 func _ready() -> void:
 	area_collision.area_entered.connect(_on_area_entered)
 	car = LevelContext.level.get_node("World").get_node("Car")
+	timer = create_tween()
+	timer.tween_callback(destroy).set_delay(lifetime)
 
 
 func set_properties(pos: Vector2, rot: float) -> void:
@@ -34,11 +35,7 @@ func _physics_process(_delta: float) -> void:
 		handle_has_target()
 	else:
 		var motion := Vector2.from_angle(rotation) * speed
-		if (reach_acc < reach):
-			reach_acc += motion.length()
-			move_and_collide(motion)
-		else:
-			destroy()
+		move_and_collide(motion)
 
 
 func destroy() -> void:
@@ -58,6 +55,7 @@ func handle_has_target() -> void:
 func _on_area_entered(area: Area2D) -> void:
 	target = area.get_parent()
 	hit_target = true
+	timer.kill()
 	if(area.get_parent() is Enemy):
 		(area.get_parent() as Enemy).died.connect(destroy)
 
