@@ -1,11 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://bed4ht5aqqkf1"]
+[gd_scene load_steps=3 format=3 uid="uid://b0276oescn8bs"]
 
 [ext_resource type="Script" path="res://assets/scripts/props/prop.gd" id="1_2tv2v"]
 [ext_resource type="Texture2D" uid="uid://cjohfbanwt25d" path="res://assets/textures/props/boulder_asset_1.png" id="2_tt6au"]
 
 [node name="Boulder" type="StaticBody2D"]
 z_index = 5
-collision_mask = 0
+collision_mask = 3
 script = ExtResource("1_2tv2v")
 block_radius = 230.0
 

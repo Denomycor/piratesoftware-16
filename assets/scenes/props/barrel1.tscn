@@ -1,21 +1,53 @@
-[gd_scene load_steps=4 format=3 uid="uid://deo63nl1macwi"]
+[gd_scene load_steps=8 format=3 uid="uid://deo63nl1macwi"]
 
-[ext_resource type="Script" path="res://assets/scripts/props/prop.gd" id="1_464r1"]
 [ext_resource type="Texture2D" uid="uid://b8pjgkx0utcs6" path="res://assets/textures/props/barrel_asset_1.png" id="1_sehac"]
+[ext_resource type="Script" path="res://assets/scripts/props/barrel.gd" id="1_xs686"]
+[ext_resource type="Script" path="res://assets/scripts/components/hit-box.gd" id="3_68ped"]
+[ext_resource type="Script" path="res://assets/scripts/components/hurt-box.gd" id="4_3nec5"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vldhs"]
+friction = 0.8
+bounce = 0.3
+absorbent = true
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3qjhx"]
 size = Vector2(157.29, 81.0239)
 
-[node name="Barrel" type="StaticBody2D"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_yna4x"]
+radius = 248.0
+
+[node name="Barrel" type="RigidBody2D"]
 z_index = 5
-collision_mask = 0
-script = ExtResource("1_464r1")
+collision_mask = 3
+mass = 0.1
+physics_material_override = SubResource("PhysicsMaterial_vldhs")
+gravity_scale = 0.0
+script = ExtResource("1_xs686")
 block_radius = 90.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_sehac")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+z_index = 1
+position = Vector2(0.684161, -0.0805338)
+rotation = -0.413698
+shape = SubResource("RectangleShape2D_3qjhx")
+
+[node name="HitBoxComponent" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 7
+script = ExtResource("3_68ped")
+damage_amount = 20
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
+shape = SubResource("CircleShape2D_yna4x")
+
+[node name="HurtBoxComponent" type="Area2D" parent="."]
+collision_mask = 0
+script = ExtResource("4_3nec5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBoxComponent"]
 z_index = 1
 position = Vector2(0.684161, -0.0805338)
 rotation = -0.413698

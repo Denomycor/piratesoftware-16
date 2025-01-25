@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://8ph600g0xx25"]
+
+[ext_resource type="Script" path="res://assets/scripts/props/bones.gd" id="1_485rn"]
+[ext_resource type="Texture2D" uid="uid://vnkjdwue3tt4" path="res://assets/textures/props/bones_asset_1.png" id="2_bobt7"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8645f"]
+radius = 35.6467
+height = 200.232
+
+[node name="Bones" type="Area2D" node_paths=PackedStringArray("slow_area")]
+z_index = 5
+collision_mask = 2
+script = ExtResource("1_485rn")
+slow_ratio = 0.3
+slow_area = NodePath(".")
+block_radius = 120.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_bobt7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 32)
+rotation = -0.549049
+shape = SubResource("CapsuleShape2D_8645f")
