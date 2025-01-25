@@ -13,4 +13,5 @@ func _on_take_damage(amount: int):
     health -= amount
     if health <= 0:
         hit_box.monitoring = true
-        queue_free()
+        var tween := get_tree().create_tween()
+        tween.tween_callback(queue_free).set_delay(0.1)

@@ -73,8 +73,8 @@ offset_bottom = 4000.0
 script = ExtResource("4_eyags")
 walls_per_side = 30
 prop_list = Array[PackedScene]([ExtResource("7_tmaof"), ExtResource("8_chcvc")])
-ratios = Array[int]([1, 2])
-prop_density = 0.005
+ratios = Array[int]([10, 1])
+prop_density = 0.015
 
 [node name="Camera2D" type="Camera2D" parent="World/Arena"]
 enabled = false
@@ -96,7 +96,7 @@ script = ExtResource("4_a7yx0")
 target = NodePath("../Car")
 
 [node name="SpawnTimer" type="Timer" parent="World/EnemySpawner"]
-wait_time = 15.0
+wait_time = 0.5
 
 [node name="PauseMenu" parent="." instance=ExtResource("2_idj3t")]
 visible = false
