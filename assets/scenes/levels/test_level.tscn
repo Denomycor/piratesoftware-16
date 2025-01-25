@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://deo63nl1macwi" path="res://assets/scenes/props/barrel1.tscn" id="7_tmaof"]
 [ext_resource type="Script" path="res://assets/scripts/level/stats.gd" id="8_6ascs"]
 [ext_resource type="PackedScene" uid="uid://bed4ht5aqqkf1" path="res://assets/scenes/props/boulder1.tscn" id="8_chcvc"]
-[ext_resource type="PackedScene" uid="uid://dtyepolgwnyv2" path="res://assets/scenes/ui/game_over_menu.tscn" id="9_h3nak"]
+[ext_resource type="PackedScene" path="res://assets/scenes/ui/game_over_menu.tscn" id="9_h3nak"]
 [ext_resource type="Script" path="res://assets/scripts/utils/panning_camera.gd" id="9_qeern"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_hkqgo"]
