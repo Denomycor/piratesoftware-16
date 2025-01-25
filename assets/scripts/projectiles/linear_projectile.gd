@@ -6,7 +6,11 @@ class_name LinearProjectile extends CharacterBody2D
 
 @onready var hitbox_component: HitBoxComponent = $HitBoxComponent
 
+@export var scale_curve: Curve
+
 var timer: Tween
+var scale_tween: Tween
+
 var travel_direction: Vector2
 var inherited_velocity := Vector2.ZERO
 
@@ -16,6 +20,13 @@ var destroy_next_frame := false
 func _ready() -> void:
 	timer = create_tween()
 	timer.tween_callback(destroy).set_delay(lifetime)
+
+	if(scale_curve):
+		scale_tween = create_tween()
+		scale_tween.tween_method(func(value: float):
+			scale = Vector2.ONE * scale_curve.sample(value)
+		, 0.0, 1.0, lifetime)
+
 	hitbox_component.has_dealt_damage.connect(func(_p): destroy())
 
 
