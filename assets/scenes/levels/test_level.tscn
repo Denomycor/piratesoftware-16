@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://assets/scripts/level/level.gd" id="1_y7sae"]
 [ext_resource type="PackedScene" uid="uid://drcpxeie725b" path="res://assets/scenes/car/car.tscn" id="2_8k278"]
 [ext_resource type="PackedScene" uid="uid://dr2otcq7lhq6j" path="res://assets/scenes/ui/pause_menu.tscn" id="2_idj3t"]
-[ext_resource type="PackedScene" uid="uid://is7aeubau3xs" path="res://assets/scenes/ui/overlay.tscn" id="2_wbdkc"]
+[ext_resource type="PackedScene" path="res://assets/scenes/ui/overlay.tscn" id="2_wbdkc"]
 [ext_resource type="Script" path="res://assets/scripts/enemies/manager/enemies-manager.gd" id="4_a7yx0"]
 [ext_resource type="Script" path="res://assets/scripts/arena/arena.gd" id="4_eyags"]
 [ext_resource type="Shader" path="res://assets/scenes/levels/test_level.gdshader" id="5_b170y"]
@@ -96,7 +96,7 @@ script = ExtResource("4_a7yx0")
 target = NodePath("../Car")
 
 [node name="SpawnTimer" type="Timer" parent="World/EnemySpawner"]
-wait_time = 15.0
+wait_time = 0.001
 
 [node name="PauseMenu" parent="." instance=ExtResource("2_idj3t")]
 visible = false
