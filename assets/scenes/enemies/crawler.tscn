@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://assets/scripts/components/hurt-box.gd" id="3_xyjir"]
 [ext_resource type="Script" path="res://assets/scripts/components/hit-box.gd" id="4_78tml"]
 [ext_resource type="Texture2D" uid="uid://nesewo4kcwtn" path="res://assets/textures/enemies/Crawler_moving_spritesheet.png" id="5_i3u1f"]
-[ext_resource type="Texture2D" uid="uid://dvwp2m6xuetjs" path="res://assets/textures/enemies/unnamed.png" id="5_mad2f"]
+[ext_resource type="Texture2D" uid="uid://dvwp2m6xuetjs" path="res://assets/textures/particles/stomach.png" id="5_mad2f"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6pu46"]
 radius = 71.0

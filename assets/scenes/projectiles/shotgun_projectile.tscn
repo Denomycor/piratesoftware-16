@@ -1,10 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://b1vjjhqginc1j"]
+[gd_scene load_steps=6 format=3 uid="uid://b1vjjhqginc1j"]
 
 [ext_resource type="Script" path="res://assets/scripts/projectiles/linear_projectile.gd" id="1_pex8q"]
 [ext_resource type="Script" path="res://assets/scripts/components/hit-box.gd" id="2_eg3h8"]
+[ext_resource type="Texture2D" uid="uid://duphwgq7pgw6a" path="res://assets/textures/car/weapon/projectiles/shotgun-bullet.png" id="3_tnyw5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cgf20"]
-size = Vector2(4, 4)
+size = Vector2(6, 6)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_x70es"]
 radius = 5.0
@@ -15,10 +16,6 @@ collision_mask = 5
 script = ExtResource("1_pex8q")
 speed = 60.0
 reach = 800.0
-
-[node name="Polygon2D" type="Polygon2D" parent="."]
-position = Vector2(-2, 2)
-polygon = PackedVector2Array(-1, 1, -1, -5, 5, -5, 5, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_cgf20")
@@ -32,3 +29,6 @@ damage_amount = 5
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
 shape = SubResource("CircleShape2D_x70es")
 debug_color = Color(0.983756, 0.102916, 0.182855, 0.42)
+
+[node name="Shotgun-bullet" type="Sprite2D" parent="."]
+texture = ExtResource("3_tnyw5")
