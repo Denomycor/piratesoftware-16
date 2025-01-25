@@ -5,7 +5,7 @@ class_name HitBoxComponent extends Area2D
 
 var one_shot_available := true
 
-signal has_dealt_damage
+signal has_dealt_damage(damage: int)
 
 func _ready() -> void:
     self.monitoring = true

@@ -16,7 +16,7 @@ var destroy_next_frame := false
 func _ready() -> void:
 	timer = create_tween()
 	timer.tween_callback(destroy).set_delay(lifetime)
-	hitbox_component.has_dealt_damage.connect(destroy)
+	hitbox_component.has_dealt_damage.connect(func(_p): destroy())
 
 
 func set_properties(pos: Vector2, rot: float) -> void:

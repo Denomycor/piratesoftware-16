@@ -28,3 +28,11 @@ func _process(_delta: float) -> void:
 	
 	if Input.is_action_pressed("fire"):
 		projectile_spawner_component.shoot(get_global_mouse_position())
+
+
+func _input(event: InputEvent) -> void:
+	if(event.is_action_pressed("fire")):
+		$GPUParticles2D.emitting = true
+	elif(event.is_action_released("fire")):
+		$GPUParticles2D.emitting = false
+
