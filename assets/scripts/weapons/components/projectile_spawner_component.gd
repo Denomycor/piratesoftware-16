@@ -8,6 +8,8 @@ signal projectile_ready
 @export var multishot: int
 @export var spread: float
 
+@export var bullet_spawn: Node2D = self
+
 var delay_acc: float
 var proj_ready := true
 var enabled := true
@@ -31,6 +33,6 @@ func shoot(to: Vector2, data: Variant = null) -> void:
 	if proj_ready and enabled:
 		for i in range(multishot):
 			var angle: float = (to - global_position).angle() + (randf() - 0.5) * spread
-			shoot_projectile.emit(global_position, angle, data)
+			shoot_projectile.emit(bullet_spawn.global_position, angle, data)
 		proj_ready = false
 		delay_acc = fire_delay

@@ -17,6 +17,9 @@ script = ExtResource("1_pex8q")
 speed = 60.0
 lifetime = 1.3
 
+[node name="Shotgun-bullet" type="Sprite2D" parent="."]
+texture = ExtResource("3_tnyw5")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_cgf20")
 
@@ -29,6 +32,3 @@ damage_amount = 5.0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
 shape = SubResource("CircleShape2D_x70es")
 debug_color = Color(0.983756, 0.102916, 0.182855, 0.42)
-
-[node name="Shotgun-bullet" type="Sprite2D" parent="."]
-texture = ExtResource("3_tnyw5")

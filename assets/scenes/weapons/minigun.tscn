@@ -69,8 +69,7 @@ texture = ExtResource("2_52n6a")
 [node name="TurnComponent" type="Node2D" parent="."]
 script = ExtResource("1_fw3mj")
 
-[node name="ProjectileSpawnerComponent" type="Node2D" parent="."]
-position = Vector2(201, 0)
+[node name="ProjectileSpawnerComponent" type="Node2D" parent="." node_paths=PackedStringArray("bullet_spawn")]
 script = ExtResource("2_qdibs")
 fire_delay = 0.01
 multishot = 1
