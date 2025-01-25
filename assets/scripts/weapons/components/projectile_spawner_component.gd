@@ -15,12 +15,11 @@ var delay_acc: float
 var proj_ready := true
 var enabled := true
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready() -> void:
 	delay_acc = fire_delay
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if !proj_ready:
 		if delay_acc < delta:
@@ -31,7 +30,7 @@ func _process(delta: float) -> void:
 
 
 func shoot(to: Vector2, data: Variant = null) -> void:
-	if proj_ready and enabled:
+	if (proj_ready or fire_delay <= 0.0) and enabled:
 		for i in range(multishot):
 			var angle: float = (to - global_position).angle() + (randf() - 0.5) * spread
 			shoot_projectile.emit(bullet_spawn.global_position, angle, data)
