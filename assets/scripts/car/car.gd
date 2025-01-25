@@ -18,6 +18,7 @@ var current_weapon: Weapon
 func _ready():
 	contact_monitor = true
 	max_contacts_reported = 10
+	
 	body_entered.connect(_on_collision)
 	weapon_dock.weapon_switched.connect(_on_weapon_switched)
 	hurt_box.has_taken_damage.connect(_on_take_damage)
@@ -53,7 +54,6 @@ func get_drift_strength(strength_torque_multiplier: float) -> float:
 
 func get_speed() -> float:
 	return linear_velocity.length()
-
 
 func on_weapon_activated():
 	pass

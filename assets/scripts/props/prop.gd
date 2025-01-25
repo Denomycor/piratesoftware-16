@@ -1,4 +1,4 @@
-class_name Prop extends PhysicsBody2D
+class_name Prop extends CollisionObject2D
 
 @export var block_radius: float
 
