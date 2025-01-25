@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://d1cjua2bc0fii"]
+[gd_scene load_steps=19 format=3 uid="uid://cdjq1shmnferv"]
 
 [ext_resource type="Texture2D" uid="uid://dgw1rmb751aac" path="res://assets/textures/car/weapon/flamethrower.png" id="1_txcs4"]
 [ext_resource type="Script" path="res://assets/scripts/weapons/flamethrower.gd" id="2_743pj"]

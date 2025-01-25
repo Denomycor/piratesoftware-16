@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://xikgd8wwnc3j"]
+[gd_scene load_steps=4 format=3 uid="uid://dijyr1pxut0bc"]
 
 [ext_resource type="Script" path="res://assets/scripts/projectiles/flamethrower_projectile.gd" id="1_o2qr0"]
 [ext_resource type="Script" path="res://assets/scripts/components/hit-box.gd" id="1_ultg0"]

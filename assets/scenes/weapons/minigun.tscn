@@ -70,13 +70,17 @@ texture = ExtResource("2_52n6a")
 script = ExtResource("1_fw3mj")
 
 [node name="ProjectileSpawnerComponent" type="Node2D" parent="." node_paths=PackedStringArray("bullet_spawn")]
+position = Vector2(199, 0)
 script = ExtResource("2_qdibs")
 fire_delay = 0.01
 multishot = 1
 spread = 0.098
+bullet_spawn = NodePath("../bullet_spawn")
+
+[node name="bullet_spawn" type="Node2D" parent="."]
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
-position = Vector2(208, -2)
+position = Vector2(208, -1)
 amount = 100
 process_material = SubResource("ParticleProcessMaterial_20d43")
 texture = ExtResource("3_uauo7")
