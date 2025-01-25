@@ -21,6 +21,7 @@ func update_movement():
 	velocity = direction * speed
 
 func die():
+	LevelContext.level.stats.increment_kills()
 	died.emit()
 	velocity = Vector2.ZERO
 	hurt_box.has_taken_damage.disconnect(_take_dmg)

@@ -61,6 +61,7 @@ func _physics_process(delta: float) -> void:
 
 
 func die():
+	LevelContext.level.stats.increment_kills()
 	queue_free()
 
 # Signal
