@@ -25,7 +25,7 @@ shape = SubResource("RectangleShape2D_qagmc")
 
 [node name="HitBoxComponent" type="Area2D" parent="."]
 collision_layer = 0
-collision_mask = 4
+collision_mask = 5
 script = ExtResource("2_607e3")
 damage_amount = 5
 
