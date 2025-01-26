@@ -2,13 +2,11 @@
 
 [ext_resource type="Script" path="res://assets/scripts/ui/overlay.gd" id="1_tmn6d"]
 
-[node name="Overlay" type="CanvasLayer" node_paths=PackedStringArray("point_counter", "kills_counter", "hp_counter")]
+[node name="Overlay" type="CanvasLayer"]
 script = ExtResource("1_tmn6d")
-point_counter = NodePath("Points")
-kills_counter = NodePath("Kills")
-hp_counter = NodePath("Hp")
 
 [node name="Points" type="Label" parent="."]
+unique_name_in_owner = true
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -21,6 +19,7 @@ size_flags_vertical = 0
 text = "Points: 100"
 
 [node name="Kills" type="Label" parent="."]
+unique_name_in_owner = true
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -31,6 +30,7 @@ grow_horizontal = 0
 text = "Kills: 0"
 
 [node name="Hp" type="Label" parent="."]
+unique_name_in_owner = true
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -39,3 +39,18 @@ offset_top = 56.0
 offset_bottom = 79.0
 grow_horizontal = 0
 text = "HP: 100"
+
+[node name="Speed" type="Label" parent="."]
+unique_name_in_owner = true
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -44.0
+offset_top = -51.0
+offset_right = 44.0
+offset_bottom = -28.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Km/h"
