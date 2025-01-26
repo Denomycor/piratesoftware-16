@@ -38,15 +38,3 @@ script = ExtResource("1_80q8j")
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_j40sk")
 debug_color = Color(0.972063, 0, 0.443653, 0.42)
-
-[node name="LineOfSight" type="RayCast2D" parent="."]
-position = Vector2(110, 0)
-rotation = 1.5708
-target_position = Vector2(0, -38)
-
-[node name="Laser" type="Line2D" parent="LineOfSight"]
-visible = false
-position = Vector2(4.37117e-08, 1)
-points = PackedVector2Array(0, 0, 0, -2000)
-width = 5.0
-default_color = Color(0.815686, 0, 0, 0.392157)
