@@ -33,6 +33,11 @@ void fragment() {
 	vec4 sand = texture(sand_texture, sand_uv);
 	if (screen_color == TRANSPARENT_COLOR) {
 		COLOR = sand;
+		vec2 shadow_offset = vec2(0.006, 0.0) * our_camera_zoom;
+		vec4 screen_color_offset = texture(SCREEN_TEXTURE, UV + shadow_offset);
+		if (screen_color_offset != TRANSPARENT_COLOR) {
+			COLOR -= vec4(0.2, 0.2, 0.2, 0.0);
+		}
 	} else {
 		COLOR = screen_color;
 	}
