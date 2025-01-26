@@ -1,0 +1,25 @@
+[gd_resource type="ShaderMaterial" load_steps=5 format=3 uid="uid://ggsgapjxe2mu"]
+
+[ext_resource type="Shader" path="res://assets/scenes/levels/test_level.gdshader" id="1_hfoj8"]
+[ext_resource type="Texture2D" uid="uid://ux0uxex7dx6" path="res://assets/textures/arena/sand_asset_1.png" id="2_4enk8"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_6wexk"]
+noise_type = 3
+frequency = 0.0024
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_tcwut"]
+width = 1920
+height = 1080
+generate_mipmaps = false
+seamless = true
+noise = SubResource("FastNoiseLite_6wexk")
+
+[resource]
+shader = ExtResource("1_hfoj8")
+shader_parameter/our_camera_position = null
+shader_parameter/our_camera_zoom = null
+shader_parameter/shadow_offset = Vector2(0.006, 0)
+shader_parameter/dustColor = Vector3(10, 10, 8)
+shader_parameter/dustIntensity = 0.4
+shader_parameter/sand_texture = ExtResource("2_4enk8")
+shader_parameter/fog_noise = SubResource("NoiseTexture2D_tcwut")
