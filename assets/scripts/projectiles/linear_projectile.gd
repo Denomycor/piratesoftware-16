@@ -15,6 +15,7 @@ var travel_direction: Vector2
 var inherited_velocity := Vector2.ZERO
 
 var destroy_next_frame := false
+var frozen := false
 
 
 func _ready() -> void:
@@ -37,13 +38,14 @@ func set_properties(pos: Vector2, rot: float) -> void:
 
 
 func _physics_process(delta: float) -> void:
-	if(destroy_next_frame):
-		destroy()
-	else:
-		var motion := (travel_direction * speed)
-		var collision := move_and_collide(motion + inherited_velocity * delta)
-		if(collision):
-			schedule_destroy()
+	if(!frozen):
+		if(destroy_next_frame):
+			destroy()
+		else:
+			var motion := travel_direction * speed + inherited_velocity
+			var collision := move_and_collide(motion * delta)
+			if(collision):
+				schedule_destroy()
 
 
 func destroy() -> void:

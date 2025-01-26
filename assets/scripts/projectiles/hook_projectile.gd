@@ -35,8 +35,8 @@ func _physics_process(delta: float) -> void:
 	if hit_target:
 		handle_has_target()
 	else:
-		var motion := Vector2.from_angle(rotation) * speed
-		move_and_collide(motion + inherited_velocity * delta)
+		var motion := Vector2.from_angle(rotation) * speed + inherited_velocity
+		move_and_collide(motion * delta)
 
 
 func destroy() -> void:
