@@ -29,10 +29,9 @@ overlay = NodePath("../Overlay")
 
 [node name="Arena" type="Node2D" parent="World"]
 script = ExtResource("4_eyags")
-walls_per_side = 50
+walls_per_side = 30
 prop_list = Array[PackedScene]([ExtResource("7_tmaof"), ExtResource("8_chcvc")])
 ratios = Array[int]([1, 2])
-debug = true
 
 [node name="Camera2D" type="Camera2D" parent="World/Arena"]
 enabled = false
@@ -59,7 +58,7 @@ script = ExtResource("4_a7yx0")
 target = NodePath("../Car")
 
 [node name="SpawnTimer" type="Timer" parent="World/EnemySpawner"]
-wait_time = 1500.0
+wait_time = 15.0
 
 [node name="PauseMenu" parent="." instance=ExtResource("2_idj3t")]
 visible = false
