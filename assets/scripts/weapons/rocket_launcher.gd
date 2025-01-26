@@ -11,6 +11,7 @@ func _ready() -> void:
 	projectile_spawner_component.shoot_projectile.connect(func(from: Vector2, rot: float, _data):
 		var projectile: AreaProjectile = PROJECTILE_SCENE.instantiate()
 		projectile.set_properties(from, rot)
+		projectile.inherited_velocity = LevelContext.level.car.last_velocity
 		
 		LevelContext.level.get_node("World").add_child(projectile)
 

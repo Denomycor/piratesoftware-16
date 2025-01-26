@@ -11,6 +11,7 @@ class_name HookProjectile extends CharacterBody2D
 var target: PhysicsBody2D
 var car: RigidBody2D
 var timer: Tween
+var inherited_velocity := Vector2.ZERO
 
 var hit_target: bool = false
 
@@ -27,7 +28,7 @@ func set_properties(pos: Vector2, rot: float) -> void:
 	rotation = rot
 
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	cable.points[0] = cable.to_local(car.global_position)
 	cable.points[1] = cable.to_local(global_position)
 
@@ -35,7 +36,7 @@ func _physics_process(_delta: float) -> void:
 		handle_has_target()
 	else:
 		var motion := Vector2.from_angle(rotation) * speed
-		move_and_collide(motion)
+		move_and_collide(motion + inherited_velocity * delta)
 
 
 func destroy() -> void:
@@ -60,4 +61,3 @@ func _on_area_entered(area: Area2D) -> void:
 		(area.get_parent() as Enemy).died.connect(destroy)
 
 	area_collision.area_entered.disconnect(_on_area_entered)
-

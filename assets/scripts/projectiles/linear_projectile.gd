@@ -36,12 +36,12 @@ func set_properties(pos: Vector2, rot: float) -> void:
 	travel_direction = Vector2.from_angle(rotation)
 
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if(destroy_next_frame):
 		destroy()
 	else:
-		var motion := (travel_direction * speed) + inherited_velocity
-		var collision := move_and_collide(motion)
+		var motion := (travel_direction * speed)
+		var collision := move_and_collide(motion + inherited_velocity * delta)
 		if(collision):
 			schedule_destroy()
 

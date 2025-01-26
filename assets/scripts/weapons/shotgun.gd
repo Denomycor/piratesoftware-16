@@ -12,6 +12,7 @@ const PROJECTILE_SCENE: PackedScene = preload("res://assets/scenes/projectiles/s
 func _ready() -> void:
 	projectile_spawner_component.shoot_projectile.connect(func(from: Vector2, rot_angle: float, _data):
 		var projectile: LinearProjectile = PROJECTILE_SCENE.instantiate()
+		projectile.inherited_velocity = LevelContext.level.car.linear_velocity
 		projectile.speed = randf_range(projectile.speed * speed_variation, projectile.speed)
 		projectile.set_properties(from, rot_angle)
 		LevelContext.level.get_node("World").add_child(projectile)

@@ -27,5 +27,6 @@ func _process(_delta: float) -> void:
 func _on_hook_shoot(from: Vector2, rot: float, _data: Variant) -> void:
 	var projectile: HookProjectile = PROJECTILE_SCENE.instantiate()
 	projectile.set_properties(from, rot)
+	projectile.inherited_velocity = LevelContext.level.car.last_velocity
 	LevelContext.level.get_node("World").add_child(projectile)
 

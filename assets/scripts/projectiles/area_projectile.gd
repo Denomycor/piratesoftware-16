@@ -6,6 +6,8 @@ class_name AreaProjectile extends CharacterBody2D
 @onready var hitbox_component : HitBoxComponent = $HitBoxComponent
 @onready var area_hitbox_component : HitBoxComponent = $AreaHitBoxComponent
 
+var inherited_velocity := Vector2.ZERO
+
 var reach_acc := 0.0
 
 func _ready() -> void:
@@ -18,11 +20,11 @@ func set_properties(pos: Vector2, rot: float) -> void:
 	rotation = rot
 
 
-func _physics_process(_delta) -> void:
+func _physics_process(delta) -> void:
 	var motion := Vector2.from_angle(rotation) * speed
 	if (reach_acc < reach):
 		reach_acc += motion.length()
-		move_and_collide(motion)
+		move_and_collide(motion + inherited_velocity * delta)
 	else:
 		destroy()
 
