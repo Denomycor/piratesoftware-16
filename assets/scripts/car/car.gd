@@ -5,19 +5,21 @@ class_name Car extends RigidBody2D
 @export var torque_multiplier: float
 @export var perpendicular_multiplier: float
 @export var parallel_multiplier: float
-@export var health: int = 100
-@export var max_collision_damage: int = 25
-@export var speed_for_max_collision_damage: float = 500
-
+@export var health: float = 100
+@export var max_collision_damage: float = 25
+@export var min_collision_speed: float = 300
+@export var speed_for_max_collision_damage: float = 1500
 
 @onready var weapon_dock: WeaponDock = $weapon_dock
 @onready var hurt_box: HurtBoxComponent = $HurtBoxComponent
 
 var current_weapon: Weapon
 
+var last_velocity: Vector2
+
 func _ready():
 	contact_monitor = true
-	max_contacts_reported = 10
+	max_contacts_reported = 1
 	
 	body_entered.connect(_on_collision)
 	weapon_dock.weapon_switched.connect(_on_weapon_switched)
@@ -37,6 +39,7 @@ func get_perpendicular_direction() -> Vector2:
 func _physics_process(_delta):
 	apply_central_force(get_forward_direction() * motor_strength)
 	apply_drift_friction()
+	last_velocity = linear_velocity
 
 func apply_drift_friction():
 	var perpendicular_component := get_perpendicular_direction().dot(linear_velocity)
@@ -74,13 +77,14 @@ func _on_weapon_switched():
 	current_weapon.activated.connect(on_weapon_activated)
 	current_weapon.deactivated.connect(on_weapon_deactivated)
 
-func _on_take_damage(amount: int):
+func _on_take_damage(amount: float):
 	health -= amount
 	if health <= 0:
 		LevelContext.level.set_game_over()
 
 func _on_collision(node: Node) -> void:
-	var collision_damage := clampi(int(lerpf(0,max_collision_damage, get_speed()/speed_for_max_collision_damage)),0,max_collision_damage)
+	var collision_speed := last_velocity.dot(global_position.direction_to(node.global_position))
+	var collision_damage := clampf(lerpf(0,max_collision_damage, (collision_speed-min_collision_speed)/(speed_for_max_collision_damage - min_collision_speed)),0,max_collision_damage)
 	if node is RigidBody2D:
 		var mass_ratio = node.mass/mass
 		hurt_box.take_damage(collision_damage * mass_ratio)
