@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dijyr1pxut0bc"]
+[gd_scene load_steps=14 format=3 uid="uid://dt8a5t1vy0tba"]
 
 [ext_resource type="Script" path="res://assets/scripts/projectiles/flamethrower_projectile.gd" id="1_o2qr0"]
 [ext_resource type="Script" path="res://assets/scripts/components/hit-box.gd" id="1_ultg0"]
@@ -8,7 +8,7 @@
 radius = 16.0
 
 [sub_resource type="Curve" id="Curve_adw2t"]
-_data = [Vector2(0.0918919, 1), 0.0, 0.0, 0, 0, Vector2(0.735135, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+_data = [Vector2(0.0918919, 1), 0.0, 0.0, 0, 0, Vector2(0.66, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="CurveTexture" id="CurveTexture_sny7l"]
@@ -80,7 +80,7 @@ emitting = false
 amount = 200
 process_material = SubResource("ParticleProcessMaterial_c3dy6")
 texture = ExtResource("3_pn8uo")
-lifetime = 2.2
+lifetime = 2.0
 one_shot = true
 explosiveness = 0.1
 local_coords = true
