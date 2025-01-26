@@ -13,7 +13,7 @@ uniform sampler2D fog_noise;
 uniform float dustIntensity;
 
 const vec2 IMAGE_RESOLUTION = vec2(3840.0, 2160.0);
-const vec4 TRANSPARENT_COLOR = vec4(0.0, 0.0, 0.0, 1.0);
+const vec3 TRANSPARENT_COLOR = vec3(0.0, 0.0, 0.0);
 
 void fragment() {
 
@@ -34,17 +34,19 @@ void fragment() {
 
 	// where the current pixel is in the image
 	vec2 current_pixel = (center_pixel_of_screen + vec_from_center) / IMAGE_RESOLUTION;
-
+	
 	// mod to get uv for sand texture
 	vec2 sand_uv = mod(current_pixel, 1.0);
 
+	vec4 screen_color2 = screen_color * 100.0;
+	
 	// sand texture
 	vec4 sand = texture(sand_texture, sand_uv);
-	if (screen_color == TRANSPARENT_COLOR) {
+	if (screen_color.rgb == TRANSPARENT_COLOR) {
 		final_color = sand;
 		vec2 shadow_offset_scaled = shadow_offset * our_camera_zoom;
 		vec4 screen_color_offset = texture(SCREEN_TEXTURE, UV + shadow_offset_scaled);
-		if (screen_color_offset != TRANSPARENT_COLOR) {
+		if (screen_color_offset.rgb != TRANSPARENT_COLOR) {
 			final_color -= vec4(0.2, 0.2, 0.2, 0.0);
 		}
 	} else {
@@ -70,6 +72,7 @@ void fragment() {
 
 	// COLOR += dustOverlay;
 	// COLOR += vec4(sand_uv, 0.0, 1.0) * 0.1;
+
 }
 
 void light() {
