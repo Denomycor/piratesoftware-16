@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://2vnrdwbw1mxc"]
+[gd_scene load_steps=25 format=3 uid="uid://2vnrdwbw1mxc"]
 
 [ext_resource type="Script" path="res://assets/scripts/level/level.gd" id="1_y7sae"]
 [ext_resource type="PackedScene" uid="uid://drcpxeie725b" path="res://assets/scenes/car/car.tscn" id="2_8k278"]
@@ -6,54 +6,49 @@
 [ext_resource type="PackedScene" uid="uid://is7aeubau3xs" path="res://assets/scenes/ui/overlay.tscn" id="2_wbdkc"]
 [ext_resource type="Script" path="res://assets/scripts/enemies/manager/enemies-manager.gd" id="4_a7yx0"]
 [ext_resource type="Script" path="res://assets/scripts/arena/arena.gd" id="4_eyags"]
-[ext_resource type="Script" path="res://assets/scenes/levels/color_rect.gd" id="4_lb7n5"]
 [ext_resource type="Shader" path="res://assets/scenes/levels/test_level.gdshader" id="5_b170y"]
-[ext_resource type="PackedScene" uid="uid://deo63nl1macwi" path="res://assets/scenes/props/barrel1.tscn" id="7_tmaof"]
+[ext_resource type="PackedScene" uid="uid://d30f5kc1dbwjf" path="res://assets/scenes/props/structure1.tscn" id="6_6obcn"]
+[ext_resource type="PackedScene" uid="uid://cisecnemv14kt" path="res://assets/scenes/props/structure2.tscn" id="7_r222i"]
 [ext_resource type="Script" path="res://assets/scripts/level/stats.gd" id="8_6ascs"]
-[ext_resource type="PackedScene" uid="uid://b0276oescn8bs" path="res://assets/scenes/props/boulder1.tscn" id="8_chcvc"]
-[ext_resource type="PackedScene" path="res://assets/scenes/ui/game_over_menu.tscn" id="9_h3nak"]
+[ext_resource type="PackedScene" uid="uid://b0276oescn8bs" path="res://assets/scenes/props/big_boulder.tscn" id="8_chcvc"]
+[ext_resource type="PackedScene" uid="uid://cajclfviyosyn" path="res://assets/scenes/props/big_barrel.tscn" id="9_5mdmc"]
+[ext_resource type="PackedScene" uid="uid://dtyepolgwnyv2" path="res://assets/scenes/ui/game_over_menu.tscn" id="9_h3nak"]
 [ext_resource type="Script" path="res://assets/scripts/utils/panning_camera.gd" id="9_qeern"]
-[ext_resource type="Texture2D" uid="uid://ux0uxex7dx6" path="res://assets/textures/arena/sand_asset_1.png" id="13_k6wla"]
+[ext_resource type="PackedScene" uid="uid://8ph600g0xx25" path="res://assets/scenes/props/big_bones.tscn" id="10_06wf4"]
+[ext_resource type="PackedScene" uid="uid://b3itd7tj4qqcc" path="res://assets/scenes/props/mid_boulder.tscn" id="11_quaxx"]
+[ext_resource type="PackedScene" uid="uid://omuildk4n3dq" path="res://assets/scenes/props/mid_barrel.tscn" id="12_gvol0"]
+[ext_resource type="PackedScene" uid="uid://ceb3gud524fvc" path="res://assets/scenes/props/mid_bones.tscn" id="13_quvsm"]
+[ext_resource type="PackedScene" uid="uid://cjefdnfauee2i" path="res://assets/scenes/props/small_barrel.tscn" id="14_ghf57"]
+[ext_resource type="PackedScene" uid="uid://brmeqjse3n0ml" path="res://assets/scenes/props/small_bones.tscn" id="15_0ad71"]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_6wexk"]
+[sub_resource type="Gradient" id="Gradient_muhko"]
+colors = PackedColorArray(0.933333, 0.827451, 0, 1, 0.74902, 0.588235, 0.427451, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_on0o5"]
 noise_type = 3
-frequency = 0.0024
+frequency = 0.0867
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_tcwut"]
-width = 1920
-height = 1080
-generate_mipmaps = false
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_gf0g1"]
+width = 4000
+height = 2000
 seamless = true
-noise = SubResource("FastNoiseLite_6wexk")
+color_ramp = SubResource("Gradient_muhko")
+noise = SubResource("FastNoiseLite_on0o5")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_laca7"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6ve6o"]
 shader = ExtResource("5_b170y")
 shader_parameter/our_camera_position = null
 shader_parameter/our_camera_zoom = null
-shader_parameter/shadow_offset = Vector2(0.006, 0)
-shader_parameter/dustColor = Vector3(10, 10, 8)
-shader_parameter/dustIntensity = 0.4
-shader_parameter/sand_texture = ExtResource("13_k6wla")
-shader_parameter/fog_noise = SubResource("NoiseTexture2D_tcwut")
+shader_parameter/shadow_offset = null
+shader_parameter/dustColor = null
+shader_parameter/dustIntensity = null
+shader_parameter/sand_texture = SubResource("NoiseTexture2D_gf0g1")
 
 [node name="TestLevel" type="Node" node_paths=PackedStringArray("overlay", "stats", "car")]
 script = ExtResource("1_y7sae")
 overlay = NodePath("Overlay")
 stats = NodePath("Stats")
 car = NodePath("World/Car")
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
-z_index = -3
-material = SubResource("ShaderMaterial_laca7")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 1)
-script = ExtResource("4_lb7n5")
 
 [node name="Stats" type="Node" parent="." node_paths=PackedStringArray("overlay")]
 script = ExtResource("8_6ascs")
@@ -62,19 +57,32 @@ overlay = NodePath("../Overlay")
 
 [node name="Overlay" parent="." instance=ExtResource("2_wbdkc")]
 
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxBackground" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(8000, 4000)
+
+[node name="ColorRect" type="ColorRect" parent="ParallaxBackground/ParallaxBackground"]
+material = SubResource("ShaderMaterial_6ve6o")
+offset_right = 8012.0
+offset_bottom = 4000.0
+
 [node name="World" type="Node2D" parent="."]
 
 [node name="Arena" type="Node2D" parent="World"]
 script = ExtResource("4_eyags")
-walls_per_side = 50
-scale_offset = 0.05
-prop_list = Array[PackedScene]([ExtResource("7_tmaof"), ExtResource("8_chcvc")])
-ratios = Array[int]([1, 2])
-prop_density = 0.005
+walls_per_side = 30
+prop_list = Array[PackedScene]([ExtResource("6_6obcn"), ExtResource("7_r222i"), ExtResource("8_chcvc"), ExtResource("9_5mdmc"), ExtResource("10_06wf4"), ExtResource("11_quaxx"), ExtResource("12_gvol0"), ExtResource("13_quvsm"), ExtResource("14_ghf57"), ExtResource("15_0ad71")])
+ratios = Array[int]([2, 3, 4, 6, 8, 10, 14, 18, 25, 30])
+prop_density = 0.02
 
 [node name="Camera2D" type="Camera2D" parent="World/Arena"]
+enabled = false
+zoom = Vector2(0.04, 0.04)
 script = ExtResource("9_qeern")
-min_zoom = 0.001
+min_zoom = 0.003
+max_zoom = 0.3
+zoom_factor = 0.005
 
 [node name="Car" parent="World" instance=ExtResource("2_8k278")]
 z_index = 5
@@ -82,20 +90,18 @@ position = Vector2(987, 467)
 drift_friction_strength = 5.0
 perpendicular_multiplier = 0.25
 parallel_multiplier = 0.25
-health = 10000
 
 [node name="BoomArm" parent="World/Car" index="2"]
-speed_slide_distance = null
-max_slide_speed = null
-min_speed = null
-cam_speed = null
+mouse_slide_distance = 1000.0
+speed_slide_distance = 1500.0
+max_slide_speed = 4000.0
 
 [node name="EnemySpawner" type="Node" parent="World" node_paths=PackedStringArray("target")]
 script = ExtResource("4_a7yx0")
 target = NodePath("../Car")
 
 [node name="SpawnTimer" type="Timer" parent="World/EnemySpawner"]
-wait_time = 0.1
+wait_time = 15.0
 
 [node name="PauseMenu" parent="." instance=ExtResource("2_idj3t")]
 visible = false

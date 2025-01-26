@@ -1,0 +1,292 @@
+[gd_scene load_steps=16 format=3 uid="uid://d30f5kc1dbwjf"]
+
+[ext_resource type="Script" path="res://assets/scripts/props/prop.gd" id="1_rqj0n"]
+[ext_resource type="Texture2D" uid="uid://bskh06ei8dwyv" path="res://assets/textures/props/stain_asset_5.png" id="2_0d08f"]
+[ext_resource type="Texture2D" uid="uid://d2opqsg6m3xry" path="res://assets/textures/props/boulder_asset_3.png" id="2_fgc2a"]
+[ext_resource type="PackedScene" uid="uid://qupwycf3fsaf" path="res://assets/scenes/props/barrel1.tscn" id="2_w4wmv"]
+[ext_resource type="PackedScene" uid="uid://by6bilhvb4vhf" path="res://assets/scenes/props/barrel2.tscn" id="3_4yt4r"]
+[ext_resource type="Texture2D" uid="uid://cjohfbanwt25d" path="res://assets/textures/props/boulder_asset_1.png" id="3_6adb6"]
+[ext_resource type="PackedScene" uid="uid://deo63nl1macwi" path="res://assets/scenes/props/barrel3.tscn" id="4_gmy76"]
+[ext_resource type="Texture2D" uid="uid://bgvc8anb4t5li" path="res://assets/textures/props/boulder_asset_2.png" id="4_xsmuh"]
+[ext_resource type="Texture2D" uid="uid://d0db5vjestun1" path="res://assets/textures/props/gasoline_asset_1.png" id="5_veixc"]
+[ext_resource type="Texture2D" uid="uid://n261pc8d10gg" path="res://assets/textures/props/stain_asset_3.png" id="6_yhj5b"]
+[ext_resource type="PackedScene" uid="uid://brmeqjse3n0ml" path="res://assets/scenes/props/small_bones.tscn" id="8_3dwuh"]
+[ext_resource type="Texture2D" uid="uid://mycah0x0fu1h" path="res://assets/textures/props/stain_asset_4.png" id="8_dusf7"]
+[ext_resource type="PackedScene" uid="uid://ceb3gud524fvc" path="res://assets/scenes/props/mid_bones.tscn" id="9_xg7s3"]
+[ext_resource type="PackedScene" uid="uid://8ph600g0xx25" path="res://assets/scenes/props/big_bones.tscn" id="10_rms4s"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_r8kgi"]
+
+[node name="Structure" type="Area2D"]
+z_index = 5
+position = Vector2(578, 483)
+script = ExtResource("1_rqj0n")
+block_radius = 150.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(222.538, -88.358)
+shape = SubResource("CircleShape2D_r8kgi")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-736, -413)
+rotation = 0.0943955
+texture = ExtResource("2_0d08f")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(-660, -1640)
+rotation = 0.967976
+texture = ExtResource("8_dusf7")
+
+[node name="Sprite2D25" type="Sprite2D" parent="."]
+position = Vector2(-103, -694)
+rotation = 1.92362
+texture = ExtResource("8_dusf7")
+
+[node name="Sprite2D26" type="Sprite2D" parent="."]
+position = Vector2(-920, -619)
+rotation = 1.03142
+texture = ExtResource("8_dusf7")
+
+[node name="Sprite2D27" type="Sprite2D" parent="."]
+position = Vector2(-202, -999)
+rotation = -0.143132
+texture = ExtResource("5_veixc")
+
+[node name="Sprite2D28" type="Sprite2D" parent="."]
+position = Vector2(-690, -616)
+rotation = -0.143132
+texture = ExtResource("5_veixc")
+
+[node name="Sprite2D29" type="Sprite2D" parent="."]
+position = Vector2(-114.462, 129.642)
+rotation = -0.0266654
+texture = ExtResource("5_veixc")
+
+[node name="Sprite2D21" type="Sprite2D" parent="."]
+position = Vector2(-726.462, 385.642)
+rotation = 0.967976
+texture = ExtResource("6_yhj5b")
+
+[node name="Sprite2D22" type="Sprite2D" parent="."]
+position = Vector2(-726.462, 385.642)
+rotation = 0.967976
+texture = ExtResource("6_yhj5b")
+
+[node name="Sprite2D23" type="Sprite2D" parent="."]
+position = Vector2(-308.462, 314.642)
+rotation = 2.34121
+texture = ExtResource("6_yhj5b")
+
+[node name="Sprite2D24" type="Sprite2D" parent="."]
+position = Vector2(-197.462, -176.358)
+rotation = 1.45679
+texture = ExtResource("6_yhj5b")
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+position = Vector2(-783, -1011)
+rotation = 0.0943955
+texture = ExtResource("2_0d08f")
+
+[node name="Sprite2D15" type="Sprite2D" parent="."]
+position = Vector2(-641.462, -192.358)
+rotation = -1.86056
+texture = ExtResource("2_fgc2a")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2(-769, -858)
+rotation = 0.546619
+
+[node name="Sprite2D16" type="Sprite2D" parent="StaticBody2D2"]
+texture = ExtResource("2_fgc2a")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D2"]
+polygon = PackedVector2Array(-25.2443, -60.7267, -114.691, 34.6684, -34.2575, 89.9079, 52.1701, 60.7312, 62.8919, -90.9429)
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="."]
+position = Vector2(-1041, -1264)
+rotation = -2.10652
+
+[node name="Sprite2D16" type="Sprite2D" parent="StaticBody2D4"]
+texture = ExtResource("2_fgc2a")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D4"]
+polygon = PackedVector2Array(-25.2443, -60.7267, -114.691, 34.6684, -34.2575, 89.9079, 52.1701, 60.7312, 62.8919, -90.9429)
+
+[node name="Barrel" parent="." instance=ExtResource("2_w4wmv")]
+position = Vector2(-223, -974)
+rotation = 1.43148
+
+[node name="Barrel5" parent="." instance=ExtResource("2_w4wmv")]
+position = Vector2(-194.462, -292.358)
+rotation = 3.4999
+
+[node name="Barrel6" parent="." instance=ExtResource("2_w4wmv")]
+position = Vector2(-1010, -1694)
+rotation = 2.60973
+
+[node name="Barrel2" parent="." instance=ExtResource("3_4yt4r")]
+position = Vector2(-205.462, 110.642)
+
+[node name="Barrel4" parent="." instance=ExtResource("3_4yt4r")]
+position = Vector2(-1041, 181)
+
+[node name="Barrel3" parent="." instance=ExtResource("4_gmy76")]
+position = Vector2(-396.462, 450.642)
+
+[node name="Barrel7" parent="." instance=ExtResource("4_gmy76")]
+position = Vector2(-139, -604)
+rotation = -0.536209
+
+[node name="Barrel8" parent="." instance=ExtResource("4_gmy76")]
+position = Vector2(-816, -1254)
+rotation = -0.536209
+
+[node name="Barrel9" parent="." instance=ExtResource("4_gmy76")]
+position = Vector2(-529, -1505)
+rotation = -0.536209
+
+[node name="Barrel10" parent="." instance=ExtResource("4_gmy76")]
+position = Vector2(-615, -590)
+
+[node name="Bones" parent="." instance=ExtResource("8_3dwuh")]
+position = Vector2(-503, -1637)
+rotation = 0.725982
+
+[node name="Bones2" parent="." instance=ExtResource("8_3dwuh")]
+position = Vector2(-191, -1196)
+rotation = -0.100078
+
+[node name="Bones3" parent="." instance=ExtResource("9_xg7s3")]
+position = Vector2(-933, 786)
+rotation = -0.995238
+
+[node name="Bones4" parent="." instance=ExtResource("9_xg7s3")]
+position = Vector2(-932, -306)
+rotation = -0.877802
+
+[node name="Bones5" parent="." instance=ExtResource("10_rms4s")]
+position = Vector2(-1074, -765)
+rotation = 1.55245
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(147.538, -41.358)
+
+[node name="Sprite2D5" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(-602, 265)
+rotation = -1.93936
+texture = ExtResource("3_6adb6")
+
+[node name="Sprite2D8" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(-713, 478)
+rotation = -2.0944
+texture = ExtResource("4_xsmuh")
+
+[node name="Sprite2D14" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(-560, 601)
+rotation = 0.655078
+texture = ExtResource("2_fgc2a")
+
+[node name="Sprite2D4" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(-512, -38)
+rotation = -0.440916
+texture = ExtResource("3_6adb6")
+
+[node name="Sprite2D20" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(-500, -378)
+rotation = 0.604425
+texture = ExtResource("3_6adb6")
+
+[node name="Sprite2D6" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(-562, 152)
+rotation = 0.319953
+texture = ExtResource("4_xsmuh")
+
+[node name="Sprite2D7" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(-700, -346)
+rotation = -1.46518
+texture = ExtResource("4_xsmuh")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(-387, -581, -308, -377, -311, -317, -384, -292, -425, -311, -514, -228, -419, -203, -371, -165, -406, 172, -400, 283, -514, 423, -600, 464, -606, 553, -492, 534, -451, 556, -565, 686, -800, 575, -809, 277, -736, 124, -667, 118, -711, -19, -911, -165, -809, -212, -819, -358, -600, -555)
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="."]
+position = Vector2(-233, -1196)
+rotation = 2.52075
+
+[node name="Sprite2D18" type="Sprite2D" parent="StaticBody2D3"]
+position = Vector2(474, -373)
+rotation = 3.01007
+texture = ExtResource("2_fgc2a")
+
+[node name="Sprite2D9" type="Sprite2D" parent="StaticBody2D3"]
+position = Vector2(381, -123)
+rotation = -2.28337
+texture = ExtResource("3_6adb6")
+
+[node name="Sprite2D10" type="Sprite2D" parent="StaticBody2D3"]
+position = Vector2(186, 272)
+rotation = 2.10909
+texture = ExtResource("3_6adb6")
+
+[node name="Sprite2D11" type="Sprite2D" parent="StaticBody2D3"]
+position = Vector2(198, 67)
+texture = ExtResource("4_xsmuh")
+
+[node name="Sprite2D12" type="Sprite2D" parent="StaticBody2D3"]
+position = Vector2(302, -325)
+rotation = -2.33439
+texture = ExtResource("4_xsmuh")
+
+[node name="Sprite2D13" type="Sprite2D" parent="StaticBody2D3"]
+position = Vector2(331, 515)
+rotation = -2.96633
+texture = ExtResource("4_xsmuh")
+
+[node name="Sprite2D19" type="Sprite2D" parent="StaticBody2D3"]
+position = Vector2(277, 699)
+rotation = 2.29579
+texture = ExtResource("4_xsmuh")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D3"]
+polygon = PackedVector2Array(216, 797, 384, 766, 460, 480, 387, 410, 416, 318, 394, 251, 508, 207, 584, 89, 518, 29, 524, -101, 594, -177, 537, -288, 584, -409, 483, -479, 337, -415, 241, -450, 210, -415, 197, -47, 70, -12, 76, 86, -13, 156, 127, 445, 67, 651, 165, 667)
+
+[node name="StaticBody2D5" type="StaticBody2D" parent="."]
+position = Vector2(-1090, 339)
+rotation = 5.95644
+
+[node name="Sprite2D18" type="Sprite2D" parent="StaticBody2D5"]
+position = Vector2(474, -373)
+rotation = 3.01007
+texture = ExtResource("2_fgc2a")
+
+[node name="Sprite2D9" type="Sprite2D" parent="StaticBody2D5"]
+position = Vector2(381, -123)
+rotation = -2.28337
+texture = ExtResource("3_6adb6")
+
+[node name="Sprite2D10" type="Sprite2D" parent="StaticBody2D5"]
+position = Vector2(186, 272)
+rotation = 2.10909
+texture = ExtResource("3_6adb6")
+
+[node name="Sprite2D11" type="Sprite2D" parent="StaticBody2D5"]
+position = Vector2(198, 67)
+texture = ExtResource("4_xsmuh")
+
+[node name="Sprite2D12" type="Sprite2D" parent="StaticBody2D5"]
+position = Vector2(302, -325)
+rotation = -2.33439
+texture = ExtResource("4_xsmuh")
+
+[node name="Sprite2D13" type="Sprite2D" parent="StaticBody2D5"]
+position = Vector2(331, 515)
+rotation = -2.96633
+texture = ExtResource("4_xsmuh")
+
+[node name="Sprite2D19" type="Sprite2D" parent="StaticBody2D5"]
+position = Vector2(277, 699)
+rotation = 2.29579
+texture = ExtResource("4_xsmuh")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D5"]
+polygon = PackedVector2Array(216, 797, 384, 766, 460, 480, 387, 410, 416, 318, 394, 251, 508, 207, 584, 89, 518, 29, 524, -101, 594, -177, 537, -288, 584, -409, 483, -479, 337, -415, 241, -450, 210, -415, 197, -47, 70, -12, 76, 86, -13, 156, 127, 445, 67, 651, 165, 667)

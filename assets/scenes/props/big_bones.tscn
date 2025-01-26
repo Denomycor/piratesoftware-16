@@ -1,0 +1,71 @@
+[gd_scene load_steps=10 format=3 uid="uid://8ph600g0xx25"]
+
+[ext_resource type="Script" path="res://assets/scripts/props/bones.gd" id="1_485rn"]
+[ext_resource type="Texture2D" uid="uid://bskh06ei8dwyv" path="res://assets/textures/props/stain_asset_5.png" id="2_4ulqe"]
+[ext_resource type="Texture2D" uid="uid://vnkjdwue3tt4" path="res://assets/textures/props/bones_asset_1.png" id="2_bobt7"]
+[ext_resource type="Texture2D" uid="uid://n261pc8d10gg" path="res://assets/textures/props/stain_asset_3.png" id="3_f5ctv"]
+[ext_resource type="Texture2D" uid="uid://b4ijhc37idyrd" path="res://assets/textures/props/bones_asset_2.png" id="3_yplkf"]
+[ext_resource type="Texture2D" uid="uid://dravwbtnb7rnw" path="res://assets/textures/props/bones_asset_3.png" id="4_30tjm"]
+[ext_resource type="Texture2D" uid="uid://tqhar040dkl6" path="res://assets/textures/props/stain_asset_1.png" id="4_xg1w1"]
+[ext_resource type="Texture2D" uid="uid://ynxix6yeyg27" path="res://assets/textures/props/bones_asset_4.png" id="5_dtx68"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8645f"]
+radius = 82.3429
+height = 323.39
+
+[node name="Bones" type="Area2D" node_paths=PackedStringArray("slow_area")]
+z_index = 5
+collision_mask = 2
+script = ExtResource("1_485rn")
+slow_ratio = 0.4
+slow_area = NodePath(".")
+block_radius = 190.0
+
+[node name="Sprite2D5" type="Sprite2D" parent="."]
+position = Vector2(123, 84)
+rotation = -1.42566
+texture = ExtResource("2_4ulqe")
+
+[node name="Sprite2D6" type="Sprite2D" parent="."]
+position = Vector2(-72, -5.00001)
+rotation = -0.640608
+texture = ExtResource("3_f5ctv")
+
+[node name="Sprite2D9" type="Sprite2D" parent="."]
+position = Vector2(-72, -5.00001)
+rotation = -0.640608
+texture = ExtResource("3_f5ctv")
+
+[node name="Sprite2D7" type="Sprite2D" parent="."]
+position = Vector2(-22, 80)
+rotation = -0.640608
+texture = ExtResource("4_xg1w1")
+
+[node name="Sprite2D8" type="Sprite2D" parent="."]
+position = Vector2(42, -72)
+rotation = -0.640608
+texture = ExtResource("4_xg1w1")
+
+[node name="Sprite2D4" type="Sprite2D" parent="."]
+position = Vector2(-97.0253, -116.372)
+rotation = -0.640608
+texture = ExtResource("5_dtx68")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(63.9747, 17.1282)
+texture = ExtResource("2_bobt7")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(0.97467, -90.3718)
+rotation = -5.98873
+texture = ExtResource("3_yplkf")
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+position = Vector2(-2.02533, 150.628)
+texture = ExtResource("4_30tjm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(2.99997, 4.00012)
+rotation = -0.549049
+shape = SubResource("CapsuleShape2D_8645f")

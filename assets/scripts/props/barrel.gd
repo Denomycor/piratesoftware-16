@@ -9,7 +9,7 @@ class_name Barrel extends Prop
 @export var health := 40
 
 func _ready():
-    hurt_box.has_taken_damage.connect(_on_take_damage)
+    hurt_box.has_taken_damage.connect(_on_take_damage.call_deferred)
     hit_box.monitoring = false
     
 
