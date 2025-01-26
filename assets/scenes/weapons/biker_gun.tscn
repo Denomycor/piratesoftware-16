@@ -14,9 +14,12 @@ polygon = PackedVector2Array(0, -4, 0, -20, 128, -20, 128, 20, 0, 20)
 [node name="TurnComponent" type="Node2D" parent="."]
 script = ExtResource("1_2lekv")
 
-[node name="ProjectileSpawnerComponent" type="Node2D" parent="."]
-position = Vector2(128, 0)
+[node name="ProjectileSpawnerComponent" type="Node2D" parent="." node_paths=PackedStringArray("bullet_spawn")]
 script = ExtResource("2_48ehv")
 fire_delay = 0.01
 multishot = 1
 spread = 0.098
+bullet_spawn = NodePath("../BulletSpawn")
+
+[node name="BulletSpawn" type="Node2D" parent="."]
+position = Vector2(128, 0)
