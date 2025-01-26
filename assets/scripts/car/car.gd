@@ -10,7 +10,6 @@ class_name Car extends RigidBody2D
 @export var min_collision_speed: float = 300
 @export var speed_for_max_collision_damage: float = 1500
 
-
 @onready var weapon_dock: WeaponDock = $weapon_dock
 @onready var hurt_box: HurtBoxComponent = $HurtBoxComponent
 

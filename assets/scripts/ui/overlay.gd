@@ -16,3 +16,6 @@ func set_hp(hp: int) -> void:
 
 func set_speed(speed: float) -> void:
 	speed_counter.text = str(speed) + " km/h"
+
+func set_hp(hp: float) -> void:
+	hp_counter.text = "HP: " + str(int(hp))
