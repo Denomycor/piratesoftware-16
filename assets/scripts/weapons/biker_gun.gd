@@ -21,4 +21,4 @@ func _process(_delta: float) -> void:
 		turn_component.activate()
 		projectile_spawner_component.shoot(LevelContext.level.car.global_position)
 	elif turn_component.active:
-		turn_component.deactivate(get_enemy_direction())
+		turn_component.deactivate()

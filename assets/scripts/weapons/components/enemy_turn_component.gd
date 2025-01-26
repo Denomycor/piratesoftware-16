@@ -11,7 +11,7 @@ func _process(_delta: float) -> void:
 func activate() -> void:
 	active = true
 
-func deactivate(direction: Vector2) -> void:
+func deactivate() -> void:
 	active = false
 	#Reset to original position
-	parent.look_at(direction.normalized())
+	parent.rotation = 0

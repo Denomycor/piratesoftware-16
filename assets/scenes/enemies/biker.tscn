@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://dw2abso84avq1"]
+[gd_scene load_steps=7 format=3 uid="uid://dw2abso84avq1"]
 
 [ext_resource type="Script" path="res://assets/scripts/enemies/biker.gd" id="1_3s7no"]
 [ext_resource type="Script" path="res://assets/scripts/components/hurt-box.gd" id="1_80q8j"]
 [ext_resource type="Texture2D" uid="uid://blvtkmatmqnm8" path="res://assets/textures/biker.png" id="2_tipff"]
+[ext_resource type="PackedScene" uid="uid://d1mkxnil63kry" path="res://assets/scenes/weapons/biker_gun.tscn" id="3_6f57m"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_utvnp"]
 radius = 48.0
@@ -28,6 +29,9 @@ texture = ExtResource("2_tipff")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_utvnp")
+
+[node name="BikerGun" parent="." instance=ExtResource("3_6f57m")]
+position = Vector2(124, 0)
 
 [node name="HurtBoxComponent" type="Area2D" parent="."]
 collision_layer = 4
