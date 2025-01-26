@@ -11,7 +11,7 @@ func _ready() -> void:
 
 func destroy() -> void:
 	if(!frozen):
-		print("yau")
+		$Polygon2D.visible = false
 		area_hitbox_component.monitoring = true
 		frozen = true
 		$CollisionShape2D.set_deferred("disabled", true)
