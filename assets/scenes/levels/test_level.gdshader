@@ -1,26 +1,43 @@
 shader_type canvas_item;
 
 uniform sampler2D sand_texture;
-uniform sampler2D normal_map_texture;
+uniform sampler2D SCREEN_TEXTURE: hint_screen_texture;
+uniform vec2 our_camera_position;
+uniform vec2 our_camera_zoom;
 
-void vertex() {
-	// Called for every vertex the material is visible on.
-}
+
+const vec2 IMAGE_RESOLUTION = vec2(3840.0, 2160.0);
+
+const vec4 TRANSPARENT_COLOR = vec4(0.0, 0.0, 0.0, 1.0);
 
 void fragment() {
-	vec4 sand = texture(sand_texture, UV);
-	vec4 normal_map = texture(normal_map_texture, UV);
+	vec4 screen_color = texture(SCREEN_TEXTURE, UV);
+	
+	// CONSTANTS
+	vec2 our_resolution = vec2(1920.0, 1080.0);
+	vec2 our_viewport_resolution = vec2(1920.0, 1080.0) / our_camera_zoom;
 
-	vec3 normal = normalize(normal_map.rgb * 2.0 - 1.0);
-	vec3 light_dir = normalize(vec3(0.0, 0.8, 1.0));
+	// vector from center of screen at viewport resolution
+	vec2 vec_from_center = (UV - 0.5) * our_viewport_resolution;
 
-	float factor = max(dot(normal, light_dir), 0.0);
+	// where the center of the screen is in the image
+	vec2 center_pixel_of_screen = mod(our_camera_position, IMAGE_RESOLUTION);
 
-	vec3 adjusted_sand = sand.rgb * factor;
+	// where the current pixel is in the image
+	vec2 current_pixel = (center_pixel_of_screen + vec_from_center) / IMAGE_RESOLUTION;
 
-	vec4 final_color = vec4(adjusted_sand, 1.0);
+	// mod to get uv for sand texture
+	vec2 sand_uv = mod(current_pixel, 1.0);
 
-	COLOR = final_color;
+	// sand texture
+	vec4 sand = texture(sand_texture, sand_uv);
+	if (screen_color == TRANSPARENT_COLOR) {
+		COLOR = sand;
+	} else {
+		COLOR = screen_color;
+	}
+
+	// COLOR += vec4(sand_uv, 0.0, 1.0) * 0.1;
 }
 
 void light() {
