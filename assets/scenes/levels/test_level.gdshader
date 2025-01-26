@@ -13,7 +13,6 @@ uniform sampler2D fog_noise;
 uniform float dustIntensity;
 
 const vec2 IMAGE_RESOLUTION = vec2(3840.0, 2160.0);
-
 const vec4 TRANSPARENT_COLOR = vec4(0.0, 0.0, 0.0, 1.0);
 
 void fragment() {
