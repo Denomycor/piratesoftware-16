@@ -6,8 +6,15 @@
 size = Vector2(692.987, 1055)
 
 [node name="Wall" type="StaticBody2D"]
+visibility_layer = 513
 rotation = 1.5708
 collision_mask = 0
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+light_mask = 0
+visibility_layer = 512
+position = Vector2(9.17803, 1.50268)
+polygon = PackedVector2Array(224, 0, 224, -1056, -1289, -1056, -1289, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-71.5, -503)

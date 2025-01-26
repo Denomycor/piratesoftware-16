@@ -3,8 +3,14 @@
 [ext_resource type="Texture2D" uid="uid://nj5vu5iapn2p" path="res://assets/textures/arena/Wall-corner-1.png" id="1_bxpee"]
 
 [node name="Corner" type="StaticBody2D"]
+visibility_layer = 513
 position = Vector2(13, 0)
 collision_mask = 0
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+light_mask = 0
+visibility_layer = 512
+polygon = PackedVector2Array(-30, 148, -57, -1862, 1850, -1859, 2873, -454, 1657, 874, 898, 142)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(1015.8, 175.9)
