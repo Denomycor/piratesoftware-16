@@ -27,5 +27,8 @@ void fragment() {
 			COLOR = background_color;
 		}
 
+		if(distance(UV, vec2(0.5)) > 0.5){
+			COLOR.a = 0.0;
+		}
 	}
 }

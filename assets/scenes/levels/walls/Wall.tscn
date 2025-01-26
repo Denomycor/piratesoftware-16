@@ -14,7 +14,7 @@ collision_mask = 0
 light_mask = 0
 visibility_layer = 512
 position = Vector2(9.17803, 1.50268)
-polygon = PackedVector2Array(224, 0, 224, -1056, -1289, -1056, -1289, 0)
+polygon = PackedVector2Array(224, 150, 224, -1200, -100000, -1200, -100, 150)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-71.5, -503)
