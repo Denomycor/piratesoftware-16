@@ -1,21 +1,57 @@
-[gd_scene load_steps=6 format=3 uid="uid://b1vjjhqginc1j"]
+[gd_scene load_steps=10 format=3 uid="uid://b1vjjhqginc1j"]
 
 [ext_resource type="Script" path="res://assets/scripts/projectiles/linear_projectile.gd" id="1_pex8q"]
 [ext_resource type="Script" path="res://assets/scripts/components/hit-box.gd" id="2_eg3h8"]
 [ext_resource type="Texture2D" uid="uid://duphwgq7pgw6a" path="res://assets/textures/car/weapon/projectiles/shotgun-bullet.png" id="3_tnyw5"]
 
+[sub_resource type="Curve" id="Curve_15b5m"]
+max_value = 2.0
+_data = [Vector2(0, 2), 0.0, -4.6978, 0, 0, Vector2(0.5, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_1wmtf"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.646667, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.0879121), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_hi1iu"]
+curve = SubResource("Curve_1wmtf")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_b5yj8"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 21.8
+angle_min = 1.07288e-05
+angle_max = 360.0
+gravity = Vector3(0, 0, 0)
+scale_min = 4.0
+scale_max = 8.0
+color = Color(0.169245, 0.169245, 0.169245, 1)
+alpha_curve = SubResource("CurveTexture_hi1iu")
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cgf20"]
-size = Vector2(6, 6)
+size = Vector2(24, 24)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_x70es"]
-radius = 5.0
+radius = 19.0263
 
 [node name="ShotgunProjectile" type="CharacterBody2D"]
 collision_layer = 8
 collision_mask = 5
 script = ExtResource("1_pex8q")
-speed = 60.0
-reach = 800.0
+speed = 2500.0
+lifetime = 0.5
+scale_curve = SubResource("Curve_15b5m")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+amount = 16
+process_material = SubResource("ParticleProcessMaterial_b5yj8")
+lifetime = 0.4
+explosiveness = 0.4
+randomness = 0.3
+
+[node name="Shotgun-bullet" type="Sprite2D" parent="."]
+scale = Vector2(5, 5)
+texture = ExtResource("3_tnyw5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_cgf20")
@@ -24,11 +60,9 @@ shape = SubResource("RectangleShape2D_cgf20")
 collision_layer = 0
 collision_mask = 5
 script = ExtResource("2_eg3h8")
-damage_amount = 5.0
+damage_amount = 5
+one_shot = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
 shape = SubResource("CircleShape2D_x70es")
 debug_color = Color(0.983756, 0.102916, 0.182855, 0.42)
-
-[node name="Shotgun-bullet" type="Sprite2D" parent="."]
-texture = ExtResource("3_tnyw5")

@@ -1,7 +1,11 @@
 class_name HitBoxComponent extends Area2D
 
 @export var damage_amount: float
-signal has_dealt_damage
+@export var one_shot := false
+
+var one_shot_available := true
+
+signal has_dealt_damage(damage: int)
 
 func _ready() -> void:
     self.monitoring = true
@@ -15,5 +19,7 @@ func deal_damage(area: Area2D) -> void:
 
 # signal
 func _on_area_entered(area: Area2D) -> void:
-    if area.has_method("take_damage"):
+    if area.has_method("take_damage") && one_shot_available:
+        one_shot_available = !(one_shot && one_shot_available)
         deal_damage(area)
+
