@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://2vnrdwbw1mxc"]
+[gd_scene load_steps=12 format=3 uid="uid://2vnrdwbw1mxc"]
 
 [ext_resource type="Script" path="res://assets/scripts/level/level.gd" id="1_y7sae"]
 [ext_resource type="PackedScene" uid="uid://drcpxeie725b" path="res://assets/scenes/car/car.tscn" id="2_8k278"]
@@ -6,43 +6,11 @@
 [ext_resource type="PackedScene" uid="uid://is7aeubau3xs" path="res://assets/scenes/ui/overlay.tscn" id="2_wbdkc"]
 [ext_resource type="Script" path="res://assets/scripts/enemies/manager/enemies-manager.gd" id="4_a7yx0"]
 [ext_resource type="Script" path="res://assets/scripts/arena/arena.gd" id="4_eyags"]
-[ext_resource type="Shader" path="res://assets/scenes/levels/test_level.gdshader" id="5_b170y"]
 [ext_resource type="PackedScene" uid="uid://deo63nl1macwi" path="res://assets/scenes/props/barrel1.tscn" id="7_tmaof"]
 [ext_resource type="Script" path="res://assets/scripts/level/stats.gd" id="8_6ascs"]
 [ext_resource type="PackedScene" uid="uid://b0276oescn8bs" path="res://assets/scenes/props/boulder1.tscn" id="8_chcvc"]
 [ext_resource type="PackedScene" uid="uid://dtyepolgwnyv2" path="res://assets/scenes/ui/game_over_menu.tscn" id="9_h3nak"]
 [ext_resource type="Script" path="res://assets/scripts/utils/panning_camera.gd" id="9_qeern"]
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_hkqgo"]
-noise_type = 3
-frequency = 0.002
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_uxiu7"]
-width = 4000
-height = 2000
-seamless = true
-as_normal_map = true
-bump_strength = 15.8
-noise = SubResource("FastNoiseLite_hkqgo")
-
-[sub_resource type="Gradient" id="Gradient_muhko"]
-colors = PackedColorArray(0.933333, 0.827451, 0, 1, 0.74902, 0.588235, 0.427451, 1)
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_on0o5"]
-noise_type = 3
-frequency = 0.0867
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_gf0g1"]
-width = 4000
-height = 2000
-seamless = true
-color_ramp = SubResource("Gradient_muhko")
-noise = SubResource("FastNoiseLite_on0o5")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_6ve6o"]
-shader = ExtResource("5_b170y")
-shader_parameter/sand_texture = SubResource("NoiseTexture2D_gf0g1")
-shader_parameter/normal_map_texture = SubResource("NoiseTexture2D_uxiu7")
 
 [node name="TestLevel" type="Node" node_paths=PackedStringArray("overlay", "stats", "car")]
 script = ExtResource("1_y7sae")
@@ -57,16 +25,6 @@ overlay = NodePath("../Overlay")
 
 [node name="Overlay" parent="." instance=ExtResource("2_wbdkc")]
 
-[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
-
-[node name="ParallaxBackground" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_mirroring = Vector2(8000, 4000)
-
-[node name="ColorRect" type="ColorRect" parent="ParallaxBackground/ParallaxBackground"]
-material = SubResource("ShaderMaterial_6ve6o")
-offset_right = 8012.0
-offset_bottom = 4000.0
-
 [node name="World" type="Node2D" parent="."]
 
 [node name="Arena" type="Node2D" parent="World"]
@@ -74,7 +32,6 @@ script = ExtResource("4_eyags")
 walls_per_side = 30
 prop_list = Array[PackedScene]([ExtResource("7_tmaof"), ExtResource("8_chcvc")])
 ratios = Array[int]([1, 2])
-prop_density = 0.005
 
 [node name="Camera2D" type="Camera2D" parent="World/Arena"]
 enabled = false
