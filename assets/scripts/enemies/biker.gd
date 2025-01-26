@@ -6,16 +6,27 @@ class_name Biker extends Enemy
 @export var max_angle_diff: float = 1.0
 
 @onready var line_of_sight: RayCast2D = $LineOfSight
+@onready var projectile_spawner_component = $ProjectileSpawnerComponent
 
 
 func _ready() -> void:
+	projectile_spawner_component.shoot_projectile.connect(func(from: Vector2, rot: float, _data):
+		var projectile: LinearProjectile = PROJECTILE_SCENE.instantiate()
+		projectile.set_properties(from, rot)
+
+		LevelContext.level.get_node("World").add_child(projectile)
+	)
 	hurt_box.has_taken_damage.connect(_take_dmg)
 	if follow_range == 0:
 		follow_range = int(randf_range(500, 1500))
 
+func _process(delta: float) -> void:
+	attack()
+	
+
 func attack():
 	if line_of_sight.is_colliding():
-		print("I am the biker")
+		projectile_spawner_component.shoot(line_of_sight.target_position)
 
 func update_movement():
 	pass
