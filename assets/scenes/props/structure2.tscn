@@ -1,15 +1,20 @@
-[gd_scene load_steps=12 format=3 uid="uid://cisecnemv14kt"]
+[gd_scene load_steps=17 format=3 uid="uid://e4c645ffpwak"]
 
 [ext_resource type="Script" path="res://assets/scripts/props/prop.gd" id="1_4fd1u"]
 [ext_resource type="Texture2D" uid="uid://d2opqsg6m3xry" path="res://assets/textures/props/boulder_asset_3.png" id="6_vqlqy"]
 [ext_resource type="PackedScene" uid="uid://qupwycf3fsaf" path="res://assets/scenes/props/barrel1.tscn" id="7_xe4q5"]
-[ext_resource type="PackedScene" uid="uid://by6bilhvb4vhf" path="res://assets/scenes/props/barrel2.tscn" id="8_lxwpm"]
-[ext_resource type="PackedScene" uid="uid://deo63nl1macwi" path="res://assets/scenes/props/barrel3.tscn" id="9_hblgs"]
-[ext_resource type="PackedScene" uid="uid://brmeqjse3n0ml" path="res://assets/scenes/props/small_bones.tscn" id="10_cdes0"]
-[ext_resource type="PackedScene" uid="uid://ceb3gud524fvc" path="res://assets/scenes/props/mid_bones.tscn" id="11_ibis5"]
-[ext_resource type="PackedScene" uid="uid://8ph600g0xx25" path="res://assets/scenes/props/big_bones.tscn" id="12_m1acy"]
+[ext_resource type="PackedScene" path="res://assets/scenes/props/barrel2.tscn" id="8_lxwpm"]
+[ext_resource type="PackedScene" path="res://assets/scenes/props/barrel3.tscn" id="9_hblgs"]
+[ext_resource type="PackedScene" uid="uid://87oc2iymck6e" path="res://assets/scenes/props/small_bones.tscn" id="10_cdes0"]
+[ext_resource type="PackedScene" uid="uid://x756spdcleym" path="res://assets/scenes/props/mid_bones.tscn" id="11_ibis5"]
+[ext_resource type="Texture2D" uid="uid://bhg8jshbbwqtk" path="res://assets/textures/props/stain_asset_2.png" id="11_vl1q8"]
+[ext_resource type="PackedScene" uid="uid://b66n0n4i6aa3b" path="res://assets/scenes/props/big_bones.tscn" id="12_m1acy"]
+[ext_resource type="Texture2D" uid="uid://mycah0x0fu1h" path="res://assets/textures/props/stain_asset_4.png" id="12_ur4fp"]
+[ext_resource type="Texture2D" uid="uid://tqhar040dkl6" path="res://assets/textures/props/stain_asset_1.png" id="13_0qqs6"]
 [ext_resource type="Texture2D" uid="uid://cjohfbanwt25d" path="res://assets/textures/props/boulder_asset_1.png" id="13_jh32r"]
 [ext_resource type="Texture2D" uid="uid://bgvc8anb4t5li" path="res://assets/textures/props/boulder_asset_2.png" id="14_grh04"]
+[ext_resource type="Texture2D" uid="uid://n261pc8d10gg" path="res://assets/textures/props/stain_asset_3.png" id="14_ilq73"]
+[ext_resource type="Texture2D" uid="uid://bskh06ei8dwyv" path="res://assets/textures/props/stain_asset_5.png" id="15_ds2fx"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_r8kgi"]
 
@@ -191,3 +196,49 @@ texture = ExtResource("6_vqlqy")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D5"]
 polygon = PackedVector2Array(-56, 760, -84, 803, -67, 896, -87, 950, -5, 952, 46, 859)
+
+[node name="StainAsset2" type="Sprite2D" parent="."]
+z_index = -2
+position = Vector2(-514, 297)
+rotation = 1.29717
+texture = ExtResource("11_vl1q8")
+
+[node name="StainAsset4" type="Sprite2D" parent="."]
+z_index = -2
+position = Vector2(-550, -273)
+rotation = -0.762801
+texture = ExtResource("12_ur4fp")
+
+[node name="StainAsset3" type="Sprite2D" parent="."]
+z_index = -2
+position = Vector2(550, -186)
+texture = ExtResource("11_vl1q8")
+
+[node name="StainAsset1" type="Sprite2D" parent="."]
+z_index = -2
+position = Vector2(493, 668)
+rotation = 1.32142
+texture = ExtResource("13_0qqs6")
+
+[node name="StainAsset5" type="Sprite2D" parent="."]
+z_index = -2
+position = Vector2(-7, 638)
+rotation = 0.784131
+texture = ExtResource("13_0qqs6")
+
+[node name="StainAsset6" type="Sprite2D" parent="."]
+z_index = -2
+position = Vector2(-178, -404)
+texture = ExtResource("14_ilq73")
+
+[node name="StainAsset7" type="Sprite2D" parent="."]
+z_index = -2
+position = Vector2(-316, 474)
+rotation = 1.44063
+texture = ExtResource("14_ilq73")
+
+[node name="StainAsset8" type="Sprite2D" parent="."]
+z_index = -2
+position = Vector2(568, 198)
+rotation = 0.929978
+texture = ExtResource("15_ds2fx")

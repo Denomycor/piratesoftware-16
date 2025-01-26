@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://8ph600g0xx25"]
+[gd_scene load_steps=10 format=3 uid="uid://b66n0n4i6aa3b"]
 
 [ext_resource type="Script" path="res://assets/scripts/props/bones.gd" id="1_485rn"]
 [ext_resource type="Texture2D" uid="uid://bskh06ei8dwyv" path="res://assets/textures/props/stain_asset_5.png" id="2_4ulqe"]
@@ -22,26 +22,31 @@ slow_area = NodePath(".")
 block_radius = 190.0
 
 [node name="Sprite2D5" type="Sprite2D" parent="."]
+z_index = -2
 position = Vector2(123, 84)
 rotation = -1.42566
 texture = ExtResource("2_4ulqe")
 
 [node name="Sprite2D6" type="Sprite2D" parent="."]
+z_index = -2
 position = Vector2(-72, -5.00001)
 rotation = -0.640608
 texture = ExtResource("3_f5ctv")
 
 [node name="Sprite2D9" type="Sprite2D" parent="."]
+z_index = -2
 position = Vector2(-72, -5.00001)
 rotation = -0.640608
 texture = ExtResource("3_f5ctv")
 
 [node name="Sprite2D7" type="Sprite2D" parent="."]
+z_index = -2
 position = Vector2(-22, 80)
 rotation = -0.640608
 texture = ExtResource("4_xg1w1")
 
 [node name="Sprite2D8" type="Sprite2D" parent="."]
+z_index = -2
 position = Vector2(42, -72)
 rotation = -0.640608
 texture = ExtResource("4_xg1w1")

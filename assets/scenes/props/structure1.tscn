@@ -1,19 +1,19 @@
-[gd_scene load_steps=16 format=3 uid="uid://d30f5kc1dbwjf"]
+[gd_scene load_steps=16 format=3 uid="uid://57gif8jic3gl"]
 
 [ext_resource type="Script" path="res://assets/scripts/props/prop.gd" id="1_rqj0n"]
 [ext_resource type="Texture2D" uid="uid://bskh06ei8dwyv" path="res://assets/textures/props/stain_asset_5.png" id="2_0d08f"]
 [ext_resource type="Texture2D" uid="uid://d2opqsg6m3xry" path="res://assets/textures/props/boulder_asset_3.png" id="2_fgc2a"]
 [ext_resource type="PackedScene" uid="uid://qupwycf3fsaf" path="res://assets/scenes/props/barrel1.tscn" id="2_w4wmv"]
-[ext_resource type="PackedScene" uid="uid://by6bilhvb4vhf" path="res://assets/scenes/props/barrel2.tscn" id="3_4yt4r"]
+[ext_resource type="PackedScene" path="res://assets/scenes/props/barrel2.tscn" id="3_4yt4r"]
 [ext_resource type="Texture2D" uid="uid://cjohfbanwt25d" path="res://assets/textures/props/boulder_asset_1.png" id="3_6adb6"]
-[ext_resource type="PackedScene" uid="uid://deo63nl1macwi" path="res://assets/scenes/props/barrel3.tscn" id="4_gmy76"]
+[ext_resource type="PackedScene" path="res://assets/scenes/props/barrel3.tscn" id="4_gmy76"]
 [ext_resource type="Texture2D" uid="uid://bgvc8anb4t5li" path="res://assets/textures/props/boulder_asset_2.png" id="4_xsmuh"]
 [ext_resource type="Texture2D" uid="uid://d0db5vjestun1" path="res://assets/textures/props/gasoline_asset_1.png" id="5_veixc"]
 [ext_resource type="Texture2D" uid="uid://n261pc8d10gg" path="res://assets/textures/props/stain_asset_3.png" id="6_yhj5b"]
-[ext_resource type="PackedScene" uid="uid://brmeqjse3n0ml" path="res://assets/scenes/props/small_bones.tscn" id="8_3dwuh"]
+[ext_resource type="PackedScene" uid="uid://87oc2iymck6e" path="res://assets/scenes/props/small_bones.tscn" id="8_3dwuh"]
 [ext_resource type="Texture2D" uid="uid://mycah0x0fu1h" path="res://assets/textures/props/stain_asset_4.png" id="8_dusf7"]
-[ext_resource type="PackedScene" uid="uid://ceb3gud524fvc" path="res://assets/scenes/props/mid_bones.tscn" id="9_xg7s3"]
-[ext_resource type="PackedScene" uid="uid://8ph600g0xx25" path="res://assets/scenes/props/big_bones.tscn" id="10_rms4s"]
+[ext_resource type="PackedScene" uid="uid://x756spdcleym" path="res://assets/scenes/props/mid_bones.tscn" id="9_xg7s3"]
+[ext_resource type="PackedScene" uid="uid://b66n0n4i6aa3b" path="res://assets/scenes/props/big_bones.tscn" id="10_rms4s"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_r8kgi"]
 
@@ -28,61 +28,73 @@ position = Vector2(222.538, -88.358)
 shape = SubResource("CircleShape2D_r8kgi")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -2
 position = Vector2(-736, -413)
 rotation = 0.0943955
 texture = ExtResource("2_0d08f")
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
+z_index = -2
 position = Vector2(-660, -1640)
 rotation = 0.967976
 texture = ExtResource("8_dusf7")
 
 [node name="Sprite2D25" type="Sprite2D" parent="."]
+z_index = -2
 position = Vector2(-103, -694)
 rotation = 1.92362
 texture = ExtResource("8_dusf7")
 
 [node name="Sprite2D26" type="Sprite2D" parent="."]
+z_index = -2
 position = Vector2(-920, -619)
 rotation = 1.03142
 texture = ExtResource("8_dusf7")
 
 [node name="Sprite2D27" type="Sprite2D" parent="."]
+z_index = -2
 position = Vector2(-202, -999)
 rotation = -0.143132
 texture = ExtResource("5_veixc")
 
 [node name="Sprite2D28" type="Sprite2D" parent="."]
+z_index = -2
 position = Vector2(-690, -616)
 rotation = -0.143132
 texture = ExtResource("5_veixc")
 
 [node name="Sprite2D29" type="Sprite2D" parent="."]
+z_index = -2
 position = Vector2(-114.462, 129.642)
 rotation = -0.0266654
 texture = ExtResource("5_veixc")
 
 [node name="Sprite2D21" type="Sprite2D" parent="."]
+z_index = -2
 position = Vector2(-726.462, 385.642)
 rotation = 0.967976
 texture = ExtResource("6_yhj5b")
 
 [node name="Sprite2D22" type="Sprite2D" parent="."]
+z_index = -2
 position = Vector2(-726.462, 385.642)
 rotation = 0.967976
 texture = ExtResource("6_yhj5b")
 
 [node name="Sprite2D23" type="Sprite2D" parent="."]
+z_index = -2
 position = Vector2(-308.462, 314.642)
 rotation = 2.34121
 texture = ExtResource("6_yhj5b")
 
 [node name="Sprite2D24" type="Sprite2D" parent="."]
+z_index = -2
 position = Vector2(-197.462, -176.358)
 rotation = 1.45679
 texture = ExtResource("6_yhj5b")
 
 [node name="Sprite2D3" type="Sprite2D" parent="."]
+z_index = -2
 position = Vector2(-783, -1011)
 rotation = 0.0943955
 texture = ExtResource("2_0d08f")

@@ -1,12 +1,13 @@
-[gd_scene load_steps=21 format=3 uid="uid://2vnrdwbw1mxc"]
+[gd_scene load_steps=22 format=3 uid="uid://2vnrdwbw1mxc"]
 
 [ext_resource type="Script" path="res://assets/scripts/level/level.gd" id="1_y7sae"]
 [ext_resource type="PackedScene" uid="uid://drcpxeie725b" path="res://assets/scenes/car/car.tscn" id="2_8k278"]
 [ext_resource type="PackedScene" uid="uid://dr2otcq7lhq6j" path="res://assets/scenes/ui/pause_menu.tscn" id="2_idj3t"]
-[ext_resource type="Material" uid="uid://ggsgapjxe2mu" path="res://assets/scenes/levels/level_shader.tres" id="2_jdkt6"]
+[ext_resource type="Material" uid="uid://blfae81viatyt" path="res://assets/scenes/levels/level_shader.tres" id="2_jdkt6"]
 [ext_resource type="PackedScene" uid="uid://is7aeubau3xs" path="res://assets/scenes/ui/overlay.tscn" id="2_wbdkc"]
 [ext_resource type="Script" path="res://assets/scripts/enemies/manager/enemies-manager.gd" id="4_a7yx0"]
 [ext_resource type="Script" path="res://assets/scripts/arena/arena.gd" id="4_eyags"]
+[ext_resource type="Script" path="res://assets/scenes/levels/color_rect.gd" id="4_lb7n5"]
 [ext_resource type="PackedScene" path="res://assets/scenes/props/structure1.tscn" id="6_6obcn"]
 [ext_resource type="PackedScene" path="res://assets/scenes/props/structure2.tscn" id="7_r222i"]
 [ext_resource type="Script" path="res://assets/scripts/level/stats.gd" id="8_6ascs"]
@@ -37,6 +38,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+color = Color(0, 0, 0, 1)
+script = ExtResource("4_lb7n5")
 
 [node name="Stats" type="Node" parent="." node_paths=PackedStringArray("overlay")]
 script = ExtResource("8_6ascs")

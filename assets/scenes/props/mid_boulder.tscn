@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://b3itd7tj4qqcc"]
+[gd_scene load_steps=8 format=3 uid="uid://dnfnetfp4l5fb"]
 
 [ext_resource type="Script" path="res://assets/scripts/props/prop.gd" id="1_1lq8r"]
 [ext_resource type="Texture2D" uid="uid://tqhar040dkl6" path="res://assets/textures/props/stain_asset_1.png" id="2_4dwa7"]
@@ -15,26 +15,31 @@ script = ExtResource("1_1lq8r")
 block_radius = 200.0
 
 [node name="Sprite2D4" type="Sprite2D" parent="."]
+z_index = -2
 position = Vector2(93, 91)
 rotation = 3.48059
 texture = ExtResource("2_4dwa7")
 
 [node name="Sprite2D8" type="Sprite2D" parent="."]
+z_index = -2
 position = Vector2(198, -2.99999)
 rotation = 4.8232
 texture = ExtResource("2_4dwa7")
 
 [node name="Sprite2D7" type="Sprite2D" parent="."]
+z_index = -2
 position = Vector2(-80, 158)
 rotation = 4.0674
 texture = ExtResource("3_vm8d5")
 
 [node name="Sprite2D5" type="Sprite2D" parent="."]
+z_index = -2
 position = Vector2(85, -88)
 rotation = 4.6699
 texture = ExtResource("4_c1bo0")
 
 [node name="Sprite2D6" type="Sprite2D" parent="."]
+z_index = -2
 position = Vector2(-140, -27)
 rotation = 2.54383
 texture = ExtResource("5_81tvr")
