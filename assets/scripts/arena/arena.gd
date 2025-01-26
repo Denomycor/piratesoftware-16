@@ -81,6 +81,12 @@ func get_random_point_inside_polygon() -> Vector2:
 		point_generator = PolygonRandomPointGenerator.new(polygon)
 	return point_generator.get_random_point()
 
+func get_random_free_point_inside_polygon(border: float) -> Vector2:
+	var pos = get_random_point_inside_polygon()
+	while not can_place(border, pos):
+			pos = get_random_point_inside_polygon()
+	return pos
+
 func get_random_prop_instance() -> Prop:
 	if prop_list.size() == 0:
 		return null
@@ -100,18 +106,15 @@ func generate_props() -> void:
 	var prop_number: int = int(area * prop_density)
 	for idx in prop_number:
 		var prop := get_random_prop_instance()
-		var pos := get_random_point_inside_polygon()
-		while not can_place_prop(prop, pos):
-			pos = get_random_point_inside_polygon()
-		prop.global_position = pos
+		prop.global_position = get_random_free_point_inside_polygon(prop.block_radius)
 		prop.destroyed.connect(func(): props.erase(prop))
 		apply_random_transforms(prop)
 		props.append(prop)
 		get_parent().add_child.call_deferred(prop)
 	
-func can_place_prop(prop: Prop, pos: Vector2) -> bool:
+func can_place(block_radius: float, pos: Vector2) -> bool:
 	for item in props:
-		if item.is_overlaping(pos, prop.block_radius):
+		if item.is_overlaping(pos, block_radius):
 			return false
 	return true
 

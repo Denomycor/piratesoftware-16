@@ -3,6 +3,7 @@ class_name Level extends Node
 @export var overlay: Overlay
 @export var stats: Stats
 @export var car: Car
+@export var arena: Arena
 
 @onready var pause_menu: PauseMenu = $PauseMenu
 @onready var game_over_menu: GameOverMenu = $GameOverMenu

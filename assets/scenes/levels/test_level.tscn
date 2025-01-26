@@ -22,11 +22,12 @@
 [ext_resource type="PackedScene" uid="uid://c7ac5st3m716u" path="res://assets/scenes/props/small_barrel.tscn" id="14_ghf57"]
 [ext_resource type="PackedScene" uid="uid://87oc2iymck6e" path="res://assets/scenes/props/small_bones.tscn" id="15_0ad71"]
 
-[node name="TestLevel" type="Node" node_paths=PackedStringArray("overlay", "stats", "car")]
+[node name="TestLevel" type="Node" node_paths=PackedStringArray("overlay", "stats", "car", "arena")]
 script = ExtResource("1_y7sae")
 overlay = NodePath("Overlay")
 stats = NodePath("Stats")
 car = NodePath("World/Car")
+arena = NodePath("World/Arena")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
