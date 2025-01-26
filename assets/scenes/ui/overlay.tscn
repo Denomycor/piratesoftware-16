@@ -5,52 +5,64 @@
 [node name="Overlay" type="CanvasLayer"]
 script = ExtResource("1_tmn6d")
 
-[node name="Points" type="Label" parent="."]
-unique_name_in_owner = true
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -133.0
-offset_top = 6.0
-offset_bottom = 29.0
+offset_left = -97.0
+offset_top = 12.0
+offset_right = -12.0
+offset_bottom = 116.0
 grow_horizontal = 0
+alignment = 1
+
+[node name="Points" type="Label" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
 text = "Points: 100"
+horizontal_alignment = 2
+vertical_alignment = 1
 
-[node name="Kills" type="Label" parent="."]
+[node name="Kills" type="Label" parent="VBoxContainer"]
 unique_name_in_owner = true
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -115.0
-offset_top = 30.0
-offset_bottom = 53.0
-grow_horizontal = 0
+layout_mode = 2
 text = "Kills: 0"
+horizontal_alignment = 2
+vertical_alignment = 1
 
-[node name="Hp" type="Label" parent="."]
+[node name="Hp" type="Label" parent="VBoxContainer"]
 unique_name_in_owner = true
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -104.0
-offset_top = 56.0
-offset_bottom = 79.0
-grow_horizontal = 0
+layout_mode = 2
 text = "HP: 100"
+horizontal_alignment = 2
+vertical_alignment = 1
 
-[node name="Speed" type="Label" parent="."]
+[node name="Speed" type="Label" parent="VBoxContainer"]
 unique_name_in_owner = true
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -44.0
-offset_top = -51.0
-offset_right = 44.0
-offset_bottom = -28.0
-grow_horizontal = 2
-grow_vertical = 0
+layout_mode = 2
 text = "Km/h"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -137.0
+offset_top = -136.0
+offset_right = -9.0
+offset_bottom = -8.0
+grow_horizontal = 0
+grow_vertical = 0
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(128, 128)
+render_target_update_mode = 4
+
+[node name="sonar_world" type="Node2D" parent="SubViewportContainer/SubViewport"]
