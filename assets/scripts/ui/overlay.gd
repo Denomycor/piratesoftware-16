@@ -11,11 +11,9 @@ func set_points(points: int) -> void:
 func set_kills(kills: int) -> void:
 	kills_counter.text = "Kills: " + str(kills)
 
-func set_hp(hp: int) -> void:
-	hp_counter.text = "HP: " + str(hp)
-
 func set_speed(speed: float) -> void:
 	speed_counter.text = str(speed) + " km/h"
 
 func set_hp(hp: float) -> void:
 	hp_counter.text = "HP: " + str(int(hp))
+

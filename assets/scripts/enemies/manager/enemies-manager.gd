@@ -11,8 +11,8 @@ extends Node
 @onready var spawn_timer: Timer = $SpawnTimer
 
 
-var crawler_scene = load("res://assets/scenes/enemies/crawler.tscn")
-var biker_scene = load("res://assets/scenes/enemies/biker.tscn")
+var crawler_scene: PackedScene = preload("res://assets/scenes/enemies/crawler.tscn")
+var biker_scene: PackedScene = preload("res://assets/scenes/enemies/biker.tscn")
 
 var cur_group = 0
 
