@@ -5,6 +5,11 @@ class_name Biker extends Enemy
 @export var prediction_time: float = 0.3
 @export var max_accelaration := 100000
 @export var prediction_scalar := 1000
+@export var max_collision_damage: float = 25
+@export var min_collision_speed: float = 300
+@export var speed_for_max_collision_damage: float = 1500
+
+var last_velocity := Vector2.ZERO
 
 
 func _ready() -> void:
@@ -23,10 +28,10 @@ func _physics_process(delta: float) -> void:
 		velocity = get_chase_velocity(delta)
 	else:
 		velocity = get_mimic_velocity(delta)
-
 	look_at(global_position + velocity)
 	
 	move_and_slide()
+	last_velocity = velocity
 
 func get_distance_to_target() -> float:
 	return target.global_position.distance_to(global_position)
@@ -50,3 +55,19 @@ func _take_dmg(amount: float):
 	health -= amount
 	if health <= 0:
 		die()
+
+func _on_collision(node: Node) -> void:
+	var collision_speed := last_velocity.dot(global_position.direction_to(node.global_position))
+	var collision_damage := clampf(lerpf(0,max_collision_damage, (collision_speed-min_collision_speed)/(speed_for_max_collision_damage - min_collision_speed)),0,max_collision_damage)
+	if node is RigidBody2D:
+		var mass_ratio = node.mass
+		var velocity_ratio = 1
+		if node.has_method("get_last_velocity"):
+			velocity_ratio = clampf((last_velocity - node.get_last_velocity()).length()/speed_for_max_collision_damage, 0, 2)
+		hurt_box.take_damage(collision_damage * mass_ratio * velocity_ratio)
+	elif node is StaticBody2D:
+		hurt_box.take_damage(collision_damage)
+	elif node is CharacterBody2D:
+		#ainda n sei
+		pass
+	return
