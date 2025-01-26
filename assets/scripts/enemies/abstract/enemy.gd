@@ -5,6 +5,7 @@ signal died
 
 @onready var hurt_box: HurtBoxComponent = $HurtBoxComponent
 @export var speed: float = 200.0
+@export var points: int = 20
 
 var target: RigidBody2D
 
