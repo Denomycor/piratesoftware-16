@@ -5,17 +5,12 @@ class_name Biker extends Enemy
 @export var prediction_time: float = 0.3
 @export var max_angle_diff: float = 1.0
 
-@onready var line_of_sight: RayCast2D = $LineOfSight
-
 
 func _ready() -> void:
 	hurt_box.has_taken_damage.connect(_take_dmg)
 	if follow_range == 0:
 		follow_range = int(randf_range(500, 1500))
 
-func attack():
-	if line_of_sight.is_colliding():
-		print("I am the biker")
 
 func update_movement():
 	pass
