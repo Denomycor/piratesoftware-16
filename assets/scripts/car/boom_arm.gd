@@ -9,12 +9,28 @@ class_name BoomArm extends Node2D
 @export var min_speed: float = 0
 @export var max_speed: float = 300
 @export var cam_speed: float = 3
+## Maximum rotation angle when shaking
+@export var shake_rot_angle: float 
+## Maximum nr of pixels transversed in x and y during shake
+@export var shake_offset : Vector2
+## Percentage of shaking reduction per secon 
+@export_range(0,1) var shake_decay 
 
 @onready var camera: Camera2D = get_node("Camera2D")
+@onready var noise : FastNoiseLite = FastNoiseLite.new() # noise for shake variation
+
+var trauma : float = 0 # Shake strength
+var noise_y : int = 0 # Used to transverse linearly through the noise
+
+func _ready() -> void:
+	noise.seed = randi()
 
 func _process(delta):
 	set_boom_position(delta)
 	set_camera_zoom(delta)
+	if trauma:
+		trauma = max(trauma - shake_decay*delta, 0)
+		_shake_camera()
 
 func get_mouse_distance() -> float:
 	return owner.get_local_mouse_position().distance_to(Vector2.ZERO)
@@ -32,3 +48,13 @@ func set_camera_zoom(delta: float) -> void:
 	var speed = owner.linear_velocity.length()
 	var zoom = clampf(lerpf(max_zoom, min_zoom, (speed - min_speed)/max_speed), min_zoom, max_zoom)
 	camera.zoom = lerp(camera.zoom, Vector2(zoom,zoom), delta * cam_speed)
+	
+func add_trauma(amount: float) -> void:
+	trauma = min(trauma + amount, 1)
+
+func _shake_camera() -> void:
+	var shake_amount = pow(trauma, 2)
+	noise_y += 1
+	camera.rotation = shake_rot_angle * shake_amount * noise.get_noise_2d(1, noise_y)
+	camera.offset.x = shake_offset.x * shake_amount * noise.get_noise_2d(50, noise_y)
+	camera.offset.y = shake_offset.y * shake_amount * noise.get_noise_2d(100, noise_y)
