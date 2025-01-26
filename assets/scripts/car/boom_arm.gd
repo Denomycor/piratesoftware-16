@@ -48,7 +48,9 @@ func set_camera_zoom(delta: float) -> void:
 	var speed = owner.linear_velocity.length()
 	var zoom = clampf(lerpf(max_zoom, min_zoom, (speed - min_speed)/max_speed), min_zoom, max_zoom)
 	camera.zoom = lerp(camera.zoom, Vector2(zoom,zoom), delta * cam_speed)
-	
+
+# Call this method to add shake to the camera. Trauma (i.e. shake strength) is a percentage, 
+# and amount should be between 0 and 1.
 func add_trauma(amount: float) -> void:
 	trauma = min(trauma + amount, 1)
 
