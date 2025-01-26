@@ -19,7 +19,7 @@ void fragment() {
 
 
 	vec4 screen_color = texture(SCREEN_TEXTURE, UV);
-	
+
 	vec4 final_color = vec4(0);
 
 	// CONSTANTS
@@ -34,12 +34,12 @@ void fragment() {
 
 	// where the current pixel is in the image
 	vec2 current_pixel = (center_pixel_of_screen + vec_from_center) / IMAGE_RESOLUTION;
-	
+
 	// mod to get uv for sand texture
 	vec2 sand_uv = mod(current_pixel, 1.0);
 
 	vec4 screen_color2 = screen_color * 100.0;
-	
+
 	// sand texture
 	vec4 sand = texture(sand_texture, sand_uv);
 	if (screen_color.rgb == TRANSPARENT_COLOR) {

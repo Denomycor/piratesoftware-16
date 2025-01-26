@@ -16,11 +16,10 @@ height = 268.0
 collision_layer = 4
 collision_mask = 7
 script = ExtResource("1_3s7no")
-health = 40
 follow_range = 1500
-prediction_time = null
 max_angle_diff = 10.0
 speed = 4000.0
+points = 100
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.5, 0.5)

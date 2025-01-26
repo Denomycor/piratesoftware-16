@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=3 uid="uid://87oc2iymck6e"]
+
+[ext_resource type="Script" path="res://assets/scripts/props/bones.gd" id="1_lv8re"]
+[ext_resource type="Texture2D" uid="uid://tqhar040dkl6" path="res://assets/textures/props/stain_asset_1.png" id="2_cny4q"]
+[ext_resource type="Texture2D" uid="uid://b4ijhc37idyrd" path="res://assets/textures/props/bones_asset_2.png" id="3_dcevm"]
+[ext_resource type="Texture2D" uid="uid://dravwbtnb7rnw" path="res://assets/textures/props/bones_asset_3.png" id="4_j6pqb"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_poodf"]
+radius = 35.1283
+
+[node name="Bones" type="Area2D" node_paths=PackedStringArray("slow_area")]
+z_index = 5
+collision_mask = 2
+script = ExtResource("1_lv8re")
+slow_ratio = 0.1
+slow_area = NodePath(".")
+block_radius = 40.0
+
+[node name="Sprite2D5" type="Sprite2D" parent="."]
+z_index = -2
+position = Vector2(-40, -20)
+rotation = 1.56836
+texture = ExtResource("2_cny4q")
+
+[node name="Sprite2D6" type="Sprite2D" parent="."]
+z_index = -2
+position = Vector2(37, 21)
+rotation = 2.60977
+texture = ExtResource("2_cny4q")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(-10.2774, -16.8991)
+rotation = 2.77553
+texture = ExtResource("3_dcevm")
+
+[node name="Sprite2D4" type="Sprite2D" parent="."]
+position = Vector2(-17.2774, 33.1009)
+rotation = 7.85155
+texture = ExtResource("4_j6pqb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(4, 2.38419e-07)
+rotation = -1.54199
+shape = SubResource("CircleShape2D_poodf")

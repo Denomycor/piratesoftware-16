@@ -22,7 +22,7 @@ func update_movement():
 
 func die():
 	LevelContext.level.stats.increment_kills()
-	died.emit()
+	LevelContext.level.stats.add_points(points)
 	velocity = Vector2.ZERO
 	hurt_box.has_taken_damage.disconnect(_take_dmg)
 	hurt_box.queue_free()
@@ -31,6 +31,7 @@ func die():
 	animations.visible = false
 	gpuParticles.emitting = true
 	gpuParticles.finished.connect(queue_free)
+	died.emit()
 
 # Signal
 func _take_dmg(amount: float):

@@ -1,0 +1,62 @@
+[gd_scene load_steps=8 format=3 uid="uid://dnfnetfp4l5fb"]
+
+[ext_resource type="Script" path="res://assets/scripts/props/prop.gd" id="1_1lq8r"]
+[ext_resource type="Texture2D" uid="uid://tqhar040dkl6" path="res://assets/textures/props/stain_asset_1.png" id="2_4dwa7"]
+[ext_resource type="Texture2D" uid="uid://bgvc8anb4t5li" path="res://assets/textures/props/boulder_asset_2.png" id="2_fvmcf"]
+[ext_resource type="Texture2D" uid="uid://d2opqsg6m3xry" path="res://assets/textures/props/boulder_asset_3.png" id="3_8aj4t"]
+[ext_resource type="Texture2D" uid="uid://bhg8jshbbwqtk" path="res://assets/textures/props/stain_asset_2.png" id="3_vm8d5"]
+[ext_resource type="Texture2D" uid="uid://n261pc8d10gg" path="res://assets/textures/props/stain_asset_3.png" id="4_c1bo0"]
+[ext_resource type="Texture2D" uid="uid://bskh06ei8dwyv" path="res://assets/textures/props/stain_asset_5.png" id="5_81tvr"]
+
+[node name="Boulder" type="StaticBody2D"]
+z_index = 5
+collision_mask = 3
+script = ExtResource("1_1lq8r")
+block_radius = 200.0
+
+[node name="Sprite2D4" type="Sprite2D" parent="."]
+z_index = -2
+position = Vector2(93, 91)
+rotation = 3.48059
+texture = ExtResource("2_4dwa7")
+
+[node name="Sprite2D8" type="Sprite2D" parent="."]
+z_index = -2
+position = Vector2(198, -2.99999)
+rotation = 4.8232
+texture = ExtResource("2_4dwa7")
+
+[node name="Sprite2D7" type="Sprite2D" parent="."]
+z_index = -2
+position = Vector2(-80, 158)
+rotation = 4.0674
+texture = ExtResource("3_vm8d5")
+
+[node name="Sprite2D5" type="Sprite2D" parent="."]
+z_index = -2
+position = Vector2(85, -88)
+rotation = 4.6699
+texture = ExtResource("4_c1bo0")
+
+[node name="Sprite2D6" type="Sprite2D" parent="."]
+z_index = -2
+position = Vector2(-140, -27)
+rotation = 2.54383
+texture = ExtResource("5_81tvr")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_fvmcf")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(-146, 95)
+rotation = 1.68386
+texture = ExtResource("3_8aj4t")
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+position = Vector2(150, -30)
+rotation = 2.54383
+texture = ExtResource("3_8aj4t")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+visible = false
+polygon = PackedVector2Array(-216, 139, -62, 173, 21, 123, 203, 75, 224, -119, 138, -133, 57, -76, -27, -122, -128, -87, -136, -22, -230, 35)

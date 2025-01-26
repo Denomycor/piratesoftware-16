@@ -1,0 +1,85 @@
+[gd_scene load_steps=10 format=3 uid="uid://dl6rmenebbkf2"]
+
+[ext_resource type="Script" path="res://assets/scripts/props/prop.gd" id="1_bnj5e"]
+[ext_resource type="PackedScene" uid="uid://qupwycf3fsaf" path="res://assets/scenes/props/barrel1.tscn" id="2_l0n22"]
+[ext_resource type="PackedScene" path="res://assets/scenes/props/barrel2.tscn" id="3_bgqig"]
+[ext_resource type="PackedScene" path="res://assets/scenes/props/barrel3.tscn" id="4_5knx0"]
+[ext_resource type="Texture2D" uid="uid://d0db5vjestun1" path="res://assets/textures/props/gasoline_asset_1.png" id="5_qu26w"]
+[ext_resource type="Texture2D" uid="uid://n261pc8d10gg" path="res://assets/textures/props/stain_asset_3.png" id="6_dsog4"]
+[ext_resource type="Texture2D" uid="uid://tqhar040dkl6" path="res://assets/textures/props/stain_asset_1.png" id="7_q2et7"]
+[ext_resource type="Texture2D" uid="uid://mycah0x0fu1h" path="res://assets/textures/props/stain_asset_4.png" id="8_4ewe2"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_r8kgi"]
+
+[node name="Barrel" type="Area2D"]
+z_index = 5
+script = ExtResource("1_bnj5e")
+block_radius = 200.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(75, -47)
+shape = SubResource("CircleShape2D_r8kgi")
+
+[node name="Barrel" parent="." instance=ExtResource("2_l0n22")]
+position = Vector2(75, -47)
+rotation = 0.03576
+
+[node name="Barrel6" parent="." instance=ExtResource("2_l0n22")]
+position = Vector2(-37, 94)
+rotation = -0.960018
+
+[node name="Barrel7" parent="." instance=ExtResource("2_l0n22")]
+position = Vector2(-96, -40)
+rotation = 0.508095
+
+[node name="Barrel2" parent="." instance=ExtResource("3_bgqig")]
+position = Vector2(-122, 52)
+
+[node name="Barrel3" parent="." instance=ExtResource("4_5knx0")]
+position = Vector2(-71, -127)
+rotation = -1.08541
+
+[node name="Barrel8" parent="." instance=ExtResource("4_5knx0")]
+position = Vector2(155, 24)
+rotation = 0.734884
+
+[node name="Barrel9" parent="." instance=ExtResource("4_5knx0")]
+position = Vector2(52, 154)
+rotation = 3.58317
+
+[node name="Barrel5" parent="." instance=ExtResource("4_5knx0")]
+position = Vector2(25, -124)
+rotation = 2.62839
+
+[node name="Barrel4" parent="." instance=ExtResource("3_bgqig")]
+position = Vector2(65, 57)
+rotation = 1.58392
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -2
+position = Vector2(-114, 50)
+texture = ExtResource("5_qu26w")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+z_index = -2
+position = Vector2(93, -107)
+rotation = 1.23819
+texture = ExtResource("5_qu26w")
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+z_index = -2
+position = Vector2(106, 124)
+rotation = 1.23819
+texture = ExtResource("6_dsog4")
+
+[node name="Sprite2D5" type="Sprite2D" parent="."]
+z_index = -2
+position = Vector2(240, -26)
+rotation = 2.23414
+texture = ExtResource("7_q2et7")
+
+[node name="Sprite2D4" type="Sprite2D" parent="."]
+z_index = -2
+position = Vector2(-88, -150)
+rotation = 2.34371
+texture = ExtResource("8_4ewe2")

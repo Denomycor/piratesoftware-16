@@ -62,7 +62,9 @@ func _physics_process(delta: float) -> void:
 
 func die():
 	LevelContext.level.stats.increment_kills()
+	LevelContext.level.stats.add_points(points)
 	queue_free()
+	died.emit()
 
 # Signal
 func _take_dmg(amount: float):
