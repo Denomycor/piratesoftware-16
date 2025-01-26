@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" load_steps=5 format=3 uid="uid://blfae81viatyt"]
 
-[ext_resource type="Shader" path="res://assets/scenes/levels/test_level.gdshader" id="1_hfoj8"]
+[ext_resource type="Shader" path="res://assets/resources/shaders/test_level.gdshader" id="1_hfoj8"]
 [ext_resource type="Texture2D" uid="uid://ux0uxex7dx6" path="res://assets/textures/arena/sand_asset_1.png" id="2_4enk8"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_6wexk"]
