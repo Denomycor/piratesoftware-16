@@ -14,6 +14,7 @@ class_name Biker extends Enemy
 @onready var collision: CollisionShape2D = $CollisionShape2D
 
 var last_velocity := Vector2.ZERO
+var dead := false
 
 
 func _ready() -> void:
@@ -25,6 +26,9 @@ func update_movement():
 	pass
 	
 func _physics_process(delta: float) -> void:
+	if(dead):
+		return
+
 	if get_distance_to_target() > follow_range:
 		velocity = get_chase_velocity(delta)
 	else:
@@ -46,8 +50,11 @@ func get_mimic_velocity(delta: float) -> Vector2:
 	return velocity + acceleration * delta
 
 func die():
+	dead = true
 	LevelContext.level.stats.increment_kills()
 	LevelContext.level.stats.add_points(points)
+	($BikerGun as BikerGun).projectile_spawner_component.enabled = false
+	($BikerGun as BikerGun).visible = false
 	velocity = Vector2.ZERO
 	hurt_box.has_taken_damage.disconnect(_take_dmg)
 	hurt_box.queue_free()
@@ -55,7 +62,7 @@ func die():
 	for sprite in sprites:
 		sprite.visible = false
 	gpu_particles.emitting = true
-	gpu_particles.finished.connect(queue_free)
+	create_tween().tween_callback(queue_free).set_delay(1)
 	died.emit()
 
 # Signal

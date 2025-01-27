@@ -114,6 +114,7 @@ emitting = false
 amount = 200
 process_material = SubResource("ParticleProcessMaterial_bwm2c")
 texture = ExtResource("7_ciqv4")
+lifetime = 0.5
 one_shot = true
 explosiveness = 0.4
 randomness = 0.3
