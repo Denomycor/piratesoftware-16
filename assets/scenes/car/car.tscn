@@ -1,6 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://drcpxeie725b"]
+[gd_scene load_steps=13 format=3 uid="uid://drcpxeie725b"]
 
 [ext_resource type="Script" path="res://assets/scripts/car/car.gd" id="1_nqiho"]
+[ext_resource type="PackedScene" path="res://assets/scenes/car/car_break_particles.tscn" id="2_2uyc3"]
 [ext_resource type="Shader" path="res://assets/scripts/circle.gdshader" id="2_l82v1"]
 [ext_resource type="Texture2D" uid="uid://cyfq1o7yraqrl" path="res://assets/textures/car/car.png" id="2_no78u"]
 [ext_resource type="Texture2D" uid="uid://qjmbo1bj5df7" path="res://icon.svg" id="3_4wvws"]
@@ -32,6 +33,7 @@ center_of_mass = Vector2(0, -100)
 script = ExtResource("1_nqiho")
 motor_strength = 500.0
 torque_multiplier = 10.0
+particle_scene = ExtResource("2_2uyc3")
 
 [node name="sonar_position" type="Sprite2D" parent="."]
 light_mask = 0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://b66n0n4i6aa3b"]
+[gd_scene load_steps=19 format=3 uid="uid://b66n0n4i6aa3b"]
 
 [ext_resource type="Script" path="res://assets/scripts/props/bones.gd" id="1_485rn"]
 [ext_resource type="Texture2D" uid="uid://bskh06ei8dwyv" path="res://assets/textures/props/stain_asset_5.png" id="2_4ulqe"]
@@ -8,17 +8,66 @@
 [ext_resource type="Texture2D" uid="uid://dravwbtnb7rnw" path="res://assets/textures/props/bones_asset_3.png" id="4_30tjm"]
 [ext_resource type="Texture2D" uid="uid://tqhar040dkl6" path="res://assets/textures/props/stain_asset_1.png" id="4_xg1w1"]
 [ext_resource type="Texture2D" uid="uid://ynxix6yeyg27" path="res://assets/textures/props/bones_asset_4.png" id="5_dtx68"]
+[ext_resource type="Texture2D" uid="uid://ceh6s351pyonv" path="res://assets/textures/particles/bone_breaking_spritesheet.png" id="9_4idfa"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8645f"]
 radius = 82.3429
 height = 323.39
 
-[node name="Bones" type="Area2D" node_paths=PackedStringArray("slow_area")]
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_uxndh"]
+particles_animation = true
+particles_anim_h_frames = 4
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_ifa3e"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.622951, 1), 0.0, 0.0, 0, 0, Vector2(0.995902, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_sxrq2"]
+curve = SubResource("Curve_ifa3e")
+
+[sub_resource type="Gradient" id="Gradient_w5h71"]
+colors = PackedColorArray(0.857996, 0.7022, 0.593483, 1, 0.659359, 0.481944, 0.35444, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_nce40"]
+gradient = SubResource("Gradient_w5h71")
+
+[sub_resource type="Gradient" id="Gradient_s4kb7"]
+colors = PackedColorArray(1, 1, 1, 1, 0.735772, 0.547354, 0.419712, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_goriu"]
+gradient = SubResource("Gradient_s4kb7")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_eurm6"]
+lifetime_randomness = 0.2
+particle_flag_rotate_y = true
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 190.0
+angle_min = 1.07288e-05
+angle_max = 360.0
+spread = 180.0
+initial_velocity_min = 100.0
+initial_velocity_max = 160.0
+gravity = Vector3(0, 0, 0)
+scale_max = 2.5
+color_ramp = SubResource("GradientTexture1D_goriu")
+color_initial_ramp = SubResource("GradientTexture1D_nce40")
+alpha_curve = SubResource("CurveTexture_sxrq2")
+anim_speed_min = 1.0
+anim_speed_max = 1.0
+turbulence_noise_strength = 3.0
+turbulence_noise_scale = 5.4
+turbulence_noise_speed_random = 4.0
+
+[node name="Bones" type="Area2D" node_paths=PackedStringArray("slow_area", "sprites")]
 z_index = 5
 collision_mask = 2
 script = ExtResource("1_485rn")
 slow_ratio = 0.4
 slow_area = NodePath(".")
+sprites = [NodePath("Sprite2D5"), NodePath("Sprite2D6"), NodePath("Sprite2D9"), NodePath("Sprite2D7"), NodePath("Sprite2D8"), NodePath("Sprite2D4"), NodePath("Sprite2D"), NodePath("Sprite2D2"), NodePath("Sprite2D3")]
 block_radius = 190.0
 
 [node name="Sprite2D5" type="Sprite2D" parent="."]
@@ -74,3 +123,16 @@ visible = false
 position = Vector2(2.99997, 4.00012)
 rotation = -0.549049
 shape = SubResource("CapsuleShape2D_8645f")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_uxndh")
+position = Vector2(1, -1)
+rotation = 1.5708
+emitting = false
+amount = 300
+process_material = SubResource("ParticleProcessMaterial_eurm6")
+texture = ExtResource("9_4idfa")
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.4
+randomness = 0.3
