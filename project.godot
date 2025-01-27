@@ -20,10 +20,6 @@ config/icon="res://icon.svg"
 LevelContext="*res://assets/scripts/level/level_context.gd"
 GameOptions="*res://assets/scripts/game_options.gd"
 
-[display]
-
-window/size/mode=3
-
 [input]
 
 fire={

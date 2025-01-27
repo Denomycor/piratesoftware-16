@@ -1,0 +1,86 @@
+[gd_scene load_steps=14 format=3 uid="uid://dt8a5t1vy0tba"]
+
+[ext_resource type="Script" path="res://assets/scripts/projectiles/flamethrower_projectile.gd" id="1_o2qr0"]
+[ext_resource type="Script" path="res://assets/scripts/components/hit-box.gd" id="1_ultg0"]
+[ext_resource type="Texture2D" uid="uid://7v0n3bcxsn3m" path="res://assets/textures/particles/fire.png" id="3_pn8uo"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vxxqp"]
+radius = 16.0
+
+[sub_resource type="Curve" id="Curve_adw2t"]
+_data = [Vector2(0.0918919, 1), 0.0, 0.0, 0, 0, Vector2(0.66, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_sny7l"]
+curve = SubResource("Curve_adw2t")
+
+[sub_resource type="Gradient" id="Gradient_re110"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.0318471, 0.33121, 0.656051, 0.987261)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 0, 1, 0.8, 0.694118, 0, 1, 0.8, 0.458824, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_d2p3t"]
+gradient = SubResource("Gradient_re110")
+
+[sub_resource type="Curve" id="Curve_eygh5"]
+min_value = -1.0
+_data = [Vector2(0, 0.0109891), 0.0, 0.0, 0, 0, Vector2(0.545946, -0.076923), 0.0, 0.0, 0, 0, Vector2(1, -0.252747), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_hug78"]
+curve = SubResource("Curve_eygh5")
+
+[sub_resource type="Curve" id="Curve_mbpa3"]
+max_value = 4.0
+_data = [Vector2(0, 0.703297), 0.0, 2.93613, 0, 0, Vector2(0.846667, 3.34066), 1.5616, 1.5616, 0, 0, Vector2(0.993333, 1.79121), -3.8854, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_5sm84"]
+curve = SubResource("Curve_mbpa3")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_c3dy6"]
+particle_flag_rotate_y = true
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 1.0
+angle_min = 1.07288e-05
+angle_max = 360.0
+gravity = Vector3(0, 0, 0)
+scale_max = 10.0
+scale_curve = SubResource("CurveTexture_5sm84")
+color_ramp = SubResource("GradientTexture1D_d2p3t")
+alpha_curve = SubResource("CurveTexture_sny7l")
+hue_variation_min = 0.85
+hue_variation_max = 1.0
+hue_variation_curve = SubResource("CurveTexture_hug78")
+turbulence_noise_strength = 0.1
+turbulence_noise_scale = 0.5
+turbulence_noise_speed_random = 4.0
+turbulence_influence_min = 0.01
+turbulence_influence_max = 0.01
+
+[node name="flamethrower_projectile" type="Node2D"]
+script = ExtResource("1_o2qr0")
+speed = 800.0
+lifetime = 2.0
+
+[node name="HitBoxComponent" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 5
+script = ExtResource("1_ultg0")
+damage_amount = 2.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
+shape = SubResource("CircleShape2D_vxxqp")
+debug_color = Color(0.891168, 0.000245659, 0.791009, 0.42)
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+z_index = 5
+emitting = false
+amount = 200
+process_material = SubResource("ParticleProcessMaterial_c3dy6")
+texture = ExtResource("3_pn8uo")
+lifetime = 2.0
+one_shot = true
+explosiveness = 0.1
+local_coords = true

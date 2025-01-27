@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://dw2abso84avq1"]
+[gd_scene load_steps=8 format=3 uid="uid://dw2abso84avq1"]
 
 [ext_resource type="Script" path="res://assets/scripts/enemies/biker.gd" id="1_3s7no"]
 [ext_resource type="Script" path="res://assets/scripts/components/hurt-box.gd" id="1_80q8j"]
 [ext_resource type="Texture2D" uid="uid://drrd7mkp1t7la" path="res://assets/textures/enemies/motard_sprite.png" id="2_fr78b"]
 [ext_resource type="Texture2D" uid="uid://canrvohjsbxjs" path="res://assets/textures/enemies/motard_wheel.png" id="3_sa0fu"]
+[ext_resource type="PackedScene" uid="uid://d1mkxnil63kry" path="res://assets/scenes/weapons/biker_gun.tscn" id="5_csq2n"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_utvnp"]
 radius = 72.0
@@ -35,8 +36,11 @@ position = Vector2(133, 0)
 rotation = 1.5708
 texture = ExtResource("3_sa0fu")
 
+[node name="BikerGun" parent="." instance=ExtResource("5_csq2n")]
+position = Vector2(51, 0)
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(2, 0)
+position = Vector2(2, -1)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_utvnp")
 
@@ -50,15 +54,3 @@ position = Vector2(2, 0)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_j40sk")
 debug_color = Color(0.972063, 0, 0.443653, 0.42)
-
-[node name="LineOfSight" type="RayCast2D" parent="."]
-position = Vector2(110, 0)
-rotation = 1.5708
-target_position = Vector2(0, -38)
-
-[node name="Laser" type="Line2D" parent="LineOfSight"]
-visible = false
-position = Vector2(4.37117e-08, 1)
-points = PackedVector2Array(0, 0, 0, -2000)
-width = 5.0
-default_color = Color(0.815686, 0, 0, 0.392157)

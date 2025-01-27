@@ -17,9 +17,6 @@ func _ready() -> void:
 	if follow_range == 0:
 		follow_range = int(randf_range(500, 1500))
 
-func attack():
-	pass
-
 func update_movement():
 	pass
 	

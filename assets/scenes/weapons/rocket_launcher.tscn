@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://dbxdugkiufequ"]
+[gd_scene load_steps=4 format=3 uid="uid://xpgamcshcoi3"]
 
 [ext_resource type="Script" path="res://assets/scripts/weapons/rocket_launcher.gd" id="1_ldygr"]
 [ext_resource type="Script" path="res://assets/scripts/weapons/components/turn_component.gd" id="2_qsljy"]
@@ -14,8 +14,11 @@ polygon = PackedVector2Array(0, 0, 0, -16, 224, -16, 224, 16, 0, 16)
 [node name="TurnComponent" type="Node2D" parent="."]
 script = ExtResource("2_qsljy")
 
-[node name="ProjectileSpawnerComponent" type="Node2D" parent="."]
-position = Vector2(224, 0)
+[node name="ProjectileSpawnerComponent" type="Node2D" parent="." node_paths=PackedStringArray("bullet_spawn")]
 script = ExtResource("3_ygmqf")
 fire_delay = 0.01
 multishot = 1
+bullet_spawn = NodePath("../bullet_spawn")
+
+[node name="bullet_spawn" type="Node2D" parent="."]
+position = Vector2(224, 0)
