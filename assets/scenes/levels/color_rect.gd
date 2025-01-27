@@ -18,3 +18,5 @@ func _physics_process(_delta):
 	else:
 		material.set_shader_parameter("our_camera_position", boom_arm.camera.global_position)
 		material.set_shader_parameter("our_camera_zoom", boom_arm.camera.zoom)
+		material.set_shader_parameter("our_resolution", get_viewport_rect().size)
+
