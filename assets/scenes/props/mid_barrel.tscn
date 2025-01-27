@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://assets/scripts/props/prop.gd" id="1_xdn7f"]
 [ext_resource type="PackedScene" uid="uid://qupwycf3fsaf" path="res://assets/scenes/props/barrel1.tscn" id="2_ujjjl"]
-[ext_resource type="PackedScene" path="res://assets/scenes/props/barrel2.tscn" id="3_pfced"]
-[ext_resource type="PackedScene" path="res://assets/scenes/props/barrel3.tscn" id="4_qnvs3"]
+[ext_resource type="PackedScene" uid="uid://by6bilhvb4vhf" path="res://assets/scenes/props/barrel2.tscn" id="3_pfced"]
+[ext_resource type="PackedScene" uid="uid://deo63nl1macwi" path="res://assets/scenes/props/barrel3.tscn" id="4_qnvs3"]
 [ext_resource type="Texture2D" uid="uid://d0db5vjestun1" path="res://assets/textures/props/gasoline_asset_1.png" id="5_dfgmh"]
 [ext_resource type="Texture2D" uid="uid://bhg8jshbbwqtk" path="res://assets/textures/props/stain_asset_2.png" id="7_7jlpd"]
 [ext_resource type="Texture2D" uid="uid://mycah0x0fu1h" path="res://assets/textures/props/stain_asset_4.png" id="8_m38n1"]

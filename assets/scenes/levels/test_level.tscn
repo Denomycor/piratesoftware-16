@@ -11,9 +11,9 @@
 [ext_resource type="PackedScene" uid="uid://57gif8jic3gl" path="res://assets/scenes/props/structure1.tscn" id="6_6obcn"]
 [ext_resource type="PackedScene" uid="uid://e4c645ffpwak" path="res://assets/scenes/props/structure2.tscn" id="7_r222i"]
 [ext_resource type="Script" path="res://assets/scripts/level/stats.gd" id="8_6ascs"]
-[ext_resource type="PackedScene" path="res://assets/scenes/props/big_boulder.tscn" id="8_chcvc"]
-[ext_resource type="PackedScene" path="res://assets/scenes/props/big_barrel.tscn" id="9_5mdmc"]
-[ext_resource type="PackedScene" path="res://assets/scenes/ui/game_over_menu.tscn" id="9_h3nak"]
+[ext_resource type="PackedScene" uid="uid://bb6guieu8fwa" path="res://assets/scenes/props/big_boulder.tscn" id="8_chcvc"]
+[ext_resource type="PackedScene" uid="uid://dl6rmenebbkf2" path="res://assets/scenes/props/big_barrel.tscn" id="9_5mdmc"]
+[ext_resource type="PackedScene" uid="uid://dtyepolgwnyv2" path="res://assets/scenes/ui/game_over_menu.tscn" id="9_h3nak"]
 [ext_resource type="Script" path="res://assets/scripts/utils/panning_camera.gd" id="9_qeern"]
 [ext_resource type="PackedScene" uid="uid://b66n0n4i6aa3b" path="res://assets/scenes/props/big_bones.tscn" id="10_06wf4"]
 [ext_resource type="PackedScene" uid="uid://dnfnetfp4l5fb" path="res://assets/scenes/props/mid_boulder.tscn" id="11_quaxx"]
@@ -22,11 +22,12 @@
 [ext_resource type="PackedScene" uid="uid://c7ac5st3m716u" path="res://assets/scenes/props/small_barrel.tscn" id="14_ghf57"]
 [ext_resource type="PackedScene" uid="uid://87oc2iymck6e" path="res://assets/scenes/props/small_bones.tscn" id="15_0ad71"]
 
-[node name="TestLevel" type="Node" node_paths=PackedStringArray("overlay", "stats", "car")]
+[node name="TestLevel" type="Node" node_paths=PackedStringArray("overlay", "stats", "car", "arena")]
 script = ExtResource("1_y7sae")
 overlay = NodePath("Overlay")
 stats = NodePath("Stats")
 car = NodePath("World/Car")
+arena = NodePath("World/Arena")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -82,7 +83,7 @@ script = ExtResource("4_a7yx0")
 target = NodePath("../Car")
 
 [node name="SpawnTimer" type="Timer" parent="World/EnemySpawner"]
-wait_time = 15.0
+wait_time = 2.0
 
 [node name="PauseMenu" parent="." instance=ExtResource("2_idj3t")]
 visible = false
