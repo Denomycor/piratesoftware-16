@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://assets/scripts/projectiles/linear_projectile.gd" id="1_pex8q"]
 [ext_resource type="Script" path="res://assets/scripts/components/hit-box.gd" id="2_eg3h8"]
-[ext_resource type="Texture2D" uid="uid://duphwgq7pgw6a" path="res://assets/textures/car/weapon/projectiles/shotgun-bullet.png" id="3_tnyw5"]
+[ext_resource type="Texture2D" uid="uid://n0qmhc5y4h7t" path="res://assets/textures/car/weapon/projectiles/shotgun_bullet.png" id="2_xs1d6"]
 
 [sub_resource type="Curve" id="Curve_15b5m"]
 max_value = 2.0
@@ -28,8 +28,8 @@ scale_max = 8.0
 color = Color(0.169245, 0.169245, 0.169245, 1)
 alpha_curve = SubResource("CurveTexture_hi1iu")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_cgf20"]
-size = Vector2(24, 24)
+[sub_resource type="CircleShape2D" id="CircleShape2D_n0rgj"]
+radius = 11.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_x70es"]
 radius = 19.0263
@@ -50,11 +50,11 @@ explosiveness = 0.4
 randomness = 0.3
 
 [node name="Shotgun-bullet" type="Sprite2D" parent="."]
-scale = Vector2(5, 5)
-texture = ExtResource("3_tnyw5")
+scale = Vector2(1.1, 1.1)
+texture = ExtResource("2_xs1d6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_cgf20")
+shape = SubResource("CircleShape2D_n0rgj")
 
 [node name="HitBoxComponent" type="Area2D" parent="."]
 collision_layer = 0
