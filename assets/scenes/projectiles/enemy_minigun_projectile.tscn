@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://8n6da01wdk6u"]
+
+[ext_resource type="Script" path="res://assets/scripts/projectiles/linear_projectile.gd" id="1_p22tt"]
+[ext_resource type="Texture2D" uid="uid://belso67udlqgi" path="res://assets/textures/car/weapon/projectiles/minigun-bullet.png" id="2_3lnef"]
+[ext_resource type="Script" path="res://assets/scripts/components/hit-box.gd" id="3_rb03y"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qagmc"]
+size = Vector2(25, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c3o5e"]
+size = Vector2(32, 16)
+
+[node name="minigun_projectile" type="CharacterBody2D"]
+collision_layer = 16
+collision_mask = 3
+motion_mode = 1
+script = ExtResource("1_p22tt")
+speed = 2400.0
+lifetime = 1.3
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 1.5708
+scale = Vector2(2, 2)
+texture = ExtResource("2_3lnef")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_qagmc")
+
+[node name="HitBoxComponent" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 3
+script = ExtResource("3_rb03y")
+damage_amount = 0.5
+one_shot = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
+shape = SubResource("RectangleShape2D_c3o5e")
+debug_color = Color(0.983756, 0.102916, 0.182855, 0.42)
