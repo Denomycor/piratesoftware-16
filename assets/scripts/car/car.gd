@@ -98,7 +98,7 @@ func _on_collision(node: Node) -> void:
 		if node.has_method("get_last_velocity"):
 			velocity_ratio = clampf((last_velocity - node.get_last_velocity()).length()/speed_for_max_collision_damage, 0, 2)
 		hurt_box.take_damage(collision_damage * mass_ratio * velocity_ratio)
-		emit_break_particles(collision_damage * mass_ratio,collision_direction)
+		emit_break_particles(collision_damage * mass_ratio * velocity_ratio,collision_direction)
 	elif node is StaticBody2D:
 		hurt_box.take_damage(collision_damage)
 		emit_break_particles(collision_damage,collision_direction)

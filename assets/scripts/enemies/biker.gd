@@ -1,5 +1,7 @@
 class_name Biker extends Enemy
 
+const PARTICLE_RADIUS = 120
+
 @export var health: float = 20
 @export_range(500, 1500) var follow_range: int
 @export var prediction_time: float = 0.3
@@ -8,6 +10,8 @@ class_name Biker extends Enemy
 @export var max_collision_damage: float = 25
 @export var min_collision_speed: float = 300
 @export var speed_for_max_collision_damage: float = 1500
+
+@export var particle_scene: PackedScene
 
 var last_velocity := Vector2.ZERO
 
@@ -54,7 +58,8 @@ func _take_dmg(amount: float):
 		die()
 
 func _on_collision(node: Node) -> void:
-	var collision_speed := last_velocity.dot(global_position.direction_to(node.global_position))
+	var collision_direction := global_position.direction_to(node.global_position)
+	var collision_speed := last_velocity.dot(collision_direction)
 	var collision_damage := clampf(lerpf(0,max_collision_damage, (collision_speed-min_collision_speed)/(speed_for_max_collision_damage - min_collision_speed)),0,max_collision_damage)
 	if node is RigidBody2D:
 		var mass_ratio = node.mass
@@ -62,9 +67,19 @@ func _on_collision(node: Node) -> void:
 		if node.has_method("get_last_velocity"):
 			velocity_ratio = clampf((last_velocity - node.get_last_velocity()).length()/speed_for_max_collision_damage, 0, 2)
 		hurt_box.take_damage(collision_damage * mass_ratio * velocity_ratio)
+		emit_break_particles(collision_damage * mass_ratio * velocity_ratio,collision_direction)
 	elif node is StaticBody2D:
 		hurt_box.take_damage(collision_damage)
+		emit_break_particles(collision_damage,collision_direction)
 	elif node is CharacterBody2D:
 		#ainda n sei
 		pass
 	return
+
+func emit_break_particles(damage: float, direction: Vector2) -> void:
+	var particles: GPUParticles2D = particle_scene.instantiate()
+	particles.amount_ratio = damage/max_collision_damage
+	particles.emitting = true
+	particles.position = direction * PARTICLE_RADIUS
+	add_child(particles)
+	particles.finished.connect(particles.queue_free)
