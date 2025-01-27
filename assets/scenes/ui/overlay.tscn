@@ -1,56 +1,91 @@
-[gd_scene load_steps=2 format=3 uid="uid://is7aeubau3xs"]
+[gd_scene load_steps=7 format=3 uid="uid://is7aeubau3xs"]
 
 [ext_resource type="Script" path="res://assets/scripts/ui/overlay.gd" id="1_tmn6d"]
+[ext_resource type="Script" path="res://assets/scripts/sonar/sonar_viewport.gd" id="2_vnyf8"]
+[ext_resource type="Shader" path="res://assets/scripts/sonar/sonar.gdshader" id="3_s501v"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_qklw6"]
+noise_type = 3
+frequency = 0.0312
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_pgy1c"]
+noise = SubResource("FastNoiseLite_qklw6")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xppwn"]
+shader = ExtResource("3_s501v")
+shader_parameter/enabled = true
+shader_parameter/background_color = Color(0.0646966, 0.0646965, 0.0646966, 1)
+shader_parameter/sec_background_color = null
+shader_parameter/obstacle_color = Color(0.385029, 0.777194, 0.316256, 1)
+shader_parameter/sec_obstacle_color = Color(0.92549, 0.760784, 0, 1)
+shader_parameter/noise = SubResource("NoiseTexture2D_pgy1c")
 
 [node name="Overlay" type="CanvasLayer"]
 script = ExtResource("1_tmn6d")
 
-[node name="Points" type="Label" parent="."]
-unique_name_in_owner = true
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -133.0
-offset_top = 6.0
-offset_bottom = 29.0
+offset_left = -97.0
+offset_top = 12.0
+offset_right = -12.0
+offset_bottom = 116.0
 grow_horizontal = 0
+alignment = 1
+
+[node name="Points" type="Label" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
 text = "Points: 100"
+horizontal_alignment = 2
+vertical_alignment = 1
 
-[node name="Kills" type="Label" parent="."]
+[node name="Kills" type="Label" parent="VBoxContainer"]
 unique_name_in_owner = true
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -115.0
-offset_top = 30.0
-offset_bottom = 53.0
-grow_horizontal = 0
+layout_mode = 2
 text = "Kills: 0"
+horizontal_alignment = 2
+vertical_alignment = 1
 
-[node name="Hp" type="Label" parent="."]
+[node name="Hp" type="Label" parent="VBoxContainer"]
 unique_name_in_owner = true
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -104.0
-offset_top = 56.0
-offset_bottom = 79.0
-grow_horizontal = 0
+layout_mode = 2
 text = "HP: 100"
+horizontal_alignment = 2
+vertical_alignment = 1
 
-[node name="Speed" type="Label" parent="."]
+[node name="Speed" type="Label" parent="VBoxContainer"]
 unique_name_in_owner = true
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -44.0
-offset_top = -51.0
-offset_right = 44.0
-offset_bottom = -28.0
-grow_horizontal = 2
-grow_vertical = 0
+layout_mode = 2
 text = "Km/h"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+material = SubResource("ShaderMaterial_xppwn")
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -206.0
+offset_top = -207.0
+offset_right = -14.0
+offset_bottom = -15.0
+grow_horizontal = 0
+grow_vertical = 0
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+canvas_cull_mask = 4294966784
+size = Vector2i(192, 192)
+render_target_update_mode = 4
+script = ExtResource("2_vnyf8")
+
+[node name="sonar_camera" type="Camera2D" parent="SubViewportContainer/SubViewport"]
+zoom = Vector2(0.01, 0.01)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://e4c645ffpwak"]
+[gd_scene load_steps=18 format=3 uid="uid://e4c645ffpwak"]
 
 [ext_resource type="Script" path="res://assets/scripts/props/prop.gd" id="1_4fd1u"]
 [ext_resource type="Texture2D" uid="uid://d2opqsg6m3xry" path="res://assets/textures/props/boulder_asset_3.png" id="6_vqlqy"]
@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://bgvc8anb4t5li" path="res://assets/textures/props/boulder_asset_2.png" id="14_grh04"]
 [ext_resource type="Texture2D" uid="uid://n261pc8d10gg" path="res://assets/textures/props/stain_asset_3.png" id="14_ilq73"]
 [ext_resource type="Texture2D" uid="uid://bskh06ei8dwyv" path="res://assets/textures/props/stain_asset_5.png" id="15_ds2fx"]
+[ext_resource type="Script" path="res://assets/scripts/sonar/sonar_shape_calculator.gd" id="16_0itor"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_r8kgi"]
 
@@ -242,3 +243,7 @@ z_index = -2
 position = Vector2(568, 198)
 rotation = 0.929978
 texture = ExtResource("15_ds2fx")
+
+[node name="SonarShapeCalculator" type="Node2D" parent="." node_paths=PackedStringArray("shapes")]
+script = ExtResource("16_0itor")
+shapes = [NodePath("../StaticBody2D/CollisionPolygon2D")]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://57gif8jic3gl"]
+[gd_scene load_steps=17 format=3 uid="uid://57gif8jic3gl"]
 
 [ext_resource type="Script" path="res://assets/scripts/props/prop.gd" id="1_rqj0n"]
 [ext_resource type="Texture2D" uid="uid://bskh06ei8dwyv" path="res://assets/textures/props/stain_asset_5.png" id="2_0d08f"]
@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://mycah0x0fu1h" path="res://assets/textures/props/stain_asset_4.png" id="8_dusf7"]
 [ext_resource type="PackedScene" uid="uid://x756spdcleym" path="res://assets/scenes/props/mid_bones.tscn" id="9_xg7s3"]
 [ext_resource type="PackedScene" uid="uid://b66n0n4i6aa3b" path="res://assets/scenes/props/big_bones.tscn" id="10_rms4s"]
+[ext_resource type="Script" path="res://assets/scripts/sonar/sonar_shape_calculator.gd" id="15_w1cjr"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_r8kgi"]
 
@@ -302,3 +303,7 @@ texture = ExtResource("4_xsmuh")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D5"]
 polygon = PackedVector2Array(216, 797, 384, 766, 460, 480, 387, 410, 416, 318, 394, 251, 508, 207, 584, 89, 518, 29, 524, -101, 594, -177, 537, -288, 584, -409, 483, -479, 337, -415, 241, -450, 210, -415, 197, -47, 70, -12, 76, 86, -13, 156, 127, 445, 67, 651, 165, 667)
+
+[node name="SonarShapeCalculator" type="Node2D" parent="." node_paths=PackedStringArray("shapes")]
+script = ExtResource("15_w1cjr")
+shapes = [NodePath("../StaticBody2D/CollisionPolygon2D"), NodePath("../StaticBody2D3/CollisionPolygon2D"), NodePath("../StaticBody2D5/CollisionPolygon2D")]

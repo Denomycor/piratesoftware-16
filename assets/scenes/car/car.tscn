@@ -1,7 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://drcpxeie725b"]
+[gd_scene load_steps=12 format=3 uid="uid://drcpxeie725b"]
 
 [ext_resource type="Script" path="res://assets/scripts/car/car.gd" id="1_nqiho"]
+[ext_resource type="Shader" path="res://assets/scripts/circle.gdshader" id="2_l82v1"]
 [ext_resource type="Texture2D" uid="uid://cyfq1o7yraqrl" path="res://assets/textures/car/car.png" id="2_no78u"]
+[ext_resource type="Texture2D" uid="uid://qjmbo1bj5df7" path="res://icon.svg" id="3_4wvws"]
 [ext_resource type="Script" path="res://assets/scripts/car/boom_arm.gd" id="3_g02g4"]
 [ext_resource type="Script" path="res://assets/scripts/car/wheel.gd" id="4_wkcph"]
 [ext_resource type="PackedScene" uid="uid://c4b5t5usvyqcs" path="res://assets/scenes/weapons/weapon_dock.tscn" id="6_kmu1j"]
@@ -11,11 +13,16 @@
 friction = 0.8
 bounce = 0.1
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ghngx"]
+shader = ExtResource("2_l82v1")
+shader_parameter/color = Color(1, 1, 1, 1)
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1m2s1"]
 radius = 122.0
 height = 446.0
 
 [node name="Car" type="RigidBody2D"]
+visibility_layer = 513
 collision_layer = 2
 collision_mask = 5
 physics_material_override = SubResource("PhysicsMaterial_kt83k")
@@ -25,6 +32,13 @@ center_of_mass = Vector2(0, -100)
 script = ExtResource("1_nqiho")
 motor_strength = 500.0
 torque_multiplier = 10.0
+
+[node name="sonar_position" type="Sprite2D" parent="."]
+light_mask = 0
+visibility_layer = 512
+material = SubResource("ShaderMaterial_ghngx")
+scale = Vector2(4, 4)
+texture = ExtResource("3_4wvws")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_no78u")
