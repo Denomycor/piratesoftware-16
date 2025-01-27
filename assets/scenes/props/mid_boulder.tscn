@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dnfnetfp4l5fb"]
+[gd_scene load_steps=9 format=3 uid="uid://dnfnetfp4l5fb"]
 
 [ext_resource type="Script" path="res://assets/scripts/props/prop.gd" id="1_1lq8r"]
 [ext_resource type="Texture2D" uid="uid://tqhar040dkl6" path="res://assets/textures/props/stain_asset_1.png" id="2_4dwa7"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bhg8jshbbwqtk" path="res://assets/textures/props/stain_asset_2.png" id="3_vm8d5"]
 [ext_resource type="Texture2D" uid="uid://n261pc8d10gg" path="res://assets/textures/props/stain_asset_3.png" id="4_c1bo0"]
 [ext_resource type="Texture2D" uid="uid://bskh06ei8dwyv" path="res://assets/textures/props/stain_asset_5.png" id="5_81tvr"]
+[ext_resource type="Script" path="res://assets/scripts/sonar/sonar_shape_calculator.gd" id="8_l1el3"]
 
 [node name="Boulder" type="StaticBody2D"]
 z_index = 5
@@ -60,3 +61,7 @@ texture = ExtResource("3_8aj4t")
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 visible = false
 polygon = PackedVector2Array(-216, 139, -62, 173, 21, 123, 203, 75, 224, -119, 138, -133, 57, -76, -27, -122, -128, -87, -136, -22, -230, 35)
+
+[node name="SonarShapeCalculator" type="Node2D" parent="." node_paths=PackedStringArray("shapes")]
+script = ExtResource("8_l1el3")
+shapes = [NodePath("../CollisionPolygon2D")]

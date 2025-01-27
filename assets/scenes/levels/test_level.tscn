@@ -57,6 +57,7 @@ script = ExtResource("4_eyags")
 walls_per_side = 30
 prop_list = Array[PackedScene]([ExtResource("6_6obcn"), ExtResource("7_r222i"), ExtResource("8_chcvc"), ExtResource("9_5mdmc"), ExtResource("10_06wf4"), ExtResource("11_quaxx"), ExtResource("12_gvol0"), ExtResource("13_quvsm"), ExtResource("14_ghf57"), ExtResource("15_0ad71")])
 ratios = Array[int]([2, 3, 4, 6, 8, 10, 14, 18, 25, 30])
+prop_density = 0.02
 
 [node name="Camera2D" type="Camera2D" parent="World/Arena"]
 enabled = false
@@ -73,7 +74,7 @@ drift_friction_strength = 5.0
 perpendicular_multiplier = 0.25
 parallel_multiplier = 0.25
 
-[node name="BoomArm" parent="World/Car" index="2"]
+[node name="BoomArm" parent="World/Car" index="3"]
 mouse_slide_distance = 1000.0
 speed_slide_distance = 1500.0
 max_slide_speed = 4000.0

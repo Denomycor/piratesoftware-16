@@ -1,10 +1,10 @@
-[gd_scene load_steps=17 format=3 uid="uid://e4c645ffpwak"]
+[gd_scene load_steps=18 format=3 uid="uid://e4c645ffpwak"]
 
 [ext_resource type="Script" path="res://assets/scripts/props/prop.gd" id="1_4fd1u"]
 [ext_resource type="Texture2D" uid="uid://d2opqsg6m3xry" path="res://assets/textures/props/boulder_asset_3.png" id="6_vqlqy"]
 [ext_resource type="PackedScene" uid="uid://qupwycf3fsaf" path="res://assets/scenes/props/barrel1.tscn" id="7_xe4q5"]
-[ext_resource type="PackedScene" path="res://assets/scenes/props/barrel2.tscn" id="8_lxwpm"]
-[ext_resource type="PackedScene" path="res://assets/scenes/props/barrel3.tscn" id="9_hblgs"]
+[ext_resource type="PackedScene" uid="uid://by6bilhvb4vhf" path="res://assets/scenes/props/barrel2.tscn" id="8_lxwpm"]
+[ext_resource type="PackedScene" uid="uid://deo63nl1macwi" path="res://assets/scenes/props/barrel3.tscn" id="9_hblgs"]
 [ext_resource type="PackedScene" uid="uid://87oc2iymck6e" path="res://assets/scenes/props/small_bones.tscn" id="10_cdes0"]
 [ext_resource type="PackedScene" uid="uid://x756spdcleym" path="res://assets/scenes/props/mid_bones.tscn" id="11_ibis5"]
 [ext_resource type="Texture2D" uid="uid://bhg8jshbbwqtk" path="res://assets/textures/props/stain_asset_2.png" id="11_vl1q8"]
@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://bgvc8anb4t5li" path="res://assets/textures/props/boulder_asset_2.png" id="14_grh04"]
 [ext_resource type="Texture2D" uid="uid://n261pc8d10gg" path="res://assets/textures/props/stain_asset_3.png" id="14_ilq73"]
 [ext_resource type="Texture2D" uid="uid://bskh06ei8dwyv" path="res://assets/textures/props/stain_asset_5.png" id="15_ds2fx"]
+[ext_resource type="Script" path="res://assets/scripts/sonar/sonar_shape_calculator.gd" id="16_0itor"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_r8kgi"]
 
@@ -242,3 +243,7 @@ z_index = -2
 position = Vector2(568, 198)
 rotation = 0.929978
 texture = ExtResource("15_ds2fx")
+
+[node name="SonarShapeCalculator" type="Node2D" parent="." node_paths=PackedStringArray("shapes")]
+script = ExtResource("16_0itor")
+shapes = [NodePath("../StaticBody2D/CollisionPolygon2D")]
