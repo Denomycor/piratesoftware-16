@@ -1,5 +1,7 @@
 class_name Car extends RigidBody2D
 
+const PARTICLE_RADIUS := 130
+
 @export var motor_strength: float
 @export var drift_friction_strength: float
 @export var torque_multiplier: float
@@ -9,6 +11,7 @@ class_name Car extends RigidBody2D
 @export var max_collision_damage: float = 25
 @export var min_collision_speed: float = 300
 @export var speed_for_max_collision_damage: float = 1500
+@export var particle_scene: PackedScene
 
 @onready var weapon_dock: WeaponDock = $weapon_dock
 @onready var hurt_box: HurtBoxComponent = $HurtBoxComponent
@@ -83,17 +86,26 @@ func _on_take_damage(amount: float):
 		LevelContext.level.set_game_over()
 
 func _on_collision(node: Node) -> void:
-	var collision_speed := last_velocity.dot(global_position.direction_to(node.global_position))
+	var collision_direction := global_position.direction_to(node.global_position)
+	var collision_speed := last_velocity.dot(collision_direction)
 	var collision_damage := clampf(lerpf(0,max_collision_damage, (collision_speed-min_collision_speed)/(speed_for_max_collision_damage - min_collision_speed)),0,max_collision_damage)
 	if node is RigidBody2D:
 		var mass_ratio = node.mass/mass
 		hurt_box.take_damage(collision_damage * mass_ratio)
+		emit_break_particles(collision_damage * mass_ratio,collision_direction)
 	elif node is StaticBody2D:
 		hurt_box.take_damage(collision_damage)
+		emit_break_particles(collision_damage,collision_direction)
 	elif node is CharacterBody2D:
 		#ainda n sei
 		pass
 	return
 
-
+func emit_break_particles(damage: float, direction: Vector2) -> void:
+	var particles: GPUParticles2D = particle_scene.instantiate()
+	particles.amount_ratio = damage/max_collision_damage
+	particles.emitting = true
+	particles.position = direction * PARTICLE_RADIUS
+	add_child(particles)
+	particles.finished.connect(particles.queue_free)
 #endregion

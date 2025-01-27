@@ -24,19 +24,19 @@ particles_anim_loop = false
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.622951, 1), 0.0, 0.0, 0, 0, Vector2(0.995902, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="CurveTexture" id="CurveTexture_yerfg"]
+[sub_resource type="CurveTexture" id="CurveTexture_sxrq2"]
 curve = SubResource("Curve_ifa3e")
 
 [sub_resource type="Gradient" id="Gradient_w5h71"]
 colors = PackedColorArray(0.857996, 0.7022, 0.593483, 1, 0.659359, 0.481944, 0.35444, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_34kej"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_nce40"]
 gradient = SubResource("Gradient_w5h71")
 
 [sub_resource type="Gradient" id="Gradient_s4kb7"]
-colors = PackedColorArray(0.682353, 0.501961, 0.372549, 1, 0.723132, 0.535228, 0.407764, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.735772, 0.547354, 0.419712, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_4n8ax"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_goriu"]
 gradient = SubResource("Gradient_s4kb7")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_eurm6"]
@@ -52,9 +52,9 @@ initial_velocity_min = 100.0
 initial_velocity_max = 160.0
 gravity = Vector3(0, 0, 0)
 scale_max = 2.5
-color_ramp = SubResource("GradientTexture1D_4n8ax")
-color_initial_ramp = SubResource("GradientTexture1D_34kej")
-alpha_curve = SubResource("CurveTexture_yerfg")
+color_ramp = SubResource("GradientTexture1D_goriu")
+color_initial_ramp = SubResource("GradientTexture1D_nce40")
+alpha_curve = SubResource("CurveTexture_sxrq2")
 anim_speed_min = 1.0
 anim_speed_max = 1.0
 turbulence_noise_strength = 3.0
