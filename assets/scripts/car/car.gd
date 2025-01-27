@@ -2,11 +2,14 @@ class_name Car extends RigidBody2D
 
 const PARTICLE_RADIUS := 130
 
-@export var motor_strength: float
-@export var drift_friction_strength: float
-@export var torque_multiplier: float
-@export var perpendicular_multiplier: float
-@export var parallel_multiplier: float
+var motor_strength: float = 500
+var drift_friction_strength: float = 5
+var torque_multiplier: float = 10
+var perpendicular_multiplier: float = 0.25
+var parallel_multiplier: float = 0.25
+
+@export var weapon_vars: Array[CarVars]
+
 @export var health: float = 100
 @export var max_collision_damage: float = 25
 @export var min_collision_speed: float = 300
@@ -83,6 +86,8 @@ func _on_weapon_switched():
 	current_weapon.activated.connect(on_weapon_activated)
 	current_weapon.deactivated.connect(on_weapon_deactivated)
 
+	set_car_vars(weapon_vars[weapon_dock.current_idx])
+
 func _on_take_damage(amount: float):
 	health -= amount
 	if health <= 0:
@@ -115,3 +120,10 @@ func emit_break_particles(damage: float, direction: Vector2) -> void:
 	add_child(particles)
 	particles.finished.connect(particles.queue_free)
 #endregion
+
+func set_car_vars(car_vars: CarVars) -> void:
+	motor_strength = car_vars.motor_strength
+	drift_friction_strength = car_vars.drift_friction_strength
+	torque_multiplier = car_vars.torque_multiplier
+	perpendicular_multiplier = car_vars.perpendicular_multiplier
+	parallel_multiplier = car_vars.parallel_multiplier
