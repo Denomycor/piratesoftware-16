@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" path="res://assets/scripts/weapons/weapon_dock.gd" id="1_sbl3c"]
 [ext_resource type="PackedScene" uid="uid://dbf445di2iil4" path="res://assets/scenes/weapons/minigun.tscn" id="2_4o0ak"]
-[ext_resource type="PackedScene" uid="uid://od1a5kyfmhsw" path="res://assets/scenes/weapons/shotgun.tscn" id="3_fdnat"]
-[ext_resource type="PackedScene" uid="uid://d1cjua2bc0fii" path="res://assets/scenes/weapons/flamethrower.tscn" id="4_vd2mu"]
+[ext_resource type="PackedScene" uid="uid://qaypc31xeqwu" path="res://assets/scenes/weapons/shotgun.tscn" id="3_fdnat"]
+[ext_resource type="PackedScene" uid="uid://cdjq1shmnferv" path="res://assets/scenes/weapons/flamethrower.tscn" id="4_vd2mu"]
 [ext_resource type="PackedScene" uid="uid://blwqp27dvjvst" path="res://assets/scenes/weapons/hook.tscn" id="5_rgest"]
-[ext_resource type="PackedScene" uid="uid://dbxdugkiufequ" path="res://assets/scenes/weapons/rocket_launcher.tscn" id="6_x51sl"]
+[ext_resource type="PackedScene" uid="uid://xpgamcshcoi3" path="res://assets/scenes/weapons/rocket_launcher.tscn" id="6_x51sl"]
 
 [node name="weapon_dock" type="Node2D"]
 script = ExtResource("1_sbl3c")
