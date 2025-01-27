@@ -14,7 +14,6 @@ func _ready() -> void:
 func switch_main_menu_to_level(level_scene: PackedScene) -> void:
 	var level: Level = level_scene.instantiate()
 	LevelContext.level = level
-	LevelContext.sonar_camera = level.get_node("Overlay/SubViewportContainer/SubViewport/sonar_camera")
 	level.level_exited.connect(switch_level_to_main_menu)
 	add_child(level)
 	main_menu.visible = false
