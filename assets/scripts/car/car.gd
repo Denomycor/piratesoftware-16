@@ -61,6 +61,9 @@ func get_drift_strength(strength_torque_multiplier: float) -> float:
 func get_speed() -> float:
 	return linear_velocity.length()
 
+func get_last_velocity() -> Vector2:
+	return last_velocity
+
 func on_weapon_activated():
 	pass
 
@@ -91,7 +94,10 @@ func _on_collision(node: Node) -> void:
 	var collision_damage := clampf(lerpf(0,max_collision_damage, (collision_speed-min_collision_speed)/(speed_for_max_collision_damage - min_collision_speed)),0,max_collision_damage)
 	if node is RigidBody2D:
 		var mass_ratio = node.mass/mass
-		hurt_box.take_damage(collision_damage * mass_ratio)
+		var velocity_ratio = 1
+		if node.has_method("get_last_velocity"):
+			velocity_ratio = clampf((last_velocity - node.get_last_velocity()).length()/speed_for_max_collision_damage, 0, 2)
+		hurt_box.take_damage(collision_damage * mass_ratio * velocity_ratio)
 		emit_break_particles(collision_damage * mass_ratio,collision_direction)
 	elif node is StaticBody2D:
 		hurt_box.take_damage(collision_damage)

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://blvtkmatmqnm8"
-path="res://.godot/imported/biker.png-ebac683eaa8ec20d66a54d69d7df0f6f.ctex"
+uid="uid://canrvohjsbxjs"
+path="res://.godot/imported/motard_wheel.png-62d8ec55b3f8083028c3324d863dea6f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/biker.png"
-dest_files=["res://.godot/imported/biker.png-ebac683eaa8ec20d66a54d69d7df0f6f.ctex"]
+source_file="res://assets/textures/enemies/motard_wheel.png"
+dest_files=["res://.godot/imported/motard_wheel.png-62d8ec55b3f8083028c3324d863dea6f.ctex"]
 
 [params]
 

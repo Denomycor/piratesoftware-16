@@ -1,25 +1,30 @@
-[gd_scene load_steps=4 format=3 uid="uid://d1mkxnil63kry"]
+[gd_scene load_steps=5 format=3 uid="uid://d1mkxnil63kry"]
 
 [ext_resource type="Script" path="res://assets/scripts/weapons/components/enemy_turn_component.gd" id="1_2lekv"]
 [ext_resource type="Script" path="res://assets/scripts/weapons/biker_gun.gd" id="1_gk5bl"]
 [ext_resource type="Script" path="res://assets/scripts/weapons/components/projectile_spawner_component.gd" id="2_48ehv"]
+[ext_resource type="Texture2D" uid="uid://ce2jl11inxm3w" path="res://assets/textures/enemies/motard_minigun.png" id="2_x7m6e"]
 
 [node name="BikerGun" type="Node2D"]
 script = ExtResource("1_gk5bl")
 activation_range = 5000.0
 
-[node name="Polygon2D" type="Polygon2D" parent="."]
-polygon = PackedVector2Array(0, -4, 0, -20, 128, -20, 128, 20, 0, 20)
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(82, 0)
+rotation = 1.5708
+texture = ExtResource("2_x7m6e")
 
 [node name="TurnComponent" type="Node2D" parent="."]
 script = ExtResource("1_2lekv")
 
 [node name="ProjectileSpawnerComponent" type="Node2D" parent="." node_paths=PackedStringArray("bullet_spawn")]
 script = ExtResource("2_48ehv")
-fire_delay = 0.01
+fire_delay = 0.1
 multishot = 1
 spread = 0.098
+burst_delay = 2.0
+burst_amount = 10.0
 bullet_spawn = NodePath("../BulletSpawn")
 
 [node name="BulletSpawn" type="Node2D" parent="."]
-position = Vector2(128, 0)
+position = Vector2(165, 0)

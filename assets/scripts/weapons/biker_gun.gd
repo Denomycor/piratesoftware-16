@@ -1,7 +1,7 @@
 class_name BikerGun extends EnemyWeapon
 
 #using minigun projectile as placeholder until debate
-const PROJECTILE_SCENE: PackedScene = preload("res://assets/scenes/projectiles/minigun_projectile.tscn")
+const PROJECTILE_SCENE: PackedScene = preload("res://assets/scenes/projectiles/enemy_minigun_projectile.tscn")
 
 @export var max_rotation: float = 90
 @onready var turn_component: EnemyTurnComponent = $TurnComponent

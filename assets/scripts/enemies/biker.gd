@@ -3,7 +3,13 @@ class_name Biker extends Enemy
 @export var health: float = 20
 @export_range(500, 1500) var follow_range: int
 @export var prediction_time: float = 0.3
-@export var max_angle_diff: float = 1.0
+@export var max_accelaration := 100000
+@export var prediction_scalar := 1000
+@export var max_collision_damage: float = 25
+@export var min_collision_speed: float = 300
+@export var speed_for_max_collision_damage: float = 1500
+
+var last_velocity := Vector2.ZERO
 
 
 func _ready() -> void:
@@ -11,49 +17,29 @@ func _ready() -> void:
 	if follow_range == 0:
 		follow_range = int(randf_range(500, 1500))
 
-
 func update_movement():
 	pass
 	
-	
 func _physics_process(delta: float) -> void:
-
-	var target_dist = target.global_position.distance_to(global_position)
-	
-	var time_to_collision = target.linear_velocity.distance_to(global_position) / target.linear_velocity.length()
-	var predicted_target_position = target.global_position + (target.linear_velocity * time_to_collision * delta)
-	
-	if velocity == Vector2.ZERO:
-		velocity = global_position.direction_to(predicted_target_position) * speed * delta
-	
-	var desired_velocity: Vector2
-	var desired_speed: float
-	
-	if target_dist > follow_range:
-		desired_velocity = global_position.direction_to(predicted_target_position)
-		desired_speed = speed
+	if get_distance_to_target() > follow_range:
+		velocity = get_chase_velocity(delta)
 	else:
-		desired_velocity = target.linear_velocity.normalized()
-		desired_speed = minf(speed, target.linear_velocity.length())
-	
-	var current_angle = velocity.angle()
-	var target_angle = desired_velocity.angle()
-	var angle_diff = target_angle - current_angle
-	angle_diff = clampf(angle_diff, -max_angle_diff * delta, max_angle_diff * delta)
-
-	print("max angle diff: ", max_angle_diff * delta)
-	print("current angle: ", current_angle)
-	print("target angle: ", target_angle)
-	print("angle diff: ", angle_diff)
-	print("desired velocity: ", desired_velocity)
-	print("current velocity: ", velocity)
-
-
-	velocity = velocity.rotated(angle_diff).normalized() * desired_speed
+		velocity = get_mimic_velocity(delta)
 	look_at(global_position + velocity)
 	
 	move_and_slide()
+	last_velocity = velocity
 
+func get_distance_to_target() -> float:
+	return target.global_position.distance_to(global_position)
+
+func get_chase_velocity(delta: float) -> Vector2:
+	var acceleration := SeekArriveSteeringBehaviour.get_steering_force(global_position, target.global_position, velocity, speed, max_accelaration, follow_range)
+	return velocity + acceleration * delta
+
+func get_mimic_velocity(delta: float) -> Vector2:
+	var acceleration := SeekArriveSteeringBehaviour.get_steering_force(global_position, global_position + target.linear_velocity * delta * prediction_scalar, velocity, target.get_speed(), max_accelaration, follow_range)
+	return velocity + acceleration * delta
 
 func die():
 	LevelContext.level.stats.increment_kills()
@@ -66,3 +52,19 @@ func _take_dmg(amount: float):
 	health -= amount
 	if health <= 0:
 		die()
+
+func _on_collision(node: Node) -> void:
+	var collision_speed := last_velocity.dot(global_position.direction_to(node.global_position))
+	var collision_damage := clampf(lerpf(0,max_collision_damage, (collision_speed-min_collision_speed)/(speed_for_max_collision_damage - min_collision_speed)),0,max_collision_damage)
+	if node is RigidBody2D:
+		var mass_ratio = node.mass
+		var velocity_ratio = 1
+		if node.has_method("get_last_velocity"):
+			velocity_ratio = clampf((last_velocity - node.get_last_velocity()).length()/speed_for_max_collision_damage, 0, 2)
+		hurt_box.take_damage(collision_damage * mass_ratio * velocity_ratio)
+	elif node is StaticBody2D:
+		hurt_box.take_damage(collision_damage)
+	elif node is CharacterBody2D:
+		#ainda n sei
+		pass
+	return

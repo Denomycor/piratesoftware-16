@@ -22,11 +22,12 @@
 [ext_resource type="PackedScene" uid="uid://c7ac5st3m716u" path="res://assets/scenes/props/small_barrel.tscn" id="14_ghf57"]
 [ext_resource type="PackedScene" uid="uid://87oc2iymck6e" path="res://assets/scenes/props/small_bones.tscn" id="15_0ad71"]
 
-[node name="TestLevel" type="Node" node_paths=PackedStringArray("overlay", "stats", "car")]
+[node name="TestLevel" type="Node" node_paths=PackedStringArray("overlay", "stats", "car", "arena")]
 script = ExtResource("1_y7sae")
 overlay = NodePath("Overlay")
 stats = NodePath("Stats")
 car = NodePath("World/Car")
+arena = NodePath("World/Arena")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -49,8 +50,10 @@ overlay = NodePath("../Overlay")
 [node name="Overlay" parent="." instance=ExtResource("2_wbdkc")]
 
 [node name="World" type="Node2D" parent="."]
+visibility_layer = 513
 
 [node name="Arena" type="Node2D" parent="World"]
+visibility_layer = 513
 script = ExtResource("4_eyags")
 walls_per_side = 30
 prop_list = Array[PackedScene]([ExtResource("6_6obcn"), ExtResource("7_r222i"), ExtResource("8_chcvc"), ExtResource("9_5mdmc"), ExtResource("10_06wf4"), ExtResource("11_quaxx"), ExtResource("12_gvol0"), ExtResource("13_quvsm"), ExtResource("14_ghf57"), ExtResource("15_0ad71")])
@@ -72,7 +75,7 @@ drift_friction_strength = 5.0
 perpendicular_multiplier = 0.25
 parallel_multiplier = 0.25
 
-[node name="BoomArm" parent="World/Car" index="2"]
+[node name="BoomArm" parent="World/Car" index="3"]
 mouse_slide_distance = 1000.0
 speed_slide_distance = 1500.0
 max_slide_speed = 4000.0
@@ -82,7 +85,7 @@ script = ExtResource("4_a7yx0")
 target = NodePath("../Car")
 
 [node name="SpawnTimer" type="Timer" parent="World/EnemySpawner"]
-wait_time = 15.0
+wait_time = 2.0
 
 [node name="PauseMenu" parent="." instance=ExtResource("2_idj3t")]
 visible = false
