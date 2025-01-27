@@ -78,14 +78,14 @@ particles_anim_loop = false
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.622951, 1), 0.0, 0.0, 0, 0, Vector2(0.995902, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="CurveTexture" id="CurveTexture_06cak"]
+[sub_resource type="CurveTexture" id="CurveTexture_nkxbe"]
 curve = SubResource("Curve_u40yx")
 
 [sub_resource type="Gradient" id="Gradient_jmhkx"]
 offsets = PackedFloat32Array(0, 0.240741, 0.634259, 1)
 colors = PackedColorArray(0.239216, 0.137255, 0.117647, 1, 0.898039, 0.541176, 0.964706, 1, 0.619608, 0, 0, 1, 0.619608, 0, 0, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_7xxsr"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_a7bx5"]
 gradient = SubResource("Gradient_jmhkx")
 
 [sub_resource type="Image" id="Image_fcoei"]
@@ -117,8 +117,8 @@ lifetime_randomness = 0.2
 particle_flag_rotate_y = true
 particle_flag_disable_z = true
 emission_shape = 4
-emission_point_texture = SubResource("ImageTexture_4d4lo")
-emission_color_texture = SubResource("ImageTexture_83fxd")
+emission_point_texture = SubResource("ImageTexture_c0qo3")
+emission_color_texture = SubResource("ImageTexture_y35fi")
 emission_point_count = 12856
 angle_min = 1.07288e-05
 angle_max = 360.0
@@ -127,8 +127,8 @@ initial_velocity_min = 500.0
 initial_velocity_max = 500.0
 gravity = Vector3(0, 0, 0)
 scale_max = 2.5
-color_initial_ramp = SubResource("GradientTexture1D_7xxsr")
-alpha_curve = SubResource("CurveTexture_06cak")
+color_initial_ramp = SubResource("GradientTexture1D_a7bx5")
+alpha_curve = SubResource("CurveTexture_nkxbe")
 anim_speed_min = 1.68
 anim_speed_max = 1.68
 turbulence_enabled = true
