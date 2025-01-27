@@ -45,7 +45,11 @@ func _physics_process(delta: float) -> void:
 			var motion := travel_direction * speed + inherited_velocity
 			var collision := move_and_collide(motion * delta)
 			if(collision):
-				schedule_destroy()
+				_on_collision(collision)
+
+
+func _on_collision(_collision: KinematicCollision2D) -> void:
+	schedule_destroy()
 
 
 func destroy() -> void:
@@ -55,4 +59,3 @@ func destroy() -> void:
 func schedule_destroy() -> void:
 	destroy_next_frame = true
 	visible = false
-

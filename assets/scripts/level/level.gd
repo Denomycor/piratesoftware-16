@@ -12,7 +12,6 @@ signal level_exited(level: Node)
 
 func _ready():
 	LevelContext.level = self
-	LevelContext.sonar_camera = get_node("Overlay/SubViewportContainer/SubViewport/sonar_camera")
 	pause_menu.quit_level.connect(quit_level)
 	print(get_viewport().canvas_cull_mask)
 	get_viewport().set_canvas_cull_mask_bit(9, false)

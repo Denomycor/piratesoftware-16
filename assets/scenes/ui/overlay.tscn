@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://is7aeubau3xs"]
+[gd_scene load_steps=8 format=3 uid="uid://is7aeubau3xs"]
 
 [ext_resource type="Script" path="res://assets/scripts/ui/overlay.gd" id="1_tmn6d"]
+[ext_resource type="Texture2D" uid="uid://dm0lidnygho56" path="res://assets/textures/ui/radar_ui.png" id="2_8jhi0"]
 [ext_resource type="Script" path="res://assets/scripts/sonar/sonar_viewport.gd" id="2_vnyf8"]
 [ext_resource type="Shader" path="res://assets/scripts/sonar/sonar.gdshader" id="3_s501v"]
 
@@ -22,6 +23,42 @@ shader_parameter/noise = SubResource("NoiseTexture2D_pgy1c")
 
 [node name="Overlay" type="CanvasLayer"]
 script = ExtResource("1_tmn6d")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -206.0
+offset_top = -205.0
+offset_right = -14.0
+offset_bottom = -13.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="CenterContainer"]
+material = SubResource("ShaderMaterial_xppwn")
+custom_minimum_size = Vector2(192, 192)
+layout_mode = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="CenterContainer/SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+canvas_cull_mask = 4294966784
+size = Vector2i(192, 192)
+render_target_update_mode = 4
+script = ExtResource("2_vnyf8")
+
+[node name="sonar_camera" type="Camera2D" parent="CenterContainer/SubViewportContainer/SubViewport"]
+zoom = Vector2(0.01, 0.01)
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer"]
+custom_minimum_size = Vector2(220, 220)
+layout_mode = 2
+texture = ExtResource("2_8jhi0")
+expand_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 anchors_preset = 1
@@ -63,29 +100,3 @@ layout_mode = 2
 text = "Km/h"
 horizontal_alignment = 2
 vertical_alignment = 1
-
-[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
-material = SubResource("ShaderMaterial_xppwn")
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -206.0
-offset_top = -207.0
-offset_right = -14.0
-offset_bottom = -15.0
-grow_horizontal = 0
-grow_vertical = 0
-stretch = true
-
-[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
-transparent_bg = true
-handle_input_locally = false
-canvas_cull_mask = 4294966784
-size = Vector2i(192, 192)
-render_target_update_mode = 4
-script = ExtResource("2_vnyf8")
-
-[node name="sonar_camera" type="Camera2D" parent="SubViewportContainer/SubViewport"]
-zoom = Vector2(0.01, 0.01)
