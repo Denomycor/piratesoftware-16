@@ -15,7 +15,7 @@ script = ExtResource("2_qsljy")
 
 [node name="ProjectileSpawnerComponent" type="Node2D" parent="." node_paths=PackedStringArray("bullet_spawn")]
 script = ExtResource("3_ygmqf")
-fire_delay = 0.01
+fire_delay = 1.0
 multishot = 1
 bullet_spawn = NodePath("../bullet_spawn")
 
