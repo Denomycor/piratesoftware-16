@@ -24,7 +24,6 @@ var current_weapon: Weapon
 var last_velocity: Vector2
 
 func _ready():
-	assert(weapon_vars.size() == weapon_dock.get_child_count(), "weapon vars has wrong size")
 	contact_monitor = true
 	max_contacts_reported = 1
 	

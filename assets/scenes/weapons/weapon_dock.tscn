@@ -1,26 +1,145 @@
-[gd_scene load_steps=7 format=3 uid="uid://c4b5t5usvyqcs"]
+[gd_scene load_steps=22 format=3 uid="uid://c4b5t5usvyqcs"]
 
 [ext_resource type="Script" path="res://assets/scripts/weapons/weapon_dock.gd" id="1_sbl3c"]
 [ext_resource type="PackedScene" uid="uid://dbf445di2iil4" path="res://assets/scenes/weapons/minigun.tscn" id="2_4o0ak"]
+[ext_resource type="Texture2D" uid="uid://c1c7sqliixm4x" path="res://assets/textures/car/Alien_wave_spritesheet.png" id="2_4t0e1"]
 [ext_resource type="PackedScene" uid="uid://qaypc31xeqwu" path="res://assets/scenes/weapons/shotgun.tscn" id="3_fdnat"]
 [ext_resource type="PackedScene" uid="uid://cdjq1shmnferv" path="res://assets/scenes/weapons/flamethrower.tscn" id="4_vd2mu"]
 [ext_resource type="PackedScene" uid="uid://blwqp27dvjvst" path="res://assets/scenes/weapons/hook.tscn" id="5_rgest"]
 [ext_resource type="PackedScene" uid="uid://xpgamcshcoi3" path="res://assets/scenes/weapons/rocket_launcher.tscn" id="6_x51sl"]
+[ext_resource type="Texture2D" uid="uid://dc7tjioc3kbni" path="res://assets/textures/car/weapon/weapon_morph_spritesheet.png" id="7_xxgx4"]
+[ext_resource type="Script" path="res://assets/scripts/weapons/components/turn_component.gd" id="8_wsp4u"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6j4ha"]
+atlas = ExtResource("2_4t0e1")
+region = Rect2(0, 0, 242, 266)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qmuat"]
+atlas = ExtResource("2_4t0e1")
+region = Rect2(242, 0, 242, 266)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gcemt"]
+atlas = ExtResource("2_4t0e1")
+region = Rect2(484, 0, 242, 266)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vv2yr"]
+atlas = ExtResource("2_4t0e1")
+region = Rect2(726, 0, 242, 266)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_icrfs"]
+atlas = ExtResource("2_4t0e1")
+region = Rect2(968, 0, 242, 266)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4w0xq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6j4ha")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qmuat")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gcemt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vv2yr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_icrfs")
+}],
+"loop": false,
+"name": &"default",
+"speed": 6.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jr6vb"]
+atlas = ExtResource("7_xxgx4")
+region = Rect2(0, 0, 175, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uv1rq"]
+atlas = ExtResource("7_xxgx4")
+region = Rect2(175, 0, 175, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nf66t"]
+atlas = ExtResource("7_xxgx4")
+region = Rect2(350, 0, 175, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xguum"]
+atlas = ExtResource("7_xxgx4")
+region = Rect2(525, 0, 175, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p7qe8"]
+atlas = ExtResource("7_xxgx4")
+region = Rect2(700, 0, 175, 300)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_sshw2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jr6vb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uv1rq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nf66t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xguum")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p7qe8")
+}],
+"loop": false,
+"name": &"default",
+"speed": 6.0
+}]
 
 [node name="weapon_dock" type="Node2D"]
 script = ExtResource("1_sbl3c")
 
-[node name="minigun" parent="." instance=ExtResource("2_4o0ak")]
-visible = false
+[node name="WeaponList" type="Node2D" parent="."]
 
-[node name="Shotgun" parent="." instance=ExtResource("3_fdnat")]
+[node name="minigun" parent="WeaponList" instance=ExtResource("2_4o0ak")]
 visible = false
+z_index = 2
 
-[node name="Flamethrower" parent="." instance=ExtResource("4_vd2mu")]
+[node name="Shotgun" parent="WeaponList" instance=ExtResource("3_fdnat")]
 visible = false
+z_index = 2
 
-[node name="Hook" parent="." instance=ExtResource("5_rgest")]
+[node name="Flamethrower" parent="WeaponList" instance=ExtResource("4_vd2mu")]
 visible = false
+z_index = 2
 
-[node name="RocketLauncher" parent="." instance=ExtResource("6_x51sl")]
+[node name="Hook" parent="WeaponList" instance=ExtResource("5_rgest")]
 visible = false
+z_index = 2
+
+[node name="RocketLauncher" parent="WeaponList" instance=ExtResource("6_x51sl")]
+visible = false
+z_index = 2
+
+[node name="ChangeAnim" type="Node2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ChangeAnim"]
+visible = false
+z_index = 1
+position = Vector2(0, 6)
+sprite_frames = SubResource("SpriteFrames_4w0xq")
+frame = 4
+frame_progress = 1.0
+
+[node name="Node2D" type="Node2D" parent="ChangeAnim"]
+
+[node name="TurnComponent" type="Node2D" parent="ChangeAnim/Node2D"]
+rotation = 1.5708
+script = ExtResource("8_wsp4u")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ChangeAnim/Node2D"]
+visible = false
+z_index = 3
+rotation = 1.5708
+sprite_frames = SubResource("SpriteFrames_sshw2")
+offset = Vector2(0, -103)
