@@ -4,8 +4,8 @@
 [ext_resource type="Script" path="res://assets/scripts/components/hurt-box.gd" id="1_80q8j"]
 [ext_resource type="Texture2D" uid="uid://drrd7mkp1t7la" path="res://assets/textures/enemies/motard_sprite.png" id="2_fr78b"]
 [ext_resource type="Texture2D" uid="uid://canrvohjsbxjs" path="res://assets/textures/enemies/motard_wheel.png" id="3_sa0fu"]
-[ext_resource type="PackedScene" path="res://assets/scenes/weapons/biker_gun.tscn" id="5_csq2n"]
-[ext_resource type="PackedScene" path="res://assets/scenes/enemies/biker_particles.tscn" id="6_b6p6t"]
+[ext_resource type="PackedScene" uid="uid://d1mkxnil63kry" path="res://assets/scenes/weapons/biker_gun.tscn" id="5_csq2n"]
+[ext_resource type="PackedScene" uid="uid://dyhhyf1tfwaoq" path="res://assets/scenes/enemies/biker_particles.tscn" id="6_b6p6t"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_utvnp"]
 radius = 72.0
@@ -16,6 +16,7 @@ radius = 76.0
 height = 340.0
 
 [node name="Biker" type="CharacterBody2D" groups=["enemies"]]
+z_index = 1
 collision_layer = 4
 collision_mask = 7
 script = ExtResource("1_3s7no")
@@ -57,3 +58,4 @@ shape = SubResource("CapsuleShape2D_j40sk")
 debug_color = Color(0.972063, 0, 0.443653, 0.42)
 
 [node name="GPUParticles2D" parent="." instance=ExtResource("6_b6p6t")]
+z_index = 10

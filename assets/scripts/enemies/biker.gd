@@ -55,6 +55,9 @@ func die():
 	LevelContext.level.stats.add_points(points)
 	($BikerGun as BikerGun).projectile_spawner_component.enabled = false
 	($BikerGun as BikerGun).visible = false
+	$Biker.visible = false
+	$WheelB.visible = false
+	$WheelF.visible = false
 	velocity = Vector2.ZERO
 	hurt_box.has_taken_damage.disconnect(_take_dmg)
 	hurt_box.queue_free()
