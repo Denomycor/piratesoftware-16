@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://is7aeubau3xs"]
+[gd_scene load_steps=28 format=3 uid="uid://is7aeubau3xs"]
 
 [ext_resource type="Script" path="res://assets/scripts/ui/overlay.gd" id="1_tmn6d"]
 [ext_resource type="Texture2D" uid="uid://dm0lidnygho56" path="res://assets/textures/ui/menu/radar_ui.png" id="2_8jhi0"]
@@ -16,6 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://bnv8ua4xdlhe" path="res://assets/textures/ui/in_game/hp_bar_sprite.png" id="9_h4tca"]
 [ext_resource type="Texture2D" uid="uid://c5fvrwivkf3b1" path="res://assets/textures/ui/in_game/icon_box_sprite.png" id="11_qum7v"]
 [ext_resource type="Texture2D" uid="uid://y1f4j4w8wb5j" path="res://assets/textures/ui/in_game/hp_icon_sprite.png" id="12_tas3f"]
+[ext_resource type="Script" path="res://assets/scripts/ui/health_bar.gd" id="14_7aj3w"]
 [ext_resource type="Texture2D" uid="uid://c8k5w8findbmp" path="res://assets/textures/ui/in_game/minigun_icon.png" id="15_sxptx"]
 [ext_resource type="Texture2D" uid="uid://75qpy3gla06w" path="res://assets/textures/ui/in_game/shotgun_icon.png" id="16_n364h"]
 [ext_resource type="Texture2D" uid="uid://brh5ka7gvnpw4" path="res://assets/textures/ui/in_game/flamethrower_icon.png" id="17_txk2c"]
@@ -49,9 +50,10 @@ line_spacing = 40.0
 font_size = 25
 font_color = Color(0.290196, 0.184314, 0.164706, 1)
 
-[node name="Overlay" type="CanvasLayer" node_paths=PackedStringArray("speed_counter")]
+[node name="Overlay" type="CanvasLayer" node_paths=PackedStringArray("speed_counter", "health_bar")]
 script = ExtResource("1_tmn6d")
 speed_counter = NodePath("CenterContainer2/HBoxContainer/TextureRect/Container/Sprite2D")
+health_bar = NodePath("CenterContainer2/HBoxContainer/VBoxContainer/Panel2/TextureRect/ProgressBar")
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 anchors_preset = 3
@@ -187,9 +189,11 @@ offset_top = 15.7143
 offset_right = 617.714
 offset_bottom = 105.714
 scale = Vector2(0.95, 0.9)
-value = 100.0
+max_value = 1.0
+value = 1.0
 texture_under = ExtResource("8_qnebf")
 texture_progress = ExtResource("9_h4tca")
+script = ExtResource("14_7aj3w")
 
 [node name="TextureRect" type="TextureRect" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel2/TextureRect"]
 layout_mode = 0

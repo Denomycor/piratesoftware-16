@@ -115,7 +115,6 @@ zoom_factor = 0.005
 z_index = 5
 position = Vector2(987, 467)
 weapon_vars = Array[ExtResource("19_ke0jl")]([SubResource("Resource_msscp"), SubResource("Resource_stdhw"), SubResource("Resource_fojdv"), SubResource("Resource_h5je3"), SubResource("Resource_rpkw5")])
-health = 1000.0
 
 [node name="BoomArm" parent="World/Car" index="3"]
 mouse_slide_distance = 1000.0
