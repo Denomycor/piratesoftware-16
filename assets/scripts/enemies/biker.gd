@@ -24,6 +24,8 @@ func _ready() -> void:
 		follow_range = int(randf_range(500, 1500))
 
 func update_movement():
+	if dead:
+		return
 	if get_distance_to_target() > follow_range:
 		set_chase_acceleration()
 	else:
