@@ -43,19 +43,12 @@ func _update_enemies():
 
 func _position_near_target() -> Vector2:
 	var arena := LevelContext.level.arena
-	var target_dir = target.linear_velocity.normalized()
 	var position_dir = Vector2(randf() - 0.5, randf() - 0.5).normalized()
-
-	if target_dir.dot(position_dir) < 0:
-		position_dir = -position_dir
 	
 	var pos = target.position + position_dir * teleport_distance
 
 	while not arena.can_place(BLOCK_RADIUS, pos):
 		position_dir = Vector2(randf() - 0.5, randf() - 0.5).normalized()
-
-		if target_dir.dot(position_dir) < 0:
-			position_dir = -position_dir
 		
 		pos = target.position + position_dir * teleport_distance
 	
