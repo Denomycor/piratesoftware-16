@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bxmkd5fgoxemc"
-path="res://.godot/imported/volume_bar_sprite.png-ad89dcdc6d00c2249c632c62a7acc34b.ctex"
+uid="uid://c5fvrwivkf3b1"
+path="res://.godot/imported/icon_box_sprite.png-b15460e848b87674969d1ae71eeb156f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/ui/volume_bar_sprite.png"
-dest_files=["res://.godot/imported/volume_bar_sprite.png-ad89dcdc6d00c2249c632c62a7acc34b.ctex"]
+source_file="res://assets/textures/ui/in_game/icon_box_sprite.png"
+dest_files=["res://.godot/imported/icon_box_sprite.png-b15460e848b87674969d1ae71eeb156f.ctex"]
 
 [params]
 

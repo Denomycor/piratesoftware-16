@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b5jw47r3xxfsi"
-path="res://.godot/imported/gear_activated_icon_sprite.png-95050656d9a54c7954a400b8c1222825.ctex"
+uid="uid://brh5ka7gvnpw4"
+path="res://.godot/imported/flamethrower_icon.png-bb2bbe007bcbded413568408f20c11a6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/ui/gear_activated_icon_sprite.png"
-dest_files=["res://.godot/imported/gear_activated_icon_sprite.png-95050656d9a54c7954a400b8c1222825.ctex"]
+source_file="res://assets/textures/ui/in_game/flamethrower_icon.png"
+dest_files=["res://.godot/imported/flamethrower_icon.png-bb2bbe007bcbded413568408f20c11a6.ctex"]
 
 [params]
 

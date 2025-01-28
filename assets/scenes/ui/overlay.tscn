@@ -1,9 +1,25 @@
-[gd_scene load_steps=8 format=3 uid="uid://is7aeubau3xs"]
+[gd_scene load_steps=25 format=3 uid="uid://is7aeubau3xs"]
 
 [ext_resource type="Script" path="res://assets/scripts/ui/overlay.gd" id="1_tmn6d"]
-[ext_resource type="Texture2D" uid="uid://dm0lidnygho56" path="res://assets/textures/ui/radar_ui.png" id="2_8jhi0"]
+[ext_resource type="Texture2D" uid="uid://dm0lidnygho56" path="res://assets/textures/ui/menu/radar_ui.png" id="2_8jhi0"]
+[ext_resource type="Theme" uid="uid://cjlihoor22i2h" path="res://assets/resources/theme.tres" id="2_vhdhy"]
 [ext_resource type="Script" path="res://assets/scripts/sonar/sonar_viewport.gd" id="2_vnyf8"]
 [ext_resource type="Shader" path="res://assets/scripts/sonar/sonar.gdshader" id="3_s501v"]
+[ext_resource type="Texture2D" uid="uid://2pj2waca7ysj" path="res://assets/textures/ui/in_game/velocimeter_background_sprite.png" id="5_phxvy"]
+[ext_resource type="Texture2D" uid="uid://c546kejn8nq0e" path="res://assets/textures/ui/in_game/ui_background.png" id="6_5r283"]
+[ext_resource type="Texture2D" uid="uid://cn7ymqp4hv87n" path="res://assets/textures/ui/in_game/velocimeter_pointer_sprite.png" id="7_bx4tl"]
+[ext_resource type="Texture2D" uid="uid://bjijk4nmgske7" path="res://assets/textures/ui/in_game/weapons_ui_background.png" id="7_dcln4"]
+[ext_resource type="Texture2D" uid="uid://c24twx80tufmt" path="res://assets/textures/ui/in_game/velocimeter_glass_sprite.png" id="8_pmejn"]
+[ext_resource type="Texture2D" uid="uid://cc2ers6osa6bn" path="res://assets/textures/ui/in_game/hp_bar_outline_sprite.png" id="8_qnebf"]
+[ext_resource type="Texture2D" uid="uid://bnoelkhaugr48" path="res://assets/textures/ui/in_game/velocimeter_wire_sprite.png" id="9_6ewi4"]
+[ext_resource type="Texture2D" uid="uid://bnv8ua4xdlhe" path="res://assets/textures/ui/in_game/hp_bar_sprite.png" id="9_h4tca"]
+[ext_resource type="Texture2D" uid="uid://c5fvrwivkf3b1" path="res://assets/textures/ui/in_game/icon_box_sprite.png" id="11_qum7v"]
+[ext_resource type="Texture2D" uid="uid://y1f4j4w8wb5j" path="res://assets/textures/ui/in_game/hp_icon_sprite.png" id="12_tas3f"]
+[ext_resource type="Texture2D" uid="uid://c8k5w8findbmp" path="res://assets/textures/ui/in_game/minigun_icon.png" id="15_sxptx"]
+[ext_resource type="Texture2D" uid="uid://75qpy3gla06w" path="res://assets/textures/ui/in_game/shotgun_icon.png" id="16_n364h"]
+[ext_resource type="Texture2D" uid="uid://brh5ka7gvnpw4" path="res://assets/textures/ui/in_game/flamethrower_icon.png" id="17_txk2c"]
+[ext_resource type="Texture2D" uid="uid://umuwm3qpmbga" path="res://assets/textures/ui/in_game/harpoon_icon.png" id="18_dyb6x"]
+[ext_resource type="Texture2D" uid="uid://c20fcwkkufiqx" path="res://assets/textures/ui/in_game/rocket_icon.png" id="19_36wsv"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_qklw6"]
 noise_type = 3
@@ -21,6 +37,12 @@ shader_parameter/obstacle_color = Color(0.385029, 0.777194, 0.316256, 1)
 shader_parameter/sec_obstacle_color = Color(0.92549, 0.760784, 0, 1)
 shader_parameter/noise = SubResource("NoiseTexture2D_pgy1c")
 
+[sub_resource type="LabelSettings" id="LabelSettings_066hf"]
+font_size = 40
+font_color = Color(0.960784, 0.839216, 0.701961, 1)
+outline_size = 10
+outline_color = Color(0.051971, 0.051971, 0.051971, 1)
+
 [node name="Overlay" type="CanvasLayer"]
 script = ExtResource("1_tmn6d")
 
@@ -36,6 +58,7 @@ offset_right = -14.0
 offset_bottom = -13.0
 grow_horizontal = 0
 grow_vertical = 0
+theme = ExtResource("2_vhdhy")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="CenterContainer"]
 material = SubResource("ShaderMaterial_xppwn")
@@ -60,6 +83,252 @@ layout_mode = 2
 texture = ExtResource("2_8jhi0")
 expand_mode = 2
 
+[node name="CenterContainer2" type="CenterContainer" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -220.0
+offset_right = 220.0
+grow_vertical = 0
+theme = ExtResource("2_vhdhy")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer2"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer2/HBoxContainer"]
+z_index = 1
+custom_minimum_size = Vector2(220, 220)
+layout_mode = 2
+texture = ExtResource("5_phxvy")
+expand_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer2/HBoxContainer/TextureRect"]
+layout_mode = 0
+offset_left = 54.0
+offset_top = 151.0
+offset_right = 243.0
+offset_bottom = 204.0
+scale = Vector2(0.65, 0.65)
+texture = ExtResource("7_bx4tl")
+
+[node name="TextureRect2" type="TextureRect" parent="CenterContainer2/HBoxContainer/TextureRect"]
+layout_mode = 0
+offset_top = -0.999995
+offset_right = 348.0
+offset_bottom = 313.0
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("8_pmejn")
+
+[node name="TextureRect3" type="TextureRect" parent="CenterContainer2/HBoxContainer/TextureRect"]
+layout_mode = 0
+offset_left = 140.0
+offset_top = 23.0
+offset_right = 207.0
+offset_bottom = 69.0
+rotation = 0.275366
+texture = ExtResource("9_6ewi4")
+
+[node name="TextureRect4" type="TextureRect" parent="CenterContainer2/HBoxContainer/TextureRect"]
+layout_mode = 0
+offset_left = 27.0
+offset_top = -9.0
+offset_right = 94.0
+offset_bottom = 37.0
+rotation = 0.244718
+texture = ExtResource("9_6ewi4")
+
+[node name="TextureRect5" type="TextureRect" parent="CenterContainer2/HBoxContainer/TextureRect"]
+layout_mode = 0
+offset_left = 209.0
+offset_top = 134.0
+offset_right = 276.0
+offset_bottom = 180.0
+rotation = 1.07533
+texture = ExtResource("9_6ewi4")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer2/HBoxContainer"]
+layout_direction = 2
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+
+[node name="Panel2" type="Panel" parent="CenterContainer2/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel2"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -81.0
+offset_top = -195.0
+offset_right = 551.0
+offset_bottom = -59.0
+grow_vertical = 0
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("6_5r283")
+stretch_mode = 2
+
+[node name="ProgressBar" type="TextureProgressBar" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel2/TextureRect"]
+layout_mode = 0
+offset_left = 165.714
+offset_top = 15.7143
+offset_right = 617.714
+offset_bottom = 105.714
+scale = Vector2(0.95, 0.9)
+value = 100.0
+texture_under = ExtResource("8_qnebf")
+texture_progress = ExtResource("9_h4tca")
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel2/TextureRect"]
+layout_mode = 0
+offset_left = 88.5714
+offset_top = 22.8571
+offset_right = 142.571
+offset_bottom = 91.8571
+texture = ExtResource("12_tas3f")
+
+[node name="Panel" type="Panel" parent="CenterContainer2/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -162.0
+offset_top = -153.0
+offset_right = 581.0
+offset_bottom = 38.0
+grow_vertical = 0
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("7_dcln4")
+stretch_mode = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect"]
+layout_mode = 0
+offset_left = 207.143
+offset_top = 60.0
+offset_right = 1028.14
+offset_bottom = 272.0
+scale = Vector2(0.55, 0.55)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect/HBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect/HBoxContainer/VBoxContainer"]
+z_index = 1
+layout_mode = 2
+texture = ExtResource("11_qum7v")
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect/HBoxContainer/VBoxContainer/TextureRect"]
+z_index = -1
+layout_mode = 0
+offset_left = 9.7402
+offset_top = 11.3636
+offset_right = 152.74
+offset_bottom = 155.364
+texture = ExtResource("15_sxptx")
+
+[node name="Label" type="Label" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "1
+"
+label_settings = SubResource("LabelSettings_066hf")
+horizontal_alignment = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect/HBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect/HBoxContainer/VBoxContainer2"]
+z_index = 1
+layout_mode = 2
+texture = ExtResource("11_qum7v")
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect/HBoxContainer/VBoxContainer2/TextureRect"]
+z_index = -1
+offset_left = 9.7402
+offset_top = 11.3636
+offset_right = 152.74
+offset_bottom = 155.364
+texture = ExtResource("16_n364h")
+
+[node name="Label" type="Label" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "2
+"
+label_settings = SubResource("LabelSettings_066hf")
+horizontal_alignment = 1
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect/HBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect/HBoxContainer/VBoxContainer3"]
+z_index = 1
+layout_mode = 2
+texture = ExtResource("11_qum7v")
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect/HBoxContainer/VBoxContainer3/TextureRect"]
+z_index = -1
+offset_left = 9.7402
+offset_top = 11.3636
+offset_right = 152.74
+offset_bottom = 155.364
+texture = ExtResource("17_txk2c")
+
+[node name="Label" type="Label" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect/HBoxContainer/VBoxContainer3"]
+layout_mode = 2
+text = "3"
+label_settings = SubResource("LabelSettings_066hf")
+horizontal_alignment = 1
+
+[node name="VBoxContainer4" type="VBoxContainer" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect/HBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect/HBoxContainer/VBoxContainer4"]
+z_index = 1
+layout_mode = 2
+texture = ExtResource("11_qum7v")
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect/HBoxContainer/VBoxContainer4/TextureRect"]
+z_index = -1
+offset_left = 9.7402
+offset_top = 11.3636
+offset_right = 152.74
+offset_bottom = 155.364
+texture = ExtResource("18_dyb6x")
+
+[node name="Label" type="Label" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect/HBoxContainer/VBoxContainer4"]
+layout_mode = 2
+text = "4"
+label_settings = SubResource("LabelSettings_066hf")
+horizontal_alignment = 1
+
+[node name="VBoxContainer5" type="VBoxContainer" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect/HBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect/HBoxContainer/VBoxContainer5"]
+z_index = 1
+layout_mode = 2
+texture = ExtResource("11_qum7v")
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect/HBoxContainer/VBoxContainer5/TextureRect"]
+z_index = -1
+offset_left = 9.7402
+offset_top = 11.3636
+offset_right = 152.74
+offset_bottom = 155.364
+texture = ExtResource("19_36wsv")
+
+[node name="Label" type="Label" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect/HBoxContainer/VBoxContainer5"]
+layout_mode = 2
+text = "5
+"
+label_settings = SubResource("LabelSettings_066hf")
+horizontal_alignment = 1
+
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 anchors_preset = 1
 anchor_left = 1.0
@@ -69,6 +338,7 @@ offset_top = 12.0
 offset_right = -12.0
 offset_bottom = 116.0
 grow_horizontal = 0
+theme = ExtResource("2_vhdhy")
 alignment = 1
 
 [node name="Points" type="Label" parent="VBoxContainer"]

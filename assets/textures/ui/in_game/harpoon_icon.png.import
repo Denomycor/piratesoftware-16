@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://boljn8b42dfx6"
-path="res://.godot/imported/main_menu_background.png-2f05d376322828f31c2f421fa5c7362b.ctex"
+uid="uid://umuwm3qpmbga"
+path="res://.godot/imported/harpoon_icon.png-5391850dfbfcfb68f8ba9ed7c77e8832.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/ui/main_menu_background.png"
-dest_files=["res://.godot/imported/main_menu_background.png-2f05d376322828f31c2f421fa5c7362b.ctex"]
+source_file="res://assets/textures/ui/in_game/harpoon_icon.png"
+dest_files=["res://.godot/imported/harpoon_icon.png-5391850dfbfcfb68f8ba9ed7c77e8832.ctex"]
 
 [params]
 

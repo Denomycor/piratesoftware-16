@@ -1,49 +1,57 @@
-[gd_resource type="Theme" load_steps=15 format=3 uid="uid://cjlihoor22i2h"]
+[gd_resource type="Theme" load_steps=19 format=3 uid="uid://cjlihoor22i2h"]
 
-[ext_resource type="Texture2D" uid="uid://cud02ypjmm7td" path="res://assets/textures/ui/button_box_sprite.png" id="1_vgts8"]
-[ext_resource type="Texture2D" uid="uid://boc2mqjble13k" path="res://assets/textures/ui/check_mark_sprite.png" id="2_mipaq"]
+[ext_resource type="Texture2D" uid="uid://cud02ypjmm7td" path="res://assets/textures/ui/menu/button_box_sprite.png" id="1_gpnew"]
 [ext_resource type="FontFile" uid="uid://dxrwd5iuw3fjy" path="res://assets/resources/Alert Covid.ttf" id="3_hesii"]
-[ext_resource type="Texture2D" uid="uid://cibvv5438dyd3" path="res://assets/textures/ui/check_box_sprite.png" id="3_rtq6w"]
-[ext_resource type="Texture2D" uid="uid://b7ryprj4ds8q8" path="res://assets/textures/ui/gear_icon_sprite.png" id="3_sayi4"]
-[ext_resource type="Texture2D" uid="uid://bxmkd5fgoxemc" path="res://assets/textures/ui/volume_bar_sprite.png" id="4_3m5t0"]
-[ext_resource type="Texture2D" uid="uid://b5jw47r3xxfsi" path="res://assets/textures/ui/gear_activated_icon_sprite.png" id="6_1ltw3"]
+[ext_resource type="Texture2D" uid="uid://boc2mqjble13k" path="res://assets/textures/ui/menu/check_mark_sprite.png" id="3_yqcqw"]
+[ext_resource type="Texture2D" uid="uid://cibvv5438dyd3" path="res://assets/textures/ui/menu/check_box_sprite.png" id="4_q06lb"]
+[ext_resource type="Texture2D" uid="uid://b7ryprj4ds8q8" path="res://assets/textures/ui/menu/gear_icon_sprite.png" id="5_nir5k"]
+[ext_resource type="Texture2D" uid="uid://b5jw47r3xxfsi" path="res://assets/textures/ui/menu/gear_activated_icon_sprite.png" id="6_1344s"]
+[ext_resource type="Texture2D" uid="uid://bxmkd5fgoxemc" path="res://assets/textures/ui/menu/volume_bar_sprite.png" id="7_r4gqy"]
+[ext_resource type="Texture2D" uid="uid://cc2ers6osa6bn" path="res://assets/textures/ui/in_game/hp_bar_outline_sprite.png" id="8_qy57g"]
+[ext_resource type="Texture2D" uid="uid://bnv8ua4xdlhe" path="res://assets/textures/ui/in_game/hp_bar_sprite.png" id="9_itc1l"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_v0k3b"]
 content_margin_left = 30.0
 content_margin_top = 15.0
 content_margin_right = 30.0
 content_margin_bottom = 10.0
-texture = ExtResource("1_vgts8")
+texture = ExtResource("1_gpnew")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_v366v"]
 content_margin_left = 30.0
 content_margin_top = 15.0
 content_margin_right = 30.0
 content_margin_bottom = 10.0
-texture = ExtResource("1_vgts8")
+texture = ExtResource("1_gpnew")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ccg7g"]
 content_margin_left = 30.0
 content_margin_top = 15.0
 content_margin_right = 30.0
 content_margin_bottom = 10.0
-texture = ExtResource("1_vgts8")
+texture = ExtResource("1_gpnew")
 modulate_color = Color(0.886262, 0.886261, 0.886262, 1)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_13akl"]
-texture = ExtResource("3_rtq6w")
+texture = ExtResource("4_q06lb")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5314v"]
-texture = ExtResource("4_3m5t0")
+texture = ExtResource("7_r4gqy")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kqx0u"]
 content_margin_left = 5.0
 content_margin_top = 25.0
 content_margin_right = 4.0
 content_margin_bottom = 18.0
-texture = ExtResource("4_3m5t0")
+texture = ExtResource("7_r4gqy")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xqo7k"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_eby4p"]
+texture = ExtResource("8_qy57g")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8hy52"]
+texture = ExtResource("9_itc1l")
 
 [resource]
 default_font = ExtResource("3_hesii")
@@ -69,11 +77,11 @@ CheckBox/constants/h_separation = 4
 CheckBox/constants/outline_size = 0
 CheckBox/font_sizes/font_size = 16
 CheckBox/fonts/font = ExtResource("3_hesii")
-CheckBox/icons/checked = ExtResource("2_mipaq")
+CheckBox/icons/checked = ExtResource("3_yqcqw")
 CheckBox/icons/checked_disabled = null
 CheckBox/icons/radio_checked = null
 CheckBox/icons/radio_checked_disabled = null
-CheckBox/icons/unchecked = ExtResource("3_rtq6w")
+CheckBox/icons/unchecked = ExtResource("4_q06lb")
 CheckBox/icons/unchecked_disabled = null
 CheckBox/styles/disabled = SubResource("StyleBoxTexture_13akl")
 CheckBox/styles/focus = SubResource("StyleBoxTexture_13akl")
@@ -81,11 +89,14 @@ CheckBox/styles/hover = SubResource("StyleBoxTexture_13akl")
 CheckBox/styles/hover_pressed = SubResource("StyleBoxTexture_13akl")
 CheckBox/styles/normal = SubResource("StyleBoxTexture_13akl")
 CheckBox/styles/pressed = SubResource("StyleBoxTexture_13akl")
-HSlider/icons/grabber = ExtResource("3_sayi4")
-HSlider/icons/grabber_disabled = ExtResource("3_sayi4")
-HSlider/icons/grabber_highlight = ExtResource("6_1ltw3")
+HSlider/icons/grabber = ExtResource("5_nir5k")
+HSlider/icons/grabber_disabled = ExtResource("5_nir5k")
+HSlider/icons/grabber_highlight = ExtResource("6_1344s")
 HSlider/styles/grabber_area = SubResource("StyleBoxTexture_5314v")
 HSlider/styles/grabber_area_highlight = SubResource("StyleBoxTexture_kqx0u")
 HSlider/styles/slider = SubResource("StyleBoxTexture_kqx0u")
 Label/colors/font_color = Color(0.960784, 0.839216, 0.701961, 1)
 Label/styles/normal = SubResource("StyleBoxTexture_xqo7k")
+ProgressBar/colors/font_color = Color(0.94902, 0.94902, 0.94902, 0)
+ProgressBar/styles/background = SubResource("StyleBoxTexture_eby4p")
+ProgressBar/styles/fill = SubResource("StyleBoxTexture_8hy52")

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dpv706bbyptrx"
-path="res://.godot/imported/active_volume_bar_sprite.png-260e7d270fccf59a13349b45699ca8ed.ctex"
+uid="uid://cibvv5438dyd3"
+path="res://.godot/imported/check_box_sprite.png-c8486783c18198201d82e08c8d13d551.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/ui/active_volume_bar_sprite.png"
-dest_files=["res://.godot/imported/active_volume_bar_sprite.png-260e7d270fccf59a13349b45699ca8ed.ctex"]
+source_file="res://assets/textures/ui/menu/check_box_sprite.png"
+dest_files=["res://.godot/imported/check_box_sprite.png-c8486783c18198201d82e08c8d13d551.ctex"]
 
 [params]
 

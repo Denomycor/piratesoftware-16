@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b7ryprj4ds8q8"
-path="res://.godot/imported/gear_icon_sprite.png-4229cb0e2d0c0be502666dc426a43174.ctex"
+uid="uid://c8k5w8findbmp"
+path="res://.godot/imported/minigun_icon.png-c17a8fe8661c8e0e8556c6a968d4a761.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/ui/gear_icon_sprite.png"
-dest_files=["res://.godot/imported/gear_icon_sprite.png-4229cb0e2d0c0be502666dc426a43174.ctex"]
+source_file="res://assets/textures/ui/in_game/minigun_icon.png"
+dest_files=["res://.godot/imported/minigun_icon.png-c17a8fe8661c8e0e8556c6a968d4a761.ctex"]
 
 [params]
 

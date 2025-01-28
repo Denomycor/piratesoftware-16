@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cud02ypjmm7td"
-path="res://.godot/imported/button_box_sprite.png-18afb1cae4e7d39adf8a31514449d8a6.ctex"
+uid="uid://boc2mqjble13k"
+path="res://.godot/imported/check_mark_sprite.png-d8717bcd34ceb8c3af1e2cf178e316b4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/ui/button_box_sprite.png"
-dest_files=["res://.godot/imported/button_box_sprite.png-18afb1cae4e7d39adf8a31514449d8a6.ctex"]
+source_file="res://assets/textures/ui/menu/check_mark_sprite.png"
+dest_files=["res://.godot/imported/check_mark_sprite.png-d8717bcd34ceb8c3af1e2cf178e316b4.ctex"]
 
 [params]
 

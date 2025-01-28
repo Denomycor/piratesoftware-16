@@ -7,4 +7,3 @@ func _ready():
 
 func _process(_delta: float) -> void:
 	$sonar_camera.global_position = LevelContext.level.car.global_position
-

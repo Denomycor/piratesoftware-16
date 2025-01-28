@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dm0lidnygho56"
-path="res://.godot/imported/radar_ui.png-4ab517184ee0efa3912795f3e6615198.ctex"
+uid="uid://b7ryprj4ds8q8"
+path="res://.godot/imported/gear_icon_sprite.png-5a7eb580d278d8f926e8272f4a1733c9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/ui/radar_ui.png"
-dest_files=["res://.godot/imported/radar_ui.png-4ab517184ee0efa3912795f3e6615198.ctex"]
+source_file="res://assets/textures/ui/menu/gear_icon_sprite.png"
+dest_files=["res://.godot/imported/gear_icon_sprite.png-5a7eb580d278d8f926e8272f4a1733c9.ctex"]
 
 [params]
 
