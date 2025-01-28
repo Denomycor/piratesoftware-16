@@ -1,13 +1,20 @@
-[gd_scene load_steps=5 format=3 uid="uid://da0glwm1oavka"]
+[gd_scene load_steps=7 format=3 uid="uid://da0glwm1oavka"]
 
 [ext_resource type="Script" path="res://assets/scripts/projectiles/hook_projectile.gd" id="1_e2oua"]
-[ext_resource type="Texture2D" uid="uid://b376ctw7d50nr" path="res://assets/textures/car/weapon/hook.png" id="1_e2rc5"]
+[ext_resource type="Texture2D" uid="uid://bxnmq84hh2xw5" path="res://assets/textures/car/weapon/projectiles/hook_tip_sprite.png" id="2_5vmgt"]
+[ext_resource type="Script" path="res://assets/scripts/components/hit-box.gd" id="3_aqi36"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1umsf"]
-size = Vector2(212, 29)
+[sub_resource type="Curve" id="Curve_7g5xb"]
+_data = [Vector2(0.752632, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.021978), 0.0, 0.0, 0, 0]
+point_count = 2
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_4y1cl"]
-radius = 53.0377
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_s621l"]
+radius = 9.5
+height = 75.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bymv7"]
+radius = 20.0
+height = 74.0
 
 [node name="HookProjectile" type="CharacterBody2D"]
 collision_layer = 8
@@ -15,26 +22,35 @@ collision_mask = 5
 motion_mode = 1
 script = ExtResource("1_e2oua")
 speed = 6000.0
-lifetime = 1.3
+lifetime = 0.4
+scale_curve = SubResource("Curve_7g5xb")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(99, 0)
-shape = SubResource("RectangleShape2D_1umsf")
+position = Vector2(44.5, -0.5)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_s621l")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(98, 0)
+position = Vector2(43, 0)
 rotation = 1.5708
-texture = ExtResource("1_e2rc5")
+texture = ExtResource("2_5vmgt")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="HitBoxComponent" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
-collision_mask = 4
+collision_mask = 0
+monitoring = false
+monitorable = false
+script = ExtResource("3_aqi36")
+one_shot = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(194, 0)
-shape = SubResource("CircleShape2D_4y1cl")
-debug_color = Color(0.92576, 0.220284, 0.411626, 0.42)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
+position = Vector2(64, 0)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_bymv7")
+debug_color = Color(0.993019, 0, 0.243756, 0.42)
 
 [node name="Line2D" type="Line2D" parent="."]
+position = Vector2(2, 0)
 points = PackedVector2Array(0, 0, 0, 0)
-default_color = Color(0, 0, 0, 1)
+default_color = Color(0.0110876, 0.0110876, 0.0110876, 1)

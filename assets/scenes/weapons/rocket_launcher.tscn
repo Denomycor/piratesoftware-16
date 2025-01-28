@@ -1,24 +1,33 @@
-[gd_scene load_steps=4 format=3 uid="uid://xpgamcshcoi3"]
+[gd_scene load_steps=6 format=3 uid="uid://xpgamcshcoi3"]
 
 [ext_resource type="Script" path="res://assets/scripts/weapons/rocket_launcher.gd" id="1_ldygr"]
 [ext_resource type="Script" path="res://assets/scripts/weapons/components/turn_component.gd" id="2_qsljy"]
 [ext_resource type="Script" path="res://assets/scripts/weapons/components/projectile_spawner_component.gd" id="3_ygmqf"]
+[ext_resource type="Texture2D" uid="uid://c4mcl7cr2pt0r" path="res://assets/textures/car/weapon/projectiles/rocket_head_sprite.png" id="4_cnpui"]
+[ext_resource type="Texture2D" uid="uid://tk8ncyvl3r57" path="res://assets/textures/car/weapon/rocket_base_sprite.png" id="5_kfbfo"]
 
 [node name="RocketLauncher" type="Node2D"]
 script = ExtResource("1_ldygr")
 strength = 5000.0
-
-[node name="Polygon2D" type="Polygon2D" parent="."]
-polygon = PackedVector2Array(0, 0, 0, -16, 224, -16, 224, 16, 0, 16)
 
 [node name="TurnComponent" type="Node2D" parent="."]
 script = ExtResource("2_qsljy")
 
 [node name="ProjectileSpawnerComponent" type="Node2D" parent="." node_paths=PackedStringArray("bullet_spawn")]
 script = ExtResource("3_ygmqf")
-fire_delay = 0.01
+fire_delay = 1.0
 multishot = 1
 bullet_spawn = NodePath("../bullet_spawn")
 
 [node name="bullet_spawn" type="Node2D" parent="."]
-position = Vector2(224, 0)
+position = Vector2(162, -2)
+
+[node name="RocketHeadSprite" type="Sprite2D" parent="."]
+position = Vector2(162, -2)
+rotation = 1.5708
+texture = ExtResource("4_cnpui")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(58, 0)
+rotation = 1.5708
+texture = ExtResource("5_kfbfo")

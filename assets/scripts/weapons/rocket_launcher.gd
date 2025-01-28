@@ -14,11 +14,17 @@ func _ready() -> void:
 		projectile.inherited_velocity = LevelContext.level.car.last_velocity
 		
 		LevelContext.level.get_node("World").add_child(projectile)
-
-		var dir: Vector2 = get_global_mouse_position().direction_to(global_position)
-		
-		fired.emit(dir * strength)
 	)
+
+	projectile_spawner_component.just_shot.connect(func():
+		var dir: Vector2 = get_global_mouse_position().direction_to(global_position)
+		fired.emit(dir * strength * projectile_spawner_component.multishot)
+		$RocketHeadSprite.visible = false
+		create_tween().tween_callback(func():
+			$RocketHeadSprite.visible = true
+		).set_delay(projectile_spawner_component.fire_delay * 0.8)
+	)
+
 
 func _process(_delta: float) -> void:
 	if !active:

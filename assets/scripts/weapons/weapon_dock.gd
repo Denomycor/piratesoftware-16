@@ -41,6 +41,18 @@ func _input(event: InputEvent) -> void:
 		elif (e.button_index == MOUSE_BUTTON_WHEEL_UP && e.pressed):
 			idx = wrapi(current_idx - 1, 0, weapon_list.get_child_count())
 			play_change_animation(idx)
+			
+	elif event is InputEventKey and event.pressed:
+		var weapon_count = weapon_list.get_child_count()
+		var idx := -1
+		match event.keycode:
+			KEY_1: idx = 0
+			KEY_2: idx = 1
+			KEY_3: idx = 2
+			KEY_4: idx = 3
+			KEY_5: idx = 4
+		if idx >= 0 and idx < weapon_count:
+			play_change_animation(idx)
 
 func play_change_animation(idx: int) -> void:
 	weapon_anim.visible = true
@@ -49,6 +61,6 @@ func play_change_animation(idx: int) -> void:
 	alien_anim.play()
 	weapon_anim.frame_changed.connect(func():
 		print("change")
-		if weapon_anim.frame == 2: 
+		if weapon_anim.frame == 2:
 			switch_active_weapon(idx)
 	)

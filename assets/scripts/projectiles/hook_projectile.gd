@@ -1,63 +1,61 @@
-class_name HookProjectile extends CharacterBody2D
-
-@export var speed: float
-@export var lifetime: float
-@export var drag_dist: float = 900
-
-@onready var area_collision: Area2D = $Area2D
-@onready var cable: Line2D = $Line2D
+class_name HookProjectile extends LinearProjectile
 
 
-var target: PhysicsBody2D
-var car: RigidBody2D
-var timer: Tween
-var inherited_velocity := Vector2.ZERO
+## Due to the need of colliding with anybody this projectile tracks hit exclusively through collisions and not hitbox_component
 
-var hit_target: bool = false
+var target: CollisionObject2D = null
+var anchor: Node2D
 
-
-func _ready() -> void:
-	area_collision.area_entered.connect(_on_area_entered)
-	car = LevelContext.level.get_node("World").get_node("Car")
-	timer = create_tween()
-	timer.tween_callback(destroy).set_delay(lifetime)
+var my_rotation: float
+var target_rotation: float
 
 
-func set_properties(pos: Vector2, rot: float) -> void:
-	global_position = pos
-	rotation = rot
+func _process(_delta: float) -> void:
+	var dock: Node2D = LevelContext.level.car.get_node("weapon_dock")
+	$Line2D.set_point_position(1, $Line2D.to_local(dock.global_position))
+
+	if(target):
+		global_position = anchor.global_position
+		rotation = my_rotation + (target.rotation - target_rotation)
 
 
-func _physics_process(delta: float) -> void:
-	cable.points[0] = cable.to_local(car.global_position)
-	cable.points[1] = cable.to_local(global_position)
+func connect_hook(node: CollisionObject2D, pos: Vector2) -> void:
+	# stop lifetime timer
+	timer.kill()
+	# stop fade effect
+	scale_tween.kill()
+	# restore scale
+	scale = Vector2.ONE
+	# stop movement
+	frozen = true
+	# stop collisions
+	$CollisionShape2D.set_deferred("disabled", true)
 
-	if hit_target:
-		handle_has_target()
-	else:
-		var motion := Vector2.from_angle(rotation) * speed + inherited_velocity
-		move_and_collide(motion * delta)
+	# save the target we are hooking
+	target = node
+
+	# create the anchor
+	anchor = Node2D.new()
+	target.add_child(anchor)
+	anchor.global_position = pos
+
+	global_position = anchor.global_position
+	target_rotation = target.rotation
+	my_rotation = rotation
+	if(node is Enemy):
+		node.died.connect(destroy)
+	if(node is Prop):
+		node.destroyed.connect(destroy)
+
+
+
+func _on_collision(collision: KinematicCollision2D) -> void:
+	if(collision.get_collider() != null):
+		connect_hook(collision.get_collider(), collision.get_position())
 
 
 func destroy() -> void:
-	queue_free()
+	super.destroy()
+	if(anchor):
+		target.queue_free()
 
-
-func handle_has_target() -> void:
-	var cur_dist: float = car.global_position.distance_to(target.global_position)
-	var new_dist: float = move_toward(cur_dist, drag_dist, 300)
-	
-	var dir: Vector2 = car.global_position.direction_to(target.global_position)
-	var new_pos: Vector2 = car.global_position + dir * new_dist
-	target.global_position = new_pos
-	global_position = new_pos
-
-
-func _on_area_entered(area: Area2D) -> void:
-	target = area.get_parent()
-	hit_target = true
-	timer.kill()
-	if(area.get_parent() is Enemy):
-		(area.get_parent() as Enemy).died.connect(destroy)
-
-	area_collision.area_entered.disconnect(_on_area_entered)

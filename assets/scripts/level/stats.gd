@@ -31,7 +31,7 @@ func check_max_speed() -> void:
 
 func _physics_process(delta: float):
 	if not is_game_over:
-		speed = LevelContext.level.car.get_speed() * speed_conversion_ratio
+		speed = roundf(LevelContext.level.car.get_speed() * speed_conversion_ratio)
 		check_max_speed()
 		check_drift(delta)
 		add_points(points_per_second * delta)
@@ -49,4 +49,3 @@ func check_drift(delta: float):
 		current_drift_time += delta
 	if current_drift_time > max_drift_duration:
 		max_drift_duration = current_drift_time
-

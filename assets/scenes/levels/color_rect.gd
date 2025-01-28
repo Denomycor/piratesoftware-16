@@ -11,10 +11,9 @@ func _ready():
 
 func _physics_process(_delta):
 	if debug:
-		print(debug_camera.global_position)
-		print(debug_camera.zoom)
 		material.set_shader_parameter("our_camera_position", debug_camera.global_position)
 		material.set_shader_parameter("our_camera_zoom", debug_camera.zoom)
 	else:
 		material.set_shader_parameter("our_camera_position", boom_arm.camera.global_position)
 		material.set_shader_parameter("our_camera_zoom", boom_arm.camera.zoom)
+		material.set_shader_parameter("our_resolution", get_viewport_rect().size)
