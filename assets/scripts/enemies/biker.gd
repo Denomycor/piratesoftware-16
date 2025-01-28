@@ -29,13 +29,14 @@ func _physics_process(delta: float) -> void:
 	if(dead):
 		return
 
-	if get_distance_to_target() > follow_range:
-		velocity = get_chase_velocity(delta)
-	else:
-		velocity = get_mimic_velocity(delta)
-	look_at(global_position + velocity)
-	
-	move_and_slide()
+	if(!movement_locked):
+		if get_distance_to_target() > follow_range:
+			velocity = get_chase_velocity(delta)
+		else:
+			velocity = get_mimic_velocity(delta)
+		look_at(global_position + velocity)
+		
+		move_and_slide()
 	last_velocity = velocity
 
 func get_distance_to_target() -> float:

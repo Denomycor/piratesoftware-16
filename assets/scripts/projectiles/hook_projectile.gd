@@ -18,11 +18,29 @@ func _process(_delta: float) -> void:
 		global_position = anchor.global_position
 		rotation = my_rotation + (target.rotation - target_rotation)
 
+		if(LevelContext.level.car.global_position.distance_to(global_position) > 6000):
+			destroy()
+
 
 func _physics_process(delta: float) -> void:
 	super._physics_process(delta)
+
+
 	var dock: Node2D = LevelContext.level.car.get_node("weapon_dock")
 	$Line2D.set_point_position(1, $Line2D.to_local(dock.global_position))
+	if(target is Enemy):
+		if(target.global_position.distance_to(LevelContext.level.car.global_position) > 800):
+			var direction_to_car := target.global_position.direction_to(LevelContext.level.car.global_position)
+			var car_direction := LevelContext.level.car.linear_velocity.normalized()
+			var hook_pull := direction_to_car * 500 + LevelContext.level.car.linear_velocity * direction_to_car.dot(car_direction)
+			target.velocity = hook_pull
+			target.move_and_slide()
+		else:
+			var direction_to_car := target.global_position.direction_to(LevelContext.level.car.global_position)
+			var car_direction := LevelContext.level.car.linear_velocity.normalized()
+			var hook_pull := LevelContext.level.car.linear_velocity * direction_to_car.dot(car_direction)
+			target.velocity = hook_pull
+			target.move_and_slide()
 
 
 func connect_hook(node: CollisionObject2D, pos: Vector2) -> void:
@@ -50,6 +68,7 @@ func connect_hook(node: CollisionObject2D, pos: Vector2) -> void:
 	my_rotation = rotation
 	if(node is Enemy):
 		node.died.connect(destroy)
+		node.movement_locked = true
 	if(node is Prop):
 		node.destroyed.connect(destroy)
 	z_index = 0
@@ -64,6 +83,8 @@ func _on_collision(collision: KinematicCollision2D) -> void:
 func destroy() -> void:
 	super.destroy()
 	if(anchor):
+		if(target is Enemy):
+			target.movement_locked = false
 		anchor.queue_free()
 
 
