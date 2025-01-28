@@ -64,5 +64,10 @@ func _on_collision(collision: KinematicCollision2D) -> void:
 func destroy() -> void:
 	super.destroy()
 	if(anchor):
-		target.queue_free()
+		anchor.queue_free()
+
+
+func _input(event: InputEvent) -> void:
+	if(event.is_action_pressed("release")):
+		destroy()
 
