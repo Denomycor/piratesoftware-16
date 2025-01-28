@@ -2,3 +2,5 @@
 .godot/
 /android/
 .vscode/
+build/
+export_presets.cfg
