@@ -18,7 +18,6 @@ noise = SubResource("FastNoiseLite_6wexk")
 shader = ExtResource("1_hfoj8")
 shader_parameter/our_camera_position = null
 shader_parameter/our_camera_zoom = null
-shader_parameter/our_resolution = null
 shader_parameter/shadow_offset = Vector2(0.006, 0)
 shader_parameter/dustColor = Vector3(10, 10, 8)
 shader_parameter/dustIntensity = 0.4

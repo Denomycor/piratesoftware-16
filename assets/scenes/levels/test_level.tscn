@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://2vnrdwbw1mxc"]
+[gd_scene load_steps=30 format=3 uid="uid://2vnrdwbw1mxc"]
 
 [ext_resource type="Script" path="res://assets/scripts/level/level.gd" id="1_y7sae"]
 [ext_resource type="PackedScene" uid="uid://drcpxeie725b" path="res://assets/scenes/car/car.tscn" id="2_8k278"]
@@ -13,7 +13,7 @@
 [ext_resource type="Script" path="res://assets/scripts/level/stats.gd" id="8_6ascs"]
 [ext_resource type="PackedScene" uid="uid://bb6guieu8fwa" path="res://assets/scenes/props/big_boulder.tscn" id="8_chcvc"]
 [ext_resource type="PackedScene" uid="uid://dl6rmenebbkf2" path="res://assets/scenes/props/big_barrel.tscn" id="9_5mdmc"]
-[ext_resource type="PackedScene" uid="uid://dtyepolgwnyv2" path="res://assets/scenes/ui/game_over_menu.tscn" id="9_h3nak"]
+[ext_resource type="PackedScene" path="res://assets/scenes/ui/game_over_menu.tscn" id="9_h3nak"]
 [ext_resource type="Script" path="res://assets/scripts/utils/panning_camera.gd" id="9_qeern"]
 [ext_resource type="PackedScene" uid="uid://b66n0n4i6aa3b" path="res://assets/scenes/props/big_bones.tscn" id="10_06wf4"]
 [ext_resource type="PackedScene" uid="uid://dnfnetfp4l5fb" path="res://assets/scenes/props/mid_boulder.tscn" id="11_quaxx"]
@@ -22,6 +22,8 @@
 [ext_resource type="PackedScene" uid="uid://c7ac5st3m716u" path="res://assets/scenes/props/small_barrel.tscn" id="14_ghf57"]
 [ext_resource type="PackedScene" uid="uid://87oc2iymck6e" path="res://assets/scenes/props/small_bones.tscn" id="15_0ad71"]
 [ext_resource type="Script" path="res://assets/scripts/car/car_vars.gd" id="19_ke0jl"]
+[ext_resource type="PackedScene" uid="uid://is7y7auk6peu" path="res://assets/scenes/enemies/crawler.tscn" id="21_po4qe"]
+[ext_resource type="PackedScene" uid="uid://dw2abso84avq1" path="res://assets/scenes/enemies/biker.tscn" id="22_l11od"]
 
 [sub_resource type="Resource" id="Resource_msscp"]
 script = ExtResource("19_ke0jl")
@@ -99,7 +101,7 @@ script = ExtResource("4_eyags")
 walls_per_side = 30
 prop_list = Array[PackedScene]([ExtResource("6_6obcn"), ExtResource("7_r222i"), ExtResource("8_chcvc"), ExtResource("9_5mdmc"), ExtResource("10_06wf4"), ExtResource("11_quaxx"), ExtResource("12_gvol0"), ExtResource("13_quvsm"), ExtResource("14_ghf57"), ExtResource("15_0ad71")])
 ratios = Array[int]([2, 3, 4, 6, 8, 10, 14, 18, 25, 30])
-prop_density = 0.02
+prop_density = 0.01
 
 [node name="Camera2D" type="Camera2D" parent="World/Arena"]
 enabled = false
@@ -113,6 +115,7 @@ zoom_factor = 0.005
 z_index = 5
 position = Vector2(987, 467)
 weapon_vars = Array[ExtResource("19_ke0jl")]([SubResource("Resource_msscp"), SubResource("Resource_stdhw"), SubResource("Resource_fojdv"), SubResource("Resource_h5je3"), SubResource("Resource_rpkw5")])
+health = 1000.0
 
 [node name="BoomArm" parent="World/Car" index="3"]
 mouse_slide_distance = 1000.0
@@ -122,9 +125,11 @@ max_slide_speed = 4000.0
 [node name="EnemySpawner" type="Node" parent="World" node_paths=PackedStringArray("target")]
 script = ExtResource("4_a7yx0")
 target = NodePath("../Car")
+enemy_list = Array[PackedScene]([ExtResource("21_po4qe"), ExtResource("22_l11od")])
+enemy_ratios = Array[float]([0.96, 0.04])
 
 [node name="SpawnTimer" type="Timer" parent="World/EnemySpawner"]
-wait_time = 2.0
+wait_time = 0.2
 
 [node name="PauseMenu" parent="." instance=ExtResource("2_idj3t")]
 visible = false

@@ -93,7 +93,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"default",
-"speed": 12.0
+"speed": 24.0
 }]
 
 [node name="weapon_dock" type="Node2D"]
@@ -142,4 +142,6 @@ visible = false
 z_index = 3
 rotation = 1.5708
 sprite_frames = SubResource("SpriteFrames_sshw2")
+frame = 4
+frame_progress = 1.0
 offset = Vector2(0, -103)

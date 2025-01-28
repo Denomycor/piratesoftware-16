@@ -4,7 +4,6 @@ uniform sampler2D sand_texture;
 uniform sampler2D SCREEN_TEXTURE: hint_screen_texture;
 uniform vec2 our_camera_position;
 uniform vec2 our_camera_zoom;
-uniform vec2 our_resolution;
 
 uniform vec2 shadow_offset;
 
@@ -24,7 +23,8 @@ void fragment() {
 	vec4 final_color = vec4(0);
 
 	// CONSTANTS
-	vec2 our_viewport_resolution = our_resolution / our_camera_zoom;
+	vec2 our_resolution = vec2(1920.0, 1080.0);
+	vec2 our_viewport_resolution = vec2(1920.0, 1080.0) / our_camera_zoom;
 
 	// vector from center of screen at viewport resolution
 	vec2 vec_from_center = (UV - 0.5) * our_viewport_resolution;

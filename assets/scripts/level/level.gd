@@ -26,6 +26,5 @@ func set_game_over() -> void:
 	get_tree().paused = true
 	stats.is_game_over = true
 	pause_menu.queue_free()
-	game_over_menu.set_stats(int(stats.points), stats.time_survived, stats.kills, stats.max_speed, stats.max_drift_duration)
+	game_over_menu.set_stats(int(stats.points), snappedf(stats.time_survived, 0.01), stats.kills, stats.max_speed, snappedf(stats.max_drift_duration, 0.01))
 	game_over_menu.show_game_over_menu()
-
