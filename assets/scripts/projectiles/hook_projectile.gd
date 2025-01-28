@@ -52,6 +52,7 @@ func connect_hook(node: CollisionObject2D, pos: Vector2) -> void:
 		node.died.connect(destroy)
 	if(node is Prop):
 		node.destroyed.connect(destroy)
+	z_index = 0
 
 
 

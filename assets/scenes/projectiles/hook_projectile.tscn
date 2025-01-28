@@ -17,6 +17,7 @@ radius = 20.0
 height = 74.0
 
 [node name="HookProjectile" type="CharacterBody2D"]
+z_index = 30
 collision_layer = 8
 collision_mask = 5
 motion_mode = 1
