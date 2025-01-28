@@ -15,11 +15,12 @@ height = 332.0
 radius = 76.0
 height = 340.0
 
-[node name="Biker" type="CharacterBody2D" groups=["enemies"]]
+[node name="Biker" type="CharacterBody2D" node_paths=PackedStringArray("sprites") groups=["enemies"]]
 collision_layer = 4
 collision_mask = 7
 script = ExtResource("1_3s7no")
 follow_range = 1500
+sprites = [NodePath("Biker"), NodePath("WheelB"), NodePath("WheelF"), NodePath("BikerGun/Sprite2D")]
 speed = 4000.0
 points = 100
 
@@ -57,3 +58,5 @@ shape = SubResource("CapsuleShape2D_j40sk")
 debug_color = Color(0.972063, 0, 0.443653, 0.42)
 
 [node name="GPUParticles2D" parent="." instance=ExtResource("6_b6p6t")]
+
+[editable path="BikerGun"]

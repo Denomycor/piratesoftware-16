@@ -125,7 +125,7 @@ max_slide_speed = 4000.0
 script = ExtResource("4_a7yx0")
 target = NodePath("../Car")
 enemy_list = Array[PackedScene]([ExtResource("21_po4qe"), ExtResource("22_l11od")])
-enemy_ratios = Array[float]([0.96, 0.04])
+enemy_ratios = Array[float]([1.0, 0.0])
 
 [node name="SpawnTimer" type="Timer" parent="World/EnemySpawner"]
 wait_time = 0.2
