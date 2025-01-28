@@ -20,7 +20,8 @@ func switch_main_menu_to_level(level_scene: PackedScene) -> void:
 
 
 func switch_level_to_main_menu(level: Node) -> void:
-	LevelContext.level = null
 	level.queue_free()
+	LevelContext.set_deferred("level", null)
 	get_tree().paused = false
 	main_menu.visible = true
+
