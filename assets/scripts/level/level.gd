@@ -14,9 +14,7 @@ func _ready():
 	LevelContext.level = self
 	pause_menu.quit_level.connect(quit_level)
 	game_over_menu.quit_level.connect(quit_level)
-	print(get_viewport().canvas_cull_mask)
 	get_viewport().set_canvas_cull_mask_bit(9, false)
-	print(get_viewport().canvas_cull_mask)
 
 
 func quit_level() -> void:
