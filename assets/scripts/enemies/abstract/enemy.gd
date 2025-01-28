@@ -9,6 +9,9 @@ signal died
 
 var target: RigidBody2D
 
+var movement_locked := false
+
+
 func attack():
 	push_error("The attack function is not implemented for this enemy.")
 
@@ -25,3 +28,4 @@ func _physics_process(_delta: float) -> void:
 # Signal
 func _take_dmg(_amount: float):
 	push_error("The _take_dmg function is not implemented for this enemy.")
+

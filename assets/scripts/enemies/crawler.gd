@@ -16,9 +16,10 @@ func attack():
 	print("I am the pacifist")
 
 func update_movement():
-	var direction = global_position.direction_to(target.global_position)
-	look_at(target.global_position)
-	velocity = direction * speed
+	if(!movement_locked):
+		var direction = global_position.direction_to(target.global_position)
+		look_at(target.global_position)
+		velocity = direction * speed
 
 func die():
 	LevelContext.level.stats.increment_kills()

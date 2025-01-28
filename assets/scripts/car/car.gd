@@ -26,6 +26,7 @@ var last_velocity: Vector2
 var health := max_health
 
 func _ready():
+	LevelContext.level.overlay.set_hp(health)
 	contact_monitor = true
 	max_contacts_reported = 1
 	
