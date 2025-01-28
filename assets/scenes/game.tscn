@@ -7,3 +7,4 @@
 script = ExtResource("1_jn3nd")
 
 [node name="main_menu" parent="." instance=ExtResource("1_ps6mr")]
+process_mode = 3

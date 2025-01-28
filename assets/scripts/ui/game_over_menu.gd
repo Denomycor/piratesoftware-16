@@ -15,3 +15,4 @@ func set_stats(points: int, time_survived: float, kills: int, max_speed: float, 
 	%Kills.text = str(kills)
 	%MaxSpeed.text = str(max_speed)
 	%MaxDriftDuration.text = str(max_drift_duration)
+
