@@ -5,6 +5,8 @@ class_name MainMenu extends CanvasLayer
 func _ready() -> void:
 	%back.pressed.connect(func(): tab_container.current_tab = 0)
 	%options.pressed.connect(func(): tab_container.current_tab = 1)
+	%credits.pressed.connect(func(): tab_container.current_tab = 2)
+	%back2.pressed.connect(func(): tab_container.current_tab = 0)
 	%window_mode.pressed.connect(toggle_fullscreen)
 
 	if GameOptions.is_fullscreen:
