@@ -4,7 +4,7 @@ class_name Biker extends Enemy
 @export_range(500, 1500) var follow_range: int
 @export var prediction_time: float = 0.3
 @export var max_accelaration := 100000
-@export var prediction_scalar := 1000
+@export var prediction_scalar := 10
 @export var max_collision_damage: float = 25
 @export var min_collision_speed: float = 300
 @export var speed_for_max_collision_damage: float = 1500
@@ -15,6 +15,7 @@ class_name Biker extends Enemy
 
 var last_velocity := Vector2.ZERO
 var dead := false
+var acceleration: Vector2
 
 
 func _ready() -> void:
@@ -23,16 +24,16 @@ func _ready() -> void:
 		follow_range = int(randf_range(500, 1500))
 
 func update_movement():
-	pass
+	if get_distance_to_target() > follow_range:
+		set_chase_acceleration()
+	else:
+		set_mimic_acceleration()
 	
 func _physics_process(delta: float) -> void:
 	if(dead):
 		return
 
-	if get_distance_to_target() > follow_range:
-		velocity = get_chase_velocity(delta)
-	else:
-		velocity = get_mimic_velocity(delta)
+	velocity += acceleration * delta
 	look_at(global_position + velocity)
 	
 	move_and_slide()
@@ -41,13 +42,11 @@ func _physics_process(delta: float) -> void:
 func get_distance_to_target() -> float:
 	return target.global_position.distance_to(global_position)
 
-func get_chase_velocity(delta: float) -> Vector2:
-	var acceleration := SeekArriveSteeringBehaviour.get_steering_force(global_position, target.global_position, velocity, speed, max_accelaration, follow_range)
-	return velocity + acceleration * delta
+func set_chase_acceleration() -> void:
+	acceleration = SeekArriveSteeringBehaviour.get_steering_force(global_position, target.global_position, velocity, speed, max_accelaration, follow_range)
 
-func get_mimic_velocity(delta: float) -> Vector2:
-	var acceleration := SeekArriveSteeringBehaviour.get_steering_force(global_position, global_position + target.linear_velocity * delta * prediction_scalar, velocity, target.get_speed(), max_accelaration, follow_range)
-	return velocity + acceleration * delta
+func set_mimic_acceleration() -> void:
+	acceleration = SeekArriveSteeringBehaviour.get_steering_force(global_position, global_position + target.linear_velocity.normalized() * prediction_scalar, velocity, target.get_speed(), max_accelaration, follow_range)
 
 func die():
 	dead = true

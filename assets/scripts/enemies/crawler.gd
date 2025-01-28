@@ -9,6 +9,7 @@ class_name Crawler extends Enemy
 @onready var hit_box: HitBoxComponent = $HitBoxComponent
 @onready var attack_timer: Timer = $AttackCooldown
 
+var dead := false
 var can_attack := true
 
 func _ready() -> void:
@@ -26,6 +27,8 @@ func attack():
 	attack_timer.start()
 
 func update_movement():
+	if dead:
+		return
 	var distance := (target.global_position - global_position).length()
 	var direction = global_position.direction_to(target.global_position)
 	look_at(target.global_position)
@@ -34,6 +37,7 @@ func update_movement():
 		attack()
 
 func die():
+	dead = true
 	LevelContext.level.stats.increment_kills()
 	LevelContext.level.stats.add_points(points)
 	velocity = Vector2.ZERO

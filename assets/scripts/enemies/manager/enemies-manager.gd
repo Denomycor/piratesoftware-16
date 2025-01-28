@@ -15,6 +15,7 @@ const BLOCK_RADIUS: float = 200
 
 @onready var spawn_timer: Timer = $SpawnTimer
 
+var difficulty: float = 0
 
 var cur_group = 0
 
@@ -55,7 +56,8 @@ func _position_near_target() -> Vector2:
 	return pos
 
 
-func _process(_delta: float) -> void:
+func _physics_process(_delta: float) -> void:
+
 	_update_enemies()
 
 
