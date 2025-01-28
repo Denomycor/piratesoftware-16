@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://is7aeubau3xs"]
+[gd_scene load_steps=31 format=3 uid="uid://is7aeubau3xs"]
 
 [ext_resource type="Script" path="res://assets/scripts/ui/overlay.gd" id="1_tmn6d"]
 [ext_resource type="Texture2D" uid="uid://dm0lidnygho56" path="res://assets/textures/ui/menu/radar_ui.png" id="2_8jhi0"]
@@ -19,9 +19,12 @@
 [ext_resource type="Script" path="res://assets/scripts/ui/health_bar.gd" id="14_7aj3w"]
 [ext_resource type="Texture2D" uid="uid://c8k5w8findbmp" path="res://assets/textures/ui/in_game/minigun_icon.png" id="15_sxptx"]
 [ext_resource type="Texture2D" uid="uid://75qpy3gla06w" path="res://assets/textures/ui/in_game/shotgun_icon.png" id="16_n364h"]
+[ext_resource type="Script" path="res://assets/scripts/ui/weapon_bar.gd" id="17_17h4p"]
 [ext_resource type="Texture2D" uid="uid://brh5ka7gvnpw4" path="res://assets/textures/ui/in_game/flamethrower_icon.png" id="17_txk2c"]
 [ext_resource type="Texture2D" uid="uid://umuwm3qpmbga" path="res://assets/textures/ui/in_game/harpoon_icon.png" id="18_dyb6x"]
+[ext_resource type="Script" path="res://assets/scripts/ui/weapon_slot.gd" id="18_qlcwb"]
 [ext_resource type="Texture2D" uid="uid://c20fcwkkufiqx" path="res://assets/textures/ui/in_game/rocket_icon.png" id="19_36wsv"]
+[ext_resource type="Texture2D" uid="uid://cyr1hr466xvfd" path="res://assets/textures/ui/in_game/selected_icon_box_sprite.png" id="21_6bhrx"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_qklw6"]
 noise_type = 3
@@ -50,10 +53,11 @@ line_spacing = 40.0
 font_size = 25
 font_color = Color(0.290196, 0.184314, 0.164706, 1)
 
-[node name="Overlay" type="CanvasLayer" node_paths=PackedStringArray("speed_counter", "health_bar")]
+[node name="Overlay" type="CanvasLayer" node_paths=PackedStringArray("speed_counter", "health_bar", "weapon_bar")]
 script = ExtResource("1_tmn6d")
 speed_counter = NodePath("CenterContainer2/HBoxContainer/TextureRect/Container/Sprite2D")
 health_bar = NodePath("CenterContainer2/HBoxContainer/VBoxContainer/Panel2/TextureRect/ProgressBar")
+weapon_bar = NodePath("CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar")
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 anchors_preset = 3
@@ -222,30 +226,45 @@ scale = Vector2(0.8, 0.8)
 texture = ExtResource("7_dcln4")
 stretch_mode = 4
 
-[node name="WeaponBar" type="HBoxContainer" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect"]
+[node name="WeaponBar" type="HBoxContainer" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect" node_paths=PackedStringArray("slots")]
 layout_mode = 0
-offset_left = 207.143
-offset_top = 60.0
-offset_right = 1028.14
-offset_bottom = 272.0
+offset_left = 192.5
+offset_top = 67.5
+offset_right = 1013.5
+offset_bottom = 279.5
 scale = Vector2(0.55, 0.55)
+alignment = 1
+script = ExtResource("17_17h4p")
+slots = [NodePath("VBoxContainer"), NodePath("VBoxContainer2"), NodePath("VBoxContainer3"), NodePath("VBoxContainer4"), NodePath("VBoxContainer5")]
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar" node_paths=PackedStringArray("border", "highlighted_border", "label")]
 layout_mode = 2
+script = ExtResource("18_qlcwb")
+border = NodePath("TextureRect2/TextureRect")
+highlighted_border = NodePath("TextureRect2/TextureRect2")
+label = NodePath("Label")
 
-[node name="TextureRect" type="TextureRect" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar/VBoxContainer"]
+[node name="TextureRect2" type="TextureRect" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar/VBoxContainer"]
 z_index = 1
 layout_mode = 2
+texture = ExtResource("15_sxptx")
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar/VBoxContainer/TextureRect2"]
+layout_mode = 2
+offset_left = -10.7145
+offset_top = -6.81818
+offset_right = 150.285
+offset_bottom = 152.182
 texture = ExtResource("11_qum7v")
 
-[node name="TextureRect" type="TextureRect" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar/VBoxContainer/TextureRect"]
-z_index = -1
-layout_mode = 0
-offset_left = 9.7402
-offset_top = 11.3636
-offset_right = 152.74
-offset_bottom = 155.364
-texture = ExtResource("15_sxptx")
+[node name="TextureRect2" type="TextureRect" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar/VBoxContainer/TextureRect2"]
+visible = false
+layout_mode = 2
+offset_left = -10.7145
+offset_top = -6.81818
+offset_right = 150.285
+offset_bottom = 152.182
+texture = ExtResource("21_6bhrx")
 
 [node name="Label" type="Label" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar/VBoxContainer"]
 layout_mode = 2
@@ -254,21 +273,34 @@ text = "1
 label_settings = SubResource("LabelSettings_066hf")
 horizontal_alignment = 1
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar" node_paths=PackedStringArray("border", "highlighted_border", "label")]
 layout_mode = 2
+script = ExtResource("18_qlcwb")
+border = NodePath("TextureRect2/TextureRect")
+highlighted_border = NodePath("TextureRect2/TextureRect2")
+label = NodePath("Label")
 
-[node name="TextureRect" type="TextureRect" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar/VBoxContainer2"]
+[node name="TextureRect2" type="TextureRect" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar/VBoxContainer2"]
 z_index = 1
 layout_mode = 2
+texture = ExtResource("16_n364h")
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar/VBoxContainer2/TextureRect2"]
+layout_mode = 2
+offset_left = -10.7145
+offset_top = -6.81818
+offset_right = 150.285
+offset_bottom = 152.182
 texture = ExtResource("11_qum7v")
 
-[node name="TextureRect" type="TextureRect" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar/VBoxContainer2/TextureRect"]
-z_index = -1
-offset_left = 9.7402
-offset_top = 11.3636
-offset_right = 152.74
-offset_bottom = 155.364
-texture = ExtResource("16_n364h")
+[node name="TextureRect2" type="TextureRect" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar/VBoxContainer2/TextureRect2"]
+visible = false
+layout_mode = 2
+offset_left = -10.7145
+offset_top = -6.81818
+offset_right = 150.285
+offset_bottom = 152.182
+texture = ExtResource("21_6bhrx")
 
 [node name="Label" type="Label" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar/VBoxContainer2"]
 layout_mode = 2
@@ -277,21 +309,34 @@ text = "2
 label_settings = SubResource("LabelSettings_066hf")
 horizontal_alignment = 1
 
-[node name="VBoxContainer3" type="VBoxContainer" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar"]
+[node name="VBoxContainer3" type="VBoxContainer" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar" node_paths=PackedStringArray("border", "highlighted_border", "label")]
 layout_mode = 2
+script = ExtResource("18_qlcwb")
+border = NodePath("TextureRect2/TextureRect")
+highlighted_border = NodePath("TextureRect2/TextureRect2")
+label = NodePath("Label")
 
-[node name="TextureRect" type="TextureRect" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar/VBoxContainer3"]
+[node name="TextureRect2" type="TextureRect" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar/VBoxContainer3"]
 z_index = 1
 layout_mode = 2
+texture = ExtResource("17_txk2c")
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar/VBoxContainer3/TextureRect2"]
+layout_mode = 2
+offset_left = -10.7145
+offset_top = -6.81818
+offset_right = 150.285
+offset_bottom = 152.182
 texture = ExtResource("11_qum7v")
 
-[node name="TextureRect" type="TextureRect" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar/VBoxContainer3/TextureRect"]
-z_index = -1
-offset_left = 9.7402
-offset_top = 11.3636
-offset_right = 152.74
-offset_bottom = 155.364
-texture = ExtResource("17_txk2c")
+[node name="TextureRect2" type="TextureRect" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar/VBoxContainer3/TextureRect2"]
+visible = false
+layout_mode = 2
+offset_left = -10.7145
+offset_top = -6.81818
+offset_right = 150.285
+offset_bottom = 152.182
+texture = ExtResource("21_6bhrx")
 
 [node name="Label" type="Label" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar/VBoxContainer3"]
 layout_mode = 2
@@ -299,48 +344,74 @@ text = "3"
 label_settings = SubResource("LabelSettings_066hf")
 horizontal_alignment = 1
 
-[node name="VBoxContainer4" type="VBoxContainer" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar"]
+[node name="VBoxContainer4" type="VBoxContainer" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar" node_paths=PackedStringArray("border", "highlighted_border", "label")]
 layout_mode = 2
+script = ExtResource("18_qlcwb")
+border = NodePath("TextureRect2/TextureRect")
+highlighted_border = NodePath("TextureRect2/TextureRect2")
+label = NodePath("Label")
 
-[node name="TextureRect" type="TextureRect" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar/VBoxContainer4"]
+[node name="TextureRect2" type="TextureRect" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar/VBoxContainer4"]
 z_index = 1
 layout_mode = 2
+texture = ExtResource("18_dyb6x")
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar/VBoxContainer4/TextureRect2"]
+layout_mode = 2
+offset_left = -10.7145
+offset_top = -6.81818
+offset_right = 150.285
+offset_bottom = 152.182
 texture = ExtResource("11_qum7v")
 
-[node name="TextureRect" type="TextureRect" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar/VBoxContainer4/TextureRect"]
-z_index = -1
-offset_left = 9.7402
-offset_top = 11.3636
-offset_right = 152.74
-offset_bottom = 155.364
-texture = ExtResource("18_dyb6x")
+[node name="TextureRect2" type="TextureRect" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar/VBoxContainer4/TextureRect2"]
+visible = false
+layout_mode = 2
+offset_left = -10.7145
+offset_top = -6.81818
+offset_right = 150.285
+offset_bottom = 152.182
+texture = ExtResource("21_6bhrx")
 
 [node name="Label" type="Label" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar/VBoxContainer4"]
 layout_mode = 2
-text = "4"
+text = "4
+"
 label_settings = SubResource("LabelSettings_066hf")
 horizontal_alignment = 1
 
-[node name="VBoxContainer5" type="VBoxContainer" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar"]
+[node name="VBoxContainer5" type="VBoxContainer" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar" node_paths=PackedStringArray("border", "highlighted_border", "label")]
 layout_mode = 2
+script = ExtResource("18_qlcwb")
+border = NodePath("TextureRect2/TextureRect")
+highlighted_border = NodePath("TextureRect2/TextureRect2")
+label = NodePath("Label")
 
-[node name="TextureRect" type="TextureRect" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar/VBoxContainer5"]
+[node name="TextureRect2" type="TextureRect" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar/VBoxContainer5"]
 z_index = 1
 layout_mode = 2
+texture = ExtResource("19_36wsv")
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar/VBoxContainer5/TextureRect2"]
+layout_mode = 2
+offset_left = -10.7145
+offset_top = -6.81818
+offset_right = 150.285
+offset_bottom = 152.182
 texture = ExtResource("11_qum7v")
 
-[node name="TextureRect" type="TextureRect" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar/VBoxContainer5/TextureRect"]
-z_index = -1
-offset_left = 9.7402
-offset_top = 11.3636
-offset_right = 152.74
-offset_bottom = 155.364
-texture = ExtResource("19_36wsv")
+[node name="TextureRect2" type="TextureRect" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar/VBoxContainer5/TextureRect2"]
+visible = false
+layout_mode = 2
+offset_left = -10.7145
+offset_top = -6.81818
+offset_right = 150.285
+offset_bottom = 152.182
+texture = ExtResource("21_6bhrx")
 
 [node name="Label" type="Label" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar/VBoxContainer5"]
 layout_mode = 2
-text = "5
-"
+text = "5"
 label_settings = SubResource("LabelSettings_066hf")
 horizontal_alignment = 1
 
