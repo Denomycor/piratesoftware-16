@@ -36,7 +36,6 @@ func _physics_process(delta: float):
 		check_drift(delta)
 		add_points(points_per_second * delta)
 		time_survived += delta
-		overlay.set_hp(LevelContext.level.car.health)
 		overlay.set_speed(speed)
 
 func check_drift(delta: float):

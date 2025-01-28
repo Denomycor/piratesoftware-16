@@ -12,6 +12,7 @@ var current_idx: int
 
 func _ready() -> void:
 	get_weapon(0).activate()
+	owner.get_parent().get_parent().overlay.switch_weapon(0)
 	weapon_anim.animation_finished.connect(func(): weapon_anim.visible = false)
 	alien_anim.animation_finished.connect(func(): alien_anim.visible = false)
 
@@ -20,6 +21,7 @@ func switch_active_weapon(idx: int) -> void:
 	get_weapon(current_idx).deactivate()
 	get_weapon(idx).activate()
 	current_idx = idx
+	LevelContext.level.overlay.switch_weapon(idx)
 	weapon_switched.emit()
 
 
@@ -60,7 +62,6 @@ func play_change_animation(idx: int) -> void:
 	weapon_anim.play()
 	alien_anim.play()
 	weapon_anim.frame_changed.connect(func():
-		print("change")
 		if weapon_anim.frame == 2:
 			switch_active_weapon(idx)
 	)

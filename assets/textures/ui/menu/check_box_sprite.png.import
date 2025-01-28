@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dm0lidnygho56"
-path="res://.godot/imported/radar_ui.png-4ab517184ee0efa3912795f3e6615198.ctex"
+uid="uid://cibvv5438dyd3"
+path="res://.godot/imported/check_box_sprite.png-c8486783c18198201d82e08c8d13d551.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/ui/radar_ui.png"
-dest_files=["res://.godot/imported/radar_ui.png-4ab517184ee0efa3912795f3e6615198.ctex"]
+source_file="res://assets/textures/ui/menu/check_box_sprite.png"
+dest_files=["res://.godot/imported/check_box_sprite.png-c8486783c18198201d82e08c8d13d551.ctex"]
 
 [params]
 

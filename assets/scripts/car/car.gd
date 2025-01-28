@@ -10,7 +10,7 @@ var parallel_multiplier: float = 0.25
 
 @export var weapon_vars: Array[CarVars]
 
-@export var health: float = 100
+@export var max_health: float = 100
 @export var max_collision_damage: float = 25
 @export var min_collision_speed: float = 300
 @export var speed_for_max_collision_damage: float = 1500
@@ -22,6 +22,8 @@ var parallel_multiplier: float = 0.25
 var current_weapon: Weapon
 
 var last_velocity: Vector2
+
+var health := max_health
 
 func _ready():
 	contact_monitor = true
@@ -90,6 +92,7 @@ func _on_weapon_switched():
 
 func _on_take_damage(amount: float):
 	health -= amount
+	LevelContext.level.overlay.set_hp(health)
 	if health <= 0:
 		LevelContext.level.set_game_over()
 

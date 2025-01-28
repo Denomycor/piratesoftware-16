@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://2vnrdwbw1mxc"]
+[gd_scene load_steps=30 format=3 uid="uid://cemnplwcdcbgk"]
 
 [ext_resource type="Script" path="res://assets/scripts/level/level.gd" id="1_y7sae"]
 [ext_resource type="PackedScene" uid="uid://drcpxeie725b" path="res://assets/scenes/car/car.tscn" id="2_8k278"]
@@ -13,7 +13,7 @@
 [ext_resource type="Script" path="res://assets/scripts/level/stats.gd" id="8_6ascs"]
 [ext_resource type="PackedScene" uid="uid://bb6guieu8fwa" path="res://assets/scenes/props/big_boulder.tscn" id="8_chcvc"]
 [ext_resource type="PackedScene" uid="uid://dl6rmenebbkf2" path="res://assets/scenes/props/big_barrel.tscn" id="9_5mdmc"]
-[ext_resource type="PackedScene" path="res://assets/scenes/ui/game_over_menu.tscn" id="9_h3nak"]
+[ext_resource type="PackedScene" uid="uid://dtyepolgwnyv2" path="res://assets/scenes/ui/game_over_menu.tscn" id="9_h3nak"]
 [ext_resource type="Script" path="res://assets/scripts/utils/panning_camera.gd" id="9_qeern"]
 [ext_resource type="PackedScene" uid="uid://b66n0n4i6aa3b" path="res://assets/scenes/props/big_bones.tscn" id="10_06wf4"]
 [ext_resource type="PackedScene" uid="uid://dnfnetfp4l5fb" path="res://assets/scenes/props/mid_boulder.tscn" id="11_quaxx"]
@@ -115,7 +115,6 @@ zoom_factor = 0.005
 z_index = 5
 position = Vector2(987, 467)
 weapon_vars = Array[ExtResource("19_ke0jl")]([SubResource("Resource_msscp"), SubResource("Resource_stdhw"), SubResource("Resource_fojdv"), SubResource("Resource_h5je3"), SubResource("Resource_rpkw5")])
-health = 1000.0
 
 [node name="BoomArm" parent="World/Car" index="3"]
 mouse_slide_distance = 1000.0

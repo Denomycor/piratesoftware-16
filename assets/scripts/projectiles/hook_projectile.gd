@@ -19,6 +19,12 @@ func _process(_delta: float) -> void:
 		rotation = my_rotation + (target.rotation - target_rotation)
 
 
+func _physics_process(delta: float) -> void:
+	super._physics_process(delta)
+	var dock: Node2D = LevelContext.level.car.get_node("weapon_dock")
+	$Line2D.set_point_position(1, $Line2D.to_local(dock.global_position))
+
+
 func connect_hook(node: CollisionObject2D, pos: Vector2) -> void:
 	# stop lifetime timer
 	timer.kill()

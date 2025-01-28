@@ -1,13 +1,30 @@
-[gd_scene load_steps=4 format=3 uid="uid://cb05setpgdk7r"]
+[gd_scene load_steps=7 format=3 uid="uid://dyjdx5f34nlfp"]
 
-[ext_resource type="PackedScene" path="res://assets/scenes/ui/audio_slider.tscn" id="1_4isu8"]
+[ext_resource type="PackedScene" uid="uid://bwj7wl63yu7p8" path="res://assets/scenes/ui/audio_slider.tscn" id="1_4isu8"]
 [ext_resource type="Script" path="res://assets/scripts/ui/main_menu.gd" id="1_rkxya"]
+[ext_resource type="Texture2D" uid="uid://boljn8b42dfx6" path="res://assets/textures/ui/menu/main_menu_background.png" id="2_pxn63"]
+[ext_resource type="Theme" uid="uid://cjlihoor22i2h" path="res://assets/resources/theme.tres" id="3_1gt4d"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_8d5c2"]
-font_size = 23
+[sub_resource type="LabelSettings" id="LabelSettings_gcirm"]
+line_spacing = 5.0
+font_size = 35
+font_color = Color(0.95967, 0.838587, 0.700804, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_xgo60"]
+font_size = 50
+font_color = Color(0.960784, 0.839216, 0.701961, 1)
 
 [node name="MainMenu" type="CanvasLayer"]
 script = ExtResource("1_rkxya")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_pxn63")
+expand_mode = 3
 
 [node name="TabContainer" type="TabContainer" parent="."]
 anchors_preset = 15
@@ -15,6 +32,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("3_1gt4d")
 tab_alignment = 1
 current_tab = 0
 tabs_visible = false
@@ -26,10 +44,10 @@ metadata/_tab_index = 0
 
 [node name="Label" type="Label" parent="TabContainer/VBoxContainer"]
 layout_mode = 2
-text = "Hyper Turbo Drift: Alien Carnage Unleashed in the Sands of Eternal Fury and Apocalypse Chaos
-
-"
-label_settings = SubResource("LabelSettings_8d5c2")
+text = "Hyper Turbo Drift: 
+Alien Carnage Unleashed in the Sands 
+of Eternal Fury and Apocalypse Chaos"
+label_settings = SubResource("LabelSettings_gcirm")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -38,6 +56,7 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+theme = ExtResource("3_1gt4d")
 text = "Play"
 
 [node name="options" type="Button" parent="TabContainer/VBoxContainer"]
@@ -65,6 +84,7 @@ metadata/_tab_index = 1
 layout_mode = 2
 text = "Options
 "
+label_settings = SubResource("LabelSettings_xgo60")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -79,11 +99,6 @@ bus_name = "Master"
 layout_mode = 2
 bus_name = "Music"
 bus_idx = 1
-
-[node name="AudioSlider3" parent="TabContainer/VBoxContainer2/VBoxContainer" instance=ExtResource("1_4isu8")]
-layout_mode = 2
-bus_name = "SFX"
-bus_idx = 2
 
 [node name="AudioSlider4" parent="TabContainer/VBoxContainer2/VBoxContainer" instance=ExtResource("1_4isu8")]
 layout_mode = 2

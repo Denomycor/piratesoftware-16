@@ -13,12 +13,12 @@ signal level_exited(level: Node)
 func _ready():
 	LevelContext.level = self
 	pause_menu.quit_level.connect(quit_level)
-	print(get_viewport().canvas_cull_mask)
+	game_over_menu.quit_level.connect(quit_level)
 	get_viewport().set_canvas_cull_mask_bit(9, false)
-	print(get_viewport().canvas_cull_mask)
 
 
 func quit_level() -> void:
+	stats.is_game_over = true
 	level_exited.emit(self)
 
 

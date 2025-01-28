@@ -1,6 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://bwj7wl63yu7p8"]
+[gd_scene load_steps=3 format=3 uid="uid://bwj7wl63yu7p8"]
 
 [ext_resource type="Script" path="res://assets/scripts/ui/audio_slider.gd" id="1_nqktx"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_4ft2x"]
+font_size = 20
+font_color = Color(0.960784, 0.839216, 0.701961, 1)
 
 [node name="AudioSlider" type="VBoxContainer"]
 offset_right = 50.0
@@ -11,6 +15,7 @@ bus_name = "music"
 [node name="Label" type="Label" parent="."]
 layout_mode = 2
 text = "audio"
+label_settings = SubResource("LabelSettings_4ft2x")
 horizontal_alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
