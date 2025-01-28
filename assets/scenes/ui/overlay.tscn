@@ -1,6 +1,7 @@
-[gd_scene load_steps=31 format=3 uid="uid://is7aeubau3xs"]
+[gd_scene load_steps=33 format=3 uid="uid://is7aeubau3xs"]
 
 [ext_resource type="Script" path="res://assets/scripts/ui/overlay.gd" id="1_tmn6d"]
+[ext_resource type="Shader" path="res://assets/scripts/ui/vignette.gdshader" id="2_03iuh"]
 [ext_resource type="Texture2D" uid="uid://dm0lidnygho56" path="res://assets/textures/ui/menu/radar_ui.png" id="2_8jhi0"]
 [ext_resource type="Theme" uid="uid://cjlihoor22i2h" path="res://assets/resources/theme.tres" id="2_vhdhy"]
 [ext_resource type="Script" path="res://assets/scripts/sonar/sonar_viewport.gd" id="2_vnyf8"]
@@ -25,6 +26,14 @@
 [ext_resource type="Script" path="res://assets/scripts/ui/weapon_slot.gd" id="18_qlcwb"]
 [ext_resource type="Texture2D" uid="uid://c20fcwkkufiqx" path="res://assets/textures/ui/in_game/rocket_icon.png" id="19_36wsv"]
 [ext_resource type="Texture2D" uid="uid://cyr1hr466xvfd" path="res://assets/textures/ui/in_game/selected_icon_box_sprite.png" id="21_6bhrx"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uqnuj"]
+shader = ExtResource("2_03iuh")
+shader_parameter/inner_radius = 1.0
+shader_parameter/outer_radius = 1.0
+shader_parameter/vignette_strength = 1.5
+shader_parameter/dither_strength = 0.03
+shader_parameter/vignette_color = Color(0.392157, 0.054902, 0.0627451, 1)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_qklw6"]
 noise_type = 3
@@ -53,11 +62,21 @@ line_spacing = 40.0
 font_size = 25
 font_color = Color(0.290196, 0.184314, 0.164706, 1)
 
-[node name="Overlay" type="CanvasLayer" node_paths=PackedStringArray("speed_counter", "health_bar", "weapon_bar")]
+[node name="Overlay" type="CanvasLayer" node_paths=PackedStringArray("speed_counter", "health_bar", "weapon_bar", "vignette")]
 script = ExtResource("1_tmn6d")
 speed_counter = NodePath("CenterContainer2/HBoxContainer/TextureRect/Container/Sprite2D")
 health_bar = NodePath("CenterContainer2/HBoxContainer/VBoxContainer/Panel2/TextureRect/ProgressBar")
 weapon_bar = NodePath("CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar")
+vignette = NodePath("ColorRect")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = 2
+material = SubResource("ShaderMaterial_uqnuj")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 anchors_preset = 3
@@ -444,3 +463,5 @@ text = "Kills: 0"
 label_settings = SubResource("LabelSettings_2i05p")
 horizontal_alignment = 2
 vertical_alignment = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
