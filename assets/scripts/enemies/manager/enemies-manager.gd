@@ -10,8 +10,10 @@ const BLOCK_RADIUS: float = 200
 
 
 @export var enemy_list: Array[PackedScene]
-@export var enemy_ratios: Array[float]
-@export var max_enemies: int = 500
+@export var enemy_ratios: Array[Curve]
+@export var max_enemies: Curve
+
+@export var time_for_max_difficulty : float = 60*5
 
 @onready var spawn_timer: Timer = $SpawnTimer
 
@@ -24,7 +26,7 @@ func _ready() -> void:
 	spawn_timer.timeout.connect(_spawn_enemy)
 
 	if enemy_list.size() != enemy_ratios.size():
-		printerr("Enemy list and ratios must have the same size")
+		printerr("Enemy list and enemy_ratios must have the same size")
 		get_tree().quit()
 	
 func _update_enemies():
@@ -57,27 +59,33 @@ func _position_near_target() -> Vector2:
 
 
 func _physics_process(_delta: float) -> void:
-
+	difficulty = clampf(LevelContext.level.stats.time_survived/time_for_max_difficulty, 0, 1)
 	_update_enemies()
 
 
-func _get_random_enemy() -> PackedScene:
-	var ratio = randf()
+func _get_random_enemy() -> Enemy:
+	if enemy_list.size() == 0:
+		return null
 	var sum := 0.0
-
-	for i in enemy_ratios.size():
-		sum += enemy_ratios[i]
-		if ratio < sum:
-			return enemy_list[i]
-			
-	return enemy_list[enemy_list.size() - 1]
+	var ratios: Array[float]
+	for ratio in enemy_ratios:
+		ratios.append(ratio.sample(difficulty))
+	for amount in ratios:
+		sum += amount
+	var num := randf_range(0,sum)
+	sum = 0
+	var idx := 0
+	while sum < num && idx < enemy_list.size():
+		sum += ratios[idx]
+		idx += 1
+	return enemy_list[idx-1].instantiate()
 
 func _spawn_enemy() -> void:
-	if _get_enemies().size() >= max_enemies:
+	if _get_enemies().size() >= int(max_enemies.sample(difficulty)):
 		return
 	
 	var pos = _position_near_target()
-	var enemy_instance = _get_random_enemy().instantiate()
+	var enemy_instance = _get_random_enemy()
 	
 
 	enemy_instance.target = target

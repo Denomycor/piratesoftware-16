@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://cemnplwcdcbgk"]
+[gd_scene load_steps=33 format=3 uid="uid://cemnplwcdcbgk"]
 
 [ext_resource type="Script" path="res://assets/scripts/level/level.gd" id="1_y7sae"]
 [ext_resource type="PackedScene" uid="uid://drcpxeie725b" path="res://assets/scenes/car/car.tscn" id="2_8k278"]
@@ -65,6 +65,21 @@ torque_multiplier = 10.0
 perpendicular_multiplier = 0.25
 parallel_multiplier = 0.25
 
+[sub_resource type="Curve" id="Curve_omlgi"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_ehfhm"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 0.19715), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_u14r1"]
+min_value = 50.0
+max_value = 1000.0
+_data = [Vector2(0, 50), 0.0, 0.0, 0, 0, Vector2(1, 525), 0.0, 0.0, 0, 0]
+point_count = 2
+metadata/_snap_enabled = true
+
 [node name="TestLevel" type="Node" node_paths=PackedStringArray("overlay", "stats", "car", "arena")]
 script = ExtResource("1_y7sae")
 overlay = NodePath("Overlay")
@@ -126,7 +141,8 @@ script = ExtResource("4_a7yx0")
 target = NodePath("../Car")
 num_groups = 3
 enemy_list = Array[PackedScene]([ExtResource("21_po4qe"), ExtResource("22_l11od")])
-enemy_ratios = Array[float]([0.96, 0.04])
+enemy_ratios = Array[Curve]([SubResource("Curve_omlgi"), SubResource("Curve_ehfhm")])
+max_enemies = SubResource("Curve_u14r1")
 
 [node name="SpawnTimer" type="Timer" parent="World/EnemySpawner"]
 wait_time = 0.2
