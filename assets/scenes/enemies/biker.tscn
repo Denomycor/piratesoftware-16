@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://canrvohjsbxjs" path="res://assets/textures/enemies/motard_wheel.png" id="3_sa0fu"]
 [ext_resource type="PackedScene" uid="uid://bs42xbt08m7uo" path="res://assets/scenes/weapons/biker_gun.tscn" id="5_csq2n"]
 [ext_resource type="PackedScene" uid="uid://dyhhyf1tfwaoq" path="res://assets/scenes/enemies/biker_particles.tscn" id="6_b6p6t"]
-[ext_resource type="AudioStream" uid="uid://cltkhfnnofbal" path="res://assets/audio/biker/biker_scream.wav" id="7_22mmb"]
+[ext_resource type="AudioStream" uid="uid://dmbo5hbx7alex" path="res://assets/audio/biker/motard_scream1.wav" id="7_4ee0p"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_utvnp"]
 radius = 47.0
@@ -66,7 +66,7 @@ scale = Vector2(5.1, 4.15)
 
 [node name="scream" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
-stream = ExtResource("7_22mmb")
+stream = ExtResource("7_4ee0p")
 volume_db = 10.0
 bus = &"SFX"
 

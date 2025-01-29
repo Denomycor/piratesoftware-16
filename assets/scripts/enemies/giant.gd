@@ -9,7 +9,7 @@ class_name Giant extends Enemy
 @export var charge_speed := 1500
 @export var charge_range := 2500
 @export var charge_color: Color
-var charge_is_on_cooldown := false
+var charge_is_on_cooldown := true
 
 @onready var collision: CollisionShape2D = $CollisionShape2D
 @onready var hit_box: HitBoxComponent = $HitBoxComponent
