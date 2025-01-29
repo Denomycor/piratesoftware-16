@@ -32,3 +32,4 @@ position = Vector2(152, 0)
 [node name="shoot" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("5_vxyr5")
+bus = &"SFX"

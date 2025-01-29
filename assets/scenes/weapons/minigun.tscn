@@ -1,10 +1,11 @@
-[gd_scene load_steps=15 format=3 uid="uid://dbf445di2iil4"]
+[gd_scene load_steps=16 format=3 uid="uid://dbf445di2iil4"]
 
 [ext_resource type="Script" path="res://assets/scripts/weapons/components/turn_component.gd" id="1_fw3mj"]
 [ext_resource type="Script" path="res://assets/scripts/weapons/minigun.gd" id="1_nd5hs"]
 [ext_resource type="Texture2D" uid="uid://cfmeupd241sxf" path="res://assets/textures/car/weapon/minigun.png" id="2_52n6a"]
 [ext_resource type="Script" path="res://assets/scripts/weapons/components/projectile_spawner_component.gd" id="2_qdibs"]
 [ext_resource type="Texture2D" uid="uid://7v0n3bcxsn3m" path="res://assets/textures/particles/fire.png" id="3_uauo7"]
+[ext_resource type="AudioStream" uid="uid://n3qikxehd6wu" path="res://assets/audio/weapons/minigun.wav" id="6_1ugim"]
 
 [sub_resource type="Gradient" id="Gradient_lkkmm"]
 offsets = PackedFloat32Array(0, 0.0318471, 0.33121, 0.656051, 0.987261)
@@ -90,3 +91,8 @@ speed_scale = 4.0
 explosiveness = 0.41
 randomness = 1.0
 local_coords = true
+
+[node name="shoot" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("6_1ugim")
+bus = &"SFX"
