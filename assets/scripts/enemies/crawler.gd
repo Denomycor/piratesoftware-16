@@ -2,6 +2,7 @@ class_name Crawler extends Enemy
 
 @export var health: float = 10
 @export var attack_range: float = 310
+@export var speed_for_kill: float = 600
 
 @onready var gpu_particles: GPUParticles2D = $GPUParticles2D
 @onready var collision: CollisionShape2D = $CollisionShape2D
@@ -14,6 +15,8 @@ var dead := false
 var is_on_cooldown := false
 
 func _ready() -> void:
+	hurt_box.monitoring = true
+	hurt_box.body_entered.connect(_on_collision)
 	animation_player.play("stoped")
 	hit_box.monitoring = false
 	hurt_box.has_taken_damage.connect(_take_dmg)
@@ -73,3 +76,11 @@ func can_attack() -> bool:
 func is_in_range() -> bool:
 	var distance := (target.global_position - global_position).length()
 	return distance < attack_range
+
+func _on_collision(node: Node) -> void:
+	if not node is Car:
+		return
+	var collision_direction: Vector2 = node.global_position.direction_to(global_position)
+	var collision_speed: float = node.last_velocity.dot(collision_direction)
+	var collision_damage := lerpf(0, health, collision_speed/speed_for_kill)
+	_take_dmg(collision_damage)

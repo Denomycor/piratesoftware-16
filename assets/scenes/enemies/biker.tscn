@@ -60,4 +60,3 @@ debug_color = Color(0.972063, 0, 0.443653, 0.42)
 [node name="GPUParticles2D" parent="." instance=ExtResource("6_b6p6t")]
 
 [editable path="BikerGun"]
-z_index = 10
