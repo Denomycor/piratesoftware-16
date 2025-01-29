@@ -60,9 +60,9 @@ func _physics_process(delta: float) -> void:
 	if(dead):
 		return
 
-	velocity += acceleration * delta
-	
-	move_and_slide()
+	if(!movement_locked):
+		velocity += acceleration * delta
+		move_and_slide()
 
 func get_distance_to_target() -> float:
 	return target.global_position.distance_to(global_position)
