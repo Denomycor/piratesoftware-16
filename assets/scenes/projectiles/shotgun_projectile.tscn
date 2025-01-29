@@ -35,11 +35,12 @@ radius = 11.0
 radius = 19.0263
 
 [node name="ShotgunProjectile" type="CharacterBody2D"]
+z_index = 30
 collision_layer = 8
 collision_mask = 5
 script = ExtResource("1_pex8q")
-speed = 2500.0
-lifetime = 0.5
+speed = 3000.0
+lifetime = 0.6
 scale_curve = SubResource("Curve_15b5m")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
@@ -50,7 +51,6 @@ explosiveness = 0.4
 randomness = 0.3
 
 [node name="Shotgun-bullet" type="Sprite2D" parent="."]
-scale = Vector2(1.1, 1.1)
 texture = ExtResource("2_xs1d6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

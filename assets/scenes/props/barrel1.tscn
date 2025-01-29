@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://qupwycf3fsaf"]
+[gd_scene load_steps=16 format=3 uid="uid://qupwycf3fsaf"]
 
 [ext_resource type="Texture2D" uid="uid://b8pjgkx0utcs6" path="res://assets/textures/props/barrel_asset_1.png" id="1_sehac"]
 [ext_resource type="Script" path="res://assets/scripts/props/barrel.gd" id="1_xs686"]
@@ -34,15 +34,7 @@ data = {
 }
 
 [sub_resource type="ImageTexture" id="ImageTexture_dvbwv"]
-image = SubResource("Image_aeyxr")
-
-[sub_resource type="Curve" id="Curve_uopte"]
-max_value = 1000.0
-_data = [Vector2(0, 1000), 0.0, 0.0, 0, 0, Vector2(0.32973, 153.846), -418.552, -418.552, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="CurveTexture" id="CurveTexture_eojaq"]
-curve = SubResource("Curve_uopte")
+image = SubResource("Image_wd2cd")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_43jrf"]
 particle_flag_align_y = true
@@ -53,7 +45,6 @@ emission_point_count = 12787
 spread = 180.0
 initial_velocity_min = 50.0
 initial_velocity_max = 400.0
-velocity_limit_curve = SubResource("CurveTexture_eojaq")
 gravity = Vector3(0, 0, 0)
 scale_min = 2.0
 scale_max = 4.0
@@ -98,7 +89,6 @@ rotation = -0.413698
 shape = SubResource("RectangleShape2D_3qjhx")
 
 [node name="HitBoxComponent" type="Area2D" parent="."]
-visible = false
 collision_layer = 0
 collision_mask = 7
 script = ExtResource("3_68ped")
