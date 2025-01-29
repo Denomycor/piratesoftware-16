@@ -1,0 +1,96 @@
+[gd_scene load_steps=14 format=3 uid="uid://cj48n1sf77f1p"]
+
+[ext_resource type="Script" path="res://assets/scripts/projectiles/area_projectile.gd" id="1_7twvv"]
+[ext_resource type="Script" path="res://assets/scripts/components/hit-box.gd" id="2_mqs76"]
+[ext_resource type="Texture2D" uid="uid://7v0n3bcxsn3m" path="res://assets/textures/particles/fire.png" id="3_pe45i"]
+[ext_resource type="Texture2D" uid="uid://c4mcl7cr2pt0r" path="res://assets/textures/car/weapon/projectiles/rocket_head_sprite.png" id="4_v7fvv"]
+
+[sub_resource type="Curve" id="Curve_clchk"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.805263, 1), 0.0, 0.0, 0, 0, Vector2(0.989474, 0.010989), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_a1boc"]
+radius = 12.0
+height = 64.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vnqqc"]
+radius = 17.0
+height = 72.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pa2v0"]
+radius = 637.257
+
+[sub_resource type="Curve" id="Curve_cg8qp"]
+_data = [Vector2(0.0486486, 1), 0.0, 0.0, 0, 0, Vector2(0.783784, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_e08jp"]
+curve = SubResource("Curve_cg8qp")
+
+[sub_resource type="Gradient" id="Gradient_gyi8m"]
+offsets = PackedFloat32Array(0, 0.0318471, 0.33121, 0.656051, 0.910828)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 0, 1, 0.8, 0.694118, 0, 1, 0.8, 0.458824, 0, 1, 0.151276, 0.151276, 0.151276, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_qs2gp"]
+gradient = SubResource("Gradient_gyi8m")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_p16j1"]
+particle_flag_align_y = true
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 20.0
+spread = 180.0
+initial_velocity_min = 50.0
+initial_velocity_max = 800.0
+gravity = Vector3(0, 0, 0)
+scale_min = 2.0
+scale_max = 4.0
+color_ramp = SubResource("GradientTexture1D_qs2gp")
+alpha_curve = SubResource("CurveTexture_e08jp")
+hue_variation_min = 0.9
+hue_variation_max = 1.0
+
+[node name="GunHeadProjectile" type="CharacterBody2D"]
+collision_layer = 16
+collision_mask = 5
+script = ExtResource("1_7twvv")
+speed = 4000.0
+lifetime = 2.0
+scale_curve = SubResource("Curve_clchk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_a1boc")
+
+[node name="HitBoxComponent" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 3
+script = ExtResource("2_mqs76")
+damage_amount = 5.0
+one_shot = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_vnqqc")
+
+[node name="AreaHitBoxComponent" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 7
+script = ExtResource("2_mqs76")
+damage_amount = 10.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaHitBoxComponent"]
+shape = SubResource("CircleShape2D_pa2v0")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+z_index = 2
+emitting = false
+amount = 1000
+process_material = SubResource("ParticleProcessMaterial_p16j1")
+texture = ExtResource("3_pe45i")
+one_shot = true
+explosiveness = 1.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 1.5708
+texture = ExtResource("4_v7fvv")

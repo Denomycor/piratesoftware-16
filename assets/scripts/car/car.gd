@@ -23,9 +23,10 @@ var current_weapon: Weapon
 
 var last_velocity: Vector2
 
-var health := max_health
+var health: float
 
 func _ready():
+	health = max_health
 	LevelContext.level.overlay.set_hp(health)
 	contact_monitor = true
 	max_contacts_reported = 1

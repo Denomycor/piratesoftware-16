@@ -113,7 +113,11 @@ func generate_props() -> void:
 		get_parent().add_child.call_deferred(prop)
 	
 func can_place(block_radius: float, pos: Vector2) -> bool:
+	if not is_point_inside_polygon(pos):
+		return false
 	for item in props:
+		if item == null:
+			continue
 		if item.is_overlaping(pos, block_radius):
 			return false
 	return true

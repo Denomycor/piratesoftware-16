@@ -1,5 +1,7 @@
 extends Node
 
+const BLOCK_RADIUS: float = 200
+
 @export var target: RigidBody2D
 @export var num_groups: int = 10
 
@@ -8,11 +10,14 @@ extends Node
 
 
 @export var enemy_list: Array[PackedScene]
-@export var enemy_ratios: Array[float]
-@export var max_enemies: int = 500
+@export var enemy_ratios: Array[Curve]
+@export var max_enemies: Curve
+
+@export var time_for_max_difficulty : float = 60*5
 
 @onready var spawn_timer: Timer = $SpawnTimer
 
+var difficulty: float = 0
 
 var cur_group = 0
 
@@ -21,7 +26,7 @@ func _ready() -> void:
 	spawn_timer.timeout.connect(_spawn_enemy)
 
 	if enemy_list.size() != enemy_ratios.size():
-		printerr("Enemy list and ratios must have the same size")
+		printerr("Enemy list and enemy_ratios must have the same size")
 		get_tree().quit()
 	
 func _update_enemies():
@@ -40,36 +45,47 @@ func _update_enemies():
 
 
 func _position_near_target() -> Vector2:
-	var target_dir = target.linear_velocity.normalized()
+	var arena := LevelContext.level.arena
 	var position_dir = Vector2(randf() - 0.5, randf() - 0.5).normalized()
-
-	if target_dir.dot(position_dir) < 0:
-		position_dir = -position_dir
 	
-	return target.position + position_dir * teleport_distance
+	var pos = target.position + position_dir * teleport_distance
+
+	while not arena.can_place(BLOCK_RADIUS, pos):
+		position_dir = Vector2(randf() - 0.5, randf() - 0.5).normalized()
+		
+		pos = target.position + position_dir * teleport_distance
+	
+	return pos
 
 
-func _process(_delta: float) -> void:
+func _physics_process(_delta: float) -> void:
+	difficulty = clampf(LevelContext.level.stats.time_survived/time_for_max_difficulty, 0, 1)
 	_update_enemies()
 
 
-func _get_random_enemy() -> PackedScene:
-	var ratio = randf()
+func _get_random_enemy() -> Enemy:
+	if enemy_list.size() == 0:
+		return null
 	var sum := 0.0
-
-	for i in enemy_ratios.size():
-		sum += enemy_ratios[i]
-		if ratio < sum:
-			return enemy_list[i]
-			
-	return enemy_list[enemy_list.size() - 1]
+	var ratios: Array[float]
+	for ratio in enemy_ratios:
+		ratios.append(ratio.sample(difficulty))
+	for amount in ratios:
+		sum += amount
+	var num := randf_range(0,sum)
+	sum = 0
+	var idx := 0
+	while sum < num && idx < enemy_list.size():
+		sum += ratios[idx]
+		idx += 1
+	return enemy_list[idx-1].instantiate()
 
 func _spawn_enemy() -> void:
-	if _get_enemies().size() >= max_enemies:
+	if _get_enemies().size() >= int(max_enemies.sample(difficulty)):
 		return
 	
 	var pos = _position_near_target()
-	var enemy_instance = _get_random_enemy().instantiate()
+	var enemy_instance = _get_random_enemy()
 	
 
 	enemy_instance.target = target
