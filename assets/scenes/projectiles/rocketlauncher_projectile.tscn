@@ -1,9 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://8n0auaiip0mg"]
+[gd_scene load_steps=15 format=3 uid="uid://8n0auaiip0mg"]
 
 [ext_resource type="Script" path="res://assets/scripts/projectiles/area_projectile.gd" id="1_uqj6l"]
 [ext_resource type="Script" path="res://assets/scripts/components/hit-box.gd" id="2_8qxhd"]
 [ext_resource type="Texture2D" uid="uid://7v0n3bcxsn3m" path="res://assets/textures/particles/fire.png" id="3_3v6dp"]
 [ext_resource type="Texture2D" uid="uid://c4mcl7cr2pt0r" path="res://assets/textures/car/weapon/projectiles/rocket_head_sprite.png" id="4_tltju"]
+[ext_resource type="AudioStream" uid="uid://b1h87gfjkkm3b" path="res://assets/audio/explosion1.wav" id="5_edra0"]
 
 [sub_resource type="Curve" id="Curve_clchk"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.805263, 1), 0.0, 0.0, 0, 0, Vector2(0.989474, 0.010989), 0.0, 0.0, 0, 0]
@@ -95,3 +96,8 @@ explosiveness = 1.0
 [node name="Sprite2D" type="Sprite2D" parent="."]
 rotation = 1.5708
 texture = ExtResource("4_tltju")
+
+[node name="explosion" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("5_edra0")
+bus = &"SFX"

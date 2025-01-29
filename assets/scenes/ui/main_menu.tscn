@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://dyjdx5f34nlfp"]
+[gd_scene load_steps=10 format=3 uid="uid://dyjdx5f34nlfp"]
 
 [ext_resource type="PackedScene" uid="uid://bwj7wl63yu7p8" path="res://assets/scenes/ui/audio_slider.tscn" id="1_4isu8"]
 [ext_resource type="Script" path="res://assets/scripts/ui/main_menu.gd" id="1_rkxya"]
 [ext_resource type="Texture2D" uid="uid://boljn8b42dfx6" path="res://assets/textures/ui/menu/main_menu_background.png" id="2_pxn63"]
 [ext_resource type="Theme" uid="uid://cjlihoor22i2h" path="res://assets/resources/theme.tres" id="3_1gt4d"]
+[ext_resource type="AudioStream" uid="uid://hfvhkex3b0sh" path="res://assets/audio/terror-heights-dark-ambience.mp3" id="5_5pnt3"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_gcirm"]
 line_spacing = 5.0
@@ -179,3 +180,10 @@ size_flags_vertical = 4
 text = "Back
 
 "
+
+[node name="ambience" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("5_5pnt3")
+volume_db = -20.0
+autoplay = true
+bus = &"Music"

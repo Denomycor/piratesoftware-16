@@ -31,6 +31,8 @@ func _ready() -> void:
 		LevelContext.level.get_node("World").add_child(projectile)
 	)
 
+	projectile_spawner_component.just_shot.connect(%shooting.play)
+
 	animation_player.play("stoped")
 	hurt_box.has_taken_damage.connect(_take_dmg)
 	attack_timer.timeout.connect(func(): is_on_cooldown = false)

@@ -11,6 +11,8 @@ func _ready() -> void:
 
 func destroy() -> void:
 	if(!frozen):
+		$explosion.pitch_scale = randf_range(1, 1.4)
+		$explosion.play()
 		$Sprite2D.visible = false
 		area_hitbox_component.monitoring = true
 		frozen = true

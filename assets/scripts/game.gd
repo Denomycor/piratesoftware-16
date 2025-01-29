@@ -17,11 +17,13 @@ func switch_main_menu_to_level(level_scene: PackedScene) -> void:
 	level.level_exited.connect(switch_level_to_main_menu)
 	add_child(level)
 	main_menu.visible = false
+	main_menu.get_node("%ambience").stop()
 	get_tree().paused = false
 
 
 func switch_level_to_main_menu(level: Node) -> void:
 	level.queue_free()
 	LevelContext.set_deferred("level", null)
+	main_menu.get_node("%ambience").play()
 	main_menu.visible = true
 

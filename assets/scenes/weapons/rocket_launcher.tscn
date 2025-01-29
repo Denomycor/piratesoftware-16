@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://xpgamcshcoi3"]
+[gd_scene load_steps=7 format=3 uid="uid://xpgamcshcoi3"]
 
 [ext_resource type="Script" path="res://assets/scripts/weapons/rocket_launcher.gd" id="1_ldygr"]
 [ext_resource type="Script" path="res://assets/scripts/weapons/components/turn_component.gd" id="2_qsljy"]
 [ext_resource type="Script" path="res://assets/scripts/weapons/components/projectile_spawner_component.gd" id="3_ygmqf"]
 [ext_resource type="Texture2D" uid="uid://c4mcl7cr2pt0r" path="res://assets/textures/car/weapon/projectiles/rocket_head_sprite.png" id="4_cnpui"]
 [ext_resource type="Texture2D" uid="uid://tk8ncyvl3r57" path="res://assets/textures/car/weapon/rocket_base_sprite.png" id="5_kfbfo"]
+[ext_resource type="AudioStream" uid="uid://banr3bbjxwwli" path="res://assets/audio/weapons/rocket.wav" id="6_p0krg"]
 
 [node name="RocketLauncher" type="Node2D"]
 script = ExtResource("1_ldygr")
@@ -31,3 +32,10 @@ texture = ExtResource("4_cnpui")
 position = Vector2(58, 0)
 rotation = 1.5708
 texture = ExtResource("5_kfbfo")
+
+[node name="shoot" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("6_p0krg")
+volume_db = -5.0
+pitch_scale = 0.8
+bus = &"SFX"

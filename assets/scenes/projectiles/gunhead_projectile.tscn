@@ -1,9 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://cj48n1sf77f1p"]
+[gd_scene load_steps=15 format=3 uid="uid://cj48n1sf77f1p"]
 
 [ext_resource type="Script" path="res://assets/scripts/projectiles/area_projectile.gd" id="1_7twvv"]
 [ext_resource type="Script" path="res://assets/scripts/components/hit-box.gd" id="2_mqs76"]
 [ext_resource type="Texture2D" uid="uid://7v0n3bcxsn3m" path="res://assets/textures/particles/fire.png" id="3_pe45i"]
 [ext_resource type="Texture2D" uid="uid://c4mcl7cr2pt0r" path="res://assets/textures/car/weapon/projectiles/rocket_head_sprite.png" id="4_v7fvv"]
+[ext_resource type="AudioStream" uid="uid://b1h87gfjkkm3b" path="res://assets/audio/explosion1.wav" id="5_xocbo"]
 
 [sub_resource type="Curve" id="Curve_clchk"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.805263, 1), 0.0, 0.0, 0, 0, Vector2(0.989474, 0.010989), 0.0, 0.0, 0, 0]
@@ -51,6 +52,7 @@ hue_variation_min = 0.9
 hue_variation_max = 1.0
 
 [node name="GunHeadProjectile" type="CharacterBody2D"]
+z_index = 30
 collision_layer = 16
 collision_mask = 5
 script = ExtResource("1_7twvv")
@@ -94,3 +96,8 @@ explosiveness = 1.0
 [node name="Sprite2D" type="Sprite2D" parent="."]
 rotation = 1.5708
 texture = ExtResource("4_v7fvv")
+
+[node name="explosion" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("5_xocbo")
+bus = &"SFX"

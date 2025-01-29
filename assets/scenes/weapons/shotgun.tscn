@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://qaypc31xeqwu"]
+[gd_scene load_steps=6 format=3 uid="uid://qaypc31xeqwu"]
 
 [ext_resource type="Script" path="res://assets/scripts/weapons/shotgun.gd" id="1_4mcpn"]
 [ext_resource type="Script" path="res://assets/scripts/weapons/components/turn_component.gd" id="1_f8ofd"]
 [ext_resource type="Script" path="res://assets/scripts/weapons/components/projectile_spawner_component.gd" id="3_dgnp0"]
 [ext_resource type="Texture2D" uid="uid://b8lcbubve4m4u" path="res://assets/textures/weapons/weapon.png" id="4_05tof"]
+[ext_resource type="AudioStream" uid="uid://dk0n7j10oi0fh" path="res://assets/audio/weapons/shotgun.wav" id="5_vxyr5"]
 
 [node name="Shotgun" type="Node2D"]
 script = ExtResource("1_4mcpn")
@@ -27,3 +28,8 @@ bullet_spawn = NodePath("../bullet_spawn")
 
 [node name="bullet_spawn" type="Node2D" parent="."]
 position = Vector2(152, 0)
+
+[node name="shoot" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("5_vxyr5")
+bus = &"SFX"

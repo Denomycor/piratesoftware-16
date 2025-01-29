@@ -26,6 +26,8 @@ func _on_take_damage(amount: int):
         collision_shape.disabled = true
         explosion_particles.emitting = true
         var tween := get_tree().create_tween()
+        %explosion.pitch_scale = randf_range(1, 1.4)
+        %explosion.play()
         tween.tween_callback(destroy).set_delay(explosion_particles.lifetime)
 
 func get_last_velocity() -> Vector2:

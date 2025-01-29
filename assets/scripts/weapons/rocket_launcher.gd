@@ -23,6 +23,7 @@ func _ready() -> void:
 		create_tween().tween_callback(func():
 			$RocketHeadSprite.visible = true
 		).set_delay(projectile_spawner_component.fire_delay * 0.8)
+		%shoot.play()
 	)
 
 
@@ -32,3 +33,4 @@ func _process(_delta: float) -> void:
 	
 	if Input.is_action_just_pressed("fire"):
 		projectile_spawner_component.shoot(get_global_mouse_position())
+

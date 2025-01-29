@@ -26,6 +26,8 @@ func _ready() -> void:
 	attack_timer.timeout.connect(func(): is_on_cooldown = false)
 	
 func attack():
+	%growl.pitch_scale = randf_range(0.7, 1.4)
+	%growl.play()
 	animation_player.play("attacking")
 	is_on_cooldown = true
 	attack_timer.start()

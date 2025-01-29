@@ -21,11 +21,19 @@ func _ready() -> void:
 		fired.emit(dir * strength * projectile_spawner_component.multishot)
 	)
 
+	deactivated.connect(%shoot.stop)
+
 
 func _process(_delta: float) -> void:
 	if !active:
 		return
 	
 	if Input.is_action_pressed("fire"):
+		if(!%shoot.playing):
+			%shoot.play()
 		projectile_spawner_component.shoot(get_global_mouse_position())
+	else:
+		if(%shoot.playing):
+			%shoot.stop()
+
 

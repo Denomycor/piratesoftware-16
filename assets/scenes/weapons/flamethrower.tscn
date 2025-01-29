@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://cdjq1shmnferv"]
+[gd_scene load_steps=6 format=3 uid="uid://cdjq1shmnferv"]
 
 [ext_resource type="Texture2D" uid="uid://dgw1rmb751aac" path="res://assets/textures/car/weapon/flamethrower.png" id="1_txcs4"]
 [ext_resource type="Script" path="res://assets/scripts/weapons/flamethrower.gd" id="2_743pj"]
 [ext_resource type="Script" path="res://assets/scripts/weapons/components/turn_component.gd" id="3_n7rtc"]
 [ext_resource type="Script" path="res://assets/scripts/weapons/components/projectile_spawner_component.gd" id="4_ymtcg"]
+[ext_resource type="AudioStream" uid="uid://bfohpbb0vsdjq" path="res://assets/audio/weapons/flamethrower.wav" id="5_7ehk8"]
 
 [node name="Flamethrower" type="Node2D"]
 script = ExtResource("2_743pj")
@@ -24,3 +25,7 @@ bullet_spawn = NodePath("../bullet_spawn")
 
 [node name="bullet_spawn" type="Node2D" parent="."]
 position = Vector2(152, 0)
+
+[node name="shoot" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("5_7ehk8")
