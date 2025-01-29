@@ -20,7 +20,7 @@ var is_on_cooldown := false
 func _ready() -> void:
 	hurt_box.monitoring = true
 	hurt_box.body_entered.connect(_on_collision)
-	animation_player.play("stoped")
+	sprite.frame = randi() % 5
 	hit_box.monitoring = false
 	hurt_box.has_taken_damage.connect(_take_dmg)
 	attack_timer.timeout.connect(func(): is_on_cooldown = false)
