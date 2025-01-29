@@ -10,8 +10,6 @@ var timer: Tween
 var travel_direction: Vector2
 var inherited_velocity := Vector2.ZERO
 
-var dying := false
-
 
 func _ready() -> void:
 	timer = create_tween()
@@ -26,13 +24,12 @@ func set_properties(pos: Vector2, rot: float) -> void:
 
 
 func _physics_process(delta) -> void:
-	if(!dying):
-		collision_shape.scale += Vector2.ONE * 0.1 
+	collision_shape.scale += Vector2.ONE * 0.1 
 	var motion := (travel_direction * speed) + inherited_velocity
 	global_position += motion * delta
 
 
 func destroy() -> void:
-	collision_shape.set_deferred("disbled", true)
-	dying = true
+	# collision_shape.set_deferred("disbled", true)
+	queue_free()
 

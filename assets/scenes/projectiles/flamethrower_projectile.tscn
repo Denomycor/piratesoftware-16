@@ -62,8 +62,8 @@ turbulence_influence_max = 0.01
 [node name="flamethrower_projectile" type="Node2D"]
 z_index = 30
 script = ExtResource("1_o2qr0")
-speed = 800.0
-lifetime = 2.0
+speed = 1700.0
+lifetime = 1.2
 
 [node name="HitBoxComponent" type="Area2D" parent="."]
 collision_layer = 0
