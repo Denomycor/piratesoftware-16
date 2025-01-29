@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://cemnplwcdcbgk"]
+[gd_scene load_steps=36 format=3 uid="uid://cemnplwcdcbgk"]
 
 [ext_resource type="Script" path="res://assets/scripts/level/level.gd" id="1_y7sae"]
 [ext_resource type="PackedScene" uid="uid://drcpxeie725b" path="res://assets/scenes/car/car.tscn" id="2_8k278"]
@@ -25,6 +25,7 @@
 [ext_resource type="PackedScene" uid="uid://is7y7auk6peu" path="res://assets/scenes/enemies/crawler.tscn" id="21_po4qe"]
 [ext_resource type="PackedScene" uid="uid://dw2abso84avq1" path="res://assets/scenes/enemies/biker.tscn" id="22_l11od"]
 [ext_resource type="PackedScene" uid="uid://cadth6phe5ec7" path="res://assets/scenes/enemies/gunhead.tscn" id="23_iarkt"]
+[ext_resource type="AudioStream" uid="uid://dulwgyuq5kvtl" path="res://assets/audio/Pufino-MetalIsTrash.mp3" id="25_u114g"]
 
 [sub_resource type="Resource" id="Resource_msscp"]
 script = ExtResource("19_ke0jl")
@@ -158,5 +159,11 @@ visible = false
 
 [node name="GameOverMenu" parent="." instance=ExtResource("9_h3nak")]
 visible = false
+
+[node name="game_music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("25_u114g")
+volume_db = -20.0
+autoplay = true
+bus = &"Music"
 
 [editable path="World/Car"]
