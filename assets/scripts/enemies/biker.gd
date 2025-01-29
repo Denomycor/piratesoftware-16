@@ -12,6 +12,7 @@ class_name Biker extends Enemy
 
 @onready var gpu_particles: GPUParticles2D = $GPUParticles2D
 @onready var collision: CollisionShape2D = $CollisionShape2D
+@onready var notifier: VisibleOnScreenNotifier2D = $VisibleOnScreenNotifier2D
 
 var last_velocity := Vector2.ZERO
 var dead := false
@@ -19,6 +20,10 @@ var acceleration: Vector2
 
 
 func _ready() -> void:
+	notifier.screen_entered.connect(func():
+		if(randf() > 0.3):
+			%scream.play()
+	)
 	hurt_box.has_taken_damage.connect(_take_dmg)
 	if follow_range == 0:
 		follow_range = int(randf_range(500, 1500))

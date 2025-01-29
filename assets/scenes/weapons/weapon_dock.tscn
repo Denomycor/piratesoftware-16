@@ -150,4 +150,5 @@ offset = Vector2(0, -103)
 [node name="change" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("10_nh6dw")
+volume_db = -10.0
 bus = &"SFX"
