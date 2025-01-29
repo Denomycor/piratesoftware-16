@@ -36,6 +36,6 @@ texture = ExtResource("5_kfbfo")
 [node name="shoot" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("6_p0krg")
-pitch_scale = 0.9
-max_polyphony = 2
+volume_db = -5.0
+pitch_scale = 0.8
 bus = &"SFX"
