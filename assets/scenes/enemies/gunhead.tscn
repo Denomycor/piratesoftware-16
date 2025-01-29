@@ -7,11 +7,11 @@
 [ext_resource type="Texture2D" uid="uid://dvwp2m6xuetjs" path="res://assets/textures/particles/stomach.png" id="5_fcg7q"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_u1wtw"]
-radius = 37.3363
+radius = 44.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_srnp2"]
-radius = 50.0
-height = 152.0
+radius = 65.0
+height = 160.0
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_somgk"]
 particles_animation = true
@@ -134,7 +134,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.6, 0.8),
 "transitions": PackedFloat32Array(10, 0.08, 1),
 "update": 0,
-"values": [Vector2(0, 0), Vector2(0, 0), Vector2(0, 50)]
+"values": [Vector2(0, 0), Vector2(0, 0), Vector2(0, 100)]
 }
 
 [sub_resource type="Animation" id="Animation_lkrbe"]
@@ -204,6 +204,7 @@ debug_color = Color(0.942244, 0.168395, 0.439121, 0.42)
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(30, 3)
 rotation = 1.5708
+scale = Vector2(1.5, 1.5)
 texture = ExtResource("4_1npl7")
 offset = Vector2(0, 100)
 hframes = 10

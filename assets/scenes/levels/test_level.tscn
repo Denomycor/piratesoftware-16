@@ -75,8 +75,8 @@ _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 0.19715), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Curve" id="Curve_wcr00"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 0.098901), 0.0, 0.0, 0, 0]
-point_count = 2
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1e-05, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.098901), 0.0, 0.0, 0, 0]
+point_count = 3
 
 [sub_resource type="Curve" id="Curve_u14r1"]
 min_value = 50.0
@@ -135,6 +135,7 @@ zoom_factor = 0.005
 z_index = 5
 position = Vector2(987, 467)
 weapon_vars = Array[ExtResource("19_ke0jl")]([SubResource("Resource_msscp"), SubResource("Resource_stdhw"), SubResource("Resource_fojdv"), SubResource("Resource_h5je3"), SubResource("Resource_rpkw5")])
+max_health = 1000.0
 
 [node name="BoomArm" parent="World/Car" index="3"]
 mouse_slide_distance = 1000.0
