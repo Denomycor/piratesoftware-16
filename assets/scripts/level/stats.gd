@@ -18,7 +18,7 @@ var current_drift_time: float = 0
 @export var speed_conversion_ratio: float = 1.0 / 20.0
 
 func add_points(amount: float) -> void:
-	points += amount * 100.0
+	points += amount
 	overlay.set_points(int(points))
 
 func increment_kills() -> void:

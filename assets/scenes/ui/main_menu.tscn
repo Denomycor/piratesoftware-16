@@ -1,10 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://dyjdx5f34nlfp"]
+[gd_scene load_steps=9 format=3 uid="uid://dyjdx5f34nlfp"]
 
 [ext_resource type="Script" path="res://assets/scripts/ui/main_menu.gd" id="1_rkxya"]
 [ext_resource type="Texture2D" uid="uid://boljn8b42dfx6" path="res://assets/textures/ui/menu/main_menu_background.png" id="2_pxn63"]
 [ext_resource type="Theme" uid="uid://cjlihoor22i2h" path="res://assets/resources/theme.tres" id="3_1gt4d"]
-[ext_resource type="AudioStream" uid="uid://hfvhkex3b0sh" path="res://assets/audio/terror-heights-dark-ambience.mp3" id="5_5pnt3"]
 [ext_resource type="PackedScene" uid="uid://df72ojrh7b03v" path="res://assets/scenes/ui/options_menu.tscn" id="4_hmmy2"]
+[ext_resource type="AudioStream" uid="uid://hfvhkex3b0sh" path="res://assets/audio/terror-heights-dark-ambience.mp3" id="5_5pnt3"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_gcirm"]
 line_spacing = 5.0
