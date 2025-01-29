@@ -16,6 +16,7 @@ func destroy() -> void:
 		frozen = true
 		$CollisionShape2D.set_deferred("disabled", true)
 
+		timer.kill()
 		var area_timer := create_tween()
 		area_timer.tween_callback(func(): 
 			area_hitbox_component.get_node("CollisionShape2D").set_deferred("disabled", true)

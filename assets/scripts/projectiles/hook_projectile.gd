@@ -11,9 +11,6 @@ var target_rotation: float
 
 
 func _process(_delta: float) -> void:
-	var dock: Node2D = LevelContext.level.car.get_node("weapon_dock")
-	$Line2D.set_point_position(1, $Line2D.to_local(dock.global_position))
-
 	if(target):
 		global_position = anchor.global_position
 		rotation = my_rotation + (target.rotation - target_rotation)
@@ -21,13 +18,13 @@ func _process(_delta: float) -> void:
 		if(LevelContext.level.car.global_position.distance_to(global_position) > 6000):
 			destroy()
 
+	var dock: Node2D = LevelContext.level.car.get_node("weapon_dock")
+	$Line2D.set_point_position.call_deferred(1, $Line2D.to_local(dock.global_position))
+
 
 func _physics_process(delta: float) -> void:
 	super._physics_process(delta)
 
-
-	var dock: Node2D = LevelContext.level.car.get_node("weapon_dock")
-	$Line2D.set_point_position(1, $Line2D.to_local(dock.global_position))
 	if(target is Enemy):
 		if(target.global_position.distance_to(LevelContext.level.car.global_position) > 800):
 			var direction_to_car := target.global_position.direction_to(LevelContext.level.car.global_position)

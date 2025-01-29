@@ -61,9 +61,9 @@ func _physics_process(delta: float) -> void:
 	if(dead):
 		return
 
-	velocity += acceleration * delta
-	
-	move_and_slide()
+	if(!movement_locked):
+		velocity += acceleration * delta
+		move_and_slide()
 
 func die():
 	dead = true
