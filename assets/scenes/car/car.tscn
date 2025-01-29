@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://drcpxeie725b"]
+[gd_scene load_steps=14 format=3 uid="uid://drcpxeie725b"]
 
 [ext_resource type="Script" path="res://assets/scripts/car/car.gd" id="1_nqiho"]
 [ext_resource type="PackedScene" path="res://assets/scenes/car/car_break_particles.tscn" id="2_2uyc3"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://assets/scripts/car/wheel.gd" id="4_wkcph"]
 [ext_resource type="PackedScene" uid="uid://c4b5t5usvyqcs" path="res://assets/scenes/weapons/weapon_dock.tscn" id="6_kmu1j"]
 [ext_resource type="Script" path="res://assets/scripts/components/hurt-box.gd" id="7_plr5q"]
+[ext_resource type="AudioStream" uid="uid://bgk5ox7ootsxu" path="res://assets/audio/car/motor_start.wav" id="10_pmtp0"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_kt83k"]
 friction = 0.8
@@ -113,3 +114,8 @@ shape = SubResource("CapsuleShape2D_1m2s1")
 
 [node name="weapon_dock" parent="." instance=ExtResource("6_kmu1j")]
 position = Vector2(3, 87)
+
+[node name="motor_start" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("10_pmtp0")
+bus = &"SFX"

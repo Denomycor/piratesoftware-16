@@ -35,6 +35,8 @@ func _ready():
 	weapon_dock.weapon_switched.connect(_on_weapon_switched)
 	hurt_box.has_taken_damage.connect(_on_take_damage)
 
+	%motor_start.play()
+
 	current_weapon = weapon_dock.get_current_weapon()
 	current_weapon.fired.connect(apply_knockback)
 	current_weapon.activated.connect(on_weapon_activated)

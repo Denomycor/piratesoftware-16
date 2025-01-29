@@ -8,6 +8,7 @@ func _ready() -> void:
 
 func show_game_over_menu() -> void:
 	visible = true
+	%explode.play()
 
 func set_stats(points: int, time_survived: float, kills: int, max_speed: float, max_drift_duration: float) -> void:
 	%Points.text = str(points)
