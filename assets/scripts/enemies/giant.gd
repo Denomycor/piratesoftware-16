@@ -106,6 +106,7 @@ func attack() -> void:
 
 func end_charge() -> void:
 	$Sprite2D.self_modulate = Color.WHITE
+	animation_player.speed_scale = 0.6
 	speed = speed_backup
 	charge_timer.start()
 
@@ -114,6 +115,7 @@ func start_charge() -> void:
 	charge_is_on_cooldown = true
 	create_tween().tween_callback(end_charge).set_delay(charge_time)
 	$Sprite2D.self_modulate = charge_color
+	animation_player.speed_scale = 1
 	speed_backup = speed
 	speed = charge_speed
 
