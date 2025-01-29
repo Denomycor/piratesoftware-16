@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://d1mkxnil63kry"]
+[gd_scene load_steps=5 format=3 uid="uid://bs42xbt08m7uo"]
 
 [ext_resource type="Script" path="res://assets/scripts/weapons/components/enemy_turn_component.gd" id="1_2lekv"]
 [ext_resource type="Script" path="res://assets/scripts/weapons/biker_gun.gd" id="1_gk5bl"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://cemnplwcdcbgk"]
+[gd_scene load_steps=35 format=3 uid="uid://cemnplwcdcbgk"]
 
 [ext_resource type="Script" path="res://assets/scripts/level/level.gd" id="1_y7sae"]
 [ext_resource type="PackedScene" uid="uid://drcpxeie725b" path="res://assets/scenes/car/car.tscn" id="2_8k278"]
@@ -24,6 +24,7 @@
 [ext_resource type="Script" path="res://assets/scripts/car/car_vars.gd" id="19_ke0jl"]
 [ext_resource type="PackedScene" uid="uid://is7y7auk6peu" path="res://assets/scenes/enemies/crawler.tscn" id="21_po4qe"]
 [ext_resource type="PackedScene" uid="uid://dw2abso84avq1" path="res://assets/scenes/enemies/biker.tscn" id="22_l11od"]
+[ext_resource type="PackedScene" uid="uid://cadth6phe5ec7" path="res://assets/scenes/enemies/gunhead.tscn" id="23_iarkt"]
 
 [sub_resource type="Resource" id="Resource_msscp"]
 script = ExtResource("19_ke0jl")
@@ -71,6 +72,10 @@ point_count = 2
 
 [sub_resource type="Curve" id="Curve_ehfhm"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 0.19715), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_wcr00"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 0.098901), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Curve" id="Curve_u14r1"]
@@ -139,9 +144,9 @@ max_slide_speed = 4000.0
 [node name="EnemySpawner" type="Node" parent="World" node_paths=PackedStringArray("target")]
 script = ExtResource("4_a7yx0")
 target = NodePath("../Car")
-num_groups = 3
-enemy_list = Array[PackedScene]([ExtResource("21_po4qe"), ExtResource("22_l11od")])
-enemy_ratios = Array[Curve]([SubResource("Curve_omlgi"), SubResource("Curve_ehfhm")])
+num_groups = 1
+enemy_list = Array[PackedScene]([ExtResource("21_po4qe"), ExtResource("22_l11od"), ExtResource("23_iarkt")])
+enemy_ratios = Array[Curve]([SubResource("Curve_omlgi"), SubResource("Curve_ehfhm"), SubResource("Curve_wcr00")])
 max_enemies = SubResource("Curve_u14r1")
 
 [node name="SpawnTimer" type="Timer" parent="World/EnemySpawner"]
