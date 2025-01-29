@@ -21,6 +21,14 @@ func _ready() -> void:
 		fired.emit(dir * strength * projectile_spawner_component.multishot)
 	)
 
+	activated.connect(func():
+		if(Input.is_action_pressed("fire")):
+			%shoot.play()
+	)
+	deactivated.connect(func():
+		%shoot.stop()
+	)
+
 
 func _process(_delta: float) -> void:
 	if !active:
@@ -31,10 +39,10 @@ func _process(_delta: float) -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if(event.is_action_pressed("fire")):
-		$GPUParticles2D.emitting = true
-		%shoot.play()
-	elif(event.is_action_released("fire")):
-		$GPUParticles2D.emitting = false
-		%shoot.stop()
+		if(event.is_action_pressed("fire") && active):
+			$GPUParticles2D.emitting = true
+			%shoot.play()
+		elif(event.is_action_released("fire")):
+			$GPUParticles2D.emitting = false
+			%shoot.stop()
 
