@@ -99,4 +99,5 @@ func _on_collision(node: Node) -> void:
 	var collision_direction: Vector2 = node.global_position.direction_to(global_position)
 	var collision_speed: float = node.last_velocity.dot(collision_direction)
 	var collision_damage := lerpf(0, health, collision_speed/speed_for_kill)
-	_take_dmg(collision_damage)
+	if not dead:
+		_take_dmg(collision_damage)
