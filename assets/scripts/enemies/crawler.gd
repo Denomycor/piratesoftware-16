@@ -3,6 +3,7 @@ class_name Crawler extends Enemy
 @export var health: float = 10
 @export var attack_range: float = 310
 @export var speed_for_kill: float = 600
+@export var max_accelaration: float = 100000
 
 @onready var gpu_particles: GPUParticles2D = $GPUParticles2D
 @onready var collision: CollisionShape2D = $CollisionShape2D
@@ -10,6 +11,8 @@ class_name Crawler extends Enemy
 @onready var attack_timer: Timer = $AttackCooldown
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var sprite: Sprite2D = $Sprite2D
+
+var acceleration: Vector2
 
 var dead := false
 var is_on_cooldown := false
@@ -31,9 +34,8 @@ func update_movement():
 	if dead:
 		return
 	if not is_in_range():
-		var direction = global_position.direction_to(target.global_position)
-		look_at(target.global_position)
-		velocity = direction * speed
+		set_chase_acceleration()
+		look_at(global_position + velocity)
 	else:
 		look_at(target.global_position)
 		velocity = Vector2(0,0)
@@ -53,6 +55,20 @@ func die():
 	gpu_particles.emitting = true
 	gpu_particles.finished.connect(queue_free)
 	died.emit()
+
+func _physics_process(delta: float) -> void:
+	if(dead):
+		return
+
+	velocity += acceleration * delta
+	
+	move_and_slide()
+
+func get_distance_to_target() -> float:
+	return target.global_position.distance_to(global_position)
+
+func set_chase_acceleration() -> void:
+	acceleration = SeekArriveSteeringBehaviour.get_steering_force(global_position, target.global_position, velocity, speed, max_accelaration, 0)
 
 func _process(_delta):
 	if dead:

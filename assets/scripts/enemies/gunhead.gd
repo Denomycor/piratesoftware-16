@@ -5,6 +5,7 @@ const PROJECTILE_SCENE: PackedScene = preload("res://assets/scenes/projectiles/g
 @export var health: float = 10
 @export var attack_range: float = 310
 @export var prediction_time: float = 2
+@export var max_accelaration: float = 100000
 
 @onready var gpu_particles: GPUParticles2D = $GPUParticles2D
 @onready var collision: CollisionShape2D = $CollisionShape2D
@@ -12,6 +13,8 @@ const PROJECTILE_SCENE: PackedScene = preload("res://assets/scenes/projectiles/g
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var projectile_spawner_component: ProjectileSpawnerComponent = $ProjectileSpawnerComponent
+
+var acceleration: Vector2
 
 var dead := false
 var is_on_cooldown := false
@@ -45,16 +48,22 @@ func update_movement():
 		look_at(target.global_position)
 		velocity = Vector2.ZERO
 		return
-	var direction: Vector2 = global_position.direction_to(target.global_position)
 	if not is_in_range():
-		look_at(target.global_position)
-		velocity = direction * speed
+		set_chase_acceleration()
+		look_at(global_position + velocity)
 	else:
-		direction = global_position.direction_to(target.global_position + target.linear_velocity * prediction_time + global_position - target.global_position)
-		velocity = direction * speed
+		set_mimic_acceleration()
 		look_at(global_position + velocity)
 	if can_attack():
 		attack()
+	
+func _physics_process(delta: float) -> void:
+	if(dead):
+		return
+
+	velocity += acceleration * delta
+	
+	move_and_slide()
 
 func die():
 	dead = true
@@ -91,3 +100,9 @@ func can_attack() -> bool:
 func is_in_range() -> bool:
 	var distance := (target.global_position - global_position).length()
 	return distance < attack_range
+
+func set_chase_acceleration() -> void:
+	acceleration = SeekArriveSteeringBehaviour.get_steering_force(global_position, target.global_position, velocity, speed, max_accelaration, 0)
+
+func set_mimic_acceleration() -> void:
+	acceleration = SeekArriveSteeringBehaviour.get_steering_force(global_position, global_position + target.linear_velocity.normalized() * prediction_time, velocity, target.get_speed(), max_accelaration, 0)

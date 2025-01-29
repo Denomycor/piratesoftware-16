@@ -4,7 +4,7 @@ class_name Biker extends Enemy
 @export_range(500, 1500) var follow_range: int
 @export var prediction_time: float = 0.3
 @export var max_accelaration := 100000
-@export var prediction_scalar := 10
+@export var prediction_scalar := 3
 @export var max_collision_damage: float = 25
 @export var min_collision_speed: float = 300
 @export var speed_for_max_collision_damage: float = 1500
