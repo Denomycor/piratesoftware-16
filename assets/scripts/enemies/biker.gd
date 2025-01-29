@@ -22,6 +22,7 @@ var acceleration: Vector2
 func _ready() -> void:
 	notifier.screen_entered.connect(func():
 		if(randf() > 0.3):
+			%scream.pitch_scale = randf_range(0.5, 1.5)
 			%scream.play()
 	)
 	hurt_box.has_taken_damage.connect(_take_dmg)

@@ -14,6 +14,11 @@ func _ready() -> void:
 	projectile_spawner_component.just_shot.connect(func():
 		var dir: Vector2 = get_global_mouse_position().direction_to(global_position)
 		fired.emit(dir * strength * projectile_spawner_component.multishot)
+		%shoot.play()
+		$Sprite2D/Sprite2D.visible = false
+		create_tween().tween_callback(func():
+			$Sprite2D/Sprite2D.visible = true
+		).set_delay(projectile_spawner_component.fire_delay * 0.3)
 	)
 
 func _process(_delta: float) -> void:
