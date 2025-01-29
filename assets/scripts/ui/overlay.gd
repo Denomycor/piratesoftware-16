@@ -6,18 +6,15 @@ class_name Overlay extends CanvasLayer
 @export var health_bar: HealthBar
 @export var weapon_bar: WeaponBar
 @export var vignette: ColorRect
-@export var ui_scale: float = 1.0
 
 @onready var stats: VBoxContainer = $StatsContainer
 @onready var bar_container: CenterContainer = $BarContainer
 @onready var sonar_container: HBoxContainer = $SonarContainer
 
-
 func _ready() -> void:
-	stats.scale = Vector2(ui_scale, ui_scale)
-	bar_container.scale = Vector2(ui_scale, ui_scale)
-	sonar_container.scale = Vector2(ui_scale, ui_scale)
-	
+	var ui_scale = GameOptions.ui_scale
+	scale_ui(ui_scale)
+		
 func set_points(points: int) -> void:
 	point_counter.text = "Points: " + str(points)
 
@@ -33,3 +30,8 @@ func set_hp(hp: float) -> void:
 
 func switch_weapon(idx: int) -> void:
 	weapon_bar.change_slot(idx)
+
+func scale_ui(ui_scale: float) -> void:
+	stats.scale = Vector2(ui_scale, ui_scale)
+	bar_container.scale = Vector2(ui_scale, ui_scale)
+	sonar_container.scale = Vector2(ui_scale, ui_scale)

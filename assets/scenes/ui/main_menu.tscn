@@ -1,21 +1,18 @@
-[gd_scene load_steps=10 format=3 uid="uid://dyjdx5f34nlfp"]
+[gd_scene load_steps=11 format=3 uid="uid://dyjdx5f34nlfp"]
 
-[ext_resource type="PackedScene" uid="uid://bwj7wl63yu7p8" path="res://assets/scenes/ui/audio_slider.tscn" id="1_4isu8"]
 [ext_resource type="Script" path="res://assets/scripts/ui/main_menu.gd" id="1_rkxya"]
 [ext_resource type="Texture2D" uid="uid://boljn8b42dfx6" path="res://assets/textures/ui/menu/main_menu_background.png" id="2_pxn63"]
 [ext_resource type="Theme" uid="uid://cjlihoor22i2h" path="res://assets/resources/theme.tres" id="3_1gt4d"]
 [ext_resource type="AudioStream" uid="uid://hfvhkex3b0sh" path="res://assets/audio/terror-heights-dark-ambience.mp3" id="5_5pnt3"]
+[ext_resource type="PackedScene" uid="uid://df72ojrh7b03v" path="res://assets/scenes/ui/options_menu.tscn" id="4_hmmy2"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_gcirm"]
 line_spacing = 5.0
 font_size = 35
 font_color = Color(0.95967, 0.838587, 0.700804, 1)
 
-[sub_resource type="LabelSettings" id="LabelSettings_xgo60"]
-font_size = 50
-font_color = Color(0.960784, 0.839216, 0.701961, 1)
-
 [sub_resource type="SystemFont" id="SystemFont_5kogv"]
+subpixel_positioning = 0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gwlvb"]
 
@@ -87,51 +84,10 @@ size_flags_vertical = 4
 text = "Quit
 "
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="TabContainer"]
+[node name="OptionsMenu" parent="TabContainer" instance=ExtResource("4_hmmy2")]
 visible = false
 layout_mode = 2
-alignment = 1
 metadata/_tab_index = 1
-
-[node name="Label" type="Label" parent="TabContainer/VBoxContainer2"]
-layout_mode = 2
-text = "Options
-"
-label_settings = SubResource("LabelSettings_xgo60")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/VBoxContainer2"]
-layout_mode = 2
-
-[node name="AudioSlider" parent="TabContainer/VBoxContainer2/VBoxContainer" instance=ExtResource("1_4isu8")]
-layout_mode = 2
-bus_name = "Master"
-
-[node name="AudioSlider2" parent="TabContainer/VBoxContainer2/VBoxContainer" instance=ExtResource("1_4isu8")]
-layout_mode = 2
-bus_name = "Music"
-bus_idx = 1
-
-[node name="AudioSlider4" parent="TabContainer/VBoxContainer2/VBoxContainer" instance=ExtResource("1_4isu8")]
-layout_mode = 2
-bus_name = "UI"
-bus_idx = 3
-
-[node name="window_mode" type="Button" parent="TabContainer/VBoxContainer2"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-text = "Fullscreen
-"
-
-[node name="back" type="Button" parent="TabContainer/VBoxContainer2"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-text = "Back"
 
 [node name="VBoxContainer3" type="VBoxContainer" parent="TabContainer"]
 visible = false

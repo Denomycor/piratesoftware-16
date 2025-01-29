@@ -68,7 +68,6 @@ speed_counter = NodePath("BarContainer/HBoxContainer/TextureRect/Container/Sprit
 health_bar = NodePath("BarContainer/HBoxContainer/VBoxContainer/Panel2/TextureRect/ProgressBar")
 weapon_bar = NodePath("BarContainer/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar")
 vignette = NodePath("ColorRect")
-ui_scale = 0.5
 
 [node name="ColorRect" type="ColorRect" parent="."]
 z_index = 2
