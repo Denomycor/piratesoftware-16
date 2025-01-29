@@ -21,6 +21,7 @@ func _ready() -> void:
 	projectile_spawner_component.just_shot.connect(func():
 		var dir: Vector2 = get_global_mouse_position().direction_to(global_position)
 		fired.emit(dir * strength * projectile_spawner_component.multishot)
+		%shoot.play()
 	)
 
 
