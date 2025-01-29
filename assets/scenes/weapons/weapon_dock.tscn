@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://c4b5t5usvyqcs"]
+[gd_scene load_steps=23 format=3 uid="uid://c4b5t5usvyqcs"]
 
 [ext_resource type="Script" path="res://assets/scripts/weapons/weapon_dock.gd" id="1_sbl3c"]
 [ext_resource type="PackedScene" uid="uid://dbf445di2iil4" path="res://assets/scenes/weapons/minigun.tscn" id="2_4o0ak"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://xpgamcshcoi3" path="res://assets/scenes/weapons/rocket_launcher.tscn" id="6_x51sl"]
 [ext_resource type="Texture2D" uid="uid://dc7tjioc3kbni" path="res://assets/textures/car/weapon/weapon_morph_spritesheet.png" id="7_xxgx4"]
 [ext_resource type="Script" path="res://assets/scripts/weapons/components/turn_component.gd" id="8_wsp4u"]
+[ext_resource type="AudioStream" uid="uid://bq8pkksfismbq" path="res://assets/audio/car/weapon_transition.wav" id="10_nh6dw"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6j4ha"]
 atlas = ExtResource("2_4t0e1")
@@ -145,3 +146,8 @@ sprite_frames = SubResource("SpriteFrames_sshw2")
 frame = 4
 frame_progress = 1.0
 offset = Vector2(0, -103)
+
+[node name="change" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("10_nh6dw")
+bus = &"SFX"

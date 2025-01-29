@@ -15,6 +15,7 @@ func _ready() -> void:
 	owner.get_parent().get_parent().overlay.switch_weapon(0)
 	weapon_anim.animation_finished.connect(func(): weapon_anim.visible = false)
 	alien_anim.animation_finished.connect(func(): alien_anim.visible = false)
+	weapon_switched.connect(%change.play)
 
 
 func switch_active_weapon(idx: int) -> void:
