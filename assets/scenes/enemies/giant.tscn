@@ -1,12 +1,13 @@
-[gd_scene load_steps=20 format=3 uid="uid://k2d2dspipq3e"]
+[gd_scene load_steps=23 format=3 uid="uid://k2d2dspipq3e"]
 
 [ext_resource type="Script" path="res://assets/scripts/enemies/giant.gd" id="1_cqin3"]
 [ext_resource type="Texture2D" uid="uid://caiua3p5lpyd3" path="res://assets/textures/enemies/giant_walking_spritesheet.png" id="1_yk0sg"]
 [ext_resource type="Script" path="res://assets/scripts/components/hurt-box.gd" id="2_quirr"]
+[ext_resource type="Script" path="res://assets/scripts/components/hit-box.gd" id="3_41m4q"]
 [ext_resource type="Texture2D" uid="uid://dvwp2m6xuetjs" path="res://assets/textures/particles/stomach.png" id="4_4wr4w"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gsbna"]
-radius = 126.143
+radius = 132.185
 
 [sub_resource type="Animation" id="Animation_colj4"]
 resource_name = "walking"
@@ -40,16 +41,50 @@ tracks/0/keys = {
 "update": 1,
 "values": [0]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HitBoxComponent:monitoring")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_cqeed"]
+resource_name = "attacking"
+length = 0.3
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HitBoxComponent:monitoring")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5urpa"]
 _data = {
 "RESET": SubResource("Animation_1uiij"),
+"attacking": SubResource("Animation_cqeed"),
 "walking": SubResource("Animation_colj4")
 }
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pfgqd"]
+radius = 131.0
+height = 630.0
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5qy2v"]
 radius = 139.0
-height = 368.0
+height = 432.0
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_jpqow"]
 particles_animation = true
@@ -123,16 +158,22 @@ turbulence_noise_speed_random = 4.0
 collision_layer = 4
 collision_mask = 7
 script = ExtResource("1_cqin3")
-speed = 800.0
+charge_time = 4.0
+charge_speed = 1700
+charge_range = 1500
+charge_color = Color(0.99278, 0.596651, 0.603744, 1)
+speed = 600.0
 points = 400
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 rotation = 1.5708
+scale = Vector2(1.2, 1.2)
 texture = ExtResource("1_yk0sg")
 hframes = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-35, 9)
+visible = false
+position = Vector2(-42, 3)
 shape = SubResource("CircleShape2D_gsbna")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -141,8 +182,20 @@ libraries = {
 }
 speed_scale = 0.6
 
+[node name="HitBoxComponent" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 3
+script = ExtResource("3_41m4q")
+damage_amount = 100.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
+position = Vector2(130, 0)
+shape = SubResource("CapsuleShape2D_pfgqd")
+
 [node name="HurtBoxComponent" type="Area2D" parent="."]
-position = Vector2(-35, 8)
+visible = false
+position = Vector2(-42, 2)
 collision_layer = 4
 collision_mask = 0
 script = ExtResource("2_quirr")
@@ -161,3 +214,11 @@ texture = ExtResource("4_4wr4w")
 lifetime = 0.7
 one_shot = true
 explosiveness = 0.4
+
+[node name="attack_timer" type="Timer" parent="."]
+wait_time = 6.0
+one_shot = true
+
+[node name="charge_timer" type="Timer" parent="."]
+wait_time = 20.0
+one_shot = true
