@@ -28,12 +28,13 @@ height = 270.0
 radius = 58.0
 height = 336.0
 
-[node name="Biker" type="CharacterBody2D" node_paths=PackedStringArray("sprites") groups=["enemies"]]
+[node name="Biker" type="CharacterBody2D" node_paths=PackedStringArray("sprites", "wheels") groups=["enemies"]]
 collision_layer = 4
 collision_mask = 7
 script = ExtResource("1_3s7no")
 follow_range = 1500
 sprites = [NodePath("Biker"), NodePath("WheelB"), NodePath("WheelF"), NodePath("BikerGun/Sprite2D")]
+wheels = [NodePath("WheelB/ScrollingWheel"), NodePath("WheelF/ScrollingWheel")]
 speed = 4000.0
 points = 100
 
@@ -67,7 +68,6 @@ texture = ExtResource("4_to65p")
 
 [node name="BikerGun" parent="." instance=ExtResource("5_csq2n")]
 position = Vector2(51, 0)
-max_rotation = 90.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(2, -1)

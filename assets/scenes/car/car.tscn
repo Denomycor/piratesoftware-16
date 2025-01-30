@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://drcpxeie725b"]
+[gd_scene load_steps=20 format=3 uid="uid://drcpxeie725b"]
 
 [ext_resource type="Script" path="res://assets/scripts/car/car.gd" id="1_nqiho"]
 [ext_resource type="PackedScene" path="res://assets/scenes/car/car_break_particles.tscn" id="2_2uyc3"]
@@ -9,6 +9,8 @@
 [ext_resource type="Script" path="res://assets/scripts/car/wheel.gd" id="4_wkcph"]
 [ext_resource type="PackedScene" uid="uid://c4b5t5usvyqcs" path="res://assets/scenes/weapons/weapon_dock.tscn" id="6_kmu1j"]
 [ext_resource type="Script" path="res://assets/scripts/components/hurt-box.gd" id="7_plr5q"]
+[ext_resource type="Shader" path="res://assets/scripts/scrolling_texture.gdshader" id="8_fbmx5"]
+[ext_resource type="Texture2D" uid="uid://cqjm5fggxjs2e" path="res://assets/textures/car/scrolling_wheel_texture.png" id="9_02ml8"]
 [ext_resource type="AudioStream" uid="uid://bgxk7wr2tucwi" path="res://assets/audio/crash2.wav" id="10_p5fym"]
 [ext_resource type="AudioStream" uid="uid://ca08fqn3xwy01" path="res://assets/audio/crash1.wav" id="11_cl74a"]
 [ext_resource type="AudioStream" uid="uid://m4kn63lhjmbo" path="res://assets/audio/car/car_motor_start.wav" id="12_kqhwf"]
@@ -22,11 +24,15 @@ bounce = 0.1
 shader = ExtResource("2_l82v1")
 shader_parameter/color = Color(1, 1, 1, 1)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2fiqt"]
+shader = ExtResource("8_fbmx5")
+shader_parameter/speed = Vector2(0, 0)
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1m2s1"]
 radius = 122.0
 height = 446.0
 
-[node name="Car" type="RigidBody2D"]
+[node name="Car" type="RigidBody2D" node_paths=PackedStringArray("back_wheels", "front_wheels")]
 visibility_layer = 513
 z_index = 15
 collision_layer = 2
@@ -37,6 +43,8 @@ center_of_mass_mode = 1
 center_of_mass = Vector2(0, -100)
 script = ExtResource("1_nqiho")
 particle_scene = ExtResource("2_2uyc3")
+back_wheels = [NodePath("wheels/WheelBR/ScrollingWheel"), NodePath("wheels/WheelBL/ScrollingWheel")]
+front_wheels = [NodePath("wheels/WheelFR/ScrollingWheel"), NodePath("wheels/WheelFL/ScrollingWheel")]
 
 [node name="sonar_position" type="Sprite2D" parent="."]
 light_mask = 0
@@ -78,6 +86,13 @@ point_duration = 10.0
 min_drift_strength = 1800.0
 max_drift_strength = 2000.0
 
+[node name="ScrollingWheel" type="Sprite2D" parent="wheels/WheelFR"]
+material = SubResource("ShaderMaterial_2fiqt")
+position = Vector2(-0.809483, -3.34055)
+rotation = 3.14159
+scale = Vector2(0.833291, 0.7799)
+texture = ExtResource("9_02ml8")
+
 [node name="WheelFL" type="Node2D" parent="wheels"]
 position = Vector2(-69, -100)
 script = ExtResource("4_wkcph")
@@ -86,6 +101,13 @@ max_width = 25.0
 point_duration = 10.0
 min_drift_strength = 1800.0
 max_drift_strength = 2000.0
+
+[node name="ScrollingWheel" type="Sprite2D" parent="wheels/WheelFL"]
+material = SubResource("ShaderMaterial_2fiqt")
+position = Vector2(-0.809483, -3.34055)
+rotation = 3.14159
+scale = Vector2(0.833291, 0.7799)
+texture = ExtResource("9_02ml8")
 
 [node name="WheelBL" type="Node2D" parent="wheels"]
 position = Vector2(-78, 140)
@@ -97,6 +119,13 @@ min_drift_strength = 1200.0
 max_drift_strength = 2000.0
 torque_multiplier = 2.0
 
+[node name="ScrollingWheel" type="Sprite2D" parent="wheels/WheelBL"]
+material = SubResource("ShaderMaterial_2fiqt")
+position = Vector2(-0.142066, -4.00795)
+rotation = 3.14159
+scale = Vector2(1.01532, 1.09951)
+texture = ExtResource("9_02ml8")
+
 [node name="WheelBR" type="Node2D" parent="wheels"]
 position = Vector2(84, 140)
 script = ExtResource("4_wkcph")
@@ -106,6 +135,13 @@ point_duration = 10.0
 min_drift_strength = 1200.0
 max_drift_strength = 2000.0
 torque_multiplier = 2.0
+
+[node name="ScrollingWheel" type="Sprite2D" parent="wheels/WheelBR"]
+material = SubResource("ShaderMaterial_2fiqt")
+position = Vector2(-0.142066, -4.00795)
+rotation = 3.14159
+scale = Vector2(1.01532, 1.09951)
+texture = ExtResource("9_02ml8")
 
 [node name="HurtBoxComponent" type="Area2D" parent="."]
 collision_layer = 2
