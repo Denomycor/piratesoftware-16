@@ -81,11 +81,7 @@ _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 0.120879), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Curve" id="Curve_etxpm"]
-<<<<<<< HEAD
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 0.032967), 0.0, 0.0, 0, 0]
-=======
-_data = [Vector2(0.00471698, 0), 0.0, 0.0, 0, 0, Vector2(1, 0.054945), 0.0, 0.0, 0, 0]
->>>>>>> main
 point_count = 2
 
 [sub_resource type="Curve" id="Curve_u14r1"]
