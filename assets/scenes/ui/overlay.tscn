@@ -35,6 +35,17 @@ shader_parameter/vignette_strength = 1.5
 shader_parameter/dither_strength = 0.03
 shader_parameter/vignette_color = Color(0.392157, 0.054902, 0.0627451, 1)
 
+[sub_resource type="LabelSettings" id="LabelSettings_2i05p"]
+line_spacing = 40.0
+font_size = 25
+font_color = Color(0.290196, 0.184314, 0.164706, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_066hf"]
+font_size = 40
+font_color = Color(0.960784, 0.839216, 0.701961, 1)
+outline_size = 10
+outline_color = Color(0.051971, 0.051971, 0.051971, 1)
+
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_qklw6"]
 noise_type = 3
 frequency = 0.0312
@@ -51,22 +62,11 @@ shader_parameter/obstacle_color = Color(0.385029, 0.777194, 0.316256, 1)
 shader_parameter/sec_obstacle_color = Color(0.92549, 0.760784, 0, 1)
 shader_parameter/noise = SubResource("NoiseTexture2D_pgy1c")
 
-[sub_resource type="LabelSettings" id="LabelSettings_066hf"]
-font_size = 40
-font_color = Color(0.960784, 0.839216, 0.701961, 1)
-outline_size = 10
-outline_color = Color(0.051971, 0.051971, 0.051971, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_2i05p"]
-line_spacing = 40.0
-font_size = 25
-font_color = Color(0.290196, 0.184314, 0.164706, 1)
-
 [node name="Overlay" type="CanvasLayer" node_paths=PackedStringArray("speed_counter", "health_bar", "weapon_bar", "vignette")]
 script = ExtResource("1_tmn6d")
-speed_counter = NodePath("CenterContainer2/HBoxContainer/TextureRect/Container/Sprite2D")
-health_bar = NodePath("CenterContainer2/HBoxContainer/VBoxContainer/Panel2/TextureRect/ProgressBar")
-weapon_bar = NodePath("CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar")
+speed_counter = NodePath("BarContainer/HBoxContainer/TextureRect/Container/Sprite2D")
+health_bar = NodePath("BarContainer/HBoxContainer/VBoxContainer/Panel2/TextureRect/ProgressBar")
+weapon_bar = NodePath("BarContainer/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar")
 vignette = NodePath("ColorRect")
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -78,76 +78,71 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
-anchors_preset = 3
+[node name="StatsContainer" type="VBoxContainer" parent="."]
+anchors_preset = 1
 anchor_left = 1.0
-anchor_top = 1.0
 anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -206.0
-offset_top = -205.0
-offset_right = -14.0
-offset_bottom = -13.0
+offset_left = -102.0
+offset_top = 7.0
+offset_right = -13.0
+offset_bottom = 111.0
 grow_horizontal = 0
-grow_vertical = 0
+pivot_offset = Vector2(102, -7)
 theme = ExtResource("2_vhdhy")
+alignment = 1
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="CenterContainer"]
-material = SubResource("ShaderMaterial_xppwn")
-custom_minimum_size = Vector2(192, 192)
+[node name="Points" type="Label" parent="StatsContainer"]
+unique_name_in_owner = true
 layout_mode = 2
-stretch = true
+size_flags_horizontal = 8
+size_flags_vertical = 0
+text = "Points: 100"
+label_settings = SubResource("LabelSettings_2i05p")
+horizontal_alignment = 2
+vertical_alignment = 1
 
-[node name="SubViewport" type="SubViewport" parent="CenterContainer/SubViewportContainer"]
-transparent_bg = true
-handle_input_locally = false
-canvas_cull_mask = 4294966784
-size = Vector2i(192, 192)
-render_target_update_mode = 4
-script = ExtResource("2_vnyf8")
-
-[node name="sonar_camera" type="Camera2D" parent="CenterContainer/SubViewportContainer/SubViewport"]
-zoom = Vector2(0.01, 0.01)
-
-[node name="TextureRect" type="TextureRect" parent="CenterContainer"]
-custom_minimum_size = Vector2(220, 220)
+[node name="Kills" type="Label" parent="StatsContainer"]
+unique_name_in_owner = true
 layout_mode = 2
-texture = ExtResource("2_8jhi0")
-expand_mode = 2
+text = "Kills: 0"
+label_settings = SubResource("LabelSettings_2i05p")
+horizontal_alignment = 2
+vertical_alignment = 1
 
-[node name="CenterContainer2" type="CenterContainer" parent="."]
+[node name="BarContainer" type="CenterContainer" parent="."]
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_top = -220.0
-offset_right = 220.0
+offset_right = 224.0
 grow_vertical = 0
+pivot_offset = Vector2(0, 221)
 theme = ExtResource("2_vhdhy")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="BarContainer"]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="CenterContainer2/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="BarContainer/HBoxContainer"]
 z_index = 1
 custom_minimum_size = Vector2(220, 220)
 layout_mode = 2
 texture = ExtResource("5_phxvy")
 expand_mode = 2
 
-[node name="Container" type="Control" parent="CenterContainer2/HBoxContainer/TextureRect"]
+[node name="Container" type="Control" parent="BarContainer/HBoxContainer/TextureRect"]
 anchors_preset = 0
 offset_left = 73.0
 offset_top = 164.0
 offset_right = 113.0
 offset_bottom = 204.0
 
-[node name="Sprite2D" type="Sprite2D" parent="CenterContainer2/HBoxContainer/TextureRect/Container"]
+[node name="Sprite2D" type="Sprite2D" parent="BarContainer/HBoxContainer/TextureRect/Container"]
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("7_bx4tl")
 offset = Vector2(70, 0)
 script = ExtResource("8_ihbnl")
 
-[node name="TextureRect2" type="TextureRect" parent="CenterContainer2/HBoxContainer/TextureRect"]
+[node name="TextureRect2" type="TextureRect" parent="BarContainer/HBoxContainer/TextureRect"]
 layout_mode = 0
 offset_top = -0.999995
 offset_right = 348.0
@@ -155,7 +150,7 @@ offset_bottom = 313.0
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("8_pmejn")
 
-[node name="TextureRect3" type="TextureRect" parent="CenterContainer2/HBoxContainer/TextureRect"]
+[node name="TextureRect3" type="TextureRect" parent="BarContainer/HBoxContainer/TextureRect"]
 layout_mode = 0
 offset_left = 140.0
 offset_top = 23.0
@@ -164,7 +159,7 @@ offset_bottom = 69.0
 rotation = 0.275366
 texture = ExtResource("9_6ewi4")
 
-[node name="TextureRect4" type="TextureRect" parent="CenterContainer2/HBoxContainer/TextureRect"]
+[node name="TextureRect4" type="TextureRect" parent="BarContainer/HBoxContainer/TextureRect"]
 layout_mode = 0
 offset_left = 27.0
 offset_top = -9.0
@@ -173,7 +168,7 @@ offset_bottom = 37.0
 rotation = 0.244718
 texture = ExtResource("9_6ewi4")
 
-[node name="TextureRect5" type="TextureRect" parent="CenterContainer2/HBoxContainer/TextureRect"]
+[node name="TextureRect5" type="TextureRect" parent="BarContainer/HBoxContainer/TextureRect"]
 layout_mode = 0
 offset_left = 209.0
 offset_top = 134.0
@@ -182,16 +177,16 @@ offset_bottom = 180.0
 rotation = 1.07533
 texture = ExtResource("9_6ewi4")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer2/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="BarContainer/HBoxContainer"]
 layout_direction = 2
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 
-[node name="Panel2" type="Panel" parent="CenterContainer2/HBoxContainer/VBoxContainer"]
+[node name="Panel2" type="Panel" parent="BarContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel2"]
+[node name="TextureRect" type="TextureRect" parent="BarContainer/HBoxContainer/VBoxContainer/Panel2"]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -205,7 +200,7 @@ scale = Vector2(0.7, 0.7)
 texture = ExtResource("6_5r283")
 stretch_mode = 2
 
-[node name="ProgressBar" type="TextureProgressBar" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel2/TextureRect"]
+[node name="ProgressBar" type="TextureProgressBar" parent="BarContainer/HBoxContainer/VBoxContainer/Panel2/TextureRect"]
 layout_mode = 0
 offset_left = 165.714
 offset_top = 15.7143
@@ -218,7 +213,7 @@ texture_under = ExtResource("8_qnebf")
 texture_progress = ExtResource("9_h4tca")
 script = ExtResource("14_7aj3w")
 
-[node name="TextureRect" type="TextureRect" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel2/TextureRect"]
+[node name="TextureRect" type="TextureRect" parent="BarContainer/HBoxContainer/VBoxContainer/Panel2/TextureRect"]
 layout_mode = 0
 offset_left = 88.5714
 offset_top = 22.8571
@@ -226,12 +221,12 @@ offset_right = 142.571
 offset_bottom = 91.8571
 texture = ExtResource("12_tas3f")
 
-[node name="Panel" type="Panel" parent="CenterContainer2/HBoxContainer/VBoxContainer"]
+[node name="Panel" type="Panel" parent="BarContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
-[node name="TextureRect" type="TextureRect" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel"]
+[node name="TextureRect" type="TextureRect" parent="BarContainer/HBoxContainer/VBoxContainer/Panel"]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -245,7 +240,7 @@ scale = Vector2(0.8, 0.8)
 texture = ExtResource("7_dcln4")
 stretch_mode = 4
 
-[node name="WeaponBar" type="HBoxContainer" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect" node_paths=PackedStringArray("slots")]
+[node name="WeaponBar" type="HBoxContainer" parent="BarContainer/HBoxContainer/VBoxContainer/Panel/TextureRect" node_paths=PackedStringArray("slots")]
 layout_mode = 0
 offset_left = 192.5
 offset_top = 67.5
@@ -256,19 +251,19 @@ alignment = 1
 script = ExtResource("17_17h4p")
 slots = [NodePath("VBoxContainer"), NodePath("VBoxContainer2"), NodePath("VBoxContainer3"), NodePath("VBoxContainer4"), NodePath("VBoxContainer5")]
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar" node_paths=PackedStringArray("border", "highlighted_border", "label")]
+[node name="VBoxContainer" type="VBoxContainer" parent="BarContainer/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar" node_paths=PackedStringArray("border", "highlighted_border", "label")]
 layout_mode = 2
 script = ExtResource("18_qlcwb")
 border = NodePath("TextureRect2/TextureRect")
 highlighted_border = NodePath("TextureRect2/TextureRect2")
 label = NodePath("Label")
 
-[node name="TextureRect2" type="TextureRect" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar/VBoxContainer"]
+[node name="TextureRect2" type="TextureRect" parent="BarContainer/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar/VBoxContainer"]
 z_index = 1
 layout_mode = 2
 texture = ExtResource("15_sxptx")
 
-[node name="TextureRect" type="TextureRect" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar/VBoxContainer/TextureRect2"]
+[node name="TextureRect" type="TextureRect" parent="BarContainer/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar/VBoxContainer/TextureRect2"]
 layout_mode = 2
 offset_left = -10.7145
 offset_top = -6.81818
@@ -276,7 +271,7 @@ offset_right = 150.285
 offset_bottom = 152.182
 texture = ExtResource("11_qum7v")
 
-[node name="TextureRect2" type="TextureRect" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar/VBoxContainer/TextureRect2"]
+[node name="TextureRect2" type="TextureRect" parent="BarContainer/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar/VBoxContainer/TextureRect2"]
 visible = false
 layout_mode = 2
 offset_left = -10.7145
@@ -285,26 +280,26 @@ offset_right = 150.285
 offset_bottom = 152.182
 texture = ExtResource("21_6bhrx")
 
-[node name="Label" type="Label" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar/VBoxContainer"]
+[node name="Label" type="Label" parent="BarContainer/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar/VBoxContainer"]
 layout_mode = 2
 text = "1
 "
 label_settings = SubResource("LabelSettings_066hf")
 horizontal_alignment = 1
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar" node_paths=PackedStringArray("border", "highlighted_border", "label")]
+[node name="VBoxContainer2" type="VBoxContainer" parent="BarContainer/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar" node_paths=PackedStringArray("border", "highlighted_border", "label")]
 layout_mode = 2
 script = ExtResource("18_qlcwb")
 border = NodePath("TextureRect2/TextureRect")
 highlighted_border = NodePath("TextureRect2/TextureRect2")
 label = NodePath("Label")
 
-[node name="TextureRect2" type="TextureRect" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar/VBoxContainer2"]
+[node name="TextureRect2" type="TextureRect" parent="BarContainer/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar/VBoxContainer2"]
 z_index = 1
 layout_mode = 2
 texture = ExtResource("16_n364h")
 
-[node name="TextureRect" type="TextureRect" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar/VBoxContainer2/TextureRect2"]
+[node name="TextureRect" type="TextureRect" parent="BarContainer/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar/VBoxContainer2/TextureRect2"]
 layout_mode = 2
 offset_left = -10.7145
 offset_top = -6.81818
@@ -312,7 +307,7 @@ offset_right = 150.285
 offset_bottom = 152.182
 texture = ExtResource("11_qum7v")
 
-[node name="TextureRect2" type="TextureRect" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar/VBoxContainer2/TextureRect2"]
+[node name="TextureRect2" type="TextureRect" parent="BarContainer/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar/VBoxContainer2/TextureRect2"]
 visible = false
 layout_mode = 2
 offset_left = -10.7145
@@ -321,26 +316,26 @@ offset_right = 150.285
 offset_bottom = 152.182
 texture = ExtResource("21_6bhrx")
 
-[node name="Label" type="Label" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar/VBoxContainer2"]
+[node name="Label" type="Label" parent="BarContainer/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar/VBoxContainer2"]
 layout_mode = 2
 text = "2
 "
 label_settings = SubResource("LabelSettings_066hf")
 horizontal_alignment = 1
 
-[node name="VBoxContainer3" type="VBoxContainer" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar" node_paths=PackedStringArray("border", "highlighted_border", "label")]
+[node name="VBoxContainer3" type="VBoxContainer" parent="BarContainer/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar" node_paths=PackedStringArray("border", "highlighted_border", "label")]
 layout_mode = 2
 script = ExtResource("18_qlcwb")
 border = NodePath("TextureRect2/TextureRect")
 highlighted_border = NodePath("TextureRect2/TextureRect2")
 label = NodePath("Label")
 
-[node name="TextureRect2" type="TextureRect" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar/VBoxContainer3"]
+[node name="TextureRect2" type="TextureRect" parent="BarContainer/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar/VBoxContainer3"]
 z_index = 1
 layout_mode = 2
 texture = ExtResource("17_txk2c")
 
-[node name="TextureRect" type="TextureRect" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar/VBoxContainer3/TextureRect2"]
+[node name="TextureRect" type="TextureRect" parent="BarContainer/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar/VBoxContainer3/TextureRect2"]
 layout_mode = 2
 offset_left = -10.7145
 offset_top = -6.81818
@@ -348,7 +343,7 @@ offset_right = 150.285
 offset_bottom = 152.182
 texture = ExtResource("11_qum7v")
 
-[node name="TextureRect2" type="TextureRect" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar/VBoxContainer3/TextureRect2"]
+[node name="TextureRect2" type="TextureRect" parent="BarContainer/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar/VBoxContainer3/TextureRect2"]
 visible = false
 layout_mode = 2
 offset_left = -10.7145
@@ -357,25 +352,25 @@ offset_right = 150.285
 offset_bottom = 152.182
 texture = ExtResource("21_6bhrx")
 
-[node name="Label" type="Label" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar/VBoxContainer3"]
+[node name="Label" type="Label" parent="BarContainer/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar/VBoxContainer3"]
 layout_mode = 2
 text = "3"
 label_settings = SubResource("LabelSettings_066hf")
 horizontal_alignment = 1
 
-[node name="VBoxContainer4" type="VBoxContainer" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar" node_paths=PackedStringArray("border", "highlighted_border", "label")]
+[node name="VBoxContainer4" type="VBoxContainer" parent="BarContainer/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar" node_paths=PackedStringArray("border", "highlighted_border", "label")]
 layout_mode = 2
 script = ExtResource("18_qlcwb")
 border = NodePath("TextureRect2/TextureRect")
 highlighted_border = NodePath("TextureRect2/TextureRect2")
 label = NodePath("Label")
 
-[node name="TextureRect2" type="TextureRect" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar/VBoxContainer4"]
+[node name="TextureRect2" type="TextureRect" parent="BarContainer/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar/VBoxContainer4"]
 z_index = 1
 layout_mode = 2
 texture = ExtResource("18_dyb6x")
 
-[node name="TextureRect" type="TextureRect" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar/VBoxContainer4/TextureRect2"]
+[node name="TextureRect" type="TextureRect" parent="BarContainer/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar/VBoxContainer4/TextureRect2"]
 layout_mode = 2
 offset_left = -10.7145
 offset_top = -6.81818
@@ -383,7 +378,7 @@ offset_right = 150.285
 offset_bottom = 152.182
 texture = ExtResource("11_qum7v")
 
-[node name="TextureRect2" type="TextureRect" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar/VBoxContainer4/TextureRect2"]
+[node name="TextureRect2" type="TextureRect" parent="BarContainer/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar/VBoxContainer4/TextureRect2"]
 visible = false
 layout_mode = 2
 offset_left = -10.7145
@@ -392,26 +387,26 @@ offset_right = 150.285
 offset_bottom = 152.182
 texture = ExtResource("21_6bhrx")
 
-[node name="Label" type="Label" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar/VBoxContainer4"]
+[node name="Label" type="Label" parent="BarContainer/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar/VBoxContainer4"]
 layout_mode = 2
 text = "4
 "
 label_settings = SubResource("LabelSettings_066hf")
 horizontal_alignment = 1
 
-[node name="VBoxContainer5" type="VBoxContainer" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar" node_paths=PackedStringArray("border", "highlighted_border", "label")]
+[node name="VBoxContainer5" type="VBoxContainer" parent="BarContainer/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar" node_paths=PackedStringArray("border", "highlighted_border", "label")]
 layout_mode = 2
 script = ExtResource("18_qlcwb")
 border = NodePath("TextureRect2/TextureRect")
 highlighted_border = NodePath("TextureRect2/TextureRect2")
 label = NodePath("Label")
 
-[node name="TextureRect2" type="TextureRect" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar/VBoxContainer5"]
+[node name="TextureRect2" type="TextureRect" parent="BarContainer/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar/VBoxContainer5"]
 z_index = 1
 layout_mode = 2
 texture = ExtResource("19_36wsv")
 
-[node name="TextureRect" type="TextureRect" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar/VBoxContainer5/TextureRect2"]
+[node name="TextureRect" type="TextureRect" parent="BarContainer/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar/VBoxContainer5/TextureRect2"]
 layout_mode = 2
 offset_left = -10.7145
 offset_top = -6.81818
@@ -419,7 +414,7 @@ offset_right = 150.285
 offset_bottom = 152.182
 texture = ExtResource("11_qum7v")
 
-[node name="TextureRect2" type="TextureRect" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar/VBoxContainer5/TextureRect2"]
+[node name="TextureRect2" type="TextureRect" parent="BarContainer/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar/VBoxContainer5/TextureRect2"]
 visible = false
 layout_mode = 2
 offset_left = -10.7145
@@ -428,40 +423,49 @@ offset_right = 150.285
 offset_bottom = 152.182
 texture = ExtResource("21_6bhrx")
 
-[node name="Label" type="Label" parent="CenterContainer2/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar/VBoxContainer5"]
+[node name="Label" type="Label" parent="BarContainer/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar/VBoxContainer5"]
 layout_mode = 2
 text = "5"
 label_settings = SubResource("LabelSettings_066hf")
 horizontal_alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-anchors_preset = 1
+[node name="SonarContainer" type="HBoxContainer" parent="."]
+anchors_preset = 3
 anchor_left = 1.0
+anchor_top = 1.0
 anchor_right = 1.0
-offset_left = -104.0
-offset_top = -6.0
-offset_right = -15.0
-offset_bottom = 98.0
+anchor_bottom = 1.0
+offset_left = -220.0
+offset_top = -220.0
 grow_horizontal = 0
-theme = ExtResource("2_vhdhy")
-alignment = 1
+grow_vertical = 0
+pivot_offset = Vector2(220, 220)
 
-[node name="Points" type="Label" parent="VBoxContainer"]
-unique_name_in_owner = true
+[node name="CenterContainer" type="CenterContainer" parent="SonarContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
-size_flags_vertical = 0
-text = "Points: 100"
-label_settings = SubResource("LabelSettings_2i05p")
-horizontal_alignment = 2
-vertical_alignment = 1
+size_flags_vertical = 8
+theme = ExtResource("2_vhdhy")
 
-[node name="Kills" type="Label" parent="VBoxContainer"]
-unique_name_in_owner = true
+[node name="SubViewportContainer" type="SubViewportContainer" parent="SonarContainer/CenterContainer"]
+material = SubResource("ShaderMaterial_xppwn")
+custom_minimum_size = Vector2(192, 192)
 layout_mode = 2
-text = "Kills: 0"
-label_settings = SubResource("LabelSettings_2i05p")
-horizontal_alignment = 2
-vertical_alignment = 1
+stretch = true
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="SubViewport" type="SubViewport" parent="SonarContainer/CenterContainer/SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+canvas_cull_mask = 4294966784
+size = Vector2i(192, 192)
+render_target_update_mode = 4
+script = ExtResource("2_vnyf8")
+
+[node name="sonar_camera" type="Camera2D" parent="SonarContainer/CenterContainer/SubViewportContainer/SubViewport"]
+zoom = Vector2(0.01, 0.01)
+
+[node name="TextureRect" type="TextureRect" parent="SonarContainer/CenterContainer"]
+custom_minimum_size = Vector2(220, 220)
+layout_mode = 2
+texture = ExtResource("2_8jhi0")
+expand_mode = 2
