@@ -21,6 +21,11 @@ config/windows_native_icon="res://assets/textures/icon/game_icon.png"
 LevelContext="*res://assets/scripts/level/level_context.gd"
 GameOptions="*res://assets/scripts/game_options.gd"
 
+[display]
+
+mouse_cursor/custom_image="res://assets/textures/ui/crosshair_sprite.png"
+mouse_cursor/custom_image_hotspot=Vector2(16, 16)
+
 [input]
 
 fire={
