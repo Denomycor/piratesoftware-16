@@ -7,7 +7,7 @@ class_name OptionsMenu extends Node
 
 func _ready() -> void:
 	ui_slider.value = GameOptions.ui_scale * 100.0
-	ui_label.text = str(GameOptions.ui_scale)
+	ui_label.text = str(GameOptions.ui_scale * 100)
 	
 	ui_slider.value_changed.connect(_on_ui_slider_value_changed)
 

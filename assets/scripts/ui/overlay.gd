@@ -2,10 +2,10 @@ class_name Overlay extends CanvasLayer
 
 @onready var point_counter: Label = %Points
 @onready var kills_counter: Label = %Kills
-@export var speed_counter: SpeedPointer
-@export var health_bar: HealthBar
-@export var weapon_bar: WeaponBar
-@export var vignette: ColorRect
+@onready var speed_counter: SpeedPointer = $BarContainer/HBoxContainer/TextureRect/Container/Sprite2D
+@onready var health_bar: HealthBar = $BarContainer/HBoxContainer/VBoxContainer/Panel2/TextureRect/ProgressBar
+@onready var weapon_bar: WeaponBar = $BarContainer/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar
+@onready var vignette: ColorRect = $ColorRect
 
 @onready var stats: VBoxContainer = $StatsContainer
 @onready var bar_container: CenterContainer = $BarContainer
