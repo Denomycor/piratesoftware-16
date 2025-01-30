@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://dr2otcq7lhq6j"]
+[gd_scene load_steps=5 format=3 uid="uid://dr2otcq7lhq6j"]
 
 [ext_resource type="Script" path="res://assets/scripts/ui/pause_menu.gd" id="1_n4lgp"]
 [ext_resource type="Theme" uid="uid://cjlihoor22i2h" path="res://assets/resources/theme.tres" id="2_1hb8l"]
-[ext_resource type="PackedScene" uid="uid://df72ojrh7b03v" path="res://assets/scenes/ui/options_menu.tscn" id="3_aobq6"]
+[ext_resource type="PackedScene" uid="uid://c56ufqk3h108o" path="res://assets/scenes/ui/options_menu.tscn" id="3_aobq6"]
+[ext_resource type="AudioStream" uid="uid://br3gfa76tqcyr" path="res://assets/audio/click.wav" id="4_46wc4"]
 
 [node name="pause_menu" type="CanvasLayer"]
 process_mode = 3
@@ -62,3 +63,7 @@ text = "Quit"
 visible = false
 layout_mode = 2
 metadata/_tab_index = 1
+
+[node name="click" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_46wc4")
+bus = &"UI"

@@ -43,6 +43,7 @@ func change_volume(volume: float) -> void:
 
 		label.text = str(volume)
 		set_settings()
+	$click.play()
 
 
 func disable_mute(is_disabled: bool, volume := prev_mute_val) -> void:
@@ -56,6 +57,7 @@ func disable_mute(is_disabled: bool, volume := prev_mute_val) -> void:
 		slider.set_value_no_signal(max(1,min(prev_mute_val, volume)))
 		change_volume(max(1,min(prev_mute_val, volume)))
 	set_settings()
+	$click.play()
 
 
 func load_settings() -> void:

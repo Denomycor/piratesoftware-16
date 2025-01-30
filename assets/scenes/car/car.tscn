@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://drcpxeie725b"]
+[gd_scene load_steps=17 format=3 uid="uid://drcpxeie725b"]
 
 [ext_resource type="Script" path="res://assets/scripts/car/car.gd" id="1_nqiho"]
 [ext_resource type="PackedScene" path="res://assets/scenes/car/car_break_particles.tscn" id="2_2uyc3"]
@@ -9,7 +9,10 @@
 [ext_resource type="Script" path="res://assets/scripts/car/wheel.gd" id="4_wkcph"]
 [ext_resource type="PackedScene" uid="uid://c4b5t5usvyqcs" path="res://assets/scenes/weapons/weapon_dock.tscn" id="6_kmu1j"]
 [ext_resource type="Script" path="res://assets/scripts/components/hurt-box.gd" id="7_plr5q"]
-[ext_resource type="Texture2D" uid="uid://cqjm5fggxjs2e" path="res://assets/textures/car/scrolling_wheel_texture.png" id="9_obudu"]
+[ext_resource type="AudioStream" uid="uid://bgxk7wr2tucwi" path="res://assets/audio/crash2.wav" id="10_p5fym"]
+[ext_resource type="AudioStream" uid="uid://ca08fqn3xwy01" path="res://assets/audio/crash1.wav" id="11_cl74a"]
+[ext_resource type="AudioStream" uid="uid://m4kn63lhjmbo" path="res://assets/audio/car/car_motor_start.wav" id="12_kqhwf"]
+[ext_resource type="AudioStream" uid="uid://dcs2tryv47ofp" path="res://assets/audio/car/car_motor_continuous.wav" id="13_7nauj"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_kt83k"]
 friction = 0.8
@@ -180,3 +183,28 @@ shape = SubResource("CapsuleShape2D_1m2s1")
 
 [node name="weapon_dock" parent="." instance=ExtResource("6_kmu1j")]
 position = Vector2(3, 87)
+
+[node name="small_crash" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_p5fym")
+volume_db = -10.0
+max_distance = 5000.0
+attenuation = 0.3
+
+[node name="big_crash" type="AudioStreamPlayer2D" parent="."]
+process_mode = 3
+stream = ExtResource("11_cl74a")
+volume_db = -5.0
+max_distance = 5000.0
+attenuation = 0.3
+
+[node name="car_start" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("12_kqhwf")
+volume_db = -6.0
+max_distance = 5000.0
+attenuation = 0.3
+
+[node name="car_running" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("13_7nauj")
+volume_db = -8.0
+max_distance = 5000.0
+attenuation = 0.3

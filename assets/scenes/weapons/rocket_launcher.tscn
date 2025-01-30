@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://assets/scripts/weapons/components/projectile_spawner_component.gd" id="3_ygmqf"]
 [ext_resource type="Texture2D" uid="uid://c4mcl7cr2pt0r" path="res://assets/textures/car/weapon/projectiles/rocket_head_sprite.png" id="4_cnpui"]
 [ext_resource type="Texture2D" uid="uid://tk8ncyvl3r57" path="res://assets/textures/car/weapon/rocket_base_sprite.png" id="5_kfbfo"]
-[ext_resource type="AudioStream" uid="uid://banr3bbjxwwli" path="res://assets/audio/weapons/rocket.wav" id="6_p0krg"]
+[ext_resource type="AudioStream" uid="uid://bx8g3q5tqqlb6" path="res://assets/audio/weapons/gun_cock.wav" id="6_ucybc"]
 
 [node name="RocketLauncher" type="Node2D"]
 script = ExtResource("1_ldygr")
@@ -33,9 +33,9 @@ position = Vector2(58, 0)
 rotation = 1.5708
 texture = ExtResource("5_kfbfo")
 
-[node name="shoot" type="AudioStreamPlayer2D" parent="."]
-unique_name_in_owner = true
-stream = ExtResource("6_p0krg")
-volume_db = -5.0
-pitch_scale = 0.8
+[node name="reload" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_ucybc")
+volume_db = -10.0
+max_distance = 5000.0
+attenuation = 0.3
 bus = &"SFX"

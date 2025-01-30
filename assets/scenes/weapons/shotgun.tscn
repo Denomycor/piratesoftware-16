@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://qaypc31xeqwu"]
+[gd_scene load_steps=7 format=3 uid="uid://qaypc31xeqwu"]
 
 [ext_resource type="Script" path="res://assets/scripts/weapons/shotgun.gd" id="1_4mcpn"]
 [ext_resource type="Script" path="res://assets/scripts/weapons/components/turn_component.gd" id="1_f8ofd"]
 [ext_resource type="Script" path="res://assets/scripts/weapons/components/projectile_spawner_component.gd" id="3_dgnp0"]
 [ext_resource type="Texture2D" uid="uid://b8lcbubve4m4u" path="res://assets/textures/weapons/weapon.png" id="4_05tof"]
 [ext_resource type="AudioStream" uid="uid://dk0n7j10oi0fh" path="res://assets/audio/weapons/shotgun.wav" id="5_vxyr5"]
+[ext_resource type="AudioStream" uid="uid://1dib0sb38c1n" path="res://assets/audio/weapons/shotgun_reload.wav" id="6_b08xr"]
 
 [node name="Shotgun" type="Node2D"]
 script = ExtResource("1_4mcpn")
@@ -30,6 +31,14 @@ bullet_spawn = NodePath("../bullet_spawn")
 position = Vector2(152, 0)
 
 [node name="shoot" type="AudioStreamPlayer2D" parent="."]
-unique_name_in_owner = true
 stream = ExtResource("5_vxyr5")
+max_distance = 5000.0
+attenuation = 0.3
+bus = &"SFX"
+
+[node name="reload" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_b08xr")
+volume_db = -10.0
+max_distance = 5000.0
+attenuation = 0.3
 bus = &"SFX"
