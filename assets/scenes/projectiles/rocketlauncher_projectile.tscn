@@ -16,11 +16,11 @@ radius = 12.0
 height = 64.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vnqqc"]
-radius = 17.0
-height = 72.0
+radius = 22.0
+height = 94.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pa2v0"]
-radius = 637.257
+radius = 790.001
 
 [sub_resource type="Curve" id="Curve_cg8qp"]
 _data = [Vector2(0.0486486, 1), 0.0, 0.0, 0, 0, Vector2(0.783784, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -80,7 +80,7 @@ shape = SubResource("CapsuleShape2D_vnqqc")
 collision_layer = 0
 collision_mask = 5
 script = ExtResource("2_8qxhd")
-damage_amount = 100.0
+damage_amount = 300.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AreaHitBoxComponent"]
 shape = SubResource("CircleShape2D_pa2v0")

@@ -7,12 +7,13 @@ const PROJECTILE_SCENE: PackedScene = preload("res://assets/scenes/projectiles/m
 @onready var projectile_spawner_component: ProjectileSpawnerComponent = $ProjectileSpawnerComponent
 
 @export var strength: float = 15
-
+@export var speed_variation: float = 1.3
 func _ready() -> void:
 	projectile_spawner_component.shoot_projectile.connect(func(from: Vector2, rot: float, _data):
 		var projectile: LinearProjectile = PROJECTILE_SCENE.instantiate()
 		projectile.set_properties(from, rot)
-		projectile.inherited_velocity = LevelContext.level.car.last_velocity
+		projectile.inherited_velocity = LevelContext.level.car.linear_velocity
+		projectile.speed = randf_range(projectile.speed, projectile.speed * speed_variation)
 		LevelContext.level.get_node("World").add_child(projectile)
 	)
 
@@ -22,7 +23,7 @@ func _ready() -> void:
 	)
 
 	activated.connect(func():
-		if(Input.is_action_pressed("fire")):
+		if (Input.is_action_pressed("fire")):
 			%shoot.play()
 	)
 	deactivated.connect(func():
@@ -39,10 +40,9 @@ func _process(_delta: float) -> void:
 
 
 func _input(event: InputEvent) -> void:
-		if(event.is_action_pressed("fire") && active):
+		if (event.is_action_pressed("fire") && active):
 			$GPUParticles2D.emitting = true
 			%shoot.play()
-		elif(event.is_action_released("fire")):
+		elif (event.is_action_released("fire")):
 			$GPUParticles2D.emitting = false
 			%shoot.stop()
-
