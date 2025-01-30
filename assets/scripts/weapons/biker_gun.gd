@@ -16,7 +16,12 @@ func _ready() -> void:
 		projectile.inherited_velocity = parent.velocity
 		LevelContext.level.get_node("World").add_child(projectile)
 	)
-
+	projectile_spawner_component.just_shot.connect(func():
+		if projectile_spawner_component.bst_ready:
+			%shoot.play()
+		else:
+			%shoot.stop()
+	)
 
 func _process(_delta: float) -> void:
 	var car_position = LevelContext.level.car.global_position

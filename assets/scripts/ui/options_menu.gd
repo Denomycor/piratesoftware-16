@@ -18,6 +18,7 @@ func _ready() -> void:
 		%window_mode.text = "Fullscreen"
 
 func toggle_fullscreen() -> void:
+	$click.play()
 	if not GameOptions.is_fullscreen:
 		GameOptions.is_fullscreen = true
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
@@ -30,4 +31,5 @@ func toggle_fullscreen() -> void:
 
 func _on_ui_slider_value_changed(value: float) -> void:
 	GameOptions.change_ui_scale(value)
+	$click.play()
 	ui_label.text = str(value)

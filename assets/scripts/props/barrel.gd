@@ -22,6 +22,7 @@ func _on_take_damage(amount: int):
     health -= amount
     if health <= 0:
         hit_box.monitoring = true
+        hurt_box.monitorable = false
         sprite.visible=false
         collision_shape.disabled = true
         explosion_particles.emitting = true

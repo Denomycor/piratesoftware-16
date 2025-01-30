@@ -15,5 +15,6 @@ func _on_collision(node: Node) -> void:
         for sprite in sprites:
             sprite.visible = false
         particles.emitting = true
+        $break.play()
         collision_shape.disabled = true
         particles.finished.connect(queue_free)

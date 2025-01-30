@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://bwj7wl63yu7p8"]
+[gd_scene load_steps=4 format=3 uid="uid://bwj7wl63yu7p8"]
 
 [ext_resource type="Script" path="res://assets/scripts/ui/audio_slider.gd" id="1_nqktx"]
+[ext_resource type="AudioStream" uid="uid://br3gfa76tqcyr" path="res://assets/audio/click.wav" id="2_y5lc3"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_4ft2x"]
 font_size = 20
@@ -34,3 +35,7 @@ size_flags_vertical = 1
 [node name="Label" type="Label" parent="HBoxContainer"]
 layout_mode = 2
 text = "0"
+
+[node name="click" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_y5lc3")
+bus = &"UI"

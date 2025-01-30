@@ -40,6 +40,11 @@ func _ready():
 	current_weapon.activated.connect(on_weapon_activated)
 	current_weapon.deactivated.connect(on_weapon_deactivated)
 
+	$car_start.play()
+	$car_start.finished.connect(func():
+		$car_running.play()
+	)
+
 func get_forward_direction() -> Vector2:
 	return (to_global(Vector2.UP) - to_global(Vector2.ZERO))
 
@@ -96,6 +101,7 @@ func _on_take_damage(amount: float):
 	health -= amount
 	LevelContext.level.overlay.set_hp(health)
 	if health <= 0:
+		$big_crash.play()
 		LevelContext.level.set_game_over()
 
 func _on_collision(node: Node) -> void:
@@ -108,12 +114,15 @@ func _on_collision(node: Node) -> void:
 		if node.has_method("get_last_velocity"):
 			velocity_ratio = clampf((last_velocity - node.get_last_velocity()).length()/speed_for_max_collision_damage, 0, 2)
 		hurt_box.take_damage(collision_damage * mass_ratio * velocity_ratio)
+		if collision_damage * mass_ratio * velocity_ratio > max_collision_damage/10:
+			$small_crash.play()
 		emit_break_particles(collision_damage * mass_ratio * velocity_ratio,collision_direction)
 	elif node is StaticBody2D:
 		hurt_box.take_damage(collision_damage)
+		if collision_damage > max_collision_damage/10:
+			$small_crash.play()
 		emit_break_particles(collision_damage,collision_direction)
 	elif node is CharacterBody2D:
-		#ainda n sei
 		pass
 	return
 

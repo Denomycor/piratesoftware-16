@@ -22,8 +22,8 @@ var acceleration: Vector2
 func _ready() -> void:
 	notifier.screen_entered.connect(func():
 		if(randf() > 0.3):
-			%scream.pitch_scale = randf_range(0.5, 1.5)
-			%scream.play()
+			$scream.pitch_scale = randf_range(0.5, 1.5)
+			$scream.play()
 	)
 	hurt_box.has_taken_damage.connect(_take_dmg)
 	if follow_range == 0:
@@ -58,6 +58,7 @@ func set_mimic_acceleration() -> void:
 
 func die():
 	dead = true
+	$crash.play()
 	LevelContext.level.stats.increment_kills()
 	LevelContext.level.stats.add_points(points)
 	($BikerGun as BikerGun).projectile_spawner_component.enabled = false
@@ -91,8 +92,12 @@ func _on_collision(node: Node) -> void:
 		if node.has_method("get_last_velocity"):
 			velocity_ratio = clampf((last_velocity - node.get_last_velocity()).length()/speed_for_max_collision_damage, 0, 2)
 		hurt_box.take_damage(collision_damage * mass_ratio * velocity_ratio)
+		if collision_damage * mass_ratio * velocity_ratio > max_collision_damage/10:
+			$small_crash.play()
 	elif node is StaticBody2D:
 		hurt_box.take_damage(collision_damage)
+		if collision_damage > max_collision_damage/10:
+			$small_crash.play()
 	elif node is CharacterBody2D:
 		#ainda n sei
 		pass

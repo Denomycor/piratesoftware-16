@@ -69,6 +69,7 @@ func _physics_process(delta: float) -> void:
 
 func die():
 	dead = true
+	%squish.play()
 	LevelContext.level.stats.increment_kills()
 	LevelContext.level.stats.add_points(points)
 	velocity = Vector2.ZERO

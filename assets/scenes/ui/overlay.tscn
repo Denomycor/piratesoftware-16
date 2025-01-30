@@ -62,12 +62,8 @@ shader_parameter/obstacle_color = Color(0.385029, 0.777194, 0.316256, 1)
 shader_parameter/sec_obstacle_color = Color(0.92549, 0.760784, 0, 1)
 shader_parameter/noise = SubResource("NoiseTexture2D_pgy1c")
 
-[node name="Overlay" type="CanvasLayer" node_paths=PackedStringArray("speed_counter", "health_bar", "weapon_bar", "vignette")]
+[node name="Overlay" type="CanvasLayer"]
 script = ExtResource("1_tmn6d")
-speed_counter = NodePath("BarContainer/HBoxContainer/TextureRect/Container/Sprite2D")
-health_bar = NodePath("BarContainer/HBoxContainer/VBoxContainer/Panel2/TextureRect/ProgressBar")
-weapon_bar = NodePath("BarContainer/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar")
-vignette = NodePath("ColorRect")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 z_index = 2

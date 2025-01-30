@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://b66n0n4i6aa3b"]
+[gd_scene load_steps=20 format=3 uid="uid://b66n0n4i6aa3b"]
 
 [ext_resource type="Script" path="res://assets/scripts/props/bones.gd" id="1_485rn"]
 [ext_resource type="Texture2D" uid="uid://bskh06ei8dwyv" path="res://assets/textures/props/stain_asset_5.png" id="2_4ulqe"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://tqhar040dkl6" path="res://assets/textures/props/stain_asset_1.png" id="4_xg1w1"]
 [ext_resource type="Texture2D" uid="uid://ynxix6yeyg27" path="res://assets/textures/props/bones_asset_4.png" id="5_dtx68"]
 [ext_resource type="Texture2D" uid="uid://ceh6s351pyonv" path="res://assets/textures/particles/bone_breaking_spritesheet.png" id="9_4idfa"]
+[ext_resource type="AudioStream" uid="uid://ccqdbeppac4hn" path="res://assets/audio/bones_breaking.wav" id="10_2pc7v"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8645f"]
 radius = 82.3429
@@ -136,3 +137,9 @@ lifetime = 0.5
 one_shot = true
 explosiveness = 0.4
 randomness = 0.3
+
+[node name="break" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_2pc7v")
+volume_db = 8.0
+max_distance = 5000.0
+attenuation = 0.3

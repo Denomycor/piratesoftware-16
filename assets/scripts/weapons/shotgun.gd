@@ -21,7 +21,7 @@ func _ready() -> void:
 	projectile_spawner_component.just_shot.connect(func():
 		var dir: Vector2 = get_global_mouse_position().direction_to(global_position)
 		fired.emit(dir * strength * projectile_spawner_component.multishot)
-		%shoot.play()
+		$shoot.play()
 	)
 
 
@@ -31,3 +31,6 @@ func _process(_delta: float) -> void:
 
 	if Input.is_action_just_pressed("fire"):
 		projectile_spawner_component.shoot(get_global_mouse_position())
+	
+	if projectile_spawner_component.delay_acc >= 0.6 and !projectile_spawner_component.proj_ready:
+		$reload.play()

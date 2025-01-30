@@ -7,11 +7,15 @@ const EXPLOSION_TIME := 0.1
 func _ready() -> void:
 	super._ready()
 	area_hitbox_component.monitoring = false
+	if get_node_or_null("shoot") != null:
+		$shoot.play()
 
 
 func destroy() -> void:
 	if(!frozen):
 		$explosion.pitch_scale = randf_range(1, 1.4)
+		if get_node_or_null("shoot") != null:
+			%shoot.stop()
 		$explosion.play()
 		$Sprite2D.visible = false
 		area_hitbox_component.monitoring = true
@@ -35,4 +39,3 @@ func destroy() -> void:
 func schedule_destroy() -> void:
 	destroy_next_frame = true
 	$Sprite2D.visible = false
-

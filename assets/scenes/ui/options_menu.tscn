@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://df72ojrh7b03v"]
+[gd_scene load_steps=6 format=3 uid="uid://c56ufqk3h108o"]
 
 [ext_resource type="Script" path="res://assets/scripts/ui/options_menu.gd" id="1_kbgg0"]
 [ext_resource type="Theme" uid="uid://cjlihoor22i2h" path="res://assets/resources/theme.tres" id="1_ucekv"]
 [ext_resource type="PackedScene" uid="uid://bwj7wl63yu7p8" path="res://assets/scenes/ui/audio_slider.tscn" id="2_r6amk"]
+[ext_resource type="AudioStream" uid="uid://br3gfa76tqcyr" path="res://assets/audio/click.wav" id="4_0u62q"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ew5uo"]
 font_size = 50
@@ -90,3 +91,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 text = "Back"
+
+[node name="click" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_0u62q")
+bus = &"UI"
