@@ -43,15 +43,17 @@ void fragment() {
 	// sand texture
 	vec4 sand = texture(sand_texture, sand_uv);
 	if (screen_color.rgb == TRANSPARENT_COLOR) {
-		final_color = sand;
-		vec2 shadow_offset_scaled = shadow_offset * our_camera_zoom;
-		vec4 screen_color_offset = texture(SCREEN_TEXTURE, UV + shadow_offset_scaled);
-		if (screen_color_offset.rgb != TRANSPARENT_COLOR) {
-			final_color -= vec4(0.2, 0.2, 0.2, 0.0);
-		}
-	} else {
-		final_color = screen_color;
+		final_color = vec4(sand.rgb, 1.0);
+		// vec2 shadow_offset_scaled = shadow_offset * our_camera_zoom;
+		// vec4 screen_color_offset = texture(SCREEN_TEXTURE, UV + shadow_offset_scaled);
+		// if (screen_color_offset.rgb != TRANSPARENT_COLOR) {
+		// 	final_color -= vec4(0.2, 0.2, 0.2, 0.0);
+		// }
+	} else if (screen_color.r == screen_color.g && screen_color.g == screen_color.b) {
+		float median = screen_color.r + screen_color.g + screen_color.b + screen_color.a / 4.0;
+		final_color = mix(screen_color, sand, 1.0 - median);
 	}
+
 
 	// Dusty Fog
 	float fog_noise_value = texture(fog_noise, sand_uv).r;
