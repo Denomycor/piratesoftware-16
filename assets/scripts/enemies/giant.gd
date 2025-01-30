@@ -59,6 +59,8 @@ func _physics_process(delta: float) -> void:
 func _process(_delta: float):
 	if dead:
 		return
+	if animation_player.current_animation == "attacking2":
+		return
 	if velocity.length() > 20:
 		animation_player.play("walking")
 	else:
@@ -99,14 +101,15 @@ func can_attack() -> bool:
 
 
 func attack() -> void:
+	print("I attacked")
 	attack_is_on_cooldown = true
-	animation_player.play("attacking")
+	animation_player.play("attacking2")
 	attack_timer.start()
 
 
 func end_charge() -> void:
 	$Sprite2D.self_modulate = Color.WHITE
-	animation_player.speed_scale = 0.6
+	# animation_player.speed_scale = 0.6
 	speed = speed_backup
 	charge_timer.start()
 
@@ -115,7 +118,7 @@ func start_charge() -> void:
 	charge_is_on_cooldown = true
 	create_tween().tween_callback(end_charge).set_delay(charge_time)
 	$Sprite2D.self_modulate = charge_color
-	animation_player.speed_scale = 1
+	# animation_player.speed_scale = 1
 	speed_backup = speed
 	speed = charge_speed
 
