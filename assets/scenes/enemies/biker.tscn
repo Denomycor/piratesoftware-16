@@ -4,11 +4,21 @@
 [ext_resource type="Script" path="res://assets/scripts/components/hurt-box.gd" id="1_80q8j"]
 [ext_resource type="Texture2D" uid="uid://drrd7mkp1t7la" path="res://assets/textures/enemies/motard_sprite.png" id="2_fr78b"]
 [ext_resource type="Texture2D" uid="uid://canrvohjsbxjs" path="res://assets/textures/enemies/motard_wheel.png" id="3_sa0fu"]
+[ext_resource type="Shader" path="res://assets/scripts/scrolling_texture.gdshader" id="3_xdejw"]
+[ext_resource type="Texture2D" uid="uid://cqjm5fggxjs2e" path="res://assets/textures/car/scrolling_wheel_texture.png" id="4_to65p"]
 [ext_resource type="PackedScene" uid="uid://bs42xbt08m7uo" path="res://assets/scenes/weapons/biker_gun.tscn" id="5_csq2n"]
 [ext_resource type="PackedScene" path="res://assets/scenes/enemies/biker_particles.tscn" id="6_b6p6t"]
 [ext_resource type="AudioStream" uid="uid://dmbo5hbx7alex" path="res://assets/audio/biker/motard_scream1.wav" id="7_4ee0p"]
 [ext_resource type="AudioStream" uid="uid://ca08fqn3xwy01" path="res://assets/audio/crash1.wav" id="8_0qpkb"]
 [ext_resource type="AudioStream" uid="uid://bgxk7wr2tucwi" path="res://assets/audio/crash2.wav" id="9_o8pvb"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c32f3"]
+shader = ExtResource("3_xdejw")
+shader_parameter/speed = Vector2(0, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_v4if5"]
+shader = ExtResource("3_xdejw")
+shader_parameter/speed = Vector2(0, 0)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_utvnp"]
 radius = 47.0
@@ -18,12 +28,13 @@ height = 270.0
 radius = 58.0
 height = 336.0
 
-[node name="Biker" type="CharacterBody2D" node_paths=PackedStringArray("sprites") groups=["enemies"]]
+[node name="Biker" type="CharacterBody2D" node_paths=PackedStringArray("sprites", "wheels") groups=["enemies"]]
 collision_layer = 4
 collision_mask = 7
 script = ExtResource("1_3s7no")
 follow_range = 1500
 sprites = [NodePath("Biker"), NodePath("WheelB"), NodePath("WheelF"), NodePath("BikerGun/Sprite2D")]
+wheels = [NodePath("WheelB/ScrollingWheel"), NodePath("WheelF/ScrollingWheel")]
 speed = 4000.0
 points = 100
 
@@ -36,10 +47,24 @@ position = Vector2(-124, 0)
 rotation = 1.5708
 texture = ExtResource("3_sa0fu")
 
+[node name="ScrollingWheel" type="Sprite2D" parent="WheelB"]
+material = SubResource("ShaderMaterial_c32f3")
+position = Vector2(0.25, 0.5)
+rotation = 3.14159
+scale = Vector2(1.05, 1)
+texture = ExtResource("4_to65p")
+
 [node name="WheelF" type="Sprite2D" parent="."]
 position = Vector2(133, 0)
 rotation = 1.5708
 texture = ExtResource("3_sa0fu")
+
+[node name="ScrollingWheel" type="Sprite2D" parent="WheelF"]
+material = SubResource("ShaderMaterial_v4if5")
+position = Vector2(0.25, 0.5)
+rotation = 3.14159
+scale = Vector2(1.05, 1)
+texture = ExtResource("4_to65p")
 
 [node name="BikerGun" parent="." instance=ExtResource("5_csq2n")]
 position = Vector2(51, 0)

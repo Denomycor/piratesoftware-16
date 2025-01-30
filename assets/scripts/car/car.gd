@@ -1,6 +1,8 @@
 class_name Car extends RigidBody2D
 
 const PARTICLE_RADIUS := 130
+const FRONT_WHEEL_SIZE := 170
+const BACK_WHEEL_SIZE := 240
 
 var motor_strength: float = 500
 var drift_friction_strength: float = 5
@@ -15,6 +17,9 @@ var parallel_multiplier: float = 0.25
 @export var min_collision_speed: float = 300
 @export var speed_for_max_collision_damage: float = 1500
 @export var particle_scene: PackedScene
+
+@export var back_wheels: Array[Sprite2D]
+@export var front_wheels: Array[Sprite2D]
 
 @onready var weapon_dock: WeaponDock = $weapon_dock
 @onready var hurt_box: HurtBoxComponent = $HurtBoxComponent
@@ -54,6 +59,7 @@ func get_perpendicular_direction() -> Vector2:
 func _physics_process(_delta):
 	apply_central_force(get_forward_direction() * motor_strength)
 	apply_drift_friction()
+	set_wheel_speed()
 	last_velocity = linear_velocity
 
 func apply_drift_friction():
@@ -141,3 +147,11 @@ func set_car_vars(car_vars: CarVars) -> void:
 	torque_multiplier = car_vars.torque_multiplier
 	perpendicular_multiplier = car_vars.perpendicular_multiplier
 	parallel_multiplier = car_vars.parallel_multiplier
+
+func set_wheel_speed() -> void:
+	var parallel_component = get_forward_direction().dot(linear_velocity)
+	for wheel in back_wheels:
+		wheel.material.set_shader_parameter("speed", Vector2(0,parallel_component/(float(BACK_WHEEL_SIZE)/2)))
+	
+	for wheel in front_wheels:
+		wheel.material.set_shader_parameter("speed", Vector2(0,parallel_component/(float(FRONT_WHEEL_SIZE)/2)))

@@ -1,5 +1,7 @@
 class_name Biker extends Enemy
 
+const WHEEL_SIZE = 190
+
 @export var health: float = 20
 @export_range(500, 1500) var follow_range: int
 @export var prediction_time: float = 0.3
@@ -9,17 +11,21 @@ class_name Biker extends Enemy
 @export var min_collision_speed: float = 300
 @export var speed_for_max_collision_damage: float = 1500
 @export var sprites: Array[Sprite2D]
+@export var wheels: Array[Sprite2D]
 
 @onready var gpu_particles: GPUParticles2D = $GPUParticles2D
 @onready var collision: CollisionShape2D = $CollisionShape2D
 @onready var notifier: VisibleOnScreenNotifier2D = $VisibleOnScreenNotifier2D
 
 var last_velocity := Vector2.ZERO
+var last_position := Vector2.ZERO
+var actual_speed: float
 var dead := false
 var acceleration: Vector2
 
 
 func _ready() -> void:
+	last_position = global_position
 	notifier.screen_entered.connect(func():
 		if(randf() > 0.3):
 			$scream.pitch_scale = randf_range(0.5, 1.5)
@@ -46,6 +52,9 @@ func _physics_process(delta: float) -> void:
 	
 	move_and_slide()
 	last_velocity = velocity
+	actual_speed = (global_position - last_position).length()/delta
+	last_position = global_position
+	set_wheel_speed()
 
 func get_distance_to_target() -> float:
 	return target.global_position.distance_to(global_position)
@@ -102,3 +111,7 @@ func _on_collision(node: Node) -> void:
 		#ainda n sei
 		pass
 	return
+
+func set_wheel_speed() -> void:
+	for wheel in wheels:
+		wheel.material.set_shader_parameter("speed", Vector2(0,actual_speed/(float(WHEEL_SIZE)/2)))

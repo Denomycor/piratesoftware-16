@@ -22,11 +22,44 @@ bounce = 0.1
 shader = ExtResource("2_l82v1")
 shader_parameter/color = Color(1, 1, 1, 1)
 
+[sub_resource type="Shader" id="Shader_rbugs"]
+code = "shader_type canvas_item;
+
+// --- Uniforms --- //
+uniform vec2 speed = vec2(0.0, 0.0);
+
+// --- Functions --- //
+void fragment() {
+	COLOR = texture(TEXTURE, mod(UV + TIME * -speed, 1.0));
+}
+
+//void light() {
+	// Called for every pixel for every light affecting the CanvasItem.
+	// Uncomment to replace the default light processing function with this one.
+//}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ioi3i"]
+shader = SubResource("Shader_rbugs")
+shader_parameter/speed = Vector2(0, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uxosv"]
+shader = SubResource("Shader_rbugs")
+shader_parameter/speed = Vector2(0, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ub8pp"]
+shader = SubResource("Shader_rbugs")
+shader_parameter/speed = Vector2(0, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dyywe"]
+shader = SubResource("Shader_rbugs")
+shader_parameter/speed = Vector2(0, 0)
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1m2s1"]
 radius = 122.0
 height = 446.0
 
-[node name="Car" type="RigidBody2D"]
+[node name="Car" type="RigidBody2D" node_paths=PackedStringArray("back_wheels", "front_wheels")]
 visibility_layer = 513
 z_index = 15
 collision_layer = 2
@@ -37,6 +70,8 @@ center_of_mass_mode = 1
 center_of_mass = Vector2(0, -100)
 script = ExtResource("1_nqiho")
 particle_scene = ExtResource("2_2uyc3")
+back_wheels = [NodePath("wheels/WheelBL/ScrollingWheel"), NodePath("wheels/WheelBR/ScrollingWheel")]
+front_wheels = [NodePath("wheels/WheelFL/ScrollingWheel"), NodePath("wheels/WheelFR/ScrollingWheel")]
 
 [node name="sonar_position" type="Sprite2D" parent="."]
 light_mask = 0
@@ -49,6 +84,7 @@ texture = ExtResource("3_4wvws")
 texture = ExtResource("2_no78u")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+visible = false
 position = Vector2(1, 1)
 polygon = PackedVector2Array(-96, 182, -114, 137, -94, -16, -92, -131, -47, -136, -25, -209, 33, -207, 58, -136, 95, -137, 101, -102, 91, -11, 116, 141, 100, 179, 52, 209, -45, 212)
 
@@ -78,6 +114,13 @@ point_duration = 10.0
 min_drift_strength = 1800.0
 max_drift_strength = 2000.0
 
+[node name="ScrollingWheel" type="Sprite2D" parent="wheels/WheelFR"]
+material = SubResource("ShaderMaterial_ioi3i")
+position = Vector2(-0.4, -2.8)
+rotation = 3.14159
+scale = Vector2(0.77, 0.77)
+texture = ExtResource("9_obudu")
+
 [node name="WheelFL" type="Node2D" parent="wheels"]
 position = Vector2(-69, -100)
 script = ExtResource("4_wkcph")
@@ -86,6 +129,13 @@ max_width = 25.0
 point_duration = 10.0
 min_drift_strength = 1800.0
 max_drift_strength = 2000.0
+
+[node name="ScrollingWheel" type="Sprite2D" parent="wheels/WheelFL"]
+material = SubResource("ShaderMaterial_uxosv")
+position = Vector2(-0.4, -2.8)
+rotation = 3.14159
+scale = Vector2(0.77, 0.77)
+texture = ExtResource("9_obudu")
 
 [node name="WheelBL" type="Node2D" parent="wheels"]
 position = Vector2(-78, 140)
@@ -97,6 +147,13 @@ min_drift_strength = 1200.0
 max_drift_strength = 2000.0
 torque_multiplier = 2.0
 
+[node name="ScrollingWheel" type="Sprite2D" parent="wheels/WheelBL"]
+material = SubResource("ShaderMaterial_ub8pp")
+position = Vector2(-0.5, -4.5)
+rotation = 3.14159
+scale = Vector2(1.08, 1.08)
+texture = ExtResource("9_obudu")
+
 [node name="WheelBR" type="Node2D" parent="wheels"]
 position = Vector2(84, 140)
 script = ExtResource("4_wkcph")
@@ -107,12 +164,20 @@ min_drift_strength = 1200.0
 max_drift_strength = 2000.0
 torque_multiplier = 2.0
 
+[node name="ScrollingWheel" type="Sprite2D" parent="wheels/WheelBR"]
+material = SubResource("ShaderMaterial_dyywe")
+position = Vector2(-0.5, -4.5)
+rotation = 3.14159
+scale = Vector2(1.08, 1.08)
+texture = ExtResource("9_obudu")
+
 [node name="HurtBoxComponent" type="Area2D" parent="."]
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("7_plr5q")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBoxComponent"]
+visible = false
 position = Vector2(1, 5)
 shape = SubResource("CapsuleShape2D_1m2s1")
 
