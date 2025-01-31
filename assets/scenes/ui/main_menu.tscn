@@ -9,7 +9,7 @@
 
 [sub_resource type="LabelSettings" id="LabelSettings_gcirm"]
 line_spacing = 5.0
-font_size = 35
+font_size = 80
 font_color = Color(0.95967, 0.838587, 0.700804, 1)
 
 [sub_resource type="SystemFont" id="SystemFont_5kogv"]
@@ -47,9 +47,7 @@ metadata/_tab_index = 0
 
 [node name="Label" type="Label" parent="TabContainer/VBoxContainer"]
 layout_mode = 2
-text = "Hyper Turbo Drift: 
-Alien Carnage Unleashed in the Sands 
-of Eternal Fury and Apocalypse Chaos"
+text = "RANKURUS"
 label_settings = SubResource("LabelSettings_gcirm")
 horizontal_alignment = 1
 vertical_alignment = 1
