@@ -76,7 +76,7 @@ func set_drift_gradient() -> void:
 		for idx in alpha_points.size():
 			if idx < 2:
 				temp_gradient.remove_point(0)
-			temp_color.a = alpha_points[idx]/255
+			temp_color.a = alpha_points[idx]
 			temp_gradient.add_point(get_point_ratio(idx),temp_color)
 	gradient = temp_gradient
 
