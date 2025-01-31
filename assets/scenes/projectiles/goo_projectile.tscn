@@ -1,11 +1,22 @@
-[gd_scene load_steps=3 format=3 uid="uid://3bm2ocnbgcjh"]
+[gd_scene load_steps=5 format=3 uid="uid://3bm2ocnbgcjh"]
 
 [ext_resource type="Texture2D" uid="uid://d0db5vjestun1" path="res://assets/textures/props/gasoline_asset_1.png" id="1_7wxry"]
+[ext_resource type="Script" path="res://assets/scripts/projectiles/goo_projectile.gd" id="1_67dex"]
+
+[sub_resource type="Curve" id="Curve_p7wg8"]
+_data = [Vector2(0, 0.736264), 0.0, 0.0, 0, 0, Vector2(0.421053, 1), 0.0, 0.0, 0, 0, Vector2(0.747368, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.21978), 0.0, 0.0, 0, 0]
+point_count = 4
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2ad5l"]
 radius = 139.004
 
 [node name="goo_projectile" type="Node2D"]
+script = ExtResource("1_67dex")
+speed_from = 600.0
+speed_to = 800.0
+drag = 200.0
+lifetime = 10.0
+scale_curve = SubResource("Curve_p7wg8")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(0.645922, 0.281716, 0, 1)

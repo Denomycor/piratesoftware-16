@@ -1,6 +1,6 @@
 class_name Giant extends Enemy
 
-const PROJ_SCENE := preload("res://assets/scenes/projectiles/enemy_minigun_projectile.tscn")
+const PROJ_SCENE := preload("res://assets/scenes/projectiles/goo_projectile.tscn")
 
 @export var health: float = 1000
 @export var max_accelaration: float = 100000
@@ -37,7 +37,7 @@ func _ready() -> void:
 	hit_box.monitoring = false
 
 	projectile_spawner_component.shoot_projectile.connect(func(from: Vector2, rot: float, _data):
-		var projectile: LinearProjectile = PROJ_SCENE.instantiate()
+		var projectile: GooProjectile = PROJ_SCENE.instantiate()
 		projectile.set_properties(from, rot)
 		LevelContext.level.get_node("World").add_child(projectile)
 	)
@@ -154,7 +154,7 @@ func start_charge() -> void:
 
 
 func play_cracks() -> void:
-	$Node/crack.global_position = global_position
+	$Node/crack.global_position = $HitBoxComponent/CollisionShape2D.global_position
 	$Node/AnimationPlayer.play("crack_start")
 	create_tween().tween_callback($Node/AnimationPlayer.play.bind("crack_end")).set_delay(3)
 
