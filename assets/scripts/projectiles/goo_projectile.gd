@@ -3,11 +3,14 @@ class_name GooProjectile extends Node2D
 
 @export var speed_from: float
 @export var speed_to: float
+@export var scale_from: float = 1.0
+@export var scale_to: float = 1.0
 @export var drag: float
 @export var lifetime: float
 
 @export var scale_curve: Curve
 
+var og_scale: Vector2
 var timer: Tween
 var travel_direction: Vector2
 
@@ -16,10 +19,13 @@ var speed: float
 func _ready() -> void:
 	timer = create_tween()
 	timer.tween_callback(destroy).set_delay(lifetime)
+
 	speed = randf_range(speed_from, speed_to)
+	scale = scale * randf_range(scale_from, scale_to)
+	og_scale = scale
 
 	create_tween().tween_method(func(value: float):
-		scale = Vector2.ONE * scale_curve.sample(value)
+		scale = og_scale * scale_curve.sample(value)
 	, 0.0, 1.0, lifetime)
 	# $GPUParticles2D.emitting = true
 	# $GPUParticles2D.finished.connect(queue_free)
