@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://is7aeubau3xs"]
+[gd_scene load_steps=31 format=3 uid="uid://is7aeubau3xs"]
 
 [ext_resource type="Script" path="res://assets/scripts/ui/overlay.gd" id="1_tmn6d"]
 [ext_resource type="Shader" path="res://assets/scripts/ui/vignette.gdshader" id="2_03iuh"]
@@ -11,7 +11,6 @@
 [ext_resource type="Texture2D" uid="uid://c546kejn8nq0e" path="res://assets/textures/ui/in_game/ui_background.png" id="6_5r283"]
 [ext_resource type="Texture2D" uid="uid://cn7ymqp4hv87n" path="res://assets/textures/ui/in_game/velocimeter_pointer_sprite.png" id="7_bx4tl"]
 [ext_resource type="Texture2D" uid="uid://bjijk4nmgske7" path="res://assets/textures/ui/in_game/weapons_ui_background.png" id="7_dcln4"]
-[ext_resource type="Script" path="res://assets/scripts/ui/speed_pointer.gd" id="8_ihbnl"]
 [ext_resource type="Texture2D" uid="uid://c24twx80tufmt" path="res://assets/textures/ui/in_game/velocimeter_glass_sprite.png" id="8_pmejn"]
 [ext_resource type="Texture2D" uid="uid://cc2ers6osa6bn" path="res://assets/textures/ui/in_game/hp_bar_outline_sprite.png" id="8_qnebf"]
 [ext_resource type="Texture2D" uid="uid://bnoelkhaugr48" path="res://assets/textures/ui/in_game/velocimeter_wire_sprite.png" id="9_6ewi4"]
@@ -128,7 +127,6 @@ offset_bottom = 204.0
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("7_bx4tl")
 offset = Vector2(70, 0)
-script = ExtResource("8_ihbnl")
 
 [node name="Glass" type="TextureRect" parent="BarContainer/HBoxContainer/Speedometer"]
 layout_mode = 0
