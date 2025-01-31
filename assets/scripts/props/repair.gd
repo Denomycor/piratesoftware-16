@@ -1,6 +1,5 @@
 class_name Repair extends Prop
 
-@export var repair_warea: Area2D
 @onready var sprite := $Sprite2D
 @onready var hit_box := $HitBoxComponent
 @onready var particles: GPUParticles2D = $GPUParticles2D

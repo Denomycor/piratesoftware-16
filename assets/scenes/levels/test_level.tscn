@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://cemnplwcdcbgk"]
+[gd_scene load_steps=40 format=3 uid="uid://cemnplwcdcbgk"]
 
 [ext_resource type="Script" path="res://assets/scripts/level/level.gd" id="1_y7sae"]
 [ext_resource type="PackedScene" uid="uid://drcpxeie725b" path="res://assets/scenes/car/car.tscn" id="2_8k278"]
@@ -26,6 +26,7 @@
 [ext_resource type="PackedScene" uid="uid://dw2abso84avq1" path="res://assets/scenes/enemies/biker.tscn" id="22_l11od"]
 [ext_resource type="PackedScene" uid="uid://cadth6phe5ec7" path="res://assets/scenes/enemies/gunhead.tscn" id="23_iarkt"]
 [ext_resource type="PackedScene" uid="uid://k2d2dspipq3e" path="res://assets/scenes/enemies/giant.tscn" id="24_hdnru"]
+[ext_resource type="PackedScene" uid="uid://31na106ybcww" path="res://assets/scenes/enemies/exploding_crawler.tscn" id="25_0hi0j"]
 [ext_resource type="AudioStream" uid="uid://dulwgyuq5kvtl" path="res://assets/audio/Pufino-MetalIsTrash.mp3" id="25_u114g"]
 
 [sub_resource type="Resource" id="Resource_msscp"]
@@ -71,6 +72,10 @@ parallel_multiplier = 0.25
 [sub_resource type="Curve" id="Curve_omlgi"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
+
+[sub_resource type="Curve" id="Curve_7xteg"]
+_data = [Vector2(0, 0.054945), 0.0, 0.0, 0, 0]
+point_count = 1
 
 [sub_resource type="Curve" id="Curve_ehfhm"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 0.054945), 0.0, 0.0, 0, 0]
@@ -152,8 +157,8 @@ max_slide_speed = 4000.0
 script = ExtResource("4_a7yx0")
 target = NodePath("../Car")
 num_groups = 1
-enemy_list = Array[PackedScene]([ExtResource("21_po4qe"), ExtResource("22_l11od"), ExtResource("23_iarkt"), ExtResource("24_hdnru")])
-enemy_ratios = Array[Curve]([SubResource("Curve_omlgi"), SubResource("Curve_ehfhm"), SubResource("Curve_wcr00"), SubResource("Curve_etxpm")])
+enemy_list = Array[PackedScene]([ExtResource("21_po4qe"), ExtResource("25_0hi0j"), ExtResource("22_l11od"), ExtResource("23_iarkt"), ExtResource("24_hdnru")])
+enemy_ratios = Array[Curve]([SubResource("Curve_omlgi"), SubResource("Curve_7xteg"), SubResource("Curve_ehfhm"), SubResource("Curve_wcr00"), SubResource("Curve_etxpm")])
 max_enemies = SubResource("Curve_u14r1")
 
 [node name="SpawnTimer" type="Timer" parent="World/EnemySpawner"]
