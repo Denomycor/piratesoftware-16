@@ -1,10 +1,29 @@
-[gd_scene load_steps=3 format=3 uid="uid://deyagtrxx3e6u"]
+[gd_scene load_steps=5 format=3 uid="uid://deyagtrxx3e6u"]
 
 [ext_resource type="Script" path="res://assets/scripts/game.gd" id="1_jn3nd"]
 [ext_resource type="PackedScene" uid="uid://dyjdx5f34nlfp" path="res://assets/scenes/ui/main_menu.tscn" id="1_ps6mr"]
+[ext_resource type="Texture2D" uid="uid://8au6ve3sdk60" path="res://assets/textures/ui/tutorial_page.png" id="3_hrskd"]
+[ext_resource type="Script" path="res://assets/scripts/ui/tutorial.gd" id="3_v24fp"]
 
 [node name="game" type="Node"]
 script = ExtResource("1_jn3nd")
 
 [node name="main_menu" parent="." instance=ExtResource("1_ps6mr")]
 process_mode = 3
+
+[node name="tutorial" type="CanvasLayer" parent="."]
+process_mode = 3
+visible = false
+script = ExtResource("3_v24fp")
+
+[node name="TextureRect" type="TextureRect" parent="tutorial"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_hrskd")
+expand_mode = 2
+
+[node name="Timer" type="Timer" parent="tutorial"]
+wait_time = 10.0
