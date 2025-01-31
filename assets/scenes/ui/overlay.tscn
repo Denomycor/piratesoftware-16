@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://is7aeubau3xs"]
+[gd_scene load_steps=32 format=3 uid="uid://is7aeubau3xs"]
 
 [ext_resource type="Script" path="res://assets/scripts/ui/overlay.gd" id="1_tmn6d"]
 [ext_resource type="Shader" path="res://assets/scripts/ui/vignette.gdshader" id="2_03iuh"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://assets/scripts/sonar/sonar_viewport.gd" id="2_vnyf8"]
 [ext_resource type="Shader" path="res://assets/scripts/sonar/sonar.gdshader" id="3_s501v"]
 [ext_resource type="Texture2D" uid="uid://2pj2waca7ysj" path="res://assets/textures/ui/in_game/velocimeter_background_sprite.png" id="5_phxvy"]
+[ext_resource type="Script" path="res://assets/scripts/ui/speedometer.gd" id="5_vrg1j"]
 [ext_resource type="Texture2D" uid="uid://c546kejn8nq0e" path="res://assets/textures/ui/in_game/ui_background.png" id="6_5r283"]
 [ext_resource type="Texture2D" uid="uid://cn7ymqp4hv87n" path="res://assets/textures/ui/in_game/velocimeter_pointer_sprite.png" id="7_bx4tl"]
 [ext_resource type="Texture2D" uid="uid://bjijk4nmgske7" path="res://assets/textures/ui/in_game/weapons_ui_background.png" id="7_dcln4"]
@@ -108,27 +109,28 @@ theme = ExtResource("2_vhdhy")
 [node name="HBoxContainer" type="HBoxContainer" parent="BarContainer"]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="BarContainer/HBoxContainer"]
+[node name="Speedometer" type="TextureRect" parent="BarContainer/HBoxContainer"]
 z_index = 1
 custom_minimum_size = Vector2(220, 220)
 layout_mode = 2
 texture = ExtResource("5_phxvy")
 expand_mode = 2
+script = ExtResource("5_vrg1j")
 
-[node name="Container" type="Control" parent="BarContainer/HBoxContainer/TextureRect"]
+[node name="Container" type="Control" parent="BarContainer/HBoxContainer/Speedometer"]
 anchors_preset = 0
 offset_left = 73.0
 offset_top = 164.0
 offset_right = 113.0
 offset_bottom = 204.0
 
-[node name="Sprite2D" type="Sprite2D" parent="BarContainer/HBoxContainer/TextureRect/Container"]
+[node name="PointerSprite" type="Sprite2D" parent="BarContainer/HBoxContainer/Speedometer/Container"]
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("7_bx4tl")
 offset = Vector2(70, 0)
 script = ExtResource("8_ihbnl")
 
-[node name="TextureRect2" type="TextureRect" parent="BarContainer/HBoxContainer/TextureRect"]
+[node name="Glass" type="TextureRect" parent="BarContainer/HBoxContainer/Speedometer"]
 layout_mode = 0
 offset_top = -0.999995
 offset_right = 348.0
@@ -136,7 +138,7 @@ offset_bottom = 313.0
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("8_pmejn")
 
-[node name="TextureRect3" type="TextureRect" parent="BarContainer/HBoxContainer/TextureRect"]
+[node name="TextureRect3" type="TextureRect" parent="BarContainer/HBoxContainer/Speedometer"]
 layout_mode = 0
 offset_left = 140.0
 offset_top = 23.0
@@ -145,7 +147,7 @@ offset_bottom = 69.0
 rotation = 0.275366
 texture = ExtResource("9_6ewi4")
 
-[node name="TextureRect4" type="TextureRect" parent="BarContainer/HBoxContainer/TextureRect"]
+[node name="TextureRect4" type="TextureRect" parent="BarContainer/HBoxContainer/Speedometer"]
 layout_mode = 0
 offset_left = 27.0
 offset_top = -9.0
@@ -154,7 +156,7 @@ offset_bottom = 37.0
 rotation = 0.244718
 texture = ExtResource("9_6ewi4")
 
-[node name="TextureRect5" type="TextureRect" parent="BarContainer/HBoxContainer/TextureRect"]
+[node name="TextureRect5" type="TextureRect" parent="BarContainer/HBoxContainer/Speedometer"]
 layout_mode = 0
 offset_left = 209.0
 offset_top = 134.0
