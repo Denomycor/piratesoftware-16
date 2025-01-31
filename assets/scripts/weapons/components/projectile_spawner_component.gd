@@ -29,7 +29,7 @@ func _ready() -> void:
 	burst_delay_acc = burst_delay
 
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if !proj_ready:
 		delay_acc -= delta
 		if delay_acc < delta:

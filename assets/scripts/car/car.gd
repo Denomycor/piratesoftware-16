@@ -105,10 +105,12 @@ func _on_weapon_switched():
 
 func _on_take_damage(amount: float):
 	health -= amount
-	LevelContext.level.overlay.set_hp(health)
 	if health <= 0:
 		$big_crash.play()
 		LevelContext.level.set_game_over()
+	if health > max_health:
+		health = max_health
+	LevelContext.level.overlay.set_hp(health)
 
 func _on_collision(node: Node) -> void:
 	var collision_direction := global_position.direction_to(node.global_position)
