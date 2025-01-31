@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://3bm2ocnbgcjh"]
+
+[ext_resource type="Texture2D" uid="uid://d0db5vjestun1" path="res://assets/textures/props/gasoline_asset_1.png" id="1_7wxry"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2ad5l"]
+radius = 139.004
+
+[node name="goo_projectile" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.645922, 0.281716, 0, 1)
+texture = ExtResource("1_7wxry")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+linear_damp_space_override = 3
+linear_damp = 4.0
+angular_damp_space_override = 3
+angular_damp = 4.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_2ad5l")
