@@ -68,7 +68,7 @@ shape = SubResource("CapsuleShape2D_a1boc")
 collision_layer = 0
 collision_mask = 3
 script = ExtResource("2_mqs76")
-damage_amount = 5.0
+damage_amount = 40.0
 one_shot = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
@@ -79,7 +79,7 @@ shape = SubResource("CapsuleShape2D_vnqqc")
 collision_layer = 0
 collision_mask = 7
 script = ExtResource("2_mqs76")
-damage_amount = 10.0
+damage_amount = 25.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AreaHitBoxComponent"]
 shape = SubResource("CircleShape2D_pa2v0")

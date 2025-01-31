@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://is7aeubau3xs"]
+[gd_scene load_steps=31 format=3 uid="uid://is7aeubau3xs"]
 
 [ext_resource type="Script" path="res://assets/scripts/ui/overlay.gd" id="1_tmn6d"]
 [ext_resource type="Shader" path="res://assets/scripts/ui/vignette.gdshader" id="2_03iuh"]
@@ -46,21 +46,11 @@ font_color = Color(0.960784, 0.839216, 0.701961, 1)
 outline_size = 10
 outline_color = Color(0.051971, 0.051971, 0.051971, 1)
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_qklw6"]
-noise_type = 3
-frequency = 0.0312
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_pgy1c"]
-noise = SubResource("FastNoiseLite_qklw6")
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xppwn"]
 shader = ExtResource("3_s501v")
 shader_parameter/enabled = true
 shader_parameter/background_color = Color(0.0646966, 0.0646965, 0.0646966, 1)
-shader_parameter/sec_background_color = null
-shader_parameter/obstacle_color = Color(0.385029, 0.777194, 0.316256, 1)
-shader_parameter/sec_obstacle_color = Color(0.92549, 0.760784, 0, 1)
-shader_parameter/noise = SubResource("NoiseTexture2D_pgy1c")
+shader_parameter/obstacle_color = Color(0.6467, 0.87, 0.2001, 1)
 
 [node name="Overlay" type="CanvasLayer"]
 script = ExtResource("1_tmn6d")

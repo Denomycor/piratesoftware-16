@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bjx6o6qrk0sb8"]
+[gd_scene load_steps=18 format=3 uid="uid://3bym24uhxs0m"]
 
 [ext_resource type="Script" path="res://assets/scripts/props/repair.gd" id="1_61wy2"]
 [ext_resource type="Texture2D" uid="uid://bsx8kmlxab5bu" path="res://assets/textures/icon/repair_item_sprite.png" id="2_djdr2"]
@@ -102,7 +102,7 @@ visibility_layer = 513
 z_index = 5
 collision_mask = 2
 script = ExtResource("1_61wy2")
-block_radius = 40.0
+block_radius = 150.0
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
 light_mask = 512
@@ -142,7 +142,7 @@ attenuation = 0.3
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("5_nu7if")
-damage_amount = -250.0
+damage_amount = -350.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
 position = Vector2(4, 2.38419e-07)

@@ -57,7 +57,7 @@ z_index = 30
 collision_layer = 8
 collision_mask = 5
 script = ExtResource("1_uqj6l")
-speed = 4000.0
+speed = 5500.0
 lifetime = 2.0
 scale_curve = SubResource("Curve_clchk")
 
@@ -69,7 +69,7 @@ shape = SubResource("CapsuleShape2D_a1boc")
 collision_layer = 0
 collision_mask = 5
 script = ExtResource("2_8qxhd")
-damage_amount = 20
+damage_amount = 50.0
 one_shot = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]

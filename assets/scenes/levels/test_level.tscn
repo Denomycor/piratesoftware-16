@@ -26,7 +26,7 @@
 [ext_resource type="PackedScene" uid="uid://dw2abso84avq1" path="res://assets/scenes/enemies/biker.tscn" id="22_l11od"]
 [ext_resource type="PackedScene" uid="uid://cadth6phe5ec7" path="res://assets/scenes/enemies/gunhead.tscn" id="23_iarkt"]
 [ext_resource type="PackedScene" uid="uid://k2d2dspipq3e" path="res://assets/scenes/enemies/giant.tscn" id="24_hdnru"]
-[ext_resource type="PackedScene" uid="uid://31na106ybcww" path="res://assets/scenes/enemies/exploding_crawler.tscn" id="25_0hi0j"]
+[ext_resource type="PackedScene" uid="uid://c0lyxftkfyopk" path="res://assets/scenes/enemies/exploding_crawler.tscn" id="25_0hi0j"]
 [ext_resource type="AudioStream" uid="uid://dulwgyuq5kvtl" path="res://assets/audio/Pufino-MetalIsTrash.mp3" id="25_u114g"]
 
 [sub_resource type="Resource" id="Resource_msscp"]
@@ -34,24 +34,24 @@ script = ExtResource("19_ke0jl")
 motor_strength = 500.0
 drift_friction_strength = 5.0
 torque_multiplier = 10.0
-perpendicular_multiplier = 0.25
-parallel_multiplier = 0.25
+perpendicular_multiplier = 0.05
+parallel_multiplier = 0.05
 
 [sub_resource type="Resource" id="Resource_stdhw"]
 script = ExtResource("19_ke0jl")
 motor_strength = 500.0
 drift_friction_strength = 5.0
-torque_multiplier = 10.0
-perpendicular_multiplier = 0.25
-parallel_multiplier = 0.25
+torque_multiplier = 9.0
+perpendicular_multiplier = 0.5
+parallel_multiplier = 0.3
 
 [sub_resource type="Resource" id="Resource_fojdv"]
 script = ExtResource("19_ke0jl")
 motor_strength = 500.0
 drift_friction_strength = 5.0
-torque_multiplier = 10.0
-perpendicular_multiplier = 0.25
-parallel_multiplier = 0.25
+torque_multiplier = 12.0
+perpendicular_multiplier = 0.0
+parallel_multiplier = 0.6
 
 [sub_resource type="Resource" id="Resource_h5je3"]
 script = ExtResource("19_ke0jl")
@@ -65,9 +65,9 @@ parallel_multiplier = 0.25
 script = ExtResource("19_ke0jl")
 motor_strength = 500.0
 drift_friction_strength = 5.0
-torque_multiplier = 10.0
-perpendicular_multiplier = 0.25
-parallel_multiplier = 0.25
+torque_multiplier = 17.0
+perpendicular_multiplier = 1.0
+parallel_multiplier = 0.5
 
 [sub_resource type="Curve" id="Curve_omlgi"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -78,16 +78,16 @@ _data = [Vector2(0, 0.054945), 0.0, 0.0, 0, 0]
 point_count = 1
 
 [sub_resource type="Curve" id="Curve_ehfhm"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 0.054945), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 0.0659341), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Curve" id="Curve_wcr00"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 0.120879), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 0.098901), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Curve" id="Curve_etxpm"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 0.032967), 0.0, 0.0, 0, 0]
-point_count = 2
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.279661, 0), 0.0, 0.0, 0, 0, Vector2(1, 0.021978), 0.0, 0.0, 0, 0]
+point_count = 3
 
 [sub_resource type="Curve" id="Curve_u14r1"]
 min_value = 1.0
@@ -143,10 +143,9 @@ max_zoom = 0.3
 zoom_factor = 0.005
 
 [node name="Car" parent="World" instance=ExtResource("2_8k278")]
-z_index = 5
 position = Vector2(987, 467)
 weapon_vars = Array[ExtResource("19_ke0jl")]([SubResource("Resource_msscp"), SubResource("Resource_stdhw"), SubResource("Resource_fojdv"), SubResource("Resource_h5je3"), SubResource("Resource_rpkw5")])
-max_health = 1000.0
+max_health = 2000.0
 
 [node name="BoomArm" parent="World/Car" index="3"]
 mouse_slide_distance = 1000.0
@@ -160,6 +159,7 @@ num_groups = 1
 enemy_list = Array[PackedScene]([ExtResource("21_po4qe"), ExtResource("25_0hi0j"), ExtResource("22_l11od"), ExtResource("23_iarkt"), ExtResource("24_hdnru")])
 enemy_ratios = Array[Curve]([SubResource("Curve_omlgi"), SubResource("Curve_7xteg"), SubResource("Curve_ehfhm"), SubResource("Curve_wcr00"), SubResource("Curve_etxpm")])
 max_enemies = SubResource("Curve_u14r1")
+repair_point_interval = 5000.0
 
 [node name="SpawnTimer" type="Timer" parent="World/EnemySpawner"]
 wait_time = 0.2

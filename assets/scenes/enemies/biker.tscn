@@ -7,7 +7,7 @@
 [ext_resource type="Shader" path="res://assets/scripts/scrolling_texture.gdshader" id="3_xdejw"]
 [ext_resource type="Texture2D" uid="uid://cqjm5fggxjs2e" path="res://assets/textures/car/scrolling_wheel_texture.png" id="4_to65p"]
 [ext_resource type="PackedScene" uid="uid://bs42xbt08m7uo" path="res://assets/scenes/weapons/biker_gun.tscn" id="5_csq2n"]
-[ext_resource type="PackedScene" path="res://assets/scenes/enemies/biker_particles.tscn" id="6_b6p6t"]
+[ext_resource type="PackedScene" uid="uid://dyhhyf1tfwaoq" path="res://assets/scenes/enemies/biker_particles.tscn" id="6_b6p6t"]
 [ext_resource type="AudioStream" uid="uid://dmbo5hbx7alex" path="res://assets/audio/biker/motard_scream1.wav" id="7_4ee0p"]
 [ext_resource type="AudioStream" uid="uid://ca08fqn3xwy01" path="res://assets/audio/crash1.wav" id="8_0qpkb"]
 [ext_resource type="AudioStream" uid="uid://bgxk7wr2tucwi" path="res://assets/audio/crash2.wav" id="9_o8pvb"]
@@ -29,14 +29,16 @@ radius = 58.0
 height = 336.0
 
 [node name="Biker" type="CharacterBody2D" node_paths=PackedStringArray("sprites", "wheels") groups=["enemies"]]
+z_index = 20
 collision_layer = 4
 collision_mask = 7
 script = ExtResource("1_3s7no")
+health = 40.0
 follow_range = 1500
 sprites = [NodePath("Biker"), NodePath("WheelB"), NodePath("WheelF"), NodePath("BikerGun/Sprite2D")]
 wheels = [NodePath("WheelB/ScrollingWheel"), NodePath("WheelF/ScrollingWheel")]
 speed = 4000.0
-points = 100
+points = 200
 
 [node name="Biker" type="Sprite2D" parent="."]
 rotation = 1.5708
