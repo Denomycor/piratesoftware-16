@@ -13,8 +13,8 @@ const BLOCK_RADIUS: float = 200
 @export var enemy_ratios: Array[Curve]
 @export var max_enemies: Curve
 
-@export var time_for_max_difficulty : float = 60*5
-@export var repair_point_interval : float = 10000
+@export var time_for_max_difficulty: float = 60 * 5
+@export var repair_point_interval: float = 10000
 @export var repair_distance: float = 5000
 
 @onready var spawn_timer: Timer = $SpawnTimer
@@ -63,7 +63,7 @@ func _position_near_target(distance: float) -> Vector2:
 
 
 func _physics_process(_delta: float) -> void:
-	difficulty = clampf(LevelContext.level.stats.time_survived/time_for_max_difficulty, 0, 1)
+	difficulty = clampf(LevelContext.level.stats.time_survived / time_for_max_difficulty, 0, 1)
 	_update_enemies()
 
 	if LevelContext.level.stats.points >= repair_point_interval * repair_count:
@@ -80,13 +80,13 @@ func _get_random_enemy() -> Enemy:
 		ratios.append(ratio.sample(difficulty))
 	for amount in ratios:
 		sum += amount
-	var num := randf_range(0,sum)
+	var num := randf_range(0, sum)
 	sum = 0
 	var idx := 0
 	while sum < num && idx < enemy_list.size():
 		sum += ratios[idx]
 		idx += 1
-	return enemy_list[idx-1].instantiate()
+	return enemy_list[idx - 1].instantiate()
 
 func _spawn_enemy() -> void:
 	if _get_enemies().size() >= int(max_enemies.sample(difficulty)):
@@ -108,4 +108,3 @@ func spawn_repair() -> void:
 	var repair: Repair = repair_scene.instantiate()
 	repair.global_position = _position_near_target(repair_distance)
 	add_child(repair)
-	print(repair.global_position)
