@@ -48,9 +48,9 @@ outline_color = Color(0.051971, 0.051971, 0.051971, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xppwn"]
 shader = ExtResource("3_s501v")
-shader_parameter/enabled = true
-shader_parameter/background_color = Color(0.0646966, 0.0646965, 0.0646966, 1)
-shader_parameter/obstacle_color = Color(0.6467, 0.87, 0.2001, 1)
+shader_parameter/background_color = Color(0.113725, 0.0941176, 0.0313726, 0.4)
+shader_parameter/obstacle_color = Color(0.10748, 0.10748, 0.10748, 1)
+shader_parameter/sec_obstacle_color = Color(0.45098, 0.364706, 0, 0.568627)
 
 [node name="Overlay" type="CanvasLayer"]
 script = ExtResource("1_tmn6d")
