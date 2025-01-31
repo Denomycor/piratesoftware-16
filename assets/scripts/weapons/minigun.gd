@@ -22,7 +22,7 @@ func _ready() -> void:
 	)
 
 	activated.connect(func():
-		if(Input.is_action_pressed("fire")):
+		if (Input.is_action_pressed("fire")):
 			%shoot.play()
 	)
 	deactivated.connect(func():
@@ -39,10 +39,12 @@ func _process(_delta: float) -> void:
 
 
 func _input(event: InputEvent) -> void:
-		if(event.is_action_pressed("fire") && active):
+		if (event.is_action_pressed("fire") && active):
 			$GPUParticles2D.emitting = true
 			%shoot.play()
-		elif(event.is_action_released("fire")):
+		elif (event.is_action_released("fire")):
 			$GPUParticles2D.emitting = false
 			%shoot.stop()
 
+func load_particles() -> void:
+	$GPUParticles2D.emitting = true

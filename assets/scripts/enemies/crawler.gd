@@ -40,7 +40,7 @@ func update_movement():
 		look_at(global_position + velocity)
 	else:
 		look_at(target.global_position)
-		velocity = Vector2(0,0)
+		velocity = Vector2(0, 0)
 	if can_attack():
 		attack()
 
@@ -60,10 +60,10 @@ func die():
 	died.emit()
 
 func _physics_process(delta: float) -> void:
-	if(dead):
+	if (dead):
 		return
 
-	if(!movement_locked):
+	if (!movement_locked):
 		velocity += acceleration * delta
 		move_and_slide()
 
@@ -83,6 +83,9 @@ func _process(_delta):
 	else:
 		animation_player.play("stoped")
 
+func load_particles() -> void:
+	$GPUParticles2D.emitting = true
+
 # Signal
 func _take_dmg(amount: float):
 	health -= amount
@@ -101,6 +104,6 @@ func _on_collision(node: Node) -> void:
 		return
 	var collision_direction: Vector2 = node.global_position.direction_to(global_position)
 	var collision_speed: float = node.last_velocity.dot(collision_direction)
-	var collision_damage := lerpf(0, health, collision_speed/speed_for_kill)
+	var collision_damage := lerpf(0, health, collision_speed / speed_for_kill)
 	if not dead:
 		_take_dmg(collision_damage)
