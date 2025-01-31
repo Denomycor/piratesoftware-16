@@ -2,7 +2,7 @@ class_name Overlay extends CanvasLayer
 
 @onready var point_counter: Label = %Points
 @onready var kills_counter: Label = %Kills
-@onready var speed_counter: SpeedPointer = $BarContainer/HBoxContainer/TextureRect/Container/Sprite2D
+@onready var speedometer: Speedometer = $BarContainer/HBoxContainer/Speedometer
 @onready var health_bar: HealthBar = $BarContainer/HBoxContainer/VBoxContainer/Panel2/TextureRect/ProgressBar
 @onready var weapon_bar: WeaponBar = $BarContainer/HBoxContainer/VBoxContainer/Panel/TextureRect/WeaponBar
 @onready var vignette: ColorRect = $ColorRect
@@ -22,7 +22,7 @@ func set_kills(kills: int) -> void:
 	kills_counter.text = "Kills: " + str(kills)
 
 func set_speed(speed: float) -> void:
-	speed_counter.set_speed(speed)
+	speedometer.set_speed(speed)
 
 func set_hp(hp: float) -> void:
 	vignette.material.set_shader_parameter("inner_radius", lerpf(0, 1, hp / LevelContext.level.car.max_health))
