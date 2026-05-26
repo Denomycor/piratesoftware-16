@@ -23,8 +23,11 @@ var skill_nodes: Array[SkillNode] = []
 
 ## Cached per-run multipliers — written by apply_skills_to_car() and read by
 ## player weapon lambdas each time they spawn a projectile.
-var player_damage_multiplier: float = 1.0
-var player_range_multiplier:  float = 1.0
+## Declared static so weapon scripts can access them via the class name
+## (ProgressionManager.player_damage_multiplier) without the GDScript type
+## checker treating the access as an invalid non-static member reference.
+static var player_damage_multiplier: float = 1.0
+static var player_range_multiplier:  float = 1.0
 
 
 func _ready() -> void:

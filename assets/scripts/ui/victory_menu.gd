@@ -24,11 +24,9 @@ func set_stats(points: int, time_survived: float, kills: int, max_speed: float, 
 	var alien_lv_str := ""
 	if xp.alien_levels_gained > 0:
 		alien_lv_str = "  ▲ LEVEL UP → %d" % xp.alien_level
-	%AlienXPLabel.text = "+%d XP (Lv.%d%s)" % [
-		int(xp.alien_xp_gained), xp.alien_level, alien_lv_str]
+	%AlienXPLabel.text = "+%d XP (Lv.%d%s)" % [int(xp.alien_xp_gained), xp.alien_level, alien_lv_str]
 
 	var car_lv_str := ""
 	if xp.car_levels_gained > 0:
 		car_lv_str = "  ▲ LEVEL UP → %d" % xp.car_level
-	%CarXPLabel.text = "+%d XP (Lv.%d%s)" % [
-		int(xp.car_xp_gained), xp.car_level, car_lv_str]
+	%CarXPLabel.text = "+%d XP (Lv.%d%s)" % [int(xp.car_xp_gained), xp.car_level, car_lv_str]
