@@ -1,6 +1,15 @@
 extends Node
 
 const BLOCK_RADIUS: float = 200
+## Maximum attempts to find a valid off-screen spawn position before
+## falling back to a random point inside the arena polygon.
+const MAX_SPAWN_RETRIES: int = 30
+## Minimum world-space distance from the player for fallback spawn positions.
+const MIN_PLAYER_DISTANCE: float = 3000.0
+## Spawn interval at difficulty 0 (slow early game).
+const SPAWN_INTERVAL_MAX: float = 0.2
+## Spawn interval at difficulty 1 (fast late game).
+const SPAWN_INTERVAL_MIN: float = 0.1
 
 @export var target: RigidBody2D
 @export var num_groups: int = 10
@@ -13,7 +22,7 @@ const BLOCK_RADIUS: float = 200
 @export var enemy_ratios: Array[Curve]
 @export var max_enemies: Curve
 
-@export var time_for_max_difficulty: float = 60 * 5
+@export var time_for_max_difficulty: float = 60 * 15
 @export var repair_point_interval: float = 10000
 @export var repair_distance: float = 5000
 
@@ -53,15 +62,49 @@ func _update_enemies() -> void:
 	cur_group += 1
 
 
+func _get_camera() -> Camera2D:
+	return LevelContext.level.get_node_or_null("World/Car/BoomArm/Camera2D") as Camera2D
+
+
+## Returns true if the world-space point falls inside the player's current viewport.
+## Used to reject spawn positions that would pop in visibly on screen.
+func _is_in_viewport(pos: Vector2) -> bool:
+	var camera := _get_camera()
+	if not is_instance_valid(camera):
+		return false
+	var viewport_size: Vector2 = get_viewport().get_visible_rect().size
+	var world_size: Vector2 = viewport_size / camera.zoom
+	var cam_center: Vector2 = camera.get_screen_center_position()
+	return Rect2(cam_center - world_size * 0.5, world_size).has_point(pos)
+
+
 func _position_near_target(distance: float) -> Vector2:
 	var arena := LevelContext.level.arena
 	var position_dir := Vector2(randf() - 0.5, randf() - 0.5).normalized()
 	var pos := target.position + position_dir * distance
 
-	while not arena.can_place(BLOCK_RADIUS, pos):
+	var retries := 0
+	while not arena.can_place(BLOCK_RADIUS, pos) or _is_in_viewport(pos):
+		if retries >= MAX_SPAWN_RETRIES:
+			pos = _fallback_spawn_position()
+			break
 		position_dir = Vector2(randf() - 0.5, randf() - 0.5).normalized()
 		pos = target.position + position_dir * distance
+		retries += 1
 
+	return pos
+
+
+## Fallback when _position_near_target() exhausts retries.
+## Picks a random point inside the arena polygon and checks for minimum
+## player distance to avoid spawning directly on top of the car.
+func _fallback_spawn_position() -> Vector2:
+	var arena := LevelContext.level.arena
+	var pos := arena.get_random_free_point_inside_polygon(BLOCK_RADIUS)
+	for _i in range(5):
+		if pos.distance_to(target.position) >= MIN_PLAYER_DISTANCE and not _is_in_viewport(pos):
+			break
+		pos = arena.get_random_free_point_inside_polygon(BLOCK_RADIUS)
 	return pos
 
 
@@ -93,6 +136,9 @@ func _get_random_enemy() -> Enemy:
 
 
 func _spawn_enemy() -> void:
+	# Scale spawn interval with difficulty: faster spawns as the run progresses.
+	spawn_timer.wait_time = lerpf(SPAWN_INTERVAL_MAX, SPAWN_INTERVAL_MIN, difficulty)
+
 	if _enemies.size() >= int(max_enemies.sample(difficulty)):
 		return
 
