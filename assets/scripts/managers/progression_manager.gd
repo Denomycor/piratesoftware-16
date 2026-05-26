@@ -1,0 +1,208 @@
+## Autoload singleton — XP math, leveling, skill unlock, and skill definitions.
+##
+## XP sources (M5 scope, unbalanced by design — tune in a later pass):
+##   Alien XP = kills * XP_PER_KILL
+##   Car XP   = floor(time_survived / 10) * XP_PER_10S
+##
+## Level curve: advancing from level N to N+1 costs (N+1) * XP_PER_LEVEL.
+##   Level 0→1: 100 XP
+##   Level 1→2: 200 XP
+##   Level 2→3: 300 XP   etc.
+##
+## Gameplay effects (effect_key / effect_value on SkillNode) are NOT applied
+## during M5 — the data structure exists for future milestones.
+class_name ProgressionManager extends Node
+
+const XP_PER_KILL  := 10.0
+const XP_PER_10S   := 5.0
+const XP_PER_LEVEL := 100.0
+
+## All registered skill nodes. Populated in _ready().
+var skill_nodes: Array[SkillNode] = []
+
+
+func _ready() -> void:
+	_register_skill_nodes()
+
+
+# ------------------------------------------------------------------ XP math
+
+## XP required to advance from `level` to `level + 1`.
+static func xp_for_next_level(level: int) -> float:
+	return float(level + 1) * XP_PER_LEVEL
+
+
+## Current level derived from cumulative total XP.
+static func level_from_xp(total_xp: float) -> int:
+	var level   := 0
+	var remaining := total_xp
+	while remaining >= xp_for_next_level(level):
+		remaining -= xp_for_next_level(level)
+		level     += 1
+	return level
+
+
+## XP accumulated so far toward the *next* level (0 .. xp_for_next_level-1).
+static func xp_on_current_level(total_xp: float) -> float:
+	var level     := 0
+	var remaining := total_xp
+	while remaining >= xp_for_next_level(level):
+		remaining -= xp_for_next_level(level)
+		level     += 1
+	return remaining
+
+
+# ------------------------------------------------------------------ run completion
+
+## Award XP earned during a completed run.
+## Updates SaveManager and persists the save.
+## Returns a summary dict for display in the game-over screen:
+##   alien_xp_gained, car_xp_gained,
+##   alien_levels_gained, car_levels_gained,
+##   alien_level, car_level,
+##   alien_skill_points, car_skill_points
+func award_run_xp(kills: int, time_survived: float) -> Dictionary:
+	var alien_xp_gained := kills * XP_PER_KILL
+	var car_xp_gained   := floor(time_survived / 10.0) * XP_PER_10S
+
+	var old_alien_level := SaveManager.get_alien_level()
+	var old_car_level   := SaveManager.get_car_level()
+
+	var new_alien_xp := SaveManager.get_alien_xp() + alien_xp_gained
+	var new_car_xp   := SaveManager.get_car_xp()   + car_xp_gained
+
+	var new_alien_level := level_from_xp(new_alien_xp)
+	var new_car_level   := level_from_xp(new_car_xp)
+
+	var alien_levels_gained := new_alien_level - old_alien_level
+	var car_levels_gained   := new_car_level   - old_car_level
+
+	SaveManager.set_alien_xp(new_alien_xp)
+	SaveManager.set_car_xp(new_car_xp)
+	SaveManager.set_alien_level(new_alien_level)
+	SaveManager.set_car_level(new_car_level)
+	SaveManager.set_alien_skill_points(
+		SaveManager.get_alien_skill_points() + alien_levels_gained)
+	SaveManager.set_car_skill_points(
+		SaveManager.get_car_skill_points() + car_levels_gained)
+	SaveManager.save_game()
+
+	return {
+		"alien_xp_gained":     alien_xp_gained,
+		"car_xp_gained":       car_xp_gained,
+		"alien_levels_gained": alien_levels_gained,
+		"car_levels_gained":   car_levels_gained,
+		"alien_level":         new_alien_level,
+		"car_level":           new_car_level,
+		"alien_skill_points":  SaveManager.get_alien_skill_points(),
+		"car_skill_points":    SaveManager.get_car_skill_points(),
+	}
+
+
+# ------------------------------------------------------------------ skill unlock
+
+## Attempt to spend a skill point to unlock a node.
+## Validates: not already unlocked, sufficient points, prerequisites met.
+## Saves on success. Returns true if unlocked, false otherwise.
+func unlock_skill(node: SkillNode) -> bool:
+	if SaveManager.is_node_unlocked(node.id):
+		return false
+
+	var pts := SaveManager.get_alien_skill_points() \
+		if node.track == SkillNode.Track.ALIEN \
+		else SaveManager.get_car_skill_points()
+	if pts < node.cost:
+		return false
+
+	for prereq: StringName in node.prerequisites:
+		if not SaveManager.is_node_unlocked(prereq):
+			return false
+
+	if node.track == SkillNode.Track.ALIEN:
+		SaveManager.set_alien_skill_points(pts - node.cost)
+	else:
+		SaveManager.set_car_skill_points(pts - node.cost)
+	SaveManager.unlock_node(node.id)
+	SaveManager.save_game()
+	return true
+
+
+# ------------------------------------------------------------------ queries
+
+func get_nodes_for_track(track: SkillNode.Track) -> Array[SkillNode]:
+	var result: Array[SkillNode] = []
+	for node: SkillNode in skill_nodes:
+		if node.track == track:
+			result.append(node)
+	return result
+
+
+func get_node_by_id(id: StringName) -> SkillNode:
+	for node: SkillNode in skill_nodes:
+		if node.id == id:
+			return node
+	return null
+
+
+# ------------------------------------------------------------------ skill definitions
+
+func _register_skill_nodes() -> void:
+	skill_nodes.clear()
+
+	# ---- Alien skills ----
+	_add_node(SkillNode.Track.ALIEN, &"alien_sharp_claws",
+		"Sharp Claws",     "+10% weapon damage.",
+		&"weapon_damage_multiplier", 1.1)
+
+	_add_node(SkillNode.Track.ALIEN, &"alien_battle_hardened",
+		"Battle Hardened", "+20 max HP.",
+		&"max_hp_bonus", 20.0)
+
+	_add_node(SkillNode.Track.ALIEN, &"alien_quick_reload",
+		"Quick Reload",    "-10% weapon cooldown.",
+		&"cooldown_multiplier", 0.9,
+		[&"alien_sharp_claws"])
+
+	_add_node(SkillNode.Track.ALIEN, &"alien_hunters_eye",
+		"Hunter's Eye",    "+15% projectile range.",
+		&"range_multiplier", 1.15,
+		[&"alien_battle_hardened"])
+
+	# ---- Car skills ----
+	_add_node(SkillNode.Track.CAR, &"car_tuned_engine",
+		"Tuned Engine",       "+10% top speed.",
+		&"speed_multiplier", 1.1)
+
+	_add_node(SkillNode.Track.CAR, &"car_reinforced_frame",
+		"Reinforced Frame",   "+25 car max HP.",
+		&"car_max_hp_bonus", 25.0)
+
+	_add_node(SkillNode.Track.CAR, &"car_slick_tires",
+		"Slick Tires",        "Improved drift control.",
+		&"drift_multiplier", 1.1,
+		[&"car_tuned_engine"])
+
+	_add_node(SkillNode.Track.CAR, &"car_nitro_boost",
+		"Nitro Boost",        "+5% recoil knockback.",
+		&"knockback_multiplier", 1.05,
+		[&"car_reinforced_frame"])
+
+
+func _add_node(
+		track: SkillNode.Track,
+		id: StringName,
+		display_name: String,
+		description: String,
+		effect_key: StringName,
+		effect_value: float,
+		prerequisites: Array[StringName] = []) -> void:
+	var n           := SkillNode.new()
+	n.track         = track
+	n.id            = id
+	n.display_name  = display_name
+	n.description   = description
+	n.effect_key    = effect_key
+	n.effect_value  = effect_value
+	n.prerequisites = prerequisites
+	n.cost          = 1
+	skill_nodes.append(n)
