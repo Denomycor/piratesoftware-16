@@ -34,7 +34,7 @@ func _process(_delta: float) -> void:
 	if _pickup_sensor == null:
 		_pickup_sensor = Area2D.new()
 		_pickup_sensor.collision_layer = 0
-		_pickup_sensor.collision_mask = 1   # layer 1 — same layer as Repair/prop Area2Ds
+		_pickup_sensor.collision_mask = 1   # layer 1 — Repair root Area2D is on layer 1 (default)
 		_pickup_sensor.monitorable = false
 		var shape_node := CollisionShape2D.new()
 		var circle := CircleShape2D.new()
@@ -43,16 +43,17 @@ func _process(_delta: float) -> void:
 		_pickup_sensor.add_child(shape_node)
 		add_child(_pickup_sensor)
 
-	# While flying (no target yet), poll the sensor for Area2D pickups.
+	# While flying (no valid target yet), poll the sensor for Area2D pickups.
+	# is_instance_valid() guards against freed-but-non-null objects.
 	# Polling get_overlapping_areas() is more reliable than area_entered signals
 	# for fast-moving projectiles that might cross an Area in a single frame.
-	if target == null and not frozen:
+	if not is_instance_valid(target) and not frozen:
 		for area in _pickup_sensor.get_overlapping_areas():
 			if area is Repair:
 				connect_hook(area, area.global_position)
 				break
 
-	if target:
+	if is_instance_valid(target):
 		global_position = anchor.global_position
 		rotation = my_rotation + (target.rotation - target_rotation)
 
@@ -66,7 +67,7 @@ func _process(_delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	super._physics_process(delta)
 
-	if not target:
+	if not is_instance_valid(target):
 		return
 
 	var car := LevelContext.level.car
@@ -119,8 +120,9 @@ func _physics_process(delta: float) -> void:
 func connect_hook(node: CollisionObject2D, pos: Vector2) -> void:
 	# Stop lifetime countdown.
 	timer.kill()
-	# Stop fade-out scale effect.
-	scale_tween.kill()
+	# Stop fade-out scale effect (guard: scale_tween is null when scale_curve is unset).
+	if scale_tween != null:
+		scale_tween.kill()
 	# Restore scale (scale_tween may have begun shrinking it).
 	scale = Vector2.ONE
 	# Freeze movement.
@@ -128,7 +130,7 @@ func connect_hook(node: CollisionObject2D, pos: Vector2) -> void:
 	# Disable own collision shape (stationary from here).
 	$CollisionShape2D.set_deferred("disabled", true)
 	# Disable pickup sensor — we have a target now.
-	if _pickup_sensor != null:
+	if is_instance_valid(_pickup_sensor):
 		_pickup_sensor.set_deferred("monitoring", false)
 
 	target = node
@@ -161,8 +163,8 @@ func _on_collision(collision: KinematicCollision2D) -> void:
 
 func destroy() -> void:
 	super.destroy()
-	if anchor:
-		if target is Enemy:
+	if is_instance_valid(anchor):
+		if is_instance_valid(target) and target is Enemy:
 			target.movement_locked = false
 		anchor.queue_free()
 
