@@ -1,10 +1,10 @@
 # Project State
 
-Last updated: 2026-05-27
+Last updated: 2026-05-26
 
 ---
 
-## Current Milestone: 7 — Game Flow Polish
+## Current Milestone: 8 — QA / Performance Validation
 
 ---
 
@@ -18,7 +18,7 @@ Last updated: 2026-05-27
 | 4 | Grappling Hook Completion | ✅ Done | See details below |
 | 5 | Meta Progression Foundation | ✅ Done | See details below |
 | 6 | Boost System Expansion | ✅ Done | See details below |
-| 7 | Game Flow Polish | ⬜ Not Started | |
+| 7 | Game Flow Polish | ✅ Done | See details below |
 
 ---
 
@@ -319,12 +319,66 @@ Tune in-editor; no architecture changes needed.
 
 ---
 
+## Milestone 7 — Game Flow Polish
+
+**Status: ✅ Done (manual validation pending)**
+
+### What was done
+
+**Victory condition**
+- `Stats` — added `const VICTORY_TIME: float = 900.0` (15 minutes) and `var _victory_triggered: bool`.
+  In `_physics_process`, once `time_survived >= VICTORY_TIME` (and not already triggered), sets
+  `is_game_over = true` and calls `LevelContext.level.set_victory()` — stopping the stats ticker
+  and showing the victory screen in the same frame.
+
+**VictoryMenu** (`ui/victory_menu.gd` + `scenes/ui/victory_menu.tscn`)
+- Identical structure to `GameOverMenu` — same `set_stats()` signature, same unique-name nodes
+  (`%Points`, `%TimeSurvived`, `%Kills`, `%MaxSpeed`, `%MaxDriftDuration`, `%AlienXPLabel`, `%CarXPLabel`, `%quit`)
+- Title label: **"Victory!"** in green (`Color(0.2, 0.8, 0.2, 1)`)
+- `process_mode = 3` (PROCESS_MODE_ALWAYS) so it renders while tree is paused
+- `set_stats()` calls `ProgressionManager.award_run_xp()` — same as game-over path (mutually exclusive, no double-award)
+- Quit button text: "Return to Menu"
+
+**`Level.set_victory()`**
+- Pauses tree, sets `stats.is_game_over = true`, queue_frees `pause_menu`, then calls
+  `victory_menu.set_stats(...)` + `victory_menu.show_victory_menu()`
+- `VictoryMenu` is wired in `_ready()`: `victory_menu.quit_level.connect(quit_level)`
+
+**Skill effects applied at level start** (`ProgressionManager.apply_skills_to_car(car)`)
+Called from `Level._ready()` after `LevelContext.level = self`.
+
+| Effect key | Target | Applied how |
+|------------|--------|-------------|
+| `car_max_hp_bonus` / `max_hp_bonus` | `car.max_health` | `+= value`; `car.health = car.max_health` |
+| `speed_multiplier` | `weapon_vars[i].motor_strength` | `*= value` on all SubResources |
+| `drift_multiplier` | `weapon_vars[i].drift_friction_strength` | `*= value` on all SubResources |
+| `knockback_multiplier` | `weapon_vars[i].perpendicular_multiplier` + `.parallel_multiplier` | `*= value` on all SubResources |
+| `cooldown_multiplier` | `ProjectileSpawnerComponent.fire_delay` | `*= value` on each weapon in WeaponList |
+
+Multipliers applied to `weapon_vars` SubResources (not directly to `car.motor_strength`) so they
+survive weapon switching. `set_car_vars(weapon_vars[current_idx])` re-applied immediately after.
+
+### What was NOT done (scope deferred to M8 polish)
+- `weapon_damage_multiplier` — would require per-projectile spawn-time injection (modifying every
+  weapon lambda or adding a flag to `LinearProjectile`). Too architectural for M7.
+- `range_multiplier` — same reason (affects `LinearProjectile.lifetime` at instantiation time).
+
+### Manual validation needed
+- [ ] Survive for ~15 minutes (or temporarily lower `VICTORY_TIME` in stats.gd) → VictoryMenu appears
+- [ ] VictoryMenu shows same stats as GameOverMenu (Points, Time, Kills, XP rows)
+- [ ] "Return to Menu" button returns to main menu correctly
+- [ ] Death path (car reaches 0 HP) → GameOverMenu still shows (victory path doesn't interfere)
+- [ ] Both paths award XP and persist it correctly (no double-award on repeated runs)
+- [ ] Unlocked skills affect car stats: HP bonus visible in health bar, motor strength affects top speed
+
+---
+
 ## Known Issues / Tech Debt
 
 | Issue | File | Priority |
 |-------|------|----------|
-| No victory condition (15-min survival) | `level.gd` | M7 |
-| Skill effects not applied in gameplay | `progression_manager.gd` | M7 |
+| `weapon_damage_multiplier` skill not applied | `progression_manager.gd` | M8 polish |
+| `range_multiplier` skill not applied | `progression_manager.gd` | M8 polish |
 | Boost pickup has no animation/VFX | `boost_pickup.gd` | Polish |
 | No boost pickup audio | `boost_pickup.gd` | Polish |
 
@@ -335,11 +389,11 @@ Tune in-editor; no architecture changes needed.
 | System | Script | Notes |
 |--------|--------|-------|
 | Game root | `game.gd` | Flow: menu → loading → level → menu |
-| Level | `level/level.gd` | Owns Car, Arena, Stats, Overlay |
+| Level | `level/level.gd` | Owns Car, Arena, Stats, Overlay; `set_game_over()` + `set_victory()` |
 | LevelContext | `level/level_context.gd` | Autoload singleton |
 | GameOptions | `game_options.gd` | Autoload singleton |
 | SaveManager | `managers/save_manager.gd` | Autoload singleton; JSON save at `user://save_data.json` |
-| ProgressionManager | `managers/progression_manager.gd` | Autoload singleton; XP math + skill definitions |
+| ProgressionManager | `managers/progression_manager.gd` | Autoload singleton; XP math + skill definitions + `apply_skills_to_car()` |
 | BoostManager | `managers/boost_manager.gd` | Autoload singleton; active boost tracking + aura area; `points_multiplier` |
 | EnemiesManager | `enemies/manager/enemies-manager.gd` | Difficulty curves; cached enemy list; 5% boost drops |
 | Arena | `arena/arena.gd` | Octagonal; `can_place()` for spawn validation |
@@ -347,3 +401,4 @@ Tune in-editor; no architecture changes needed.
 | LoadingScreen | `ui/loading_screen.gd` | CanvasLayer; async + shader warmup |
 | HookProjectile | `projectiles/hook_projectile.gd` | Attaches to wall/barrel/repair/enemy/boost; lazy Area2D sensor for pickup detection |
 | ProgressionScreen | `ui/progression_screen.gd` | VBoxContainer; tab 3 of MainMenu; skill tree UI |
+| VictoryMenu | `ui/victory_menu.gd` | CanvasLayer; shown on 15-min survival; same XP award as GameOverMenu |

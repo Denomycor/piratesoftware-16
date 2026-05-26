@@ -1,8 +1,12 @@
 class_name Stats extends Node
 
+## Survival time (seconds) required to trigger victory. 15 minutes.
+const VICTORY_TIME: float = 900.0
+
 @export var min_drift_strength := 100
 
 var is_game_over: bool = false
+var _victory_triggered: bool = false
 
 var points: float
 var time_survived: float
@@ -37,6 +41,11 @@ func _physics_process(delta: float):
 		add_points(points_per_second * delta)
 		time_survived += delta
 		overlay.set_speed(speed)
+		# Victory condition: survive 15 minutes
+		if not _victory_triggered and time_survived >= VICTORY_TIME:
+			_victory_triggered = true
+			is_game_over = true
+			LevelContext.level.set_victory()
 
 func check_drift(delta: float):
 	var drift_strength := LevelContext.level.car.get_drift_strength(1)

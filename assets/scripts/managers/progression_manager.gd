@@ -9,8 +9,9 @@
 ##   Level 1→2: 200 XP
 ##   Level 2→3: 300 XP   etc.
 ##
-## Gameplay effects (effect_key / effect_value on SkillNode) are NOT applied
-## during M5 — the data structure exists for future milestones.
+## Gameplay effects for car stats and weapon cooldowns are applied at level start
+## via apply_skills_to_car(). Weapon damage and range multipliers are deferred
+## (require per-projectile spawn-time injection — M8 polish pass).
 class_name ProgressionManager extends Node
 
 const XP_PER_KILL  := 10.0
@@ -186,6 +187,74 @@ func _register_skill_nodes() -> void:
 		"Nitro Boost",        "+5% recoil knockback.",
 		&"knockback_multiplier", 1.05,
 		[&"car_reinforced_frame"])
+
+
+# ------------------------------------------------------------------ skill application
+
+## Apply all unlocked skill effects to the car at the start of a level.
+## Must be called after the car and weapon_dock are in the scene tree
+## (i.e., from Level._ready() after LevelContext.level is set).
+##
+## Effects applied:
+##   car_max_hp_bonus / max_hp_bonus → car.max_health += value
+##   speed_multiplier               → all weapon_vars[i].motor_strength *= value
+##   drift_multiplier               → all weapon_vars[i].drift_friction_strength *= value
+##   knockback_multiplier           → all weapon_vars[i].perpendicular_multiplier *= value
+##                                     and .parallel_multiplier *= value
+##   cooldown_multiplier            → each weapon's ProjectileSpawnerComponent.fire_delay *= value
+##
+## Deferred (M8): weapon_damage_multiplier, range_multiplier (require per-projectile injection).
+func apply_skills_to_car(car: Car) -> void:
+	var hp_bonus:      float = 0.0
+	var speed_mult:    float = 1.0
+	var drift_mult:    float = 1.0
+	var knockback_mult: float = 1.0
+	var cooldown_mult: float = 1.0
+
+	for node: SkillNode in skill_nodes:
+		if not SaveManager.is_node_unlocked(node.id):
+			continue
+		match node.effect_key:
+			&"car_max_hp_bonus", &"max_hp_bonus":
+				hp_bonus += node.effect_value
+			&"speed_multiplier":
+				speed_mult *= node.effect_value
+			&"drift_multiplier":
+				drift_mult *= node.effect_value
+			&"knockback_multiplier":
+				knockback_mult *= node.effect_value
+			&"cooldown_multiplier":
+				cooldown_mult *= node.effect_value
+
+	# HP bonus
+	if hp_bonus != 0.0:
+		car.max_health += hp_bonus
+		car.health = car.max_health
+		if is_instance_valid(LevelContext.level):
+			LevelContext.level.overlay.set_hp(car.health)
+
+	# Physics multipliers — applied to all weapon_vars SubResources so they
+	# survive weapon switching (set_car_vars() reads from weapon_vars[idx]).
+	for vars: CarVars in car.weapon_vars:
+		vars.motor_strength          *= speed_mult
+		vars.drift_friction_strength *= drift_mult
+		vars.perpendicular_multiplier *= knockback_mult
+		vars.parallel_multiplier      *= knockback_mult
+
+	# Re-apply current weapon's vars so the multipliers take effect immediately.
+	var dock: WeaponDock = car.weapon_dock
+	if is_instance_valid(dock):
+		car.set_car_vars(car.weapon_vars[dock.current_idx])
+
+	# Cooldown multiplier — modify fire_delay on each weapon's spawner component.
+	if is_instance_valid(dock) and cooldown_mult != 1.0:
+		var weapon_list: Node = dock.get_node_or_null("WeaponList")
+		if weapon_list != null:
+			for weapon: Node in weapon_list.get_children():
+				if weapon is Weapon:
+					var spawner: Node = weapon.get_node_or_null("ProjectileSpawnerComponent")
+					if spawner is ProjectileSpawnerComponent:
+						spawner.fire_delay *= cooldown_mult
 
 
 func _add_node(
