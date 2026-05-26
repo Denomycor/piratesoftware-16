@@ -47,10 +47,16 @@ func _process(_delta: float) -> void:
 	# is_instance_valid() guards against freed-but-non-null objects.
 	# Polling get_overlapping_areas() is more reliable than area_entered signals
 	# for fast-moving projectiles that might cross an Area in a single frame.
+	#
+	# NOTE: get_overlapping_areas() returns Array[Area2D], so the loop variable is
+	# statically typed Area2D. GDScript 4.6 rejects "area is Repair" directly because
+	# Repair extends CollisionObject2D (not Area2D). Widen to CollisionObject2D first —
+	# both Area2D and Repair share that ancestor, so the narrowing check is valid.
 	if not is_instance_valid(target) and not frozen:
 		for area in _pickup_sensor.get_overlapping_areas():
-			if area is Repair:
-				connect_hook(area, area.global_position)
+			var col: CollisionObject2D = area  # Area2D → CollisionObject2D (safe widening)
+			if col is Repair:
+				connect_hook(col, col.global_position)
 				break
 
 	if is_instance_valid(target):
