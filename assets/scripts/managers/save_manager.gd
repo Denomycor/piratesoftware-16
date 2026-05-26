@@ -14,7 +14,9 @@
 ##   "car_skill_points":  int,     # unspent points on the car track
 ##   "unlocked_nodes":    Array[String]  # list of skill node id strings
 ## }
-class_name SaveManager extends Node
+## class_name intentionally omitted: Godot 4.6.3 reports "hides an autoload
+## singleton" when class_name matches the autoload name. Access via autoload name.
+extends Node
 
 const SAVE_PATH    := "user://save_data.json"
 const SAVE_VERSION := 1

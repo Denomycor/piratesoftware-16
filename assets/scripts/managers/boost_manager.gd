@@ -8,7 +8,9 @@
 ##  - Exposes points_multiplier for Stats.add_points() to read.
 ##  - Notifies the in-game Overlay to show / update / remove timer rows.
 ##  - Clears all active state when the level is torn down.
-class_name BoostManager extends Node
+## class_name intentionally omitted: Godot 4.6.3 reports "hides an autoload
+## singleton" when class_name matches the autoload name. Access via autoload name.
+extends Node
 
 ## Read by Stats.add_points() to apply the 2x Points multiplier.
 var points_multiplier: float = 1.0

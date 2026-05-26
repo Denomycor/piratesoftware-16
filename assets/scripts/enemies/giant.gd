@@ -24,7 +24,6 @@ var charge_is_on_cooldown := true
 @export var ranged_attack_range := 2000
 
 
-var dead := false
 var attack_is_on_cooldown := false
 var speed_backup: float
 var acceleration: Vector2

@@ -12,7 +12,10 @@
 ## Gameplay effects are applied at level start via apply_skills_to_car().
 ## That method also caches player_damage_multiplier and player_range_multiplier
 ## so each player weapon can stamp those values onto freshly-spawned projectiles.
-class_name ProgressionManager extends Node
+## class_name intentionally omitted: in Godot 4.6.3, having class_name match an
+## autoload name causes "hides an autoload singleton" parse errors across the project.
+## Access this singleton by its autoload name (ProgressionManager.xxx) directly.
+extends Node
 
 const XP_PER_KILL  := 10.0
 const XP_PER_10S   := 5.0
@@ -23,11 +26,10 @@ var skill_nodes: Array[SkillNode] = []
 
 ## Cached per-run multipliers — written by apply_skills_to_car() and read by
 ## player weapon lambdas each time they spawn a projectile.
-## Declared static so weapon scripts can access them via the class name
-## (ProgressionManager.player_damage_multiplier) without the GDScript type
-## checker treating the access as an invalid non-static member reference.
-static var player_damage_multiplier: float = 1.0
-static var player_range_multiplier:  float = 1.0
+## With class_name removed, ProgressionManager resolves unambiguously to the
+## autoload instance, so regular instance vars are safe to read externally.
+var player_damage_multiplier: float = 1.0
+var player_range_multiplier:  float = 1.0
 
 
 func _ready() -> void:
