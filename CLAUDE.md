@@ -8,7 +8,7 @@ Use the **Godot MCP** server to interact with the running Godot editor — inspe
 
 ## Running the Game
 
-Open the project in Godot 4.3 and press **F5** (or use the MCP to launch). The main scene is `assets/scenes/game.tscn`.  
+Open the project in Godot 4.6 and press **F5** (or use the MCP to launch). The main scene is `assets/scenes/game.tscn`.  
 There are no build steps, test runners, or CI pipelines — all iteration is through the Godot editor.
 
 ## Architecture
