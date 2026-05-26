@@ -23,7 +23,14 @@ var repair_count: int = 0
 var difficulty: float = 0
 var repair_scene: PackedScene = preload("res://assets/scenes/props/repair.tscn")
 
-var cur_group = 0
+var cur_group: int = 0
+
+## Cached list of live enemies.
+## Using get_nodes_in_group() allocates a new Array every physics frame,
+## which generates significant GC pressure at 100+ enemies.
+## Instead we track additions in _spawn_enemy() and removals via tree_exiting.
+var _enemies: Array = []
+
 
 func _ready() -> void:
 	spawn_timer.start()
@@ -32,33 +39,29 @@ func _ready() -> void:
 	if enemy_list.size() != enemy_ratios.size():
 		printerr("Enemy list and enemy_ratios must have the same size")
 		get_tree().quit()
-	
-func _update_enemies():
+
+
+func _update_enemies() -> void:
 	cur_group = cur_group % num_groups
 
-	var enemies = _get_enemies()
-
-	for i in range(enemies.size()):
+	for i in range(_enemies.size()):
 		if i % num_groups == cur_group:
-			if enemies[i].position.distance_to(target.position) > max_distance:
-				enemies[i].global_position = _position_near_target(teleport_distance)
-
-			enemies[i].update_movement()
+			if _enemies[i].position.distance_to(target.position) > max_distance:
+				_enemies[i].global_position = _position_near_target(teleport_distance)
+			_enemies[i].update_movement()
 
 	cur_group += 1
 
 
 func _position_near_target(distance: float) -> Vector2:
 	var arena := LevelContext.level.arena
-	var position_dir = Vector2(randf() - 0.5, randf() - 0.5).normalized()
-	
-	var pos = target.position + position_dir * distance
+	var position_dir := Vector2(randf() - 0.5, randf() - 0.5).normalized()
+	var pos := target.position + position_dir * distance
 
 	while not arena.can_place(BLOCK_RADIUS, pos):
 		position_dir = Vector2(randf() - 0.5, randf() - 0.5).normalized()
-		
 		pos = target.position + position_dir * distance
-	
+
 	return pos
 
 
@@ -81,28 +84,29 @@ func _get_random_enemy() -> Enemy:
 	for amount in ratios:
 		sum += amount
 	var num := randf_range(0, sum)
-	sum = 0
+	sum = 0.0
 	var idx := 0
 	while sum < num && idx < enemy_list.size():
 		sum += ratios[idx]
 		idx += 1
 	return enemy_list[idx - 1].instantiate()
 
+
 func _spawn_enemy() -> void:
-	if _get_enemies().size() >= int(max_enemies.sample(difficulty)):
+	if _enemies.size() >= int(max_enemies.sample(difficulty)):
 		return
-	
-	var pos = _position_near_target(teleport_distance)
-	var enemy_instance = _get_random_enemy()
-	
+
+	var pos := _position_near_target(teleport_distance)
+	var enemy_instance := _get_random_enemy()
 
 	enemy_instance.target = target
 	enemy_instance.global_position = pos
+
+	# Remove from cache when the enemy leaves the tree (death, queue_free, etc.)
+	enemy_instance.tree_exiting.connect(func(): _enemies.erase(enemy_instance))
+	_enemies.append(enemy_instance)
 	add_child(enemy_instance)
 
-
-func _get_enemies() -> Array:
-	return get_tree().get_nodes_in_group("enemies")
 
 func spawn_repair() -> void:
 	var repair: Repair = repair_scene.instantiate()

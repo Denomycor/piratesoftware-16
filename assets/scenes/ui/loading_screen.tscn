@@ -1,0 +1,41 @@
+[gd_scene load_steps=2 format=3 uid="uid://cls3x8p7q2mn4e"]
+
+[ext_resource type="Script" path="res://assets/scripts/ui/loading_screen.gd" id="1_ls001"]
+
+[node name="LoadingScreen" type="CanvasLayer"]
+layer = 128
+script = ExtResource("1_ls001")
+
+[node name="Background" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.07, 0.03, 0.02, 1)
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+custom_minimum_size = Vector2(520, 0)
+theme_override_constants/separation = 20
+
+[node name="TitleLabel" type="Label" parent="CenterContainer/VBoxContainer"]
+text = "LOADING"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 52
+
+[node name="ProgressBar" type="ProgressBar" parent="CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(520, 28)
+max_value = 100.0
+value = 0.0
+
+[node name="StatusLabel" type="Label" parent="CenterContainer/VBoxContainer"]
+text = "Loading..."
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 18
