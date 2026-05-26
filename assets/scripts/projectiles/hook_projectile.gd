@@ -24,29 +24,28 @@ var anchor: Node2D
 var my_rotation: float
 var target_rotation: float
 
-## Runtime Area2D sensor used to detect Area2D-based pickups (Repair, future boosts).
-## move_and_collide() cannot reach Area2D nodes, so we poll this sensor each frame.
-var _pickup_sensor: Area2D
-
-
-func _ready() -> void:
-	super._ready()
-	# Build sensor at runtime to avoid fragile .tscn edits.
-	_pickup_sensor = Area2D.new()
-	_pickup_sensor.collision_layer = 0
-	_pickup_sensor.collision_mask = 1  # layer 1 — Repair (and other prop Area2Ds)
-	_pickup_sensor.monitorable = false
-	var shape_node := CollisionShape2D.new()
-	var circle := CircleShape2D.new()
-	circle.radius = 80.0  # large enough to survive a fast-moving hook frame
-	shape_node.shape = circle
-	_pickup_sensor.add_child(shape_node)
-	add_child(_pickup_sensor)
+## Runtime Area2D sensor for detecting Area2D-based pickups (Repair, future boosts).
+## Created lazily on the first _process frame to avoid overriding _ready().
+var _pickup_sensor: Area2D = null
 
 
 func _process(_delta: float) -> void:
+	# Build pickup sensor on the very first frame (lazy init avoids _ready override).
+	if _pickup_sensor == null:
+		_pickup_sensor = Area2D.new()
+		_pickup_sensor.collision_layer = 0
+		_pickup_sensor.collision_mask = 1   # layer 1 — same layer as Repair/prop Area2Ds
+		_pickup_sensor.monitorable = false
+		var shape_node := CollisionShape2D.new()
+		var circle := CircleShape2D.new()
+		circle.radius = 80.0
+		shape_node.shape = circle
+		_pickup_sensor.add_child(shape_node)
+		add_child(_pickup_sensor)
+
 	# While flying (no target yet), poll the sensor for Area2D pickups.
-	# Signal-based area_entered can miss fast-moving objects; polling is reliable.
+	# Polling get_overlapping_areas() is more reliable than area_entered signals
+	# for fast-moving projectiles that might cross an Area in a single frame.
 	if target == null and not frozen:
 		for area in _pickup_sensor.get_overlapping_areas():
 			if area is Repair:
@@ -95,19 +94,20 @@ func _physics_process(delta: float) -> void:
 			var dir := barrel.global_position.direction_to(car.global_position)
 			barrel.rigid_body.apply_central_force(dir * BARREL_PULL_FORCE)
 		else:
-			destroy()  # close enough — detach
+			destroy()   # close enough — detach
 
 	elif target is Repair:
-		# Move the Repair prop toward the Car directly (it's an Area2D, no physics).
-		# anchor is a child of target and moves automatically when target moves.
+		# Move the Repair prop toward the Car (it's an Area2D; set position directly).
+		# anchor is a child of target, so it follows automatically when target moves.
 		var dist := target.global_position.distance_to(car.global_position)
 		if dist > REPAIR_ARRIVAL_DISTANCE:
 			var dir := target.global_position.direction_to(car.global_position)
 			target.global_position += dir * REPAIR_PULL_SPEED * delta
 		else:
-			# Arrived — heal directly (don't rely on HitBox/HurtBox timing).
+			# Arrived — heal Car directly, trigger Repair VFX, then detach.
 			car.hurt_box.take_damage(REPAIR_HEAL_AMOUNT)
-			(target as Repair)._on_collision(0.0)  # VFX + schedule queue_free
+			var repair := target as Repair
+			repair._on_collision(0.0)
 			destroy()
 
 	elif target is StaticBody2D:
@@ -117,22 +117,23 @@ func _physics_process(delta: float) -> void:
 
 
 func connect_hook(node: CollisionObject2D, pos: Vector2) -> void:
-	# Stop lifetime countdown
+	# Stop lifetime countdown.
 	timer.kill()
-	# Stop fade-out effect
+	# Stop fade-out scale effect.
 	scale_tween.kill()
-	# Restore scale (scale_tween may have shrunk it)
+	# Restore scale (scale_tween may have begun shrinking it).
 	scale = Vector2.ONE
-	# Stop self-movement
+	# Freeze movement.
 	frozen = true
-	# Disable own collision shape (we're now stationary)
+	# Disable own collision shape (stationary from here).
 	$CollisionShape2D.set_deferred("disabled", true)
-	# Disable pickup sensor — we're already attached
-	_pickup_sensor.set_deferred("monitoring", false)
+	# Disable pickup sensor — we have a target now.
+	if _pickup_sensor != null:
+		_pickup_sensor.set_deferred("monitoring", false)
 
 	target = node
 
-	# Anchor is a child of the target so it follows target movement automatically.
+	# Anchor is a child of target so it follows target movement automatically.
 	anchor = Node2D.new()
 	target.add_child(anchor)
 	anchor.global_position = pos
@@ -147,9 +148,9 @@ func connect_hook(node: CollisionObject2D, pos: Vector2) -> void:
 	if node is Prop:
 		node.destroyed.connect(destroy)
 	if node is Repair:
-		# Disable natural pickup so the Repair doesn't heal the car on its own
-		# while being towed — we apply healing directly on arrival.
-		(node as Repair).hit_box.monitoring = false
+		# Disable natural pickup while being towed to prevent a double-heal.
+		var repair := node as Repair
+		repair.hit_box.monitoring = false
 	z_index = 0
 
 
