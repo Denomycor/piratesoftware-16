@@ -4,7 +4,7 @@ Last updated: 2026-05-27
 
 ---
 
-## Current Milestone: 5 — Meta Progression Foundation
+## Current Milestone: 6 — Boost System Expansion
 
 ---
 

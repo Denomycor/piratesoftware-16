@@ -146,6 +146,7 @@ text = "Back
 
 [node name="ProgressionTab" type="VBoxContainer" parent="TabContainer"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 alignment = 1
 metadata/_tab_index = 3
