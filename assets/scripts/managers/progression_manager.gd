@@ -73,8 +73,8 @@ static func xp_on_current_level(total_xp: float) -> float:
 ##   alien_level, car_level,
 ##   alien_skill_points, car_skill_points
 func award_run_xp(kills: int, time_survived: float) -> Dictionary:
-	var alien_xp_gained := kills * XP_PER_KILL
-	var car_xp_gained   := floor(time_survived / 10.0) * XP_PER_10S
+	var alien_xp_gained: float = kills * XP_PER_KILL
+	var car_xp_gained:   float = floor(time_survived / 10.0) * XP_PER_10S
 
 	var old_alien_level := SaveManager.get_alien_level()
 	var old_car_level   := SaveManager.get_car_level()
