@@ -32,6 +32,11 @@ var repair_count: int = 0
 var difficulty: float = 0
 var repair_scene: PackedScene = preload("res://assets/scenes/props/repair.tscn")
 
+## Chance (0–1) that a dying enemy drops a random boost pickup.
+const BOOST_DROP_CHANCE: float = 0.05
+## GDScript classes for each droppable boost type (no PackedScene needed).
+var _boost_classes: Array = [TwoPointsBoost, ImmunityBoost, AuraBoost]
+
 var cur_group: int = 0
 
 ## Cached list of live enemies.
@@ -150,8 +155,21 @@ func _spawn_enemy() -> void:
 
 	# Remove from cache when the enemy leaves the tree (death, queue_free, etc.)
 	enemy_instance.tree_exiting.connect(func(): _enemies.erase(enemy_instance))
+	# Try to drop a boost at the enemy's position when it dies.
+	enemy_instance.died.connect(func(): _try_drop_boost(enemy_instance.global_position))
 	_enemies.append(enemy_instance)
 	add_child(enemy_instance)
+
+
+## Rolls a chance to drop a random boost at the given world position.
+## Called from the dying enemy's `died` signal.
+func _try_drop_boost(pos: Vector2) -> void:
+	if randf() >= BOOST_DROP_CHANCE:
+		return
+	var script: GDScript = _boost_classes[randi() % _boost_classes.size()]
+	var boost: BoostPickup = script.new()
+	boost.global_position = pos
+	add_child(boost)
 
 
 func spawn_repair() -> void:

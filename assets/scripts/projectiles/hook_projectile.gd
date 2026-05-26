@@ -58,6 +58,9 @@ func _process(_delta: float) -> void:
 			if col is Repair:
 				connect_hook(col, col.global_position)
 				break
+			elif col is BoostPickup:
+				connect_hook(col, col.global_position)
+				break
 
 	if is_instance_valid(target):
 		global_position = anchor.global_position
@@ -117,6 +120,18 @@ func _physics_process(delta: float) -> void:
 			repair._on_collision(0.0)
 			destroy()
 
+	elif target is BoostPickup:
+		# Tow the boost pickup toward the car; collect it when close enough.
+		var dist := target.global_position.distance_to(car.global_position)
+		if dist > REPAIR_ARRIVAL_DISTANCE:
+			var dir := target.global_position.direction_to(car.global_position)
+			target.global_position += dir * REPAIR_PULL_SPEED * delta
+		else:
+			# Delivered — trigger collection and detach.
+			var pickup := target as BoostPickup
+			pickup.deliver_to_car(car)
+			destroy()
+
 	elif target is StaticBody2D:
 		# Pull the Car toward the wall anchor point.
 		var dir := car.global_position.direction_to(anchor.global_position)
@@ -159,6 +174,10 @@ func connect_hook(node: CollisionObject2D, pos: Vector2) -> void:
 		# Disable natural pickup while being towed to prevent a double-heal.
 		var repair := node as Repair
 		repair.hit_box.monitoring = false
+	if node is BoostPickup:
+		# Disable auto-collect and expire timer while being towed.
+		var pickup := node as BoostPickup
+		pickup.disable_auto_collect()
 	z_index = 0
 
 

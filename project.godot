@@ -26,6 +26,7 @@ LevelContext="*res://assets/scripts/level/level_context.gd"
 GameOptions="*res://assets/scripts/game_options.gd"
 SaveManager="*res://assets/scripts/managers/save_manager.gd"
 ProgressionManager="*res://assets/scripts/managers/progression_manager.gd"
+BoostManager="*res://assets/scripts/managers/boost_manager.gd"
 
 [display]
 

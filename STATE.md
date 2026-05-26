@@ -4,7 +4,7 @@ Last updated: 2026-05-27
 
 ---
 
-## Current Milestone: 6 — Boost System Expansion
+## Current Milestone: 7 — Game Flow Polish
 
 ---
 
@@ -17,7 +17,7 @@ Last updated: 2026-05-27
 | 3 | Enemy Spawn System Fixes | ✅ Done | See details below |
 | 4 | Grappling Hook Completion | ✅ Done | See details below |
 | 5 | Meta Progression Foundation | ✅ Done | See details below |
-| 6 | Boost System Expansion | ⬜ Not Started | |
+| 6 | Boost System Expansion | ✅ Done | See details below |
 | 7 | Game Flow Polish | ⬜ Not Started | |
 
 ---
@@ -247,13 +247,86 @@ Tune in-editor; no architecture changes needed.
 
 ---
 
+## Milestone 6 — Boost System Expansion
+
+**Status: ✅ Done (manual validation pending)**
+
+### What was done
+
+**New autoload**
+
+| Autoload | Script | Role |
+|----------|--------|------|
+| `BoostManager` | `managers/boost_manager.gd` | Tracks active timed boosts; ticks duration; deactivates on expiry; manages aura Area2D; exposes `points_multiplier`. |
+
+**Generic Boost Framework**
+
+- `BoostPickup` (`boosts/abstract/boost_pickup.gd`) — base `Area2D` class
+  - `collision_layer = 1` → hook pickup sensor detects it
+  - `collision_mask = 2` → car body triggers `body_entered` auto-collect
+  - `expire_time` timer: pickup self-destructs if not collected
+  - `disable_auto_collect()` / `deliver_to_car()` — hook retrieval interface
+  - Virtual `activate(car)` / `deactivate(car)` / `get_boost_id()` for subclasses
+  - On collect: removes visual/collision children; node stays alive for effect lifecycle
+
+**Three new boost types**
+
+| Class | File | Effect | Duration | Color |
+|-------|------|--------|----------|-------|
+| `TwoPointsBoost` | `boosts/two_points_boost.gd` | `BoostManager.points_multiplier = 2.0` | 10 s | Gold |
+| `ImmunityBoost` | `boosts/immunity_boost.gd` | `car.hurt_box.monitoring = false` | 8 s | Cyan |
+| `AuraBoost` | `boosts/aura_boost.gd` | Area2D on car damages enemies at 20 DPS, r=400 | 12 s | Purple |
+
+**Aura collision mask = 36** (layer 3 enemies=4, layer 6 crawlers=32)
+
+**Drop system**
+
+- `EnemiesManager._try_drop_boost(pos)` — 5% chance per enemy death, random boost type
+- Connected via `enemy_instance.died` signal in `_spawn_enemy()`
+- Uses `GDScript.new()` directly (no PackedScene required)
+- Dropped boosts are children of EnemiesManager
+
+**Hook retrieval extended**
+- `hook_projectile.gd` now detects `BoostPickup` alongside `Repair` in the pickup sensor loop
+- Tow logic mirrors Repair: move toward car, `deliver_to_car()` on arrival
+- `connect_hook()` calls `disable_auto_collect()` to freeze expire timer during flight
+
+**Points multiplier wired**
+- `Stats.add_points()` multiplies `amount` by `BoostManager.points_multiplier`
+- Applies to both time-based score and kill-based points
+
+**HUD boost timer strip**
+- `Overlay` builds a `VBoxContainer` programmatically at top-center
+- `add_boost_display(id, name, color, duration)` / `update_boost_timer(...)` / `remove_boost_display(id)` — called by BoostManager each frame
+- Each active boost shows `"Name  X.Xs"` in its boost color with dark outline
+
+### What was NOT done (scope deferred)
+- Boost VFX (pickup animation, aura visual on car) — M7/polish pass
+- Audio feedback for pickup — no suitable sound file available; add when SFX acquired
+- Boost balancing — same as skills: intentionally deferred
+
+### Manual validation needed
+- [ ] Kill enemies until a boost drops — pickup appears at death position
+- [ ] Walk car over boost → HUD strip shows timer row in correct color
+- [ ] Timer counts down and row disappears when expired
+- [ ] 2x Points: score gains double while active (watch Points label)
+- [ ] Immunity: car takes no damage from enemies/walls while active
+- [ ] Aura Damage: enemies near car take damage over time while active
+- [ ] Multiple boosts simultaneously display multiple rows
+- [ ] Collecting same boost type while active resets (extends) duration
+- [ ] Hook grabs a boost, tows it to car, activates on delivery
+- [ ] On level exit and restart: no stale boost effects carry over
+
+---
+
 ## Known Issues / Tech Debt
 
 | Issue | File | Priority |
 |-------|------|----------|
 | No victory condition (15-min survival) | `level.gd` | M7 |
-| Skill effects not applied in gameplay | `progression_manager.gd` | M6/M7 |
-| No boost system beyond health pack | `props/repair.gd` | M6 |
+| Skill effects not applied in gameplay | `progression_manager.gd` | M7 |
+| Boost pickup has no animation/VFX | `boost_pickup.gd` | Polish |
+| No boost pickup audio | `boost_pickup.gd` | Polish |
 
 ---
 
@@ -267,9 +340,10 @@ Tune in-editor; no architecture changes needed.
 | GameOptions | `game_options.gd` | Autoload singleton |
 | SaveManager | `managers/save_manager.gd` | Autoload singleton; JSON save at `user://save_data.json` |
 | ProgressionManager | `managers/progression_manager.gd` | Autoload singleton; XP math + skill definitions |
-| EnemiesManager | `enemies/manager/enemies-manager.gd` | Difficulty curves; cached enemy list |
+| BoostManager | `managers/boost_manager.gd` | Autoload singleton; active boost tracking + aura area; `points_multiplier` |
+| EnemiesManager | `enemies/manager/enemies-manager.gd` | Difficulty curves; cached enemy list; 5% boost drops |
 | Arena | `arena/arena.gd` | Octagonal; `can_place()` for spawn validation |
 | Car | `car/car.gd` | RigidBody2D; recoil-driven |
 | LoadingScreen | `ui/loading_screen.gd` | CanvasLayer; async + shader warmup |
-| HookProjectile | `projectiles/hook_projectile.gd` | Attaches to wall/barrel/repair/enemy; lazy Area2D sensor for repair detection |
+| HookProjectile | `projectiles/hook_projectile.gd` | Attaches to wall/barrel/repair/enemy/boost; lazy Area2D sensor for pickup detection |
 | ProgressionScreen | `ui/progression_screen.gd` | VBoxContainer; tab 3 of MainMenu; skill tree UI |

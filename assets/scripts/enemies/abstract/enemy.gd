@@ -10,6 +10,9 @@ signal died
 var target: RigidBody2D
 
 var movement_locked := false
+## Set to true by each subclass's die() before queue_free.
+## Declared here so BoostManager (and other systems) can read it on the Enemy base type.
+var dead: bool = false
 
 
 func attack():
