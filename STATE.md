@@ -4,7 +4,7 @@ Last updated: 2026-05-26
 
 ---
 
-## Current Milestone: 3 — Enemy Spawn System Fixes
+## Current Milestone: 4 — Grappling Hook Completion
 
 ---
 
@@ -15,7 +15,7 @@ Last updated: 2026-05-26
 | 1 | Migration & Stabilization | ✅ Done | See details below |
 | 2 | Performance Foundation | ✅ Done | See details below |
 | 3 | Enemy Spawn System Fixes | ✅ Done | See details below |
-| 4 | Grappling Hook Completion | ⬜ Not Started | |
+| 4 | Grappling Hook Completion | ✅ Done | See details below |
 | 5 | Meta Progression Foundation | ⬜ Not Started | |
 | 6 | Boost System Expansion | ⬜ Not Started | |
 | 7 | Game Flow Polish | ⬜ Not Started | |
@@ -115,11 +115,60 @@ All changes in `assets/scripts/enemies/manager/enemies-manager.gd`:
 
 ---
 
+## Milestone 4 — Grappling Hook Completion
+
+**Status: ✅ Done (manual validation pending)**
+
+### What was done
+
+All changes in `assets/scripts/projectiles/hook_projectile.gd`:
+
+**Wall attachment**
+- `target is StaticBody2D` → in `_physics_process`, `car.apply_central_force()` pulls the Car toward the anchor point on the wall each frame.  
+  Force: `WALL_PULL_FORCE = 6000.0` N (tunable constant). Walls never move.
+
+**Barrel drag**
+- Barrel scene root (`barrel1/2/3.tscn`) is a `RigidBody2D` with class `Barrel`.  
+  `target is Barrel` → in `_physics_process`, `barrel.rigid_body.apply_central_force()` drags the barrel toward the Car.  
+  Force: `BARREL_PULL_FORCE = 4000.0` N. Barrel is released (hook destroys) when it arrives within `BARREL_ARRIVAL_DISTANCE = 250 px`. Barrel's explosion behavior is unchanged.
+
+**Repair/boost retrieval**
+- `Repair` is an `Area2D` — `move_and_collide()` can't detect it.  
+  A runtime `Area2D` sensor (`_pickup_sensor`, `collision_mask=1`, `radius=80`) is created in `_ready()`. Each `_process` frame while flying, `get_overlapping_areas()` is polled (more reliable than `area_entered` signals at high speed). On match, `connect_hook(area, area.global_position)` is called.  
+  In `connect_hook`, the Repair's HitBoxComponent monitoring is disabled (prevents double-heal).  
+  In `_physics_process`, `target.global_position` is moved toward the Car at `REPAIR_PULL_SPEED = 2000 px/s`. When within `REPAIR_ARRIVAL_DISTANCE = 250 px`, the Car is healed directly (`car.hurt_box.take_damage(-350.0)`) and the Repair's `_on_collision(0.0)` is triggered for VFX, then the hook destroys.
+
+**Enemy hook (preserved + cleaned up)**
+- Existing logic retained verbatim. No regressions.
+
+**`connect_hook()` additions**
+- Disables `_pickup_sensor.monitoring` once attached (prevent duplicate grabs).
+- `scale_tween.kill()` guard retained from original.
+
+### What was NOT done (scope deferred)
+- Hook state machine enum (idle/fired/attached/etc.) — implicit states via `frozen`/`target` flags are sufficient. Formal enum would be a refactor with no behavior change; deferred.
+- Cooldown mechanic — not specified in roadmap requirements.
+- Wall type filtering (not all StaticBody2D are walls) — only walls exist in the arena as StaticBody2D, so no filter needed yet.
+
+### Force tuning notes
+All forces are named constants at the top of `hook_projectile.gd`:  
+`WALL_PULL_FORCE`, `BARREL_PULL_FORCE`, `BARREL_ARRIVAL_DISTANCE`, `REPAIR_PULL_SPEED`, `REPAIR_ARRIVAL_DISTANCE`.  
+Tune in-editor; no architecture changes needed.
+
+### Manual validation needed
+- [ ] Hook fires and attaches to a wall → Car is pulled toward it
+- [ ] Hook fires and attaches to a barrel → barrel slides toward Car, hook releases on arrival
+- [ ] Hook fires and attaches to a Repair item → Repair travels to Car, Car is healed, item disappears
+- [ ] Enemy pull still works as before
+- [ ] Right-click releases hook in all attach scenarios
+- [ ] No physics explosions or jitter when pulling
+
+---
+
 ## Known Issues / Tech Debt
 
 | Issue | File | Priority |
 |-------|------|----------|
-| Hook can't attach to walls, barrels, or boosts — only enemies | `hook_projectile.gd` | M4 |
 | No victory condition (15-min survival) | `level.gd` | M7 |
 | No XP/save system | — | M5 |
 | No boost system beyond health pack | `props/repair.gd` | M6 |
