@@ -19,6 +19,7 @@ Last updated: 2026-05-26
 | 5 | Meta Progression Foundation | ✅ Done | See details below |
 | 6 | Boost System Expansion | ✅ Done | See details below |
 | 7 | Game Flow Polish | ✅ Done | See details below |
+| 8 | QA / Performance Validation | 🔄 In Progress | Deferred skill effects done; manual QA pending |
 
 ---
 
@@ -377,10 +378,65 @@ survive weapon switching. `set_car_vars(weapon_vars[current_idx])` re-applied im
 
 | Issue | File | Priority |
 |-------|------|----------|
-| `weapon_damage_multiplier` skill not applied | `progression_manager.gd` | M8 polish |
-| `range_multiplier` skill not applied | `progression_manager.gd` | M8 polish |
 | Boost pickup has no animation/VFX | `boost_pickup.gd` | Polish |
 | No boost pickup audio | `boost_pickup.gd` | Polish |
+
+---
+
+## Milestone 8 — QA / Performance Validation
+
+**Status: 🔄 In Progress**
+
+### What was done
+
+**Deferred skill effects implemented (M8 polish pass)**
+
+`weapon_damage_multiplier` and `range_multiplier` are now fully applied at projectile spawn time.
+
+Architecture:
+- `LinearProjectile` — added `var damage_multiplier: float = 1.0` and `var range_multiplier: float = 1.0`.
+  In `_ready()`: `lifetime *= range_multiplier` (before timer creation) and `hitbox_component.damage_amount *= damage_multiplier`.
+- `AreaProjectile` — `_ready()` also applies `area_hitbox_component.damage_amount *= damage_multiplier`
+  so rocket explosion damage scales too.
+- `FlamethrowerProjectile` — same two vars plus `@onready var hitbox_component: HitBoxComponent = $HitBoxComponent`;
+  applies both multipliers in `_ready()`.
+- `ProgressionManager` — added `var player_damage_multiplier: float = 1.0` and `var player_range_multiplier: float = 1.0`.
+  Both are computed fresh in `apply_skills_to_car()` alongside the other multipliers.
+- **Player weapons** (Shotgun, Minigun, RocketLauncher, Flamethrower) — each `shoot_projectile` lambda now sets
+  `projectile.damage_multiplier = ProgressionManager.player_damage_multiplier` and
+  `projectile.range_multiplier  = ProgressionManager.player_range_multiplier` before `add_child()`.
+- **Enemy weapons** (BikerGun) and **HookProjectile** — left untouched; default multiplier = 1.0 means no effect.
+
+### What was NOT done (manual validation / out of scope)
+- FPS benchmark at 50/100/200 enemies — requires editor profiler (manual task)
+- Shader stutter confirmation — requires playing a fresh session
+- Gameplay stress tests — manual task
+- Object pooling for enemies — still deferred; wait for benchmark data
+
+### Manual validation needed (QA Phase 1 checklist)
+- [ ] Game launches without errors (Output panel clean)
+- [ ] Full loop: main menu → Play → loading screen → run → death → menu
+- [ ] All 5 weapons fire and produce knockback
+- [ ] All 5 enemy types spawn and behave correctly
+- [ ] Hook attaches to walls / barrels / repair items / boosts / enemies
+- [ ] HUD (health, points, kills, speed, boosts) updates correctly
+- [ ] No shader stutter on first run after loading screen
+- [ ] Victory at 15 minutes → VictoryMenu shows correct stats
+- [ ] Progression screen → unlock a skill → start new run → effect visible
+  - `alien_sharp_claws` (+10% damage): enemy dies faster per shot
+  - `alien_quick_reload` (-10% cooldown): fire rate noticeably faster
+  - `alien_hunters_eye` (+15% range): projectiles travel further before despawning
+  - `car_tuned_engine` (+10% speed): car reaches higher top speed
+  - `car_reinforced_frame` (+25 HP): health bar starts with more max HP
+- [ ] No double-award of XP (die, check totals; win, check totals)
+- [ ] Boosts drop, timer strip updates, effects work correctly (see M6 checklist)
+
+### Performance validation needed (QA Phase 2)
+- [ ] Open profiler in Godot editor (Debugger → Profiler)
+- [ ] Measure FPS baseline at: 50 / 100 / 200 enemies on screen
+  - Target: ≥ 60 FPS at 100 enemies
+- [ ] Check for frame spikes > 16 ms
+- [ ] Check memory growth over a 5-minute session
 
 ---
 

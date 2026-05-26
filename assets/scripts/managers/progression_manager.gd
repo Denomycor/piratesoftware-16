@@ -9,9 +9,9 @@
 ##   Level 1→2: 200 XP
 ##   Level 2→3: 300 XP   etc.
 ##
-## Gameplay effects for car stats and weapon cooldowns are applied at level start
-## via apply_skills_to_car(). Weapon damage and range multipliers are deferred
-## (require per-projectile spawn-time injection — M8 polish pass).
+## Gameplay effects are applied at level start via apply_skills_to_car().
+## That method also caches player_damage_multiplier and player_range_multiplier
+## so each player weapon can stamp those values onto freshly-spawned projectiles.
 class_name ProgressionManager extends Node
 
 const XP_PER_KILL  := 10.0
@@ -20,6 +20,11 @@ const XP_PER_LEVEL := 100.0
 
 ## All registered skill nodes. Populated in _ready().
 var skill_nodes: Array[SkillNode] = []
+
+## Cached per-run multipliers — written by apply_skills_to_car() and read by
+## player weapon lambdas each time they spawn a projectile.
+var player_damage_multiplier: float = 1.0
+var player_range_multiplier:  float = 1.0
 
 
 func _ready() -> void:
@@ -202,14 +207,16 @@ func _register_skill_nodes() -> void:
 ##   knockback_multiplier           → all weapon_vars[i].perpendicular_multiplier *= value
 ##                                     and .parallel_multiplier *= value
 ##   cooldown_multiplier            → each weapon's ProjectileSpawnerComponent.fire_delay *= value
-##
-## Deferred (M8): weapon_damage_multiplier, range_multiplier (require per-projectile injection).
+##   weapon_damage_multiplier       → cached in player_damage_multiplier; applied per projectile
+##   range_multiplier               → cached in player_range_multiplier; applied per projectile
 func apply_skills_to_car(car: Car) -> void:
 	var hp_bonus:      float = 0.0
 	var speed_mult:    float = 1.0
 	var drift_mult:    float = 1.0
 	var knockback_mult: float = 1.0
 	var cooldown_mult: float = 1.0
+	var damage_mult:   float = 1.0
+	var range_mult:    float = 1.0
 
 	for node: SkillNode in skill_nodes:
 		if not SaveManager.is_node_unlocked(node.id):
@@ -225,6 +232,14 @@ func apply_skills_to_car(car: Car) -> void:
 				knockback_mult *= node.effect_value
 			&"cooldown_multiplier":
 				cooldown_mult *= node.effect_value
+			&"weapon_damage_multiplier":
+				damage_mult *= node.effect_value
+			&"range_multiplier":
+				range_mult *= node.effect_value
+
+	# Cache projectile multipliers so player weapon lambdas can read them.
+	player_damage_multiplier = damage_mult
+	player_range_multiplier  = range_mult
 
 	# HP bonus
 	if hp_bonus != 0.0:

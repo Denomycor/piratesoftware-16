@@ -6,6 +6,8 @@ const EXPLOSION_TIME := 0.1
 
 func _ready() -> void:
 	super._ready()
+	# Scale explosion damage by the same damage_multiplier set on this projectile.
+	area_hitbox_component.damage_amount *= damage_multiplier
 	area_hitbox_component.monitoring = false
 	if get_node_or_null("shoot") != null:
 		$shoot.play()
