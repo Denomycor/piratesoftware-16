@@ -4,7 +4,7 @@ Last updated: 2026-05-26
 
 ---
 
-## Current Milestone: 4 — Grappling Hook Completion
+## Current Milestone: 5 — Meta Progression Foundation
 
 ---
 
@@ -121,7 +121,7 @@ All changes in `assets/scripts/enemies/manager/enemies-manager.gd`:
 
 ### What was done
 
-All changes in `assets/scripts/projectiles/hook_projectile.gd`:
+All changes in `assets/scripts/projectiles/hook_projectile.gd` and `assets/scenes/projectiles/hook_projectile.tscn`.
 
 **Wall attachment**
 - `target is StaticBody2D` → in `_physics_process`, `car.apply_central_force()` pulls the Car toward the anchor point on the wall each frame.  
@@ -134,7 +134,7 @@ All changes in `assets/scripts/projectiles/hook_projectile.gd`:
 
 **Repair/boost retrieval**
 - `Repair` is an `Area2D` — `move_and_collide()` can't detect it.  
-  A runtime `Area2D` sensor (`_pickup_sensor`, `collision_mask=1`, `radius=80`) is created in `_ready()`. Each `_process` frame while flying, `get_overlapping_areas()` is polled (more reliable than `area_entered` signals at high speed). On match, `connect_hook(area, area.global_position)` is called.  
+  A runtime `Area2D` sensor (`_pickup_sensor`, `collision_mask=1`, `radius=80`) is created lazily on the first `_process` frame (not in `_ready()` — see bug notes below). Each `_process` frame while flying, `get_overlapping_areas()` is polled (more reliable than `area_entered` signals at high speed). On match, `connect_hook(area, area.global_position)` is called.  
   In `connect_hook`, the Repair's HitBoxComponent monitoring is disabled (prevents double-heal).  
   In `_physics_process`, `target.global_position` is moved toward the Car at `REPAIR_PULL_SPEED = 2000 px/s`. When within `REPAIR_ARRIVAL_DISTANCE = 250 px`, the Car is healed directly (`car.hurt_box.take_damage(-350.0)`) and the Repair's `_on_collision(0.0)` is triggered for VFX, then the hook destroys.
 
@@ -143,7 +143,16 @@ All changes in `assets/scripts/projectiles/hook_projectile.gd`:
 
 **`connect_hook()` additions**
 - Disables `_pickup_sensor.monitoring` once attached (prevent duplicate grabs).
-- `scale_tween.kill()` guard retained from original.
+- `scale_tween` null guard added (`if scale_tween != null:` before `.kill()`).
+- All `target` / `anchor` access uses `is_instance_valid()` throughout.
+
+### Bugs fixed during M4 (3 additional commits after initial implementation)
+
+| Commit | Bug | Fix |
+|--------|-----|-----|
+| `b3c48ec` | Initial implementation overrode `_ready()` with `super._ready()`, conflicting with `LinearProjectile._ready()` (which sets up `timer` / `scale_tween`). This destabilised class_name registration. | Removed `_ready()` override entirely; moved `_pickup_sensor` creation to lazy init at top of `_process()`. |
+| `1a3ab87` | `if target:` / `if not target:` — in Godot 4, freed Objects are still non-null, so bare truthiness checks allowed accessing `anchor.global_position` on a freed node → crash. Also, `hook_projectile.tscn` script ext_resource had no `uid=` attribute. | Replaced all with `is_instance_valid(target)` / `is_instance_valid(anchor)`. Added `uid="uid://xqg4l0dpca8"` to `.tscn` script reference. |
+| `2f980d9` | **Root cause of the persistent crash**: `get_overlapping_areas()` returns `Array[Area2D]`, so the loop variable was statically typed `Area2D`. GDScript 4.6's type-narrowing checker rejected `if area is Repair` (Repair extends `CollisionObject2D`, not `Area2D` — neither is a subtype of the other). This **parse error** prevented the script from loading at all, causing `instantiate()` to return a bare `CharacterBody2D` and triggering the "type 'hook_projectile.gd'" crash in `hook.gd:33`. | Widened loop variable: `var col: CollisionObject2D = area` — both `Area2D` and `Repair` share `CollisionObject2D` as an ancestor, so the narrowing `col is Repair` is valid and the parse error disappears. |
 
 ### What was NOT done (scope deferred)
 - Hook state machine enum (idle/fired/attached/etc.) — implicit states via `frozen`/`target` flags are sufficient. Formal enum would be a refactor with no behavior change; deferred.
@@ -187,3 +196,4 @@ Tune in-editor; no architecture changes needed.
 | Arena | `arena/arena.gd` | Octagonal; `can_place()` for spawn validation |
 | Car | `car/car.gd` | RigidBody2D; recoil-driven |
 | LoadingScreen | `ui/loading_screen.gd` | CanvasLayer; async + shader warmup |
+| HookProjectile | `projectiles/hook_projectile.gd` | Attaches to wall/barrel/repair/enemy; lazy Area2D sensor for repair detection |
