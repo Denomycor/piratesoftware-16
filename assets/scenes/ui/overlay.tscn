@@ -29,7 +29,7 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_uqnuj"]
 shader = ExtResource("2_03iuh")
-shader_parameter/inner_radius = 1.0
+shader_parameter/inner_radius = 0.95
 shader_parameter/outer_radius = 1.0
 shader_parameter/vignette_strength = 1.5
 shader_parameter/dither_strength = 0.03

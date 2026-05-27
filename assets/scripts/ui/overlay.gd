@@ -51,7 +51,7 @@ func set_speed(speed: float) -> void:
 	speedometer.set_speed(speed)
 
 func set_hp(hp: float) -> void:
-	vignette.material.set_shader_parameter("inner_radius", lerpf(0, 1, hp / _max_hp))
+	vignette.material.set_shader_parameter("inner_radius", lerpf(0.0, 0.95, hp / _max_hp))
 	health_bar.set_hp(hp)
 
 func switch_weapon(idx: int) -> void:
