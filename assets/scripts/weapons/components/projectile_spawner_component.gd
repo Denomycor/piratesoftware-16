@@ -32,13 +32,13 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if !proj_ready:
 		delay_acc -= delta
-		if delay_acc < delta:
+		if delay_acc <= 0:
 			proj_ready = true
 			projectile_ready.emit()
 
 	if !bst_ready:
 		burst_delay_acc -= delta
-		if burst_delay_acc < delta:
+		if burst_delay_acc <= 0:
 			bst_ready = true
 			burst_ready.emit()
 
