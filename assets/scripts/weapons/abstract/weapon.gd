@@ -1,8 +1,7 @@
 class_name Weapon extends Node2D
 
 
-@warning_ignore("unused_signal")
-signal fired
+signal fired(impulse: Vector2)
 signal activated
 signal deactivated
 
