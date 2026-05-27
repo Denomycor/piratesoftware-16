@@ -15,14 +15,17 @@ var movement_locked := false
 var dead: bool = false
 
 
+# --- Abstract interface ---
+# Subclasses MUST implement: attack(), update_movement(), die(), _take_dmg()
+# Subclasses MAY override: any other method
 func attack():
-	push_error("The attack function is not implemented for this enemy.")
+	assert(false, "Enemy subclass must implement attack()")
 
 func update_movement():
-	push_error("The update_movement function is not implemented for this enemy.")
+	assert(false, "Enemy subclass must implement update_movement()")
 
 func die():
-	push_error("The die function is not implemented for this enemy.")
+	assert(false, "Enemy subclass must implement die()")
 
 
 func _physics_process(_delta: float) -> void:
@@ -30,5 +33,5 @@ func _physics_process(_delta: float) -> void:
 
 # Signal
 func _take_dmg(_amount: float):
-	push_error("The _take_dmg function is not implemented for this enemy.")
+	assert(false, "Enemy subclass must implement _take_dmg()")
 

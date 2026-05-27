@@ -1,7 +1,7 @@
 class_name HealthBar extends TextureProgressBar
 
 func _ready():
-	max_value = owner.get_parent().car.max_health
+	max_value = LevelContext.level.car.max_health
 	value = max_value
 
 func set_hp(hp: float) -> void:

@@ -1,4 +1,4 @@
-class_name gameOptions extends Node
+extends Node
 
 var sound_on: Array[bool] = [true, true, true, true]
 var sound_db: Array[float] = [40, 40, 40, 40]
