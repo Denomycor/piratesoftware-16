@@ -35,6 +35,11 @@ func _ready() -> void:
 	if follow_range == 0:
 		follow_range = int(randf_range(500, 1500))
 
+func attack() -> void:
+	pass  # Biker's attacks are driven by update_movement(): BikerGun fires autonomously
+	      # and collision damage is handled by _on_collision(). No discrete attack() call needed.
+
+
 func update_movement():
 	if dead:
 		return
@@ -68,8 +73,6 @@ func set_mimic_acceleration() -> void:
 func die():
 	dead = true
 	$crash.play()
-	LevelContext.level.stats.increment_kills()
-	LevelContext.level.stats.add_points(points)
 	($BikerGun as BikerGun).projectile_spawner_component.enabled = false
 	($BikerGun as BikerGun).visible = false
 	$Biker.visible = false

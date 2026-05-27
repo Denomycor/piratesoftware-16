@@ -161,6 +161,10 @@ func _spawn_enemy() -> void:
 	enemy_instance.tree_exiting.connect(func(): _enemies.erase(enemy_instance))
 	# Try to drop a boost at the enemy's position when it dies.
 	enemy_instance.died.connect(func(): _try_drop_boost(enemy_instance.global_position))
+	enemy_instance.died.connect(func():
+		LevelContext.level.stats.increment_kills()
+		LevelContext.level.stats.add_points(enemy_instance.points)
+	)
 	_enemies.append(enemy_instance)
 	add_child(enemy_instance)
 

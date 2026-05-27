@@ -89,8 +89,6 @@ func set_chase_acceleration() -> void:
 
 func die() -> void:
 	dead = true
-	LevelContext.level.stats.increment_kills()
-	LevelContext.level.stats.add_points(points)
 	velocity = Vector2.ZERO
 	hurt_box.has_taken_damage.disconnect(_take_dmg)
 	hurt_box.queue_free()
@@ -118,6 +116,13 @@ func can_attack_melee() -> bool:
 
 func can_attack_ranged() -> bool:
 	return is_in_range(ranged_attack_range) && projectile_spawner_component.proj_ready
+
+
+func attack() -> void:
+	if can_attack_melee():
+		attack_melee()
+	elif can_attack_ranged():
+		attack_ranged()
 
 
 func attack_melee() -> void:
