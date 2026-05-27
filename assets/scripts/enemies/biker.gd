@@ -35,6 +35,11 @@ func _ready() -> void:
 	if follow_range == 0:
 		follow_range = int(randf_range(500, 1500))
 
+func attack() -> void:
+	pass  # Biker's attacks are driven by update_movement(): BikerGun fires autonomously
+	      # and collision damage is handled by _on_collision(). No discrete attack() call needed.
+
+
 func update_movement():
 	if dead:
 		return

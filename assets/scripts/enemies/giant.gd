@@ -121,6 +121,13 @@ func can_attack_ranged() -> bool:
 	return is_in_range(ranged_attack_range) && projectile_spawner_component.proj_ready
 
 
+func attack() -> void:
+	if can_attack_melee():
+		attack_melee()
+	elif can_attack_ranged():
+		attack_ranged()
+
+
 func attack_melee() -> void:
 	attack_is_on_cooldown = true
 	animation_player.play("attacking2")
