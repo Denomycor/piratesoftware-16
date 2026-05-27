@@ -11,6 +11,18 @@ Use the **Godot MCP** server to interact with the running Godot editor — inspe
 Open the project in Godot 4.6 and press **F5** (or use the MCP to launch). The main scene is `assets/scenes/game.tscn`.  
 There are no build steps, test runners, or CI pipelines — all iteration is through the Godot editor.
 
+## Before Every Commit
+
+**Always run the GDScript LSP checker before committing any `.gd` file changes:**
+
+```powershell
+node .claude/gdscript-check.mjs . --timeout 20
+```
+
+- Requires the Godot editor to be open (LSP runs on port 6005 automatically).
+- Exit code 0 = clean. Exit code 1 = errors present — **do not commit**.
+- Do NOT use `godot --headless --quit` as a parse check — it only loads autoloads and the main scene, missing most scripts entirely.
+
 ## Architecture
 
 **Autoloads (singletons)**
