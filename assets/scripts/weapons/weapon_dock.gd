@@ -65,4 +65,4 @@ func play_change_animation(idx: int) -> void:
 	weapon_anim.frame_changed.connect(func():
 		if weapon_anim.frame == 2:
 			switch_active_weapon(idx)
-	)
+	, CONNECT_ONE_SHOT)
