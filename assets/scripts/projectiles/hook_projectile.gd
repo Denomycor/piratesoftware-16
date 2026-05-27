@@ -34,7 +34,7 @@ func _process(_delta: float) -> void:
 	if _pickup_sensor == null:
 		_pickup_sensor = Area2D.new()
 		_pickup_sensor.collision_layer = 0
-		_pickup_sensor.collision_mask = 1   # layer 1 — Repair root Area2D is on layer 1 (default)
+		_pickup_sensor.collision_mask = 64  # layer 7 (bitmask 64) — dedicated pickups layer
 		_pickup_sensor.monitorable = false
 		var shape_node := CollisionShape2D.new()
 		var circle := CircleShape2D.new()

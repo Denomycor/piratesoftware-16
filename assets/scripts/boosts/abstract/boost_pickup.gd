@@ -32,7 +32,7 @@ var _auto_collect_enabled: bool = true
 
 
 func _ready() -> void:
-	collision_layer = 1   # layer 1 — hook pickup sensor (collision_mask=1) detects this
+	collision_layer = 64  # layer 7 (bitmask 64) — dedicated pickups layer
 	collision_mask  = 2   # layer 2 — player body triggers body_entered
 
 	_build_visual()
