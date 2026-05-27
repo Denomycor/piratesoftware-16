@@ -122,10 +122,11 @@ func _on_collision(node: Node) -> void:
 	var collision_speed := last_velocity.dot(collision_direction)
 	var collision_damage := CollisionUtils.calculate_damage(collision_speed, min_collision_speed, speed_for_max_collision_damage, max_collision_damage)
 	if node is RigidBody2D:
-		var mass_ratio := node.mass / mass
+		var rigid := node as RigidBody2D
+		var mass_ratio: float = rigid.mass / mass
 		var velocity_ratio := 1.0
-		if node.has_method("get_last_velocity"):
-			velocity_ratio = clampf((last_velocity - node.get_last_velocity()).length() / speed_for_max_collision_damage, 0, 2)
+		if rigid.has_method("get_last_velocity"):
+			velocity_ratio = clampf((last_velocity - rigid.get_last_velocity()).length() / speed_for_max_collision_damage, 0, 2)
 		hurt_box.take_damage(collision_damage * mass_ratio * velocity_ratio)
 		if collision_damage * mass_ratio * velocity_ratio > max_collision_damage / 10:
 			$small_crash.play()
