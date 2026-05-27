@@ -83,8 +83,10 @@ func get_random_point_inside_polygon() -> Vector2:
 
 func get_random_free_point_inside_polygon(border: float) -> Vector2:
 	var pos = get_random_point_inside_polygon()
-	while not can_place(border, pos):
-			pos = get_random_point_inside_polygon()
+	var attempts := 0
+	while not can_place(border, pos) and attempts < 100:
+		pos = get_random_point_inside_polygon()
+		attempts += 1
 	return pos
 
 func get_random_prop_instance() -> Prop:
