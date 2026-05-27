@@ -25,6 +25,7 @@ const SPAWN_INTERVAL_MIN: float = 0.1
 @export var time_for_max_difficulty: float = 60 * 15
 @export var repair_point_interval: float = 10000
 @export var repair_distance: float = 5000
+@export var camera: Camera2D
 
 @onready var spawn_timer: Timer = $SpawnTimer
 
@@ -68,6 +69,9 @@ func _update_enemies() -> void:
 
 
 func _get_camera() -> Camera2D:
+	if is_instance_valid(camera):
+		return camera
+	# Fallback: legacy path lookup until scene is wired in inspector
 	return LevelContext.level.get_node_or_null("World/Car/BoomArm/Camera2D") as Camera2D
 
 

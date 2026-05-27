@@ -4,12 +4,6 @@ const PARTICLE_RADIUS := 130
 const FRONT_WHEEL_SIZE := 170
 const BACK_WHEEL_SIZE := 240
 
-var motor_strength: float = 500
-var drift_friction_strength: float = 5
-var torque_multiplier: float = 10
-var perpendicular_multiplier: float = 0.25
-var parallel_multiplier: float = 0.25
-
 @export var weapon_vars: Array[CarVars]
 
 @export var max_health: float = 100
@@ -20,6 +14,12 @@ var parallel_multiplier: float = 0.25
 
 @export var back_wheels: Array[Sprite2D]
 @export var front_wheels: Array[Sprite2D]
+
+var motor_strength: float = 500
+var drift_friction_strength: float = 5
+var torque_multiplier: float = 10
+var perpendicular_multiplier: float = 0.25
+var parallel_multiplier: float = 0.25
 
 @onready var weapon_dock: WeaponDock = $weapon_dock
 @onready var hurt_box: HurtBoxComponent = $HurtBoxComponent
