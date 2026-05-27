@@ -1,7 +1,7 @@
 class_name Wheel extends Node2D
 
 const DRIFT_LINE = preload("res://assets/scenes/car/drift_line.tscn")
-const TICK_TIME = 0.0
+const TICK_TIME = 1.0 / 30.0
 
 @export var max_points: int = 1000
 @export var min_width: float = 1
