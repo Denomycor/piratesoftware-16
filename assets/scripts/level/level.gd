@@ -30,7 +30,9 @@ func set_game_over() -> void:
 	get_tree().paused = true
 	stats.is_game_over = true
 	pause_menu.queue_free()
-	game_over_menu.set_stats(int(stats.points), snappedf(stats.time_survived, 0.01), stats.kills, stats.max_speed, snappedf(stats.max_drift_duration, 0.01))
+	var snapped_time := snappedf(stats.time_survived, 0.01)
+	var xp := ProgressionManager.award_run_xp(stats.kills, snapped_time)
+	game_over_menu.set_stats(int(stats.points), snapped_time, stats.kills, stats.max_speed, snappedf(stats.max_drift_duration, 0.01), xp)
 	game_over_menu.show_game_over_menu()
 
 
@@ -38,6 +40,8 @@ func set_victory() -> void:
 	get_tree().paused = true
 	stats.is_game_over = true
 	pause_menu.queue_free()
-	victory_menu.set_stats(int(stats.points), snappedf(stats.time_survived, 0.01), stats.kills, stats.max_speed, snappedf(stats.max_drift_duration, 0.01))
+	var snapped_time := snappedf(stats.time_survived, 0.01)
+	var xp := ProgressionManager.award_run_xp(stats.kills, snapped_time)
+	victory_menu.set_stats(int(stats.points), snapped_time, stats.kills, stats.max_speed, snappedf(stats.max_drift_duration, 0.01), xp)
 	victory_menu.show_victory_menu()
 	

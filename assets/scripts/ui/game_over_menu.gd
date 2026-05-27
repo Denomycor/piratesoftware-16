@@ -10,16 +10,13 @@ func show_game_over_menu() -> void:
 	visible = true
 
 ## Called once by Level.set_game_over().
-## Awards XP via ProgressionManager and displays the run summary + XP earned.
-func set_stats(points: int, time_survived: float, kills: int, max_speed: float, max_drift_duration: float) -> void:
+## Displays the run summary + XP earned. XP has already been awarded by Level.
+func set_stats(points: int, time_survived: float, kills: int, max_speed: float, max_drift_duration: float, xp: Dictionary) -> void:
 	%Points.text          = str(points)
 	%TimeSurvived.text    = str(time_survived)
 	%Kills.text           = str(kills)
 	%MaxSpeed.text        = str(max_speed)
 	%MaxDriftDuration.text = str(max_drift_duration)
-
-	# Award XP and display results
-	var xp := ProgressionManager.award_run_xp(kills, time_survived)
 
 	var alien_lv_str := ""
 	if xp.alien_levels_gained > 0:
