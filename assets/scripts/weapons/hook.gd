@@ -9,6 +9,7 @@ const PROJECTILE_SCENE: PackedScene = preload("res://assets/scenes/projectiles/h
 
 
 func _ready() -> void:
+	super()
 	projectile_spawner_component.shoot_projectile.connect(_on_hook_shoot)
 
 	projectile_spawner_component.just_shot.connect(func():

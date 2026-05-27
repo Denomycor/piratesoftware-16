@@ -10,6 +10,7 @@ const PROJECTILE_SCENE: PackedScene = preload("res://assets/scenes/projectiles/s
 @export var strength: float = 200
 
 func _ready() -> void:
+	super()
 	projectile_spawner_component.shoot_projectile.connect(func(from: Vector2, rot_angle: float, _data):
 		var projectile: LinearProjectile = PROJECTILE_SCENE.instantiate()
 		projectile.inherited_velocity = LevelContext.level.car.linear_velocity

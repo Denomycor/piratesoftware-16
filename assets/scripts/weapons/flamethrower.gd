@@ -9,6 +9,7 @@ const PROJECTILE_SCENE: PackedScene = preload("res://assets/scenes/projectiles/f
 
 
 func _ready() -> void:
+	super()
 	projectile_spawner_component.shoot_projectile.connect(func(from: Vector2, rot: float, _data):
 		var projectile: FlamethrowerProjectile = PROJECTILE_SCENE.instantiate()
 		projectile.damage_multiplier = ProgressionManager.player_damage_multiplier

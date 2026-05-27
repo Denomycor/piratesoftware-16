@@ -8,6 +8,7 @@ const PROJECTILE_SCENE: PackedScene = preload("res://assets/scenes/projectiles/r
 @export var strength: float = 200
 
 func _ready() -> void:
+	super()
 	projectile_spawner_component.shoot_projectile.connect(func(from: Vector2, rot: float, _data):
 		var projectile: AreaProjectile = PROJECTILE_SCENE.instantiate()
 		projectile.damage_multiplier = ProgressionManager.player_damage_multiplier
