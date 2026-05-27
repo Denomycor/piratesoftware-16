@@ -36,7 +36,6 @@ func update_movement():
 
 func die():
 	dead = true
-	$explosion.play()
 	LevelContext.level.stats.increment_kills()
 	LevelContext.level.stats.add_points(points)
 	velocity = Vector2.ZERO
