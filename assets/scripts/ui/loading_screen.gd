@@ -10,6 +10,7 @@ class_name LoadingScreen extends CanvasLayer
 ## are both complete. The caller is responsible for instantiating the scene.
 
 signal loading_complete(packed_scene: PackedScene)
+signal progress_updated(value: float)
 
 ## All shaders that should be force-compiled before gameplay starts.
 ## Each entry is warmed by rendering a ColorRect with that ShaderMaterial
@@ -34,11 +35,13 @@ func _ready() -> void:
 
 
 ## Call this to begin async loading. The loading_complete signal fires when done.
-func start_loading(scene_path: String) -> void:
+## Set show_ui = false to run headlessly (progress_updated still fires; own UI stays hidden).
+func start_loading(scene_path: String, show_ui: bool = true) -> void:
 	_scene_path = scene_path
 	progress_bar.value = 0
 	status_label.text = "Loading..."
-	visible = true
+	if show_ui:
+		visible = true
 	ResourceLoader.load_threaded_request(scene_path)
 	set_process(true)
 
@@ -52,10 +55,12 @@ func _process(_delta: float) -> void:
 			if progress.size() > 0:
 				# Scale load progress to 0–85; leave 15% for warmup
 				progress_bar.value = progress[0] * 85.0
+				progress_updated.emit(progress_bar.value)
 
 		ResourceLoader.THREAD_LOAD_LOADED:
 			set_process(false)
 			progress_bar.value = 85.0
+			progress_updated.emit(85.0)
 			status_label.text = "Warming up shaders..."
 			_do_shader_warmup.call_deferred()
 
@@ -86,6 +91,7 @@ func _do_shader_warmup() -> void:
 		viewport.add_child(rect)
 
 	progress_bar.value = 92.0
+	progress_updated.emit(92.0)
 
 	# Two frames: first to submit draw calls, second for the GPU to finish
 	await get_tree().process_frame
@@ -93,11 +99,13 @@ func _do_shader_warmup() -> void:
 
 	viewport.queue_free()
 	progress_bar.value = 100.0
+	progress_updated.emit(100.0)
 	status_label.text = "Ready!"
 
 	# Small pause so the player can see 100% before the screen disappears
 	await get_tree().create_timer(0.3).timeout
 
 	var packed_scene: PackedScene = ResourceLoader.load_threaded_get(_scene_path)
-	visible = false
+	if visible:
+		visible = false
 	loading_complete.emit(packed_scene)

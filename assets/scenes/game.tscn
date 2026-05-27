@@ -26,6 +26,35 @@ grow_vertical = 2
 texture = ExtResource("3_hrskd")
 expand_mode = 2
 
+[node name="ProgressBar" type="ProgressBar" parent="tutorial"]
+layout_mode = 1
+anchor_left = 0.2
+anchor_top = 1.0
+anchor_right = 0.8
+anchor_bottom = 1.0
+offset_top = -36.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+show_percentage = false
+max_value = 100.0
+value = 0.0
+
+[node name="ContinueLabel" type="Label" parent="tutorial"]
+layout_mode = 1
+anchor_left = 0.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -68.0
+offset_bottom = -44.0
+grow_horizontal = 2
+grow_vertical = 0
+visible = false
+text = "Press SPACE to continue"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 16
+
 [node name="Timer" type="Timer" parent="tutorial"]
 wait_time = 10.0
 
