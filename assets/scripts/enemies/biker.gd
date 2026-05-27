@@ -95,7 +95,7 @@ func _on_collision(node: Node) -> void:
 	var collision_speed := last_velocity.dot(collision_direction)
 	var collision_damage := clampf(lerpf(0,max_collision_damage, (collision_speed-min_collision_speed)/(speed_for_max_collision_damage - min_collision_speed)),0,max_collision_damage)
 	if node is RigidBody2D:
-		var mass_ratio = node.mass
+		var mass_ratio = node.mass / mass
 		var velocity_ratio = 1
 		if node.has_method("get_last_velocity"):
 			velocity_ratio = clampf((last_velocity - node.get_last_velocity()).length()/speed_for_max_collision_damage, 0, 2)
