@@ -180,10 +180,10 @@ if (!await isGodotRunning(LSP_PORT)) {
   console.error('');
   console.error('⚠️  Godot editor is not running (nothing on port ' + LSP_PORT + ').');
   console.error('');
-  console.error('   Open the project in Godot 4 — the LSP starts automatically.');
-  console.error('   Or start it headlessly:');
-  console.error(`     "C:\\Program Files (x86)\\Godot\\Godot_v4.6.3-stable_win64_console.exe" --path "${PROJECT_PATH}" --editor --headless`);
-  console.error('   Then re-run this script.');
+  console.error('   👉 Open the project in the Godot 4 editor — the LSP starts automatically.');
+  console.error('');
+  console.error('   NOTE: Do NOT use "godot --headless --quit" — that runs the game, not the');
+  console.error('   editor, and only loads autoloads + the main scene (misses most scripts).');
   console.error('');
   process.exit(2);
 }
