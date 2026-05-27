@@ -3,9 +3,10 @@ class_name Enemy extends CharacterBody2D
 @warning_ignore("UNUSED_SIGNAL")
 signal died
 
-@onready var hurt_box: HurtBoxComponent = $HurtBoxComponent
 @export var speed: float = 200.0
 @export var points: int = 20
+
+@onready var hurt_box: HurtBoxComponent = $HurtBoxComponent
 
 var target: RigidBody2D
 
@@ -18,20 +19,15 @@ var dead: bool = false
 # --- Abstract interface ---
 # Subclasses MUST implement: attack(), update_movement(), die(), _take_dmg()
 # Subclasses MAY override: any other method
-func attack():
+func attack() -> void:
 	assert(false, "Enemy subclass must implement attack()")
 
-func update_movement():
+func update_movement() -> void:
 	assert(false, "Enemy subclass must implement update_movement()")
 
-func die():
+func die() -> void:
 	assert(false, "Enemy subclass must implement die()")
 
-
-func _physics_process(_delta: float) -> void:
-	move_and_slide()
-
 # Signal
-func _take_dmg(_amount: float):
+func _take_dmg(_amount: float) -> void:
 	assert(false, "Enemy subclass must implement _take_dmg()")
-
