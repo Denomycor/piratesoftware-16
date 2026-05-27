@@ -16,7 +16,7 @@ There are no build steps, test runners, or CI pipelines — all iteration is thr
 **Always run the GDScript LSP checker before committing any `.gd` file changes:**
 
 ```powershell
-node .claude/gdscript-check.mjs . --timeout 20
+node tools/gdscript-check.mjs . --timeout 20
 ```
 
 - Requires the Godot editor to be open (LSP runs on port 6005 automatically).
