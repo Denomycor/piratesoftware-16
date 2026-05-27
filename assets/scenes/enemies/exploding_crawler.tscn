@@ -1,8 +1,8 @@
-[gd_scene load_steps=21 format=3 uid="uid://c0lyxftkfyopk"]
+﻿[gd_scene load_steps=21 format=3 uid="uid://c0lyxftkfyopk"]
 
 [ext_resource type="Script" path="res://assets/scripts/enemies/exploding_crawler.gd" id="1_7nrj7"]
-[ext_resource type="Script" path="res://assets/scripts/components/hurt-box.gd" id="2_taoc4"]
-[ext_resource type="Script" path="res://assets/scripts/components/hit-box.gd" id="3_n8rk1"]
+[ext_resource type="Script" path="res://assets/scripts/components/hurt_box.gd" id="2_taoc4"]
+[ext_resource type="Script" path="res://assets/scripts/components/hit_box.gd" id="3_n8rk1"]
 [ext_resource type="Texture2D" uid="uid://djsvg22lvmn3f" path="res://assets/textures/enemies/explosive_crawler_moving_spritesheet.png" id="4_btku1"]
 [ext_resource type="Texture2D" uid="uid://7v0n3bcxsn3m" path="res://assets/textures/particles/fire.png" id="5_ixa2n"]
 [ext_resource type="AudioStream" uid="uid://b1h87gfjkkm3b" path="res://assets/audio/explosion1.wav" id="6_ivla4"]

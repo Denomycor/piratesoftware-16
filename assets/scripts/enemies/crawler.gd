@@ -1,9 +1,7 @@
 class_name Crawler extends Enemy
 
-@export var health: float = 10
 @export var attack_range: float = 310
 @export var speed_for_kill: float = 600
-@export var max_acceleration: float = 100000
 
 @onready var gpu_particles: GPUParticles2D = $GPUParticles2D
 @onready var collision: CollisionShape2D = $CollisionShape2D
@@ -12,26 +10,24 @@ class_name Crawler extends Enemy
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var sprite: Sprite2D = $Sprite2D
 
-var acceleration: Vector2
-
 var is_on_cooldown := false
 
 func _ready() -> void:
+	super()
 	hurt_box.monitoring = true
 	hurt_box.body_entered.connect(_on_collision)
 	sprite.frame = randi() % 5
 	hit_box.monitoring = false
-	hurt_box.has_taken_damage.connect(_take_dmg)
 	attack_timer.timeout.connect(func(): is_on_cooldown = false)
-	
-func attack():
+
+func attack() -> void:
 	%growl.pitch_scale = randf_range(0.7, 1.4)
 	%growl.play()
 	animation_player.play("attacking")
 	is_on_cooldown = true
 	attack_timer.start()
 
-func update_movement():
+func update_movement() -> void:
 	if dead:
 		return
 	if not is_in_range():
@@ -39,7 +35,7 @@ func update_movement():
 		look_at(global_position + velocity)
 	else:
 		look_at(target.global_position)
-		velocity = Vector2(0,0)
+		velocity = Vector2.ZERO
 	if can_attack():
 		attack()
 
@@ -59,13 +55,7 @@ func _physics_process(delta: float) -> void:
 		velocity += acceleration * delta
 		move_and_slide()
 
-func get_distance_to_target() -> float:
-	return target.global_position.distance_to(global_position)
-
-func set_chase_acceleration() -> void:
-	acceleration = SeekArriveSteeringBehaviour.get_steering_force(global_position, target.global_position, velocity, speed, max_acceleration, 0)
-
-func _process(_delta):
+func _process(_delta: float) -> void:
 	if dead:
 		return
 	if animation_player.current_animation == "attacking":
@@ -75,24 +65,17 @@ func _process(_delta):
 	else:
 		animation_player.play("stopped")
 
-# Signal
-func _take_dmg(amount: float):
-	health -= amount
-	if health <= 0:
-		die()
-
 func can_attack() -> bool:
 	return is_in_range() and !is_on_cooldown
 
 func is_in_range() -> bool:
-	var distance := (target.global_position - global_position).length()
-	return distance < attack_range
+	return get_distance_to_target() < attack_range
 
 func _on_collision(node: Node) -> void:
 	if not node is Car:
 		return
 	var collision_direction: Vector2 = node.global_position.direction_to(global_position)
 	var collision_speed: float = node.last_velocity.dot(collision_direction)
-	var collision_damage := lerpf(0, health, collision_speed/speed_for_kill)
+	var collision_damage := lerpf(0, health, collision_speed / speed_for_kill)
 	if not dead:
 		_take_dmg(collision_damage)

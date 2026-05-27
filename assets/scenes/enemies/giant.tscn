@@ -1,9 +1,9 @@
-[gd_scene load_steps=33 format=3 uid="uid://k2d2dspipq3e"]
+﻿[gd_scene load_steps=33 format=3 uid="uid://k2d2dspipq3e"]
 
 [ext_resource type="Script" path="res://assets/scripts/enemies/giant.gd" id="1_cqin3"]
 [ext_resource type="Texture2D" uid="uid://cftapft8l1olu" path="res://assets/textures/enemies/giant_spritesheets.png" id="2_av2qq"]
-[ext_resource type="Script" path="res://assets/scripts/components/hurt-box.gd" id="2_quirr"]
-[ext_resource type="Script" path="res://assets/scripts/components/hit-box.gd" id="3_41m4q"]
+[ext_resource type="Script" path="res://assets/scripts/components/hurt_box.gd" id="2_quirr"]
+[ext_resource type="Script" path="res://assets/scripts/components/hit_box.gd" id="3_41m4q"]
 [ext_resource type="Texture2D" uid="uid://dvwp2m6xuetjs" path="res://assets/textures/particles/stomach.png" id="4_4wr4w"]
 [ext_resource type="Script" path="res://assets/scripts/weapons/components/projectile_spawner_component.gd" id="6_lo47x"]
 [ext_resource type="AudioStream" uid="uid://d3cggsxmo1f25" path="res://assets/audio/giant/monster_roars1.wav" id="8_gtmr6"]

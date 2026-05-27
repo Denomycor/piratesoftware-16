@@ -1,7 +1,7 @@
-[gd_scene load_steps=25 format=3 uid="uid://cadth6phe5ec7"]
+﻿[gd_scene load_steps=25 format=3 uid="uid://cadth6phe5ec7"]
 
 [ext_resource type="Script" path="res://assets/scripts/enemies/gunhead.gd" id="1_uib8a"]
-[ext_resource type="Script" path="res://assets/scripts/components/hurt-box.gd" id="2_mcwnu"]
+[ext_resource type="Script" path="res://assets/scripts/components/hurt_box.gd" id="2_mcwnu"]
 [ext_resource type="Texture2D" uid="uid://25saeko0fak3" path="res://assets/textures/enemies/gunhead_animations_spritesheets.png" id="4_1npl7"]
 [ext_resource type="Script" path="res://assets/scripts/weapons/components/projectile_spawner_component.gd" id="5_0q1y7"]
 [ext_resource type="Texture2D" uid="uid://dvwp2m6xuetjs" path="res://assets/textures/particles/stomach.png" id="5_fcg7q"]

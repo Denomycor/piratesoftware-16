@@ -1,7 +1,7 @@
 class_name Speedometer extends TextureRect
 
-@onready var pointer = $Container/PointerSprite
-@onready var glass = $Glass
+@onready var pointer: Sprite2D = $Container/PointerSprite
+@onready var glass: Sprite2D = $Glass
 
 @export var max_speed := 300
 

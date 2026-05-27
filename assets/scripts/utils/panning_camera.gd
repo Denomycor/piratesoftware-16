@@ -7,7 +7,7 @@ var zoom_level: float = 1
 var position_before_drag
 var position_before_drag2
 
-func _ready():
+func _ready() -> void:
     set_zoom_level(zoom_level)
 
 func _input(event: InputEvent) -> void:

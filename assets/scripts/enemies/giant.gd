@@ -2,8 +2,6 @@ class_name Giant extends Enemy
 
 const PROJ_SCENE := preload("res://assets/scenes/projectiles/goo_projectile.tscn")
 
-@export var health: float = 1000
-@export var max_acceleration: float = 100000
 @export var melee_attack_range: float = 310
 
 @export var charge_time := 3.0
@@ -26,32 +24,31 @@ var charge_is_on_cooldown := true
 
 var attack_is_on_cooldown := false
 var speed_backup: float
-var acceleration: Vector2
 
 
 func _ready() -> void:
+	super()
 	attack_timer.timeout.connect(func(): attack_is_on_cooldown = false)
 	charge_timer.timeout.connect(func(): charge_is_on_cooldown = false)
-	hurt_box.has_taken_damage.connect(_take_dmg)
 	hit_box.monitoring = false
 
 	projectile_spawner_component.shoot_projectile.connect(func(from: Vector2, rot: float, _data):
 		var projectile: GooProjectile = PROJ_SCENE.instantiate()
 		projectile.set_properties(from, rot)
-		LevelContext.level.get_node("World").add_child(projectile)
+		LevelContext.level.world.add_child(projectile)
 	)
 
 
-func update_movement():
+func update_movement() -> void:
 	if dead:
 		return
 	if can_attack_melee() && animation_player.current_animation != "firing":
 		look_at(target.global_position)
-		velocity = Vector2(0,0)
+		velocity = Vector2.ZERO
 		attack_melee()
-	elif can_attack_ranged() && animation_player.current_animation != "attacking2" :
+	elif can_attack_ranged() && animation_player.current_animation != "attacking2":
 		look_at(target.global_position)
-		velocity = Vector2(0,0)
+		velocity = Vector2.ZERO
 		attack_ranged()
 	elif animation_player.current_animation != "firing" && animation_player.current_animation != "attacking2":
 		move()
@@ -72,7 +69,7 @@ func _physics_process(delta: float) -> void:
 			move_and_slide()
 
 
-func _process(_delta: float):
+func _process(_delta: float) -> void:
 	if dead:
 		return
 	if animation_player.current_animation == "attacking2" || animation_player.current_animation == "firing":
@@ -83,10 +80,6 @@ func _process(_delta: float):
 		animation_player.play("RESET")
 
 
-func set_chase_acceleration() -> void:
-	acceleration = SeekArriveSteeringBehaviour.get_steering_force(global_position, target.global_position, velocity, speed, max_acceleration, 0)
-
-
 func _on_die() -> void:
 	collision.queue_free()
 	sprite.visible = false
@@ -94,15 +87,8 @@ func _on_die() -> void:
 	gpu_particles.finished.connect(queue_free)
 
 
-# Signal
-func _take_dmg(amount: float):
-	health -= amount
-	if health <= 0:
-		die()
-
 func is_in_range(frange: float) -> bool:
-	var distance := (target.global_position - global_position).length()
-	return distance < frange
+	return get_distance_to_target() < frange
 
 
 func can_attack_melee() -> bool:
@@ -156,4 +142,3 @@ func play_cracks() -> void:
 	$Node/crack.global_position = $HitBoxComponent/CollisionShape2D.global_position
 	$Node/AnimationPlayer.play("crack_start")
 	create_tween().tween_callback($Node/AnimationPlayer.play.bind("crack_end")).set_delay(3)
-

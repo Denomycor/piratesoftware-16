@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://drcpxeie725b"]
+﻿[gd_scene load_steps=20 format=3 uid="uid://drcpxeie725b"]
 
 [ext_resource type="Script" path="res://assets/scripts/car/car.gd" id="1_nqiho"]
 [ext_resource type="PackedScene" uid="uid://ci7aut5htygnp" path="res://assets/scenes/car/car_break_particles.tscn" id="2_2uyc3"]
@@ -8,7 +8,7 @@
 [ext_resource type="Script" path="res://assets/scripts/car/boom_arm.gd" id="3_g02g4"]
 [ext_resource type="Script" path="res://assets/scripts/car/wheel.gd" id="4_wkcph"]
 [ext_resource type="PackedScene" uid="uid://c4b5t5usvyqcs" path="res://assets/scenes/weapons/weapon_dock.tscn" id="6_kmu1j"]
-[ext_resource type="Script" path="res://assets/scripts/components/hurt-box.gd" id="7_plr5q"]
+[ext_resource type="Script" path="res://assets/scripts/components/hurt_box.gd" id="7_plr5q"]
 [ext_resource type="Shader" path="res://assets/scripts/scrolling_texture.gdshader" id="8_fbmx5"]
 [ext_resource type="Texture2D" uid="uid://cqjm5fggxjs2e" path="res://assets/textures/car/scrolling_wheel_texture.png" id="9_02ml8"]
 [ext_resource type="AudioStream" uid="uid://bgxk7wr2tucwi" path="res://assets/audio/crash2.wav" id="10_p5fym"]

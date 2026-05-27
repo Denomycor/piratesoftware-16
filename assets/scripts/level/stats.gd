@@ -6,6 +6,11 @@ const VICTORY_TIME: float = 900.0
 signal points_changed(points: int)
 signal kills_changed(kills: int)
 signal speed_changed(speed: float)
+## Emitted once when the player survives VICTORY_TIME seconds. Wired by Level to set_victory().
+signal victory_reached
+
+## Direct reference to the Car — set via inspector (wired in test_level.tscn).
+@export var car: Car
 
 @export var min_drift_strength := 100
 
@@ -36,9 +41,9 @@ func check_max_speed() -> void:
 	if speed > max_speed:
 		max_speed = speed
 
-func _physics_process(delta: float):
+func _physics_process(delta: float) -> void:
 	if not is_game_over:
-		speed = roundf(LevelContext.level.car.get_speed() * speed_conversion_ratio)
+		speed = roundf(car.get_speed() * speed_conversion_ratio)
 		check_max_speed()
 		check_drift(delta)
 		add_points(points_per_second * delta)
@@ -48,10 +53,10 @@ func _physics_process(delta: float):
 		if not _victory_triggered and time_survived >= VICTORY_TIME:
 			_victory_triggered = true
 			is_game_over = true
-			LevelContext.level.set_victory()
+			victory_reached.emit()
 
-func check_drift(delta: float):
-	var drift_strength := LevelContext.level.car.get_drift_strength(1)
+func check_drift(delta: float) -> void:
+	var drift_strength := car.get_drift_strength(1)
 	if drift_strength < min_drift_strength:
 		_is_drifting = false
 		current_drift_time = 0

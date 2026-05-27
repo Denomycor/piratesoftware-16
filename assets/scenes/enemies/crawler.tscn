@@ -1,9 +1,9 @@
-[gd_scene load_steps=26 format=3 uid="uid://is7y7auk6peu"]
+﻿[gd_scene load_steps=26 format=3 uid="uid://is7y7auk6peu"]
 
 [ext_resource type="Script" path="res://assets/scripts/enemies/crawler.gd" id="1_57m52"]
 [ext_resource type="Texture2D" uid="uid://djwimgefipdq1" path="res://assets/textures/enemies/crawler_animations_spritesheets.png" id="2_hsh6b"]
-[ext_resource type="Script" path="res://assets/scripts/components/hurt-box.gd" id="3_xyjir"]
-[ext_resource type="Script" path="res://assets/scripts/components/hit-box.gd" id="4_78tml"]
+[ext_resource type="Script" path="res://assets/scripts/components/hurt_box.gd" id="3_xyjir"]
+[ext_resource type="Script" path="res://assets/scripts/components/hit_box.gd" id="4_78tml"]
 [ext_resource type="Texture2D" uid="uid://dvwp2m6xuetjs" path="res://assets/textures/particles/stomach.png" id="5_mad2f"]
 [ext_resource type="AudioStream" uid="uid://dngv7sgec6i6u" path="res://assets/audio/crawler/crawler_attack_growl.wav" id="6_iiedx"]
 [ext_resource type="AudioStream" uid="uid://5buxx1uk22mh" path="res://assets/audio/crawler/flesh_squish.mp3" id="7_8hnof"]

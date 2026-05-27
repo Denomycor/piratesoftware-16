@@ -11,12 +11,18 @@ const SPAWN_INTERVAL_MAX: float = 0.2
 ## Spawn interval at difficulty 1 (fast late game).
 const SPAWN_INTERVAL_MIN: float = 0.1
 
+## Emitted when an enemy dies. Level wires this to Stats so scoring stays
+## in the Stats domain, not here.
+signal enemy_died(points: int)
+
 @export var target: RigidBody2D
 @export var num_groups: int = 10
+## Direct reference to Stats for reading time_survived and points thresholds.
+## Set via inspector (wired in test_level.tscn).
+@export var stats: Stats
 
 @export var max_distance: float = 25000
 @export var teleport_distance: float = 20000
-
 
 @export var enemy_list: Array[PackedScene]
 @export var enemy_ratios: Array[Curve]
@@ -59,7 +65,7 @@ func _ready() -> void:
 func _update_enemies() -> void:
 	cur_group = cur_group % num_groups
 
-	for i in range(_enemies.size()):
+	for i: int in range(_enemies.size()):
 		if i % num_groups == cur_group:
 			if _enemies[i].position.distance_to(target.position) > max_distance:
 				_enemies[i].global_position = _position_near_target(teleport_distance)
@@ -78,12 +84,12 @@ func _get_camera() -> Camera2D:
 ## Returns true if the world-space point falls inside the player's current viewport.
 ## Used to reject spawn positions that would pop in visibly on screen.
 func _is_in_viewport(pos: Vector2) -> bool:
-	var camera := _get_camera()
-	if not is_instance_valid(camera):
+	var cam := _get_camera()
+	if not is_instance_valid(cam):
 		return false
 	var viewport_size: Vector2 = get_viewport().get_visible_rect().size
-	var world_size: Vector2 = viewport_size / camera.zoom
-	var cam_center: Vector2 = camera.get_screen_center_position()
+	var world_size: Vector2 = viewport_size / cam.zoom
+	var cam_center: Vector2 = cam.get_screen_center_position()
 	return Rect2(cam_center - world_size * 0.5, world_size).has_point(pos)
 
 
@@ -110,7 +116,7 @@ func _position_near_target(distance: float) -> Vector2:
 func _fallback_spawn_position() -> Vector2:
 	var arena := LevelContext.level.arena
 	var pos := arena.get_random_free_point_inside_polygon(BLOCK_RADIUS)
-	for _i in range(5):
+	for _i: int in range(5):
 		if pos.distance_to(target.position) >= MIN_PLAYER_DISTANCE and not _is_in_viewport(pos):
 			break
 		pos = arena.get_random_free_point_inside_polygon(BLOCK_RADIUS)
@@ -118,22 +124,22 @@ func _fallback_spawn_position() -> Vector2:
 
 
 func _physics_process(_delta: float) -> void:
-	difficulty = clampf(LevelContext.level.stats.time_survived / time_for_max_difficulty, 0, 1)
+	if is_instance_valid(stats):
+		difficulty = clampf(stats.time_survived / time_for_max_difficulty, 0, 1)
+		if stats.points >= repair_point_interval * repair_count:
+			spawn_repair()
+			repair_count += 1
 	_update_enemies()
-
-	if LevelContext.level.stats.points >= repair_point_interval * repair_count:
-		spawn_repair()
-		repair_count += 1
 
 
 func _get_random_enemy() -> Enemy:
 	if enemy_list.size() == 0:
 		return null
 	var sum := 0.0
-	var ratios: Array[float]
-	for ratio in enemy_ratios:
+	var ratios: Array[float] = []
+	for ratio: Curve in enemy_ratios:
 		ratios.append(ratio.sample(difficulty))
-	for amount in ratios:
+	for amount: float in ratios:
 		sum += amount
 	var num := randf_range(0, sum)
 	sum = 0.0
@@ -161,10 +167,9 @@ func _spawn_enemy() -> void:
 	enemy_instance.tree_exiting.connect(func(): _enemies.erase(enemy_instance))
 	# Try to drop a boost at the enemy's position when it dies.
 	enemy_instance.died.connect(func(): _try_drop_boost(enemy_instance.global_position))
-	enemy_instance.died.connect(func():
-		LevelContext.level.stats.increment_kills()
-		LevelContext.level.stats.add_points(enemy_instance.points)
-	)
+	# Notify Level (and through it Stats) that an enemy died.
+	enemy_instance.died.connect(func(): enemy_died.emit(enemy_instance.points))
+
 	_enemies.append(enemy_instance)
 	add_child(enemy_instance)
 

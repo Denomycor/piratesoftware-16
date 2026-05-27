@@ -2,10 +2,8 @@ class_name GunHead extends Enemy
 
 const PROJECTILE_SCENE: PackedScene = preload("res://assets/scenes/projectiles/gunhead_projectile.tscn")
 
-@export var health: float = 10
 @export var attack_range: float = 310
 @export var prediction_time: float = 2
-@export var max_acceleration: float = 100000
 
 @onready var gpu_particles: GPUParticles2D = $GPUParticles2D
 @onready var collision: CollisionShape2D = $CollisionShape2D
@@ -14,11 +12,10 @@ const PROJECTILE_SCENE: PackedScene = preload("res://assets/scenes/projectiles/g
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var projectile_spawner_component: ProjectileSpawnerComponent = $ProjectileSpawnerComponent
 
-var acceleration: Vector2
-
 var is_on_cooldown := false
 
 func _ready() -> void:
+	super()
 	sprite.frame_changed.connect(func():
 		if sprite.frame == 15:
 			projectile_spawner_component.shoot(target.global_position)
@@ -27,22 +24,21 @@ func _ready() -> void:
 	projectile_spawner_component.shoot_projectile.connect(func(from: Vector2, rot: float, _data):
 		var projectile: LinearProjectile = PROJECTILE_SCENE.instantiate()
 		projectile.set_properties(from, rot)
-		LevelContext.level.get_node("World").add_child(projectile)
+		LevelContext.level.world.add_child(projectile)
 	)
 
 	projectile_spawner_component.just_shot.connect(%shooting.play)
 
 	animation_player.play("stopped")
-	hurt_box.has_taken_damage.connect(_take_dmg)
 	attack_timer.timeout.connect(func(): is_on_cooldown = false)
-	
-func attack():
+
+func attack() -> void:
 	look_at(target.global_position)
 	animation_player.play("attacking")
 	is_on_cooldown = true
 	attack_timer.start()
 
-func update_movement():
+func update_movement() -> void:
 	if dead:
 		return
 	if animation_player.current_animation == "attacking":
@@ -57,7 +53,7 @@ func update_movement():
 		look_at(global_position + velocity)
 	if can_attack():
 		attack()
-	
+
 func _physics_process(delta: float) -> void:
 	if dead:
 		return
@@ -73,7 +69,7 @@ func _on_die() -> void:
 	gpu_particles.emitting = true
 	gpu_particles.finished.connect(queue_free)
 
-func _process(_delta):
+func _process(_delta: float) -> void:
 	if dead:
 		return
 	if animation_player.current_animation == "attacking":
@@ -83,21 +79,14 @@ func _process(_delta):
 	else:
 		animation_player.play("stopped")
 
-# Signal
-func _take_dmg(amount: float):
-	health -= amount
-	if health <= 0:
-		die()
-
 func can_attack() -> bool:
 	return is_in_range() and !is_on_cooldown
 
 func is_in_range() -> bool:
-	var distance := (target.global_position - global_position).length()
-	return distance < attack_range
-
-func set_chase_acceleration() -> void:
-	acceleration = SeekArriveSteeringBehaviour.get_steering_force(global_position, target.global_position, velocity, speed, max_acceleration, 0)
+	return get_distance_to_target() < attack_range
 
 func set_mimic_acceleration() -> void:
-	acceleration = SeekArriveSteeringBehaviour.get_steering_force(global_position, global_position + target.linear_velocity.normalized() * prediction_time, velocity, target.get_speed(), max_acceleration, 0)
+	acceleration = SeekArriveSteeringBehaviour.get_steering_force(
+		global_position,
+		global_position + target.linear_velocity.normalized() * prediction_time,
+		velocity, target.get_speed(), max_acceleration, 0)

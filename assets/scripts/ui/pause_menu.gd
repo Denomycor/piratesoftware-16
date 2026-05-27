@@ -2,7 +2,7 @@ class_name PauseMenu extends CanvasLayer
 
 signal quit_level
 
-@onready var tab_container := $TabContainer
+@onready var tab_container: TabContainer = $TabContainer
 @onready var options_menu: OptionsMenu = $TabContainer/OptionsMenu
 func _ready() -> void:
 	%resume.pressed.connect(func():

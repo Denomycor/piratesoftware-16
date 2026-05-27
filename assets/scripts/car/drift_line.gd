@@ -16,7 +16,7 @@ var free_when_empty: bool = false
 @onready var point_distance: Array[float]
 @onready var point_age: Array[float]
 
-func _physics_process(delta: float):
+func _physics_process(delta: float) -> void:
 	var removed:= false
 	for idx in point_age.size():
 		point_age[idx] += delta

@@ -1,7 +1,8 @@
 class_name HealthBar extends TextureProgressBar
 
-func _ready():
-	max_value = LevelContext.level.car.max_health
+## Called by Overlay.setup() to initialize the max value from the car's max_health.
+func setup(max_health: float) -> void:
+	max_value = max_health
 	value = max_value
 
 func set_hp(hp: float) -> void:

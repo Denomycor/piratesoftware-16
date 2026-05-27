@@ -18,7 +18,7 @@ var drift_line: DriftLine
 var arena: Node2D
 var tick := 3.0
 
-func _ready():
+func _ready() -> void:
     create_drift_line()
 
 func _physics_process(_delta: float) -> void:

@@ -9,12 +9,12 @@ const PROJECTILE_SCENE: PackedScene = preload("res://assets/scenes/projectiles/e
 
 
 func _ready() -> void:
+	super()
 	projectile_spawner_component.shoot_projectile.connect(func(from: Vector2, rot: float, _data):
 		var projectile: LinearProjectile = PROJECTILE_SCENE.instantiate()
 		projectile.set_properties(from, rot)
-
-		projectile.inherited_velocity = parent.velocity
-		LevelContext.level.get_node("World").add_child(projectile)
+		projectile.inherited_velocity = owner_enemy.velocity
+		LevelContext.level.world.add_child(projectile)
 	)
 	projectile_spawner_component.just_shot.connect(func():
 		if projectile_spawner_component.bst_ready:
@@ -24,19 +24,17 @@ func _ready() -> void:
 	)
 
 func _process(_delta: float) -> void:
-	var car_position = LevelContext.level.car.global_position
+	var car_position: Vector2 = LevelContext.level.car.global_position
 	if global_position.distance_to(car_position) < activation_range:
 		turn_component.activate()
 	elif turn_component.active:
 		turn_component.deactivate()
-	
+
 	if turn_component.active:
-		var angle = parent.velocity.angle_to(global_position.direction_to(car_position))
+		var angle: float = owner_enemy.velocity.angle_to(global_position.direction_to(car_position))
 		if abs(angle) > deg_to_rad(max_rotation):
-			turn_component.lock_turn(max_rotation*sign(angle))
+			turn_component.lock_turn(max_rotation * sign(angle))
 			projectile_spawner_component.enabled = false
 		else:
 			projectile_spawner_component.enabled = true
 		projectile_spawner_component.shoot(car_position)
-
-	

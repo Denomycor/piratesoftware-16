@@ -1,18 +1,21 @@
 class_name WeaponDock extends Node2D
 
 signal weapon_switched
+## Emitted with the new slot index whenever the active weapon changes.
+## Wired by Level to Overlay.switch_weapon.
+signal weapon_slot_changed(idx: int)
 
-@onready var weapon_list := $WeaponList
-@onready var weapon_anim := $ChangeAnim/Node2D/AnimatedSprite2D
-@onready var alien_anim := $ChangeAnim/AnimatedSprite2D
+@onready var weapon_list: Node = $WeaponList
+@onready var weapon_anim: AnimatedSprite2D = $ChangeAnim/Node2D/AnimatedSprite2D
+@onready var alien_anim: AnimatedSprite2D = $ChangeAnim/AnimatedSprite2D
 
 
 var current_idx: int
+var _pending_switch_idx: int = -1
 
 
 func _ready() -> void:
 	get_weapon(0).activate()
-	LevelContext.level.overlay.switch_weapon(0)
 	weapon_anim.animation_finished.connect(func(): weapon_anim.visible = false)
 	alien_anim.animation_finished.connect(func(): alien_anim.visible = false)
 	weapon_switched.connect(%change.play)
@@ -22,7 +25,7 @@ func switch_active_weapon(idx: int) -> void:
 	get_weapon(current_idx).deactivate()
 	get_weapon(idx).activate()
 	current_idx = idx
-	LevelContext.level.overlay.switch_weapon(idx)
+	weapon_slot_changed.emit(idx)
 	weapon_switched.emit()
 
 
@@ -44,9 +47,9 @@ func _input(event: InputEvent) -> void:
 		elif (e.button_index == MOUSE_BUTTON_WHEEL_UP && e.pressed):
 			idx = wrapi(current_idx - 1, 0, weapon_list.get_child_count())
 			play_change_animation(idx)
-			
+
 	elif event is InputEventKey and event.pressed:
-		var weapon_count = weapon_list.get_child_count()
+		var weapon_count := weapon_list.get_child_count()
 		var idx := -1
 		match event.keycode:
 			KEY_1: idx = 0
@@ -58,11 +61,16 @@ func _input(event: InputEvent) -> void:
 			play_change_animation(idx)
 
 func play_change_animation(idx: int) -> void:
+	_pending_switch_idx = idx
 	weapon_anim.visible = true
 	alien_anim.visible = true
 	weapon_anim.play()
 	alien_anim.play()
-	weapon_anim.frame_changed.connect(func():
-		if weapon_anim.frame == 2:
-			switch_active_weapon(idx)
-	, CONNECT_ONE_SHOT)
+	if not weapon_anim.frame_changed.is_connected(_on_weapon_change_frame):
+		weapon_anim.frame_changed.connect(_on_weapon_change_frame)
+
+
+func _on_weapon_change_frame() -> void:
+	if weapon_anim.frame == 2:
+		switch_active_weapon(_pending_switch_idx)
+		weapon_anim.frame_changed.disconnect(_on_weapon_change_frame)

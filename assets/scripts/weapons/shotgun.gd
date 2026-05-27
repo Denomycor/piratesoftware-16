@@ -18,7 +18,7 @@ func _ready() -> void:
 		projectile.damage_multiplier = ProgressionManager.player_damage_multiplier
 		projectile.range_multiplier  = ProgressionManager.player_range_multiplier
 		projectile.set_properties(from, rot_angle)
-		LevelContext.level.get_node("World").add_child(projectile)
+		LevelContext.level.world.add_child(projectile)
 	)
 
 	projectile_spawner_component.just_shot.connect(func():

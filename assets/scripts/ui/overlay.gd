@@ -15,9 +15,11 @@ class_name Overlay extends CanvasLayer
 var _boost_container: VBoxContainer
 ## boost_id (StringName) → Label node showing "Name  X.Xs"
 var _boost_labels: Dictionary = {}
+## Maximum HP for the vignette gradient — set by Level via setup().
+var _max_hp: float = 100.0
 
 func _ready() -> void:
-	var ui_scale = GameOptions.ui_scale
+	var ui_scale := GameOptions.ui_scale
 	scale_ui(ui_scale)
 
 	# Build the boost timer strip at the top-center of the screen.
@@ -31,7 +33,13 @@ func _ready() -> void:
 	_boost_container.offset_right  =  120.0
 	_boost_container.alignment     = BoxContainer.ALIGNMENT_CENTER
 	add_child(_boost_container)
-		
+
+## Called by Level._ready() to initialize max HP and the first active weapon slot.
+func setup(max_health: float, initial_weapon_idx: int) -> void:
+	_max_hp = max_health
+	health_bar.setup(max_health)
+	switch_weapon(initial_weapon_idx)
+
 func set_points(points: int) -> void:
 	point_counter.text = "Points: " + str(points)
 
@@ -42,7 +50,7 @@ func set_speed(speed: float) -> void:
 	speedometer.set_speed(speed)
 
 func set_hp(hp: float) -> void:
-	vignette.material.set_shader_parameter("inner_radius", lerpf(0, 1, hp / LevelContext.level.car.max_health))
+	vignette.material.set_shader_parameter("inner_radius", lerpf(0, 1, hp / _max_hp))
 	health_bar.set_hp(hp)
 
 func switch_weapon(idx: int) -> void:
@@ -55,11 +63,11 @@ func scale_ui(ui_scale: float) -> void:
 
 
 ## Add a new timer row for the given boost.
-func add_boost_display(id: StringName, name: String, color: Color, _duration: float) -> void:
+func add_boost_display(id: StringName, boost_name: String, color: Color, _duration: float) -> void:
 	if _boost_labels.has(id):
 		return  # already displayed
 	var lbl := Label.new()
-	lbl.text = name + "  --.-s"
+	lbl.text = boost_name + "  --.-s"
 	lbl.add_theme_color_override("font_color", color)
 	lbl.add_theme_constant_override("outline_size", 6)
 	lbl.add_theme_color_override("font_outline_color", Color(0.05, 0.05, 0.05, 1.0))

@@ -2,10 +2,8 @@ class_name Biker extends Enemy
 
 const WHEEL_SIZE = 190
 
-@export var health: float = 20
 @export_range(500, 1500) var follow_range: int
 @export var prediction_time: float = 0.3
-@export var max_acceleration := 100000
 @export var prediction_scalar := 3
 @export var mass: float = 1.0  # Effective mass for collision damage ratio (CharacterBody2D has no mass)
 @export var max_collision_damage: float = 25
@@ -21,17 +19,16 @@ const WHEEL_SIZE = 190
 var last_velocity := Vector2.ZERO
 var last_position := Vector2.ZERO
 var actual_speed: float
-var acceleration: Vector2
 
 
 func _ready() -> void:
+	super()
 	last_position = global_position
 	notifier.screen_entered.connect(func():
 		if randf() > 0.3:
 			$scream.pitch_scale = randf_range(0.5, 1.5)
 			$scream.play()
 	)
-	hurt_box.has_taken_damage.connect(_take_dmg)
 	if follow_range == 0:
 		follow_range = int(randf_range(500, 1500))
 
@@ -40,35 +37,36 @@ func attack() -> void:
 	      # and collision damage is handled by _on_collision(). No discrete attack() call needed.
 
 
-func update_movement():
+func update_movement() -> void:
 	if dead:
 		return
 	if get_distance_to_target() > follow_range:
 		set_chase_acceleration()
 	else:
 		set_mimic_acceleration()
-	
+
 func _physics_process(delta: float) -> void:
 	if dead:
 		return
 
 	velocity += acceleration * delta
 	look_at(global_position + velocity)
-	
+
 	move_and_slide()
 	last_velocity = velocity
-	actual_speed = (global_position - last_position).length()/delta
+	actual_speed = (global_position - last_position).length() / delta
 	last_position = global_position
 	set_wheel_speed()
 
-func get_distance_to_target() -> float:
-	return target.global_position.distance_to(global_position)
-
+## Biker uses follow_range as the arrival radius, so we override the base.
 func set_chase_acceleration() -> void:
-	acceleration = SeekArriveSteeringBehaviour.get_steering_force(global_position, target.global_position, velocity, speed, max_acceleration, follow_range)
+	acceleration = SeekArriveSteeringBehaviour.get_steering_force(
+		global_position, target.global_position, velocity, speed, max_acceleration, follow_range)
 
 func set_mimic_acceleration() -> void:
-	acceleration = SeekArriveSteeringBehaviour.get_steering_force(global_position, global_position + target.linear_velocity.normalized() * prediction_scalar, velocity, target.get_speed(), max_acceleration, follow_range)
+	acceleration = SeekArriveSteeringBehaviour.get_steering_force(
+		global_position, global_position + target.linear_velocity.normalized() * prediction_scalar,
+		velocity, target.get_speed(), max_acceleration, follow_range)
 
 func _on_die() -> void:
 	$crash.play()
@@ -78,38 +76,34 @@ func _on_die() -> void:
 	$WheelB.visible = false
 	$WheelF.visible = false
 	collision.queue_free()
-	for sprite in sprites:
+	for sprite: Sprite2D in sprites:
 		sprite.visible = false
 	gpu_particles.emitting = true
 	create_tween().tween_callback(queue_free).set_delay(1)
 
-# Signal
-func _take_dmg(amount: float):
-	health -= amount
-	if health <= 0:
-		die()
-
 func _on_collision(node: Node) -> void:
 	var collision_direction := global_position.direction_to(node.global_position)
 	var collision_speed := last_velocity.dot(collision_direction)
-	var collision_damage := CollisionUtils.calculate_damage(collision_speed, min_collision_speed, speed_for_max_collision_damage, max_collision_damage)
+	var collision_damage := CollisionUtils.calculate_damage(
+		collision_speed, min_collision_speed, speed_for_max_collision_damage, max_collision_damage)
 	if node is RigidBody2D:
-		var mass_ratio = node.mass / mass
-		var velocity_ratio = 1
+		var mass_ratio := node.mass / mass
+		var velocity_ratio := 1.0
 		if node.has_method("get_last_velocity"):
-			velocity_ratio = clampf((last_velocity - node.get_last_velocity()).length()/speed_for_max_collision_damage, 0, 2)
+			velocity_ratio = clampf(
+				(last_velocity - node.get_last_velocity()).length() / speed_for_max_collision_damage,
+				0, 2)
 		hurt_box.take_damage(collision_damage * mass_ratio * velocity_ratio)
-		if collision_damage * mass_ratio * velocity_ratio > max_collision_damage/10:
+		if collision_damage * mass_ratio * velocity_ratio > max_collision_damage / 10:
 			$small_crash.play()
 	elif node is StaticBody2D:
 		hurt_box.take_damage(collision_damage)
-		if collision_damage > max_collision_damage/10:
+		if collision_damage > max_collision_damage / 10:
 			$small_crash.play()
 	elif node is CharacterBody2D:
-		#ainda n sei
 		pass
-	return
 
 func set_wheel_speed() -> void:
-	for wheel in wheels:
-		wheel.material.set_shader_parameter("speed", Vector2(0,actual_speed/(float(WHEEL_SIZE)/2)))
+	for wheel: Sprite2D in wheels:
+		wheel.material.set_shader_parameter(
+			"speed", Vector2(0, actual_speed / (float(WHEEL_SIZE) / 2)))

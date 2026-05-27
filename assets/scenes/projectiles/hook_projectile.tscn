@@ -1,8 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://da0glwm1oavka"]
+﻿[gd_scene load_steps=7 format=3 uid="uid://da0glwm1oavka"]
 
 [ext_resource type="Script" uid="uid://xqg4l0dpca8" path="res://assets/scripts/projectiles/hook_projectile.gd" id="1_e2oua"]
 [ext_resource type="Texture2D" uid="uid://bxnmq84hh2xw5" path="res://assets/textures/car/weapon/projectiles/hook_tip_sprite.png" id="2_5vmgt"]
-[ext_resource type="Script" path="res://assets/scripts/components/hit-box.gd" id="3_aqi36"]
+[ext_resource type="Script" path="res://assets/scripts/components/hit_box.gd" id="3_aqi36"]
 
 [sub_resource type="Curve" id="Curve_7g5xb"]
 _data = [Vector2(0.752632, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.021978), 0.0, 0.0, 0, 0]

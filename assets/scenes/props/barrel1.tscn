@@ -1,9 +1,9 @@
-[gd_scene load_steps=17 format=3 uid="uid://qupwycf3fsaf"]
+﻿[gd_scene load_steps=17 format=3 uid="uid://qupwycf3fsaf"]
 
 [ext_resource type="Texture2D" uid="uid://b8pjgkx0utcs6" path="res://assets/textures/props/barrel_asset_1.png" id="1_sehac"]
 [ext_resource type="Script" path="res://assets/scripts/props/barrel.gd" id="1_xs686"]
-[ext_resource type="Script" path="res://assets/scripts/components/hit-box.gd" id="3_68ped"]
-[ext_resource type="Script" path="res://assets/scripts/components/hurt-box.gd" id="4_3nec5"]
+[ext_resource type="Script" path="res://assets/scripts/components/hit_box.gd" id="3_68ped"]
+[ext_resource type="Script" path="res://assets/scripts/components/hurt_box.gd" id="4_3nec5"]
 [ext_resource type="Texture2D" uid="uid://7v0n3bcxsn3m" path="res://assets/textures/particles/fire.png" id="5_1gdko"]
 [ext_resource type="AudioStream" uid="uid://b1h87gfjkkm3b" path="res://assets/audio/explosion1.wav" id="6_b3jky"]
 

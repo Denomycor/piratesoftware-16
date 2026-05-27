@@ -1,7 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://b1vjjhqginc1j"]
+﻿[gd_scene load_steps=10 format=3 uid="uid://b1vjjhqginc1j"]
 
 [ext_resource type="Script" path="res://assets/scripts/projectiles/linear_projectile.gd" id="1_pex8q"]
-[ext_resource type="Script" path="res://assets/scripts/components/hit-box.gd" id="2_eg3h8"]
+[ext_resource type="Script" path="res://assets/scripts/components/hit_box.gd" id="2_eg3h8"]
 [ext_resource type="Texture2D" uid="uid://n0qmhc5y4h7t" path="res://assets/textures/car/weapon/projectiles/shotgun_bullet.png" id="2_xs1d6"]
 
 [sub_resource type="Curve" id="Curve_15b5m"]

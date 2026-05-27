@@ -1,10 +1,10 @@
-[gd_scene load_steps=18 format=3 uid="uid://by6bilhvb4vhf"]
+﻿[gd_scene load_steps=18 format=3 uid="uid://by6bilhvb4vhf"]
 
 [ext_resource type="Script" path="res://assets/scripts/props/barrel.gd" id="1_bqd12"]
 [ext_resource type="Texture2D" uid="uid://7v0n3bcxsn3m" path="res://assets/textures/particles/fire.png" id="2_jw10x"]
 [ext_resource type="Texture2D" uid="uid://bwt6327btx8pd" path="res://assets/textures/props/barrel_asset_2.png" id="3_8e6se"]
-[ext_resource type="Script" path="res://assets/scripts/components/hit-box.gd" id="4_a3234"]
-[ext_resource type="Script" path="res://assets/scripts/components/hurt-box.gd" id="5_xg728"]
+[ext_resource type="Script" path="res://assets/scripts/components/hit_box.gd" id="4_a3234"]
+[ext_resource type="Script" path="res://assets/scripts/components/hurt_box.gd" id="5_xg728"]
 [ext_resource type="AudioStream" uid="uid://b1h87gfjkkm3b" path="res://assets/audio/explosion1.wav" id="6_xy51y"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vldhs"]

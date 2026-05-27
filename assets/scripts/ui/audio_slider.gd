@@ -16,7 +16,7 @@ const MIN_DB := -20.0
 var prev_mute_val: float
 
 
-func _ready():
+func _ready() -> void:
 	slider.value_changed.connect(change_volume)
 	audio_enabled.toggled.connect(disable_mute)
 	

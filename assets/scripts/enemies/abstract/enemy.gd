@@ -5,10 +5,15 @@ signal died
 
 @export var speed: float = 200.0
 @export var points: int = 20
+## Override in subclass scenes to set per-enemy health.
+@export var health: float = 100.0
+## Override in subclass scenes to tune steering force.
+@export var max_acceleration: float = 100000.0
 
 @onready var hurt_box: HurtBoxComponent = $HurtBoxComponent
 
 var target: RigidBody2D
+var acceleration: Vector2 = Vector2.ZERO
 
 var movement_locked := false
 ## Set to true by die() before _on_die() is called.
@@ -16,8 +21,12 @@ var movement_locked := false
 var dead: bool = false
 
 
+func _ready() -> void:
+	hurt_box.has_taken_damage.connect(_take_dmg)
+
+
 # --- Abstract interface ---
-# Subclasses MUST implement: attack(), update_movement(), _take_dmg()
+# Subclasses MUST implement: attack(), update_movement()
 # Subclasses MAY override: _on_die() for subclass-specific death cleanup
 func attack() -> void:
 	assert(false, "Enemy subclass must implement attack()")
@@ -38,6 +47,19 @@ func die() -> void:
 func _on_die() -> void:
 	pass
 
-# Signal
-func _take_dmg(_amount: float) -> void:
-	assert(false, "Enemy subclass must implement _take_dmg()")
+## Default damage handler: reduces health and calls die() at zero.
+## Override only when the subclass needs non-standard damage logic.
+func _take_dmg(amount: float) -> void:
+	health -= amount
+	if health <= 0.0:
+		die()
+
+## Returns world-space distance from this enemy to its target.
+func get_distance_to_target() -> float:
+	return global_position.distance_to(target.global_position)
+
+## Steers toward the target using SeekArrive with arrival_radius = 0.
+## Override in subclasses that need a different arrival radius (e.g. Biker).
+func set_chase_acceleration() -> void:
+	acceleration = SeekArriveSteeringBehaviour.get_steering_force(
+		global_position, target.global_position, velocity, speed, max_acceleration, 0)
