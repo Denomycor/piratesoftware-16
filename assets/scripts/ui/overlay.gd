@@ -38,6 +38,7 @@ func _ready() -> void:
 func setup(max_health: float, initial_weapon_idx: int) -> void:
 	_max_hp = max_health
 	health_bar.setup(max_health)
+	set_hp(max_health)
 	switch_weapon(initial_weapon_idx)
 
 func set_points(points: int) -> void:
