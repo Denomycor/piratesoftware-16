@@ -7,6 +7,7 @@ const WHEEL_SIZE = 190
 @export var prediction_time: float = 0.3
 @export var max_accelaration := 100000
 @export var prediction_scalar := 3
+@export var mass: float = 1.0  # Effective mass for collision damage ratio (CharacterBody2D has no mass)
 @export var max_collision_damage: float = 25
 @export var min_collision_speed: float = 300
 @export var speed_for_max_collision_damage: float = 1500
