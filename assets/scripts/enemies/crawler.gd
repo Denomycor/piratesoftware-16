@@ -3,7 +3,7 @@ class_name Crawler extends Enemy
 @export var health: float = 10
 @export var attack_range: float = 310
 @export var speed_for_kill: float = 600
-@export var max_accelaration: float = 100000
+@export var max_acceleration: float = 100000
 
 @onready var gpu_particles: GPUParticles2D = $GPUParticles2D
 @onready var collision: CollisionShape2D = $CollisionShape2D
@@ -59,10 +59,10 @@ func die():
 	died.emit()
 
 func _physics_process(delta: float) -> void:
-	if(dead):
+	if dead:
 		return
 
-	if(!movement_locked):
+	if !movement_locked:
 		velocity += acceleration * delta
 		move_and_slide()
 
@@ -70,7 +70,7 @@ func get_distance_to_target() -> float:
 	return target.global_position.distance_to(global_position)
 
 func set_chase_acceleration() -> void:
-	acceleration = SeekArriveSteeringBehaviour.get_steering_force(global_position, target.global_position, velocity, speed, max_accelaration, 0)
+	acceleration = SeekArriveSteeringBehaviour.get_steering_force(global_position, target.global_position, velocity, speed, max_acceleration, 0)
 
 func _process(_delta):
 	if dead:
@@ -80,7 +80,7 @@ func _process(_delta):
 	if velocity.length() > 20:
 		animation_player.play("crawling")
 	else:
-		animation_player.play("stoped")
+		animation_player.play("stopped")
 
 # Signal
 func _take_dmg(amount: float):

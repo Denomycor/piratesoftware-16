@@ -3,7 +3,7 @@ class_name Giant extends Enemy
 const PROJ_SCENE := preload("res://assets/scenes/projectiles/goo_projectile.tscn")
 
 @export var health: float = 1000
-@export var max_accelaration: float = 100000
+@export var max_acceleration: float = 100000
 @export var melee_attack_range: float = 310
 
 @export var charge_time := 3.0
@@ -53,12 +53,12 @@ func update_movement():
 		look_at(target.global_position)
 		velocity = Vector2(0,0)
 		attack_ranged()
-	elif(animation_player.current_animation != "firing" && animation_player.current_animation != "attacking2"):
+	elif animation_player.current_animation != "firing" && animation_player.current_animation != "attacking2":
 		move()
 
 
 func move() -> void:
-	if(charge_is_on_cooldown || !is_in_range(charge_range)):
+	if charge_is_on_cooldown || !is_in_range(charge_range):
 		set_chase_acceleration()
 		look_at(global_position + velocity)
 	else:
@@ -66,8 +66,8 @@ func move() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	if(!dead):
-		if(!movement_locked):
+	if !dead:
+		if !movement_locked:
 			velocity += acceleration * delta
 			move_and_slide()
 
@@ -84,7 +84,7 @@ func _process(_delta: float):
 
 
 func set_chase_acceleration() -> void:
-	acceleration = SeekArriveSteeringBehaviour.get_steering_force(global_position, target.global_position, velocity, speed, max_accelaration, 0)
+	acceleration = SeekArriveSteeringBehaviour.get_steering_force(global_position, target.global_position, velocity, speed, max_acceleration, 0)
 
 
 func die() -> void:

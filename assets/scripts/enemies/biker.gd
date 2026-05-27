@@ -5,7 +5,7 @@ const WHEEL_SIZE = 190
 @export var health: float = 20
 @export_range(500, 1500) var follow_range: int
 @export var prediction_time: float = 0.3
-@export var max_accelaration := 100000
+@export var max_acceleration := 100000
 @export var prediction_scalar := 3
 @export var mass: float = 1.0  # Effective mass for collision damage ratio (CharacterBody2D has no mass)
 @export var max_collision_damage: float = 25
@@ -27,7 +27,7 @@ var acceleration: Vector2
 func _ready() -> void:
 	last_position = global_position
 	notifier.screen_entered.connect(func():
-		if(randf() > 0.3):
+		if randf() > 0.3:
 			$scream.pitch_scale = randf_range(0.5, 1.5)
 			$scream.play()
 	)
@@ -44,7 +44,7 @@ func update_movement():
 		set_mimic_acceleration()
 	
 func _physics_process(delta: float) -> void:
-	if(dead):
+	if dead:
 		return
 
 	velocity += acceleration * delta
@@ -60,10 +60,10 @@ func get_distance_to_target() -> float:
 	return target.global_position.distance_to(global_position)
 
 func set_chase_acceleration() -> void:
-	acceleration = SeekArriveSteeringBehaviour.get_steering_force(global_position, target.global_position, velocity, speed, max_accelaration, follow_range)
+	acceleration = SeekArriveSteeringBehaviour.get_steering_force(global_position, target.global_position, velocity, speed, max_acceleration, follow_range)
 
 func set_mimic_acceleration() -> void:
-	acceleration = SeekArriveSteeringBehaviour.get_steering_force(global_position, global_position + target.linear_velocity.normalized() * prediction_scalar, velocity, target.get_speed(), max_accelaration, follow_range)
+	acceleration = SeekArriveSteeringBehaviour.get_steering_force(global_position, global_position + target.linear_velocity.normalized() * prediction_scalar, velocity, target.get_speed(), max_acceleration, follow_range)
 
 func die():
 	dead = true

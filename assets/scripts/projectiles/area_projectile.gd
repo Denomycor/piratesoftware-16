@@ -14,7 +14,7 @@ func _ready() -> void:
 
 
 func destroy() -> void:
-	if (!frozen):
+	if !frozen:
 		$explosion.pitch_scale = randf_range(1, 1.4)
 		if get_node_or_null("shoot") != null:
 			%shoot.stop()

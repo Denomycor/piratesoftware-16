@@ -31,7 +31,7 @@ func _ready() -> void:
 	timer = create_tween()
 	timer.tween_callback(destroy).set_delay(lifetime)
 
-	if(scale_curve):
+	if scale_curve:
 		scale_tween = create_tween()
 		scale_tween.tween_method(func(value: float):
 			scale = Vector2.ONE * scale_curve.sample(value)
@@ -48,13 +48,13 @@ func set_properties(pos: Vector2, rot: float) -> void:
 
 
 func _physics_process(delta: float) -> void:
-	if(!frozen):
-		if(destroy_next_frame):
+	if !frozen:
+		if destroy_next_frame:
 			destroy()
 		else:
 			var motion := travel_direction * speed + inherited_velocity
 			var collision := move_and_collide(motion * delta)
-			if(collision):
+			if collision:
 				_on_collision(collision)
 
 
