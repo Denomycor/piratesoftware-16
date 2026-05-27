@@ -3,6 +3,10 @@ class_name Stats extends Node
 ## Survival time (seconds) required to trigger victory. 15 minutes.
 const VICTORY_TIME: float = 900.0
 
+signal points_changed(points: int)
+signal kills_changed(kills: int)
+signal speed_changed(speed: float)
+
 @export var min_drift_strength := 100
 
 var is_game_over: bool = false
@@ -18,16 +22,15 @@ var _is_drifting := false
 var current_drift_time: float = 0
 
 @export var points_per_second: int
-@export var overlay: Overlay
 @export var speed_conversion_ratio: float = 1.0 / 20.0
 
 func add_points(amount: float) -> void:
 	points += amount * BoostManager.points_multiplier
-	overlay.set_points(int(points))
+	points_changed.emit(int(points))
 
 func increment_kills() -> void:
 	kills += 1
-	overlay.set_kills(kills)
+	kills_changed.emit(kills)
 
 func check_max_speed() -> void:
 	if speed > max_speed:
@@ -40,7 +43,7 @@ func _physics_process(delta: float):
 		check_drift(delta)
 		add_points(points_per_second * delta)
 		time_survived += delta
-		overlay.set_speed(speed)
+		speed_changed.emit(speed)
 		# Victory condition: survive 15 minutes
 		if not _victory_triggered and time_survived >= VICTORY_TIME:
 			_victory_triggered = true

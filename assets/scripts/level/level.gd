@@ -15,6 +15,9 @@ func _ready():
 	pause_menu.quit_level.connect(quit_level)
 	game_over_menu.quit_level.connect(quit_level)
 	victory_menu.quit_level.connect(quit_level)
+	stats.points_changed.connect(overlay.set_points)
+	stats.kills_changed.connect(overlay.set_kills)
+	stats.speed_changed.connect(overlay.set_speed)
 	get_viewport().set_canvas_cull_mask_bit(9, false)
 	$game_music.play()
 	# Apply any unlocked skill effects to the car before gameplay starts.
