@@ -12,7 +12,6 @@ class_name Level extends Node
 signal level_exited(level: Node)
 
 func _ready():
-	LevelContext.level = self
 	pause_menu.quit_level.connect(quit_level)
 	game_over_menu.quit_level.connect(quit_level)
 	victory_menu.quit_level.connect(quit_level)
