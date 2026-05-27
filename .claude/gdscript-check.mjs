@@ -163,6 +163,31 @@ async function runCheck() {
   });
 }
 
+// ── pre-flight: check Godot is running ───────────────────────────────────────
+
+async function isGodotRunning(port) {
+  return new Promise(resolve => {
+    const probe = new net.Socket();
+    probe.setTimeout(1000);
+    probe.once('connect', () => { probe.destroy(); resolve(true); });
+    probe.once('error',   () => { probe.destroy(); resolve(false); });
+    probe.once('timeout', () => { probe.destroy(); resolve(false); });
+    probe.connect(port, '127.0.0.1');
+  });
+}
+
+if (!await isGodotRunning(LSP_PORT)) {
+  console.error('');
+  console.error('⚠️  Godot editor is not running (nothing on port ' + LSP_PORT + ').');
+  console.error('');
+  console.error('   Open the project in Godot 4 — the LSP starts automatically.');
+  console.error('   Or start it headlessly:');
+  console.error(`     "C:\\Program Files (x86)\\Godot\\Godot_v4.6.3-stable_win64_console.exe" --path "${PROJECT_PATH}" --editor --headless`);
+  console.error('   Then re-run this script.');
+  console.error('');
+  process.exit(2);
+}
+
 // ── main ──────────────────────────────────────────────────────────────────────
 
 const SEVERITY = { 1: 'ERROR', 2: 'WARNING', 3: 'INFO', 4: 'HINT' };
