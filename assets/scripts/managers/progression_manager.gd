@@ -255,11 +255,15 @@ func apply_skills_to_car(car: Car) -> void:
 
 	# Physics multipliers — applied to all weapon_vars SubResources so they
 	# survive weapon switching (set_car_vars() reads from weapon_vars[idx]).
-	for vars: CarVars in car.weapon_vars:
-		vars.motor_strength          *= speed_mult
-		vars.drift_friction_strength *= drift_mult
-		vars.perpendicular_multiplier *= knockback_mult
-		vars.parallel_multiplier      *= knockback_mult
+	# Duplicate each entry before mutating so the shared originals are not
+	# permanently modified across runs.
+	for i in range(car.weapon_vars.size()):
+		var duped: CarVars = car.weapon_vars[i].duplicate()
+		duped.motor_strength          *= speed_mult
+		duped.drift_friction_strength *= drift_mult
+		duped.perpendicular_multiplier *= knockback_mult
+		duped.parallel_multiplier      *= knockback_mult
+		car.weapon_vars[i] = duped
 
 	# Re-apply current weapon's vars so the multipliers take effect immediately.
 	var dock: WeaponDock = car.weapon_dock
