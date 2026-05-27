@@ -1,4 +1,4 @@
-﻿[gd_scene load_steps=25 format=3 uid="uid://cadth6phe5ec7"]
+[gd_scene load_steps=25 format=3 uid="uid://cadth6phe5ec7"]
 
 [ext_resource type="Script" path="res://assets/scripts/enemies/gunhead.gd" id="1_uib8a"]
 [ext_resource type="Script" path="res://assets/scripts/components/hurt_box.gd" id="2_mcwnu"]

@@ -1,4 +1,4 @@
-﻿[gd_scene load_steps=16 format=3 uid="uid://8n0auaiip0mg"]
+[gd_scene load_steps=16 format=3 uid="uid://8n0auaiip0mg"]
 
 [ext_resource type="Script" path="res://assets/scripts/projectiles/area_projectile.gd" id="1_uqj6l"]
 [ext_resource type="Script" path="res://assets/scripts/components/hit_box.gd" id="2_8qxhd"]

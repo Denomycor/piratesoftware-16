@@ -1,4 +1,4 @@
-﻿[gd_scene load_steps=17 format=3 uid="uid://qupwycf3fsaf"]
+[gd_scene load_steps=17 format=3 uid="uid://qupwycf3fsaf"]
 
 [ext_resource type="Texture2D" uid="uid://b8pjgkx0utcs6" path="res://assets/textures/props/barrel_asset_1.png" id="1_sehac"]
 [ext_resource type="Script" path="res://assets/scripts/props/barrel.gd" id="1_xs686"]

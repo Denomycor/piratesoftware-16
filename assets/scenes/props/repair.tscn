@@ -1,4 +1,4 @@
-﻿[gd_scene load_steps=18 format=3 uid="uid://3bym24uhxs0m"]
+[gd_scene load_steps=18 format=3 uid="uid://3bym24uhxs0m"]
 
 [ext_resource type="Script" path="res://assets/scripts/props/repair.gd" id="1_61wy2"]
 [ext_resource type="Texture2D" uid="uid://bsx8kmlxab5bu" path="res://assets/textures/icon/repair_item_sprite.png" id="2_djdr2"]

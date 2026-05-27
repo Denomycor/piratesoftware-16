@@ -1,4 +1,4 @@
-﻿[gd_scene load_steps=16 format=3 uid="uid://dw2abso84avq1"]
+[gd_scene load_steps=16 format=3 uid="uid://dw2abso84avq1"]
 
 [ext_resource type="Script" path="res://assets/scripts/enemies/biker.gd" id="1_3s7no"]
 [ext_resource type="Script" path="res://assets/scripts/components/hurt_box.gd" id="1_80q8j"]

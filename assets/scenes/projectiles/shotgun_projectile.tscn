@@ -1,4 +1,4 @@
-﻿[gd_scene load_steps=10 format=3 uid="uid://b1vjjhqginc1j"]
+[gd_scene load_steps=10 format=3 uid="uid://b1vjjhqginc1j"]
 
 [ext_resource type="Script" path="res://assets/scripts/projectiles/linear_projectile.gd" id="1_pex8q"]
 [ext_resource type="Script" path="res://assets/scripts/components/hit_box.gd" id="2_eg3h8"]

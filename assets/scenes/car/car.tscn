@@ -1,4 +1,4 @@
-﻿[gd_scene load_steps=20 format=3 uid="uid://drcpxeie725b"]
+[gd_scene load_steps=20 format=3 uid="uid://drcpxeie725b"]
 
 [ext_resource type="Script" path="res://assets/scripts/car/car.gd" id="1_nqiho"]
 [ext_resource type="PackedScene" uid="uid://ci7aut5htygnp" path="res://assets/scenes/car/car_break_particles.tscn" id="2_2uyc3"]

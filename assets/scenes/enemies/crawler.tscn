@@ -1,4 +1,4 @@
-﻿[gd_scene load_steps=26 format=3 uid="uid://is7y7auk6peu"]
+[gd_scene load_steps=26 format=3 uid="uid://is7y7auk6peu"]
 
 [ext_resource type="Script" path="res://assets/scripts/enemies/crawler.gd" id="1_57m52"]
 [ext_resource type="Texture2D" uid="uid://djwimgefipdq1" path="res://assets/textures/enemies/crawler_animations_spritesheets.png" id="2_hsh6b"]

@@ -1,4 +1,4 @@
-﻿[gd_scene load_steps=21 format=3 uid="uid://c0lyxftkfyopk"]
+[gd_scene load_steps=21 format=3 uid="uid://c0lyxftkfyopk"]
 
 [ext_resource type="Script" path="res://assets/scripts/enemies/exploding_crawler.gd" id="1_7nrj7"]
 [ext_resource type="Script" path="res://assets/scripts/components/hurt_box.gd" id="2_taoc4"]

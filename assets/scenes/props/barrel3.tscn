@@ -1,4 +1,4 @@
-﻿[gd_scene load_steps=18 format=3 uid="uid://deo63nl1macwi"]
+[gd_scene load_steps=18 format=3 uid="uid://deo63nl1macwi"]
 
 [ext_resource type="Script" path="res://assets/scripts/props/barrel.gd" id="1_dvfqj"]
 [ext_resource type="Texture2D" uid="uid://7v0n3bcxsn3m" path="res://assets/textures/particles/fire.png" id="2_ye8np"]
