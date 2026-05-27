@@ -87,16 +87,11 @@ func set_chase_acceleration() -> void:
 	acceleration = SeekArriveSteeringBehaviour.get_steering_force(global_position, target.global_position, velocity, speed, max_acceleration, 0)
 
 
-func die() -> void:
-	dead = true
-	velocity = Vector2.ZERO
-	hurt_box.has_taken_damage.disconnect(_take_dmg)
-	hurt_box.queue_free()
+func _on_die() -> void:
 	collision.queue_free()
 	sprite.visible = false
 	gpu_particles.emitting = true
 	gpu_particles.finished.connect(queue_free)
-	died.emit()
 
 
 # Signal

@@ -66,17 +66,12 @@ func _physics_process(delta: float) -> void:
 		velocity += acceleration * delta
 		move_and_slide()
 
-func die():
-	dead = true
+func _on_die() -> void:
 	%squish.play()
-	velocity = Vector2.ZERO
-	hurt_box.has_taken_damage.disconnect(_take_dmg)
-	hurt_box.queue_free()
 	collision.queue_free()
 	sprite.visible = false
 	gpu_particles.emitting = true
 	gpu_particles.finished.connect(queue_free)
-	died.emit()
 
 func _process(_delta):
 	if dead:

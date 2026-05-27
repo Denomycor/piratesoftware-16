@@ -70,23 +70,18 @@ func set_chase_acceleration() -> void:
 func set_mimic_acceleration() -> void:
 	acceleration = SeekArriveSteeringBehaviour.get_steering_force(global_position, global_position + target.linear_velocity.normalized() * prediction_scalar, velocity, target.get_speed(), max_acceleration, follow_range)
 
-func die():
-	dead = true
+func _on_die() -> void:
 	$crash.play()
 	($BikerGun as BikerGun).projectile_spawner_component.enabled = false
 	($BikerGun as BikerGun).visible = false
 	$Biker.visible = false
 	$WheelB.visible = false
 	$WheelF.visible = false
-	velocity = Vector2.ZERO
-	hurt_box.has_taken_damage.disconnect(_take_dmg)
-	hurt_box.queue_free()
 	collision.queue_free()
 	for sprite in sprites:
 		sprite.visible = false
 	gpu_particles.emitting = true
 	create_tween().tween_callback(queue_free).set_delay(1)
-	died.emit()
 
 # Signal
 func _take_dmg(amount: float):
