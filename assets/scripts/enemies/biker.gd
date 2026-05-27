@@ -97,7 +97,7 @@ func _take_dmg(amount: float):
 func _on_collision(node: Node) -> void:
 	var collision_direction := global_position.direction_to(node.global_position)
 	var collision_speed := last_velocity.dot(collision_direction)
-	var collision_damage := clampf(lerpf(0,max_collision_damage, (collision_speed-min_collision_speed)/(speed_for_max_collision_damage - min_collision_speed)),0,max_collision_damage)
+	var collision_damage := CollisionUtils.calculate_damage(collision_speed, min_collision_speed, speed_for_max_collision_damage, max_collision_damage)
 	if node is RigidBody2D:
 		var mass_ratio = node.mass / mass
 		var velocity_ratio = 1
