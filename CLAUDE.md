@@ -20,7 +20,8 @@ Exit code `0` = all pass (safe to commit). Exit code `1` = failures (do not comm
 Tests live in `test/unit/` and `test/integration/`. Framework: **GUT v9.6.0** (`addons/gut/`).  
 In-editor: open the GUT panel at the bottom dock → Run All.
 
-When fixing a bug, write a failing test first, then fix it — the test becomes the regression guard.
+When fixing a bug, write a failing test first, then fix it — the test becomes the regression guard.  
+When adding a feature, write tests that describe the expected behaviour before implementing it — if the feature breaks later, the tests say exactly what broke and why.
 
 ## Architecture
 
