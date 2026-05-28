@@ -59,6 +59,10 @@ release={
 
 2d/default_gravity=0.0
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/gut/plugin.cfg")
+
 [rendering]
 
 viewport/transparent_background=true
