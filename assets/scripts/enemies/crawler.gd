@@ -14,7 +14,6 @@ class_name Crawler extends Enemy
 
 var acceleration: Vector2
 
-var dead := false
 var is_on_cooldown := false
 
 func _ready() -> void:

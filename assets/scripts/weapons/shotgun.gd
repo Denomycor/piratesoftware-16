@@ -14,6 +14,8 @@ func _ready() -> void:
 		var projectile: LinearProjectile = PROJECTILE_SCENE.instantiate()
 		projectile.inherited_velocity = LevelContext.level.car.linear_velocity
 		projectile.speed = randf_range(projectile.speed * speed_variation, projectile.speed)
+		projectile.damage_multiplier = ProgressionManager.player_damage_multiplier
+		projectile.range_multiplier  = ProgressionManager.player_range_multiplier
 		projectile.set_properties(from, rot_angle)
 		LevelContext.level.get_node("World").add_child(projectile)
 	)

@@ -20,7 +20,6 @@ const WHEEL_SIZE = 190
 var last_velocity := Vector2.ZERO
 var last_position := Vector2.ZERO
 var actual_speed: float
-var dead := false
 var acceleration: Vector2
 
 

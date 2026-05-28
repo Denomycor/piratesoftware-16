@@ -17,8 +17,17 @@ var inherited_velocity := Vector2.ZERO
 var destroy_next_frame := false
 var frozen := false
 
+## Per-projectile multipliers — set by the spawning weapon before add_child().
+## Default to 1.0 so enemy projectiles are unaffected.
+var damage_multiplier: float = 1.0
+var range_multiplier:  float = 1.0
+
 
 func _ready() -> void:
+	# Apply range multiplier first so the timed-destroy and scale tween both
+	# use the modified lifetime.
+	lifetime *= range_multiplier
+
 	timer = create_tween()
 	timer.tween_callback(destroy).set_delay(lifetime)
 
@@ -28,6 +37,7 @@ func _ready() -> void:
 			scale = Vector2.ONE * scale_curve.sample(value)
 		, 0.0, 1.0, lifetime)
 
+	hitbox_component.damage_amount *= damage_multiplier
 	hitbox_component.has_dealt_damage.connect(func(_p): destroy())
 
 

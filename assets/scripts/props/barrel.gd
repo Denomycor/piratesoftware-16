@@ -18,7 +18,7 @@ func _ready():
 func _physics_process(_delta):
     last_velocity = rigid_body.linear_velocity
 
-func _on_take_damage(amount: int):
+func _on_take_damage(amount: float):
     health -= amount
     if health <= 0:
         hit_box.monitoring = true

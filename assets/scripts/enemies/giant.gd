@@ -18,13 +18,12 @@ var charge_is_on_cooldown := true
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var attack_timer: Timer = $attack_timer
-@onready var charge_timer: Timer = $attack_timer
+@onready var charge_timer: Timer = $charge_timer
 @onready var projectile_spawner_component: ProjectileSpawnerComponent = $ProjectileSpawnerComponent
 
 @export var ranged_attack_range := 2000
 
 
-var dead := false
 var attack_is_on_cooldown := false
 var speed_backup: float
 var acceleration: Vector2

@@ -11,6 +11,8 @@ const PROJECTILE_SCENE: PackedScene = preload("res://assets/scenes/projectiles/f
 func _ready() -> void:
 	projectile_spawner_component.shoot_projectile.connect(func(from: Vector2, rot: float, _data):
 		var projectile: FlamethrowerProjectile = PROJECTILE_SCENE.instantiate()
+		projectile.damage_multiplier = ProgressionManager.player_damage_multiplier
+		projectile.range_multiplier  = ProgressionManager.player_range_multiplier
 		projectile.set_properties(from, rot)
 		projectile.inherited_velocity = LevelContext.level.car.last_velocity
 		LevelContext.level.get_node("World").add_child(projectile)
