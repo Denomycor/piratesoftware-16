@@ -1,7 +1,3 @@
-# CLAUDE.md
-
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
-
 ## Tooling
 
 Use the **Godot MCP** server to interact with the running Godot editor — inspect nodes, run scenes, query resources, and read editor state. Prefer MCP over guessing scene structure from file contents alone.
@@ -10,6 +6,21 @@ Use the **Godot MCP** server to interact with the running Godot editor — inspe
 
 Open the project in Godot 4.6 and press **F5** (or use the MCP to launch). The main scene is `assets/scenes/game.tscn`.  
 There are no build steps, test runners, or CI pipelines — all iteration is through the Godot editor.
+
+## Testing — Commit Restriction
+
+**All tests must pass before committing.** Run the full suite headlessly before every commit:
+
+```
+godot --headless -s addons/gut/gut_cmdln.gd
+```
+
+Exit code `0` = all pass (safe to commit). Exit code `1` = failures (do not commit).
+
+Tests live in `test/unit/` and `test/integration/`. Framework: **GUT v9.6.0** (`addons/gut/`).  
+In-editor: open the GUT panel at the bottom dock → Run All.
+
+When fixing a bug, write a failing test first, then fix it — the test becomes the regression guard.
 
 ## Architecture
 
